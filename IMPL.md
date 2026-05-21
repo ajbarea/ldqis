@@ -10,29 +10,25 @@ crept in — extract it back to ROADMAP.
 
 ## In flight
 
-**v0 scaffold** (2026-05-21).
+Nothing currently open.
 
-Cherry-picking the design from `docs/legacy/dql-demo.html` (the
-single-file Claude Cowork output that survived the 2026-05-21
-audit-of-audit as paper-grade work) into a proper Astro 5 project.
+## Just shipped
 
-Active scope:
+**M1 — v0 scaffold** (2026-05-21). New repo at `ajbarea/ldqis`, Astro
+5.18.1 + Tailwind 4 + GitHub Pages, homepage cherry-picked from the
+2026-05-21 Claude Cowork dql.html demo and ported into Astro
+components with the official RIT branding intact (PMS 1505c orange,
+F6BE00 yellow, Instrument Serif + Inter pair, dark mode with
+localStorage persistence, skip-link, prefers-reduced-motion, OG
+metadata). Live preview: <https://ajbarea.github.io/ldqis/>.
 
-1. Scaffold Astro 5 + Tailwind 4 + TypeScript, content collections,
-   page surface (`/`, `/people`, `/projects`, `/projects/[slug]`,
-   `/publications`, `/news`, `/news/[slug]`, `/contact`).
-2. Port the homepage layout (hero / stats / research areas / projects
-   / publications / people / get-involved / footer) one section at a
-   time, preserving the official RIT branding (PMS 1505c orange, RIT
-   yellow F6BE00 accent, Instrument Serif + Inter font pair) and the
-   accessibility primitives already baked into the demo (skip-link,
-   prefers-reduced-motion, color-scheme dark/light, semantic
-   heading hierarchy).
-3. Wire content collections so adding a publication or person means
-   committing one Markdown file, not editing a 1247-line HTML.
-4. Set up GitHub Actions Pages deploy targeting a verified custom
-   domain (`dataqualitylabs.com` when DNS handoff happens with Dr.
-   Reznik).
+Two stacked bugs caught on the first deploy + fixed before AJ's first
+inspection landed: (1) base path missing for project-page deploy (CSS
+404'd on `/ldqis/`), (2) Tailwind 4 doesn't generate the
+arbitrary-bracket `[var(--color-foo)]` utility syntax in this setup —
+rewrote 13 class patterns to use the auto-generated named utilities
+from `@theme` tokens (`bg-bg`, `text-text-dim`, `border-line`, etc.).
+Both fixed in `66f78ed`.
 
 ## Known unpatched-upstream notation
 
@@ -47,33 +43,23 @@ encrypted-param replay — affect API surfaces this site doesn't use
 islands). Same unpatched-upstream pattern as phalanx-fl PR #11. Migrate
 to Astro 6 once #16542 closes; ROADMAP tracks the migration milestone.
 
-## Open questions for AJ before first push
+## Next pickups
 
-- **Repo name on GitHub**: defaulting to `ajbarea/ldqis` (matches the
-  lab acronym used in the demo wordmark). Alternatives:
-  `ajbarea/dataqualitylabs` (matches domain) or `ajbarea/dql` (matches
-  the original folder name). Repo name is cheap to change before push;
-  flag if you want a different one.
-- **Sign-in with Google button**: the demo has one in the nav
-  (`/login` anchor). The legacy site uses it for the authenticated
-  `/dataView` table. New site has no auth surface, so this button has
-  nothing to do. Default plan: drop it entirely. If RIT-account sign-in
-  is wanted for a future authenticated surface, file as a separate
-  milestone in ROADMAP.
-- **Demo banner**: the dql.html demo includes a "REDESIGN PREVIEW —
-  feedback welcome" banner. Drop on first real ship; keep during
-  preview deploys.
+Per ROADMAP, in order:
 
-## Just shipped
+1. **M2 — content collections + per-detail pages.** One Markdown file
+   per project / publication / person, replacing the inline arrays in
+   `src/pages/index.astro`. Routes: `/projects/[slug]`,
+   `/publications/[slug]`, `/people/[slug]`. Adding a new pub or
+   person becomes a Markdown commit, not a 200-line file edit.
+2. **M3 — news / blog surface** with an RSS feed.
+3. **M4 — CI: lint + typecheck + Playwright smoke + axe-core a11y +
+   Lighthouse CI.**
+4. **M5 — custom domain handoff to dataqualitylabs.com** (gated on
+   Dr. Reznik / DNS).
+5. **M6 — sister graduation** (`Makefile` + `.claude/skill-context.md`
+   + add to `~/.claude/techne.toml`).
 
-Nothing yet — first commit pending.
-
-## Next pickups (after v0 scaffold)
-
-1. Per-project detail pages content (one `.md` per InteFL / Phalanx-FL /
-   VelocityFL / Kourai Khryseai).
-2. Per-publication detail pages (one `.md` per existing publication).
-3. News section seed content (one welcome post explaining the
-   rebuild).
-4. Playwright smoke test + axe-core a11y check in CI.
-5. Domain handoff coordination with Dr. Reznik.
+When picking one up, replace the "In flight" block above with a full
+session plan (Why / Decisions / Scope / Out of scope / Definition of
+done).

@@ -279,4 +279,4 @@ Definition of done:
 One-line per item, newest first. Detail moves to git history when
 work lands.
 
-- _(nothing yet)_
+- 2026-05-21 — **M1 — v0 scaffold**. Astro 5.18.1 + Tailwind 4 + GitHub Pages, homepage cherry-picked from the audit-of-audit-approved dql.html demo. Two follow-up commits fixed the base-path and the Tailwind 4 named-utility port. Live at <https://ajbarea.github.io/ldqis/>.

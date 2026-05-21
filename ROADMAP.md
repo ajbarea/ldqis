@@ -5,9 +5,11 @@ execution lives in [IMPL.md](./IMPL.md). When a milestone ships, it
 collapses to a one-liner under [Shipped](#shipped).
 
 Last reviewed: 2026-05-21. Pre-release: no production deploy yet.
-Cherry-picking from `docs/legacy/dql-demo.html` (the single-file Claude
-Cowork output that survived the 2026-05-21 audit-of-audit as
-paper-grade) into a real Astro project on AJ's personal GitHub. Will
+The design was cherry-picked from a single-file Claude Cowork output
+("Cosmic Horror" / DQL demo) that survived the 2026-05-21
+audit-of-audit as paper-grade; that demo HTML lived briefly in
+`docs/legacy/` but has been deleted (the original Cowork session is
+the authoritative record if we ever need the source again). Will
 graduate to a sister in `~/.claude/techne.toml` once Makefile +
 `.claude/skill-context.md` + CI workflows are in place.
 
@@ -79,8 +81,6 @@ Definition of done:
   preserved
 - [ ] First commit lands on `main` in a brand-new repo
 - [ ] GH Pages deploy is wired and green
-- [ ] Old `dql.html` archived as `docs/legacy/dql-demo.html` for
-  reference
 
 ---
 

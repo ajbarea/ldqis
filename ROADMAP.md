@@ -191,22 +191,28 @@ Definition of done:
 
 ## M6 — Sister graduation
 
-> Status: planned, after M1-M5 ship
+> Status: **in flight as of 2026-05-21** — AJ promoted ldqis to a
+> sister ahead of schedule. The `~/.claude/techne.toml` entry was
+> added so `/techne:sisters` audits start including ldqis from the
+> next run. Supporting primitives (Makefile + `.claude/skill-context.md`)
+> still need to land; the first sister-audit pass will surface them
+> as missing-primitive findings, which is intentional eyeballs-on-it
+> work.
 
-Once the repo has a Makefile, `.claude/skill-context.md`, working
-`techne:audit` / `techne:ci-audit` invocation patterns, and a green
-CI pipeline, add to `~/.claude/techne.toml` as the sixth active
-sister. At that point `/techne:sisters` will include LDQIS in the
-weekly cross-repo drift audit.
+Once the repo has a Makefile and `.claude/skill-context.md` (the
+remaining sister-shape primitives), the audit findings clear and
+ldqis is fully aligned with the other five sisters.
 
 Definition of done:
 
+- [x] Entry added to `~/.claude/techne.toml`
 - [ ] `Makefile` with `setup`, `lint`, `test`, `build`, `e2e`
   targets matching sister convention
 - [ ] `.claude/skill-context.md` filled in with per-skill facts
 - [ ] First successful `/techne:audit` run against this repo
-- [ ] Entry added to `~/.claude/techne.toml`
-- [ ] `~/ajsoftworks/MEMORY.md` updated to note the new sister
+- [ ] First successful `/techne:sisters` audit run that includes
+  ldqis alongside the other five with no missing-primitive findings
+- [ ] `~/ajsoftworks/MEMORY.md` updated to note ldqis is now a sister
 
 ---
 

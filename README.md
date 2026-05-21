@@ -1,51 +1,38 @@
 # LDQIS — Lab Website
 
-> Laboratory of Data Quality and Intelligent Security at the Rochester Institute of Technology.
-> The new home of the lab on the web, replacing the legacy Flask/Bootstrap-4 site at `dataqualitylabs.com`.
+Source for the Laboratory of Data Quality and Intelligent Security website at RIT. Static site, Astro 5 + Tailwind 4, deploys to GitHub Pages. Replaces the legacy Flask + Bootstrap-4 site at `dataqualitylabs.com`.
 
-This repo is the source for the lab's public website. It's a static site
-built with Astro 5 + Tailwind 4, content authored as Markdown frontmatter,
-deployed via GitHub Pages. No backend, no authentication, no attack
-surface — the legacy site's `/login`, `/register`, and `/dataView` routes
-are gone, and with them the entire class of authentication-related
-vulnerabilities that made the old site insecure.
+[![Astro](https://img.shields.io/badge/Astro-5-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
+[![Tailwind](https://img.shields.io/badge/Tailwind-4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?style=flat-square&logo=github)](https://ajbarea.github.io/ldqis/)
 
 ## Quick start
 
 ```bash
-npm install
-npm run dev      # local dev server with hot reload
-npm run build    # production build into dist/
-npm run preview  # preview the production build locally
+make setup    # npm ci, clean install from lock
+make dev      # hot-reload dev server at localhost:4321
+make build    # production build into dist/
+make check    # astro check (type-check + template validation)
 ```
 
-## What's here
+`make help` lists every target.
 
-| Path | What |
-| --- | --- |
-| `src/pages/` | Astro route files |
-| `src/content/` | Markdown content collections (people, projects, publications, news, research areas) |
-| `src/components/` | Reusable Astro / Vue components |
-| `src/layouts/` | Page layouts |
-| `src/styles/` | Tailwind config + custom CSS |
-| `public/` | Static assets served as-is |
-| `docs/legacy/` | Snapshot of the original `dql.html` demo for design reference |
-| `IMPL.md` | What's actively in flight this session |
-| `ROADMAP.md` | Long-horizon plan + content model + milestones |
+## Project structure
 
-## Why Astro
+```
+src/
+├── layouts/BaseLayout.astro    # head + theme + skip-link + slot
+├── pages/index.astro           # homepage (single-page until M2)
+└── styles/global.css           # Tailwind 4 @theme tokens (RIT palette)
 
-Searched 2026 best practice before committing — Astro is the default for
-content-driven academic / lab sites this year. Zero JavaScript by default,
-islands architecture for selective interactivity, native Markdown, top
-Lighthouse scores out of the box. The lab template ecosystem
-([greenelab/lab-website-template](https://github.com/greenelab/lab-website-template)
-has a Zenodo DOI) confirms it's well-established for this niche. Nuxt was
-the runner-up since AJ has Vue expertise on `ajbarea.github.io`, but Nuxt's
-strength is full-stack and DQL is content-heavy, so Astro wins on the
-performance + SEO axis that matters for academic discoverability.
+public/                         # static assets
+.github/workflows/deploy.yml    # Pages deploy on push to main
+astro.config.mjs                # site URL + base path + Vite Tailwind plugin
+```
+
+`ROADMAP.md` has the long view (content collections, news, CI, custom domain handoff). `IMPL.md` has whatever is actively in flight.
 
 ## Status
 
-Pre-release. First commit, scaffolding in progress. See `IMPL.md` for the
-active session plan and `ROADMAP.md` for the long view.
+Pre-release. v0 scaffold shipped 2026-05-21; preview at <https://ajbarea.github.io/ldqis/>. Custom domain handoff to `dataqualitylabs.com` is M5 work, gated on Dr. Reznik / DNS.

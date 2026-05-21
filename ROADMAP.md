@@ -206,13 +206,14 @@ ldqis is fully aligned with the other five sisters.
 Definition of done:
 
 - [x] Entry added to `~/.claude/techne.toml`
-- [ ] `Makefile` with `setup`, `lint`, `test`, `build`, `e2e`
-  targets matching sister convention
-- [ ] `.claude/skill-context.md` filled in with per-skill facts
+- [x] `Makefile` with the current toolchain's targets (`setup`,
+  `dev`, `build`, `preview`, `check`, `clean`). The full
+  `lint` / `test` / `e2e` set lands with M4.
+- [x] `.claude/skill-context.md` filled in with per-skill facts
 - [ ] First successful `/techne:audit` run against this repo
 - [ ] First successful `/techne:sisters` audit run that includes
   ldqis alongside the other five with no missing-primitive findings
-- [ ] `~/ajsoftworks/MEMORY.md` updated to note ldqis is now a sister
+- [x] `~/ajsoftworks/MEMORY.md` updated to note ldqis is now a sister
 
 ---
 

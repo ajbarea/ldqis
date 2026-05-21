@@ -240,6 +240,24 @@ Definition of done:
 - **Accessibility is a check, not a vibe.** Playwright + axe-core
   in CI; no "passes my screen reader" assertions land without the
   automated check passing too.
+- **YAGNI-refactored.** Don't build capability-compensating
+  scaffolding for limitations the ecosystem is about to fix. Astro 6
+  + Tailwind 4 + Nuxt Content evolve faster than this site does;
+  before hand-rolling an image-optimization helper, a custom RSS
+  feed generator, a markdown loader, or a content-collections shim,
+  check whether the framework already ships the primitive (or is
+  about to). Conversely, don't avoid forward-looking product /
+  content shape decisions waiting on capabilities you can already
+  see coming. The pair is complementary: stop building workarounds
+  for closed gaps, *and* stop deferring shape decisions for closing
+  gaps.
+- **Stale-assumption audit.** Whenever Astro, Tailwind, or one of
+  the content-collection primitives ships a major version, audit
+  which workarounds in `src/` existed to compensate for a now-closed
+  gap. The Astro 5 `define:vars` XSS workaround, the Tailwind 4
+  named-token rewrite (vs `[var(--color-foo)]`), the
+  `@tailwindcss/vite` rolldown pin — all are scaffolding that should
+  unwind when upstream catches up.
 
 ---
 

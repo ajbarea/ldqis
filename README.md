@@ -36,3 +36,13 @@ astro.config.mjs                # site URL + base path + Vite Tailwind plugin
 ## Status
 
 Pre-release. v0 scaffold shipped 2026-05-21; preview at <https://ajbarea.github.io/ldqis/>. Custom domain handoff to `dataqualitylabs.com` is M5 work, gated on Dr. Reznik / DNS.
+
+## Sister ecosystem
+
+Part of a family of repos exploring agentic AI and federated learning from complementary angles. Each is independently invocable; together they form one research program.
+
+- **[kourai-khryseai](https://github.com/ajbarea/kourai-khryseai)** — Innovation. Multi-agent software-development forge: maidens-as-specialists over A2A, MCP sidecars, transparent human-on-the-loop.
+- **[phalanx-fl](https://github.com/ajbarea/phalanx-fl)** — Research. Federated-learning reference platform on Flower + Ray. Eight aggregation strategies (FedAvg, Krum, Multi-Krum, Bulyan, Geometric Median, Trimmed Mean, FedMedian, FedProx) with the attack vocabulary.
+- **[vFL](https://github.com/ajbarea/vFL)** — Performance. Same FL strategies as Rust kernels via PyO3 + FastMCP + Prefect Horizon; crowd-scale speed lane.
+- **[techne](https://github.com/ajbarea/techne)** — Governance. Claude Code skills plugin: audits, lint/test gates, cross-repo drift detection.
+- **[ajbarea.github.io](https://github.com/ajbarea/ajbarea.github.io)** — Visibility. Portfolio that tells the ecosystem story end-to-end.

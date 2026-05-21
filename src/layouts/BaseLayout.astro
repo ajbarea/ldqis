@@ -1,0 +1,91 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "LDQIS — Laboratory of Data Quality & Intelligent Security at RIT",
+  description = "Research at the frontier of federated learning, agentic AI, and intelligent security. A research laboratory at the Rochester Institute of Technology.",
+  canonical = Astro.url.href,
+  ogImage = "https://dataqualitylabs.com/og-image.png",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="author"
+      content="LDQIS — Rochester Institute of Technology"
+    />
+    <link rel="canonical" href={canonical} />
+
+    {/* Open Graph */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LDQIS @ RIT" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    {/* Twitter falls back to OG */}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {/* theme-color matches active mode bg */}
+    <meta
+      name="theme-color"
+      content="#fefefd"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#0a0e13"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    {/* favicon — inline SVG matching the wordmark mark */}
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F76902'/%3E%3Cpath d='M22 18v28h22' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"
+    />
+
+    {/* Google Fonts: Inter (body) + Instrument Serif (display) */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+
+    {/* FOUC prevention — flip theme before first paint */}
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("ldqis-theme");
+          if (stored === "dark")
+            document.documentElement.setAttribute("data-theme", "dark");
+        } catch (e) {
+          /* localStorage blocked is fine — stay on light theme */
+        }
+      })();
+    </script>
+  </head>
+  <body
+    class="bg-[var(--color-bg)] text-[var(--color-text)] font-sans antialiased overflow-x-hidden transition-colors duration-200"
+    style="font-family: var(--font-sans);"
+  >
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,630 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// research(2026-05): keeping the homepage as one inline-content file for v0.
+// Content collections (people/projects/publications/news/research-areas)
+// land in M2 once the build is verified. Faster path to a working deploy
+// than premature decomposition.
+
+const researchAreas = [
+  {
+    n: "01",
+    title: "Federated Learning",
+    desc: "Privacy-preserving model training across distributed clients — designing protocols, aggregation strategies, and threat models for collaborative ML without centralizing sensitive data.",
+  },
+  {
+    n: "02",
+    title: "Data Quality at Scale",
+    desc: "Provable quality metrics for streaming sensor data, with frameworks for evaluating fitness-for-purpose across heterogeneous sources.",
+  },
+  {
+    n: "03",
+    title: "ML System Security",
+    desc: "Adversarial robustness, model integrity, and runtime monitoring for ML systems deployed in safety-critical environments.",
+  },
+  {
+    n: "04",
+    title: "Edge Intelligence",
+    desc: "Neural network architectures and inference systems designed for the power, privacy, and reliability constraints of edge deployment.",
+  },
+  {
+    n: "05",
+    title: "Verifiable Mobile Security",
+    desc: "Building on the lab's shipped Android apps — Android System Security Evaluation and Detector of Unverified Apps on Google Play — into continuous verification for app supply-chain integrity.",
+  },
+  {
+    n: "06",
+    title: "Open-Source Tooling",
+    desc: "Releasing reproducible benchmarks, evaluation frameworks, and reference implementations the community can build on.",
+  },
+];
+
+const projects = [
+  {
+    name: "InteFL",
+    tagline: "Knowledge Management Framework for Federated Learning",
+    tags: ["Federated Learning", "Agentic AI"],
+    stack: "Python · Flower · PyTorch · LoRA",
+    desc: 'A configuration and execution framework for federated learning simulations built on Flower. Implements <strong>novel PID controller-inspired and Trust-based aggregation strategies</strong> alongside classical robust methods (Krum, Multi-Krum, Bulyan, RFA, Trimmed-Mean), adversarial attack scheduling, federated LLM fine-tuning with LoRA, and a wide range of medical imaging datasets. Published in <strong>IEEE Intelligent Systems, 2026.</strong>',
+    links: [
+      {
+        label: "GitHub ↗",
+        href: "https://github.com/dmitrykoro/fl-execution-framework",
+      },
+      { label: "IEEE DOI ↗", href: "https://doi.org/10.1109/MIS.2026.3658072" },
+    ],
+  },
+  {
+    name: "Phalanx-FL",
+    tagline: "Experimental fork of InteFL",
+    tags: ["Federated Learning", "Research Sandbox"],
+    stack: "FastAPI · React · Celery · Redis",
+    desc: "A personal sandbox built atop InteFL — exploring what a full-stack web interface (React frontend, FastAPI backend, Celery worker queue) could look like for federated learning simulations. A space for tooling and UI experiments; the canonical research framework remains InteFL.",
+    links: [
+      { label: "GitHub ↗", href: "https://github.com/ajbarea/phalanx-fl" },
+      { label: "Docs ↗", href: "https://ajbarea.github.io/phalanx-fl/" },
+    ],
+  },
+  {
+    name: "VelocityFL",
+    tagline: "Rust-core federated learning orchestration",
+    tags: ["Federated Learning", "High-Performance"],
+    stack: "Rust · PyO3 · Python",
+    desc: "A federated learning runtime with a Rust aggregation core and a Python-first interface. Eight paper-cited aggregation algorithms (FedAvg, FedProx, Krum, Bulyan, Geometric Median…), round-level and data-pipeline attack simulation, and aggregation kernels measured at ~92× the speed of pure Python.",
+    links: [
+      { label: "GitHub ↗", href: "https://github.com/ajbarea/vFL" },
+      { label: "Docs ↗", href: "https://ajbarea.github.io/vFL/" },
+    ],
+  },
+  {
+    name: "Kourai Khryseai",
+    tagline: "A multi-agent system with three interfaces",
+    tags: ["Multi-Agent System", "Federated Learning"],
+    stack: "MCP + A2A · CLI · Pygame · Ren'Py",
+    desc: "Ten specialized A2A-protocol agents — planner, coder, tester, reviewer, scribe, validators — that collaborate in a shared group chat to plan, build, and ship code. Three coordinated interfaces: terminal CLI, Pygame GUI, and a Ren'Py visual novel. Ongoing research into narrative interfaces for agent observability.",
+    links: [
+      { label: "GitHub ↗", href: "https://github.com/ajbarea/kourai-khryseai" },
+      { label: "Site ↗", href: "https://ajbarea.github.io/kourai-khryseai/" },
+    ],
+  },
+];
+
+const publications = [
+  {
+    year: "2026",
+    venue: "IEEE Intelligent Systems",
+    title:
+      "InteFL Framework: Optimizing Federated Learning with Metacognition for Application Design and Deployment",
+    authors: "D. Korobeinikov, R. Zatsarenko, S. Chuprov, A. Barea, L. Reznik",
+    link: { label: "DOI ↗", href: "https://doi.org/10.1109/MIS.2026.3658072" },
+  },
+  {
+    year: "2024",
+    venue: "IEEE AIIoT 2024",
+    title: "Trust-Based Anomaly Detection in Federated Edge Learning",
+    authors: "D. Korobeinikov, et al.",
+    link: {
+      label: "IEEE Xplore ↗",
+      href: "https://ieeexplore.ieee.org/document/10578967/",
+    },
+  },
+  {
+    year: "2024",
+    venue: "ASIA '24 · 19th Annual Symposium on Information Assurance · Albany, NY",
+    title:
+      "Federated Learning Robustness on Real World Data in Intelligent Transportation Systems",
+    authors: "D. Korobeinikov, S. Chuprov, R. Zatsarenko, L. Reznik",
+    link: {
+      label: "NSF Repository ↗",
+      href: "https://par.nsf.gov/biblio/10532530",
+    },
+  },
+];
+
+const currentTeam = [
+  {
+    initials: "LR",
+    name: "Dr. Leon Reznik",
+    role: "Principal Investigator · Professor of Computer Science · RIT",
+    email: "lrvcs@rit.edu",
+    lead: true,
+  },
+  {
+    initials: "SC",
+    name: "Dr. Sergei Chuprov",
+    role: "Faculty Collaborator · Professor · UTRGV",
+    email: "sergei.chuprov@utrgv.edu",
+  },
+  {
+    initials: "DK",
+    name: "Dmitrii Korobeinikov",
+    role: "RIT Graduate Researcher · InteFL lead author",
+    email: "dk9148@g.rit.edu",
+  },
+  {
+    initials: "RZ",
+    name: "Raman Zatsarenko",
+    role: "RIT Graduate Researcher · PID-inspired aggregation lead",
+    email: "rz4983@rit.edu",
+  },
+  {
+    initials: "AB",
+    name: "AJ Barea",
+    role: "RIT Graduate Researcher · Phalanx-FL · VelocityFL · Kourai Khryseai",
+    email: "ajb6289@g.rit.edu",
+  },
+  {
+    initials: "TB",
+    name: "Tyler Black",
+    role: "RIT Graduate Researcher · InteFL contributor",
+    email: "tcb8683@rit.edu",
+  },
+  {
+    initials: "CS",
+    name: "Chris Soravilla",
+    role: "RIT Graduate Researcher · InteFL contributor",
+    email: "cs3346@rit.edu",
+  },
+];
+
+const pastCohort = [
+  { initials: "IK", name: "Dr. Igor Khokhlov", role: "2018 NSF Webinar Co-Presenter" },
+  { initials: "DY", name: "Dmitri Yudanov", role: "Alumnus · Neural network architectures" },
+  { initials: "AH", name: "Andrew Hoffman", role: "Mobile trust evaluation · 2015" },
+  { initials: "AH", name: "Andrew Heyman", role: "Fuzzy systems + CI software · 2015–18" },
+  { initials: "DP", name: "Darrel Pollard", role: "Mobile trust evaluation · 2015" },
+  { initials: "RD", name: "Rohan Dalvi", role: "Android security framework · 2017" },
+  { initials: "AM", name: "Ankan Mookherjee", role: "Data quality + Android security · 2017" },
+  { initials: "AK", name: "Ashish Kumar", role: "Android security framework · 2017" },
+  { initials: "RB", name: "Rohit Bhaskar", role: "Wearable sensors + ML · 2018–19" },
+  { initials: "SJ", name: "Suresh Babu Jothilingam", role: "Wearable sensor design · 2018" },
+  { initials: "AK", name: "Akhil Killawala", role: "Computational intelligence · FUZZ-IEEE 2018" },
+  { initials: "AS", name: "Akshay Salunke", role: "Sentiment analysis · MS thesis" },
+  { initials: "MP", name: "Michael Perez", role: "Android anomaly detection · 2019" },
+  { initials: "AP", name: "Akshay Pudage", role: "Sensor selection optimization · 2019" },
+  { initials: "NL", name: "Ninad Ligade", role: "RNNs for Android attacks · 2020" },
+  { initials: "SS", name: "Srujan Shetty", role: "Transfer learning + ML systems · 2022" },
+  { initials: "KM", name: "Karan Manghi", role: "Multi-modal sensor selection · 2022" },
+];
+---
+
+<BaseLayout>
+  {/* NAV */}
+  <nav
+    class="sticky top-0 z-50 backdrop-blur-md border-b border-[var(--color-line)]"
+    style="background: color-mix(in oklab, var(--color-bg) 78%, transparent);"
+  >
+    <div class="max-w-[1200px] mx-auto px-6 flex items-center justify-between py-[18px]">
+      <a href="/" class="flex items-center gap-[10px]" style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;">
+        <span
+          class="w-7 h-7 rounded-lg relative"
+          style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow));"
+        >
+          <span
+            class="absolute inset-[6px] rounded-[4px] border-[1.5px]"
+            style="border-color: color-mix(in oklab, var(--color-bg) 92%, transparent); border-bottom: none; border-right: none;"
+          ></span>
+        </span>
+        LDQIS
+      </a>
+      <div class="hidden md:flex gap-7 text-sm text-[var(--color-text-dim)]">
+        <a href="#research" class="hover:text-[var(--color-text)]">Research</a>
+        <a href="#projects" class="hover:text-[var(--color-text)]">Projects</a>
+        <a href="#publications" class="hover:text-[var(--color-text)]">Publications</a>
+        <a href="#people" class="hover:text-[var(--color-text)]">People</a>
+      </div>
+      <button
+        type="button"
+        id="theme-toggle"
+        aria-label="Toggle color theme"
+        class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-[var(--color-line)] text-[var(--color-text-dim)] hover:text-[var(--color-rit-orange-text)] hover:border-[var(--color-rit-orange)] transition-transform hover:rotate-[15deg]"
+      >
+        <svg id="icon-moon" class="w-4 h-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg id="icon-sun" class="w-4 h-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main" class="relative z-[1]">
+    {/* HERO */}
+    <header class="pt-[120px] pb-[100px] relative">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="inline-flex items-center gap-2 px-3 py-[6px] border border-[var(--color-line)] rounded-full text-xs text-[var(--color-text-dim)] mb-8 bg-[var(--color-bg-soft)]">
+          <span class="w-[6px] h-[6px] rounded-full bg-[var(--color-rit-orange)]" style="box-shadow: 0 0 12px var(--color-rit-orange);"></span>
+          Rochester Institute of Technology · Department of Computer Science
+        </div>
+        <h1 class="mb-7 max-w-[14ch]" style="font-family: var(--font-display); font-size: clamp(48px, 8vw, 96px); font-weight: 400; line-height: 1.02; letter-spacing: -2px;">
+          Trustworthy data.<br/><em class="italic" style="color: var(--color-rit-orange);">Intelligent</em> security.
+        </h1>
+        <p class="text-lg text-[var(--color-text-dim)] max-w-[56ch] mb-10">
+          The Laboratory of Data Quality and Intelligent Security at RIT builds
+          the methods, models, and systems that make modern data infrastructure
+          verifiable, resilient, and worthy of trust — from sensor networks at
+          the edge to large-scale ML systems at the core.
+        </p>
+        <div class="flex gap-[14px] flex-wrap">
+          <a
+            href="#research"
+            class="inline-flex items-center gap-2 px-[22px] py-[14px] rounded-full text-sm font-medium transition-transform hover:-translate-y-[1px]"
+            style="background: var(--color-rit-orange); color: #0a0e13;"
+          >
+            Explore the research →
+          </a>
+          <a
+            href="#support"
+            class="inline-flex items-center gap-2 px-[22px] py-[14px] rounded-full text-sm font-medium border border-[var(--color-line)] text-[var(--color-text)] hover:border-[var(--color-text-dim)]"
+          >
+            Support our work
+          </a>
+        </div>
+
+        {/* STATS */}
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-px mt-20 border border-[var(--color-line)] rounded-[14px] overflow-hidden" style="background: var(--color-line);">
+          {[
+            { num: "4", label: "Active OSS projects" },
+            { num: "25+", label: "Researchers trained" },
+            { num: "3", label: "Peer-reviewed publications" },
+            { num: "12+", label: "Years of funded work" },
+          ].map(({ num, label }) => (
+            <div class="bg-[var(--color-bg)] py-7 px-6">
+              <div style="font-family: var(--font-display); font-size: 44px; line-height: 1; color: var(--color-rit-orange);">
+                {num}
+              </div>
+              <div class="text-[13px] text-[var(--color-text-dim)] uppercase tracking-[0.5px] mt-[6px]">
+                {label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </header>
+
+    {/* RESEARCH AREAS */}
+    <section id="research" class="py-[100px] relative">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="text-xs tracking-[1.5px] uppercase text-[var(--color-rit-orange-text)] mb-4">
+          Research Areas
+        </div>
+        <h2 class="mb-6 max-w-[22ch]" style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;">
+          Six frontiers we're pushing in parallel.
+        </h2>
+        <p class="text-lg text-[var(--color-text-dim)] max-w-[64ch] mb-14">
+          Our work sits at the intersection of data quality, security, and
+          intelligent systems — with a hard focus on what's deployable,
+          measurable, and trustworthy.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {researchAreas.map((area) => (
+            <article
+              class="p-8 bg-[var(--color-bg-elev)] border border-[var(--color-line)] rounded-[14px] transition-all hover:-translate-y-[2px] hover:border-[var(--color-rit-orange)]"
+            >
+              <span class="block text-sm italic mb-6" style="font-family: var(--font-display); color: var(--color-rit-orange-text);">
+                — {area.n}
+              </span>
+              <div class="text-[22px] font-medium mb-3 leading-[1.2]">{area.title}</div>
+              <p class="text-[var(--color-text-dim)] text-[15px]">{area.desc}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* PROJECTS */}
+    <section id="projects" class="py-[100px] relative">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="text-xs tracking-[1.5px] uppercase text-[var(--color-rit-orange-text)] mb-4">
+          Active Projects
+        </div>
+        <h2 class="mb-6 max-w-[22ch]" style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;">
+          What we're shipping right now.
+        </h2>
+        <p class="text-lg text-[var(--color-text-dim)] max-w-[64ch] mb-14">
+          Open-source frameworks, peer-reviewed methods, and end-to-end
+          systems — built by the current cohort and used by researchers beyond
+          LDQIS.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {projects.map((p) => (
+            <article class="bg-[var(--color-bg-elev)] border border-[var(--color-line)] rounded-[14px] p-8 transition-all hover:-translate-y-[2px] hover:border-[var(--color-rit-orange)] flex flex-col">
+              <div class="flex items-center gap-3 mb-[18px] flex-wrap">
+                {p.tags.map((t) => (
+                  <span
+                    class="text-[11px] tracking-[1px] uppercase px-[10px] py-[3px] rounded-full border"
+                    style="color: var(--color-rit-orange-text); background: color-mix(in oklab, var(--color-rit-orange) 8%, transparent); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
+                  >
+                    {t}
+                  </span>
+                ))}
+                <span class="text-[11px] text-[var(--color-text-faint)] font-mono">{p.stack}</span>
+              </div>
+              <div class="mb-[6px] leading-[1.1]" style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;">
+                {p.name}
+              </div>
+              <div class="text-sm text-[var(--color-text-dim)] italic mb-4">{p.tagline}</div>
+              <p class="text-[15px] text-[var(--color-text-dim)] mb-6 flex-grow" set:html={p.desc}></p>
+              <div class="flex gap-[14px] text-[13px] pt-[18px] border-t border-[var(--color-line)]">
+                {p.links.map((l) => (
+                  <a
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener"
+                    class="inline-flex items-center gap-1 hover:underline"
+                    style="color: var(--color-rit-orange-text);"
+                  >
+                    {l.label}
+                  </a>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* PUBLICATIONS */}
+    <section id="publications" class="py-[100px] relative">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="text-xs tracking-[1.5px] uppercase text-[var(--color-rit-orange-text)] mb-4">
+          Publications
+        </div>
+        <h2 class="mb-6 max-w-[22ch]" style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;">
+          Recent peer-reviewed work.
+        </h2>
+        <p class="text-lg text-[var(--color-text-dim)] max-w-[64ch] mb-14">
+          Selected recent publications from the lab. For the complete record,
+          see Dr. Reznik's
+          <a
+            href="https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en"
+            target="_blank"
+            rel="noopener"
+            class="border-b"
+            style="color: var(--color-rit-orange-text); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
+          >Google Scholar profile</a>.
+        </p>
+        <div class="flex flex-col gap-4">
+          {publications.map((pub) => (
+            <article class="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 items-center p-6 md:px-7 bg-[var(--color-bg-elev)] border border-[var(--color-line)] rounded-[14px] hover:border-[var(--color-rit-orange)]">
+              <div class="text-4xl leading-none" style="font-family: var(--font-display); color: var(--color-rit-orange-text); letter-spacing: -1px;">
+                {pub.year}
+              </div>
+              <div class="min-w-0">
+                <div class="text-[11px] tracking-[1.5px] uppercase text-[var(--color-text-faint)] mb-[6px]">
+                  {pub.venue}
+                </div>
+                <div class="text-[17px] font-medium leading-[1.35] mb-1">{pub.title}</div>
+                <div class="text-[13px] text-[var(--color-text-dim)]">{pub.authors}</div>
+              </div>
+              <a
+                href={pub.link.href}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-[6px] px-[14px] py-2 border border-[var(--color-line)] rounded-full text-[13px] text-[var(--color-text-dim)] hover:border-[var(--color-rit-orange)] hover:text-[var(--color-rit-orange-text)] whitespace-nowrap justify-self-start md:justify-self-auto"
+              >
+                {pub.link.label}
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* PEOPLE */}
+    <section id="people" class="py-[100px] relative" style="background: var(--color-bg-elev); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line);">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div class="text-xs tracking-[1.5px] uppercase text-[var(--color-rit-orange-text)] mb-4">
+          People
+        </div>
+        <h2 class="mb-6 max-w-[22ch]" style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;">
+          The team — past and present.
+        </h2>
+        <p class="text-lg text-[var(--color-text-dim)] max-w-[64ch] mb-14">
+          LDQIS is the work of every researcher who has passed through it.
+          Today's team is pushing on federated learning and agentic AI;
+          previous cohorts built the foundations in mobile security, data
+          quality evaluation, wearable sensors, and computational intelligence
+          that made today's work possible.
+        </p>
+
+        <div class="flex items-baseline gap-4 mb-6">
+          <span class="text-[11px] tracking-[1.5px] uppercase" style="color: var(--color-rit-orange-text);">Now</span>
+          <h3 class="font-normal" style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;">Current Team</h3>
+          <span class="text-[13px] text-[var(--color-text-dim)]">Federated learning · agentic AI · 2024–present</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+          {currentTeam.map((p) => (
+            <div
+              class={`bg-[var(--color-bg-elev)] border border-[var(--color-line)] rounded-[14px] p-6 hover:border-[var(--color-rit-orange)] transition-colors ${p.lead ? "sm:col-span-2 md:col-span-2" : ""}`}
+              style={p.lead ? "background: linear-gradient(135deg, var(--color-bg-elev), var(--color-bg-soft));" : undefined}
+            >
+              <div
+                class="w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg mb-4"
+                style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
+              >
+                {p.initials}
+              </div>
+              <div class="text-base font-medium mb-1">{p.name}</div>
+              <div class="text-[13px] text-[var(--color-text-dim)]">{p.role}</div>
+              <a
+                href={`mailto:${p.email}`}
+                class="inline-block text-xs font-mono mt-2 hover:underline break-all"
+                style="color: var(--color-rit-orange-text);"
+              >
+                {p.email}
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <div class="flex items-baseline gap-4 mt-14 mb-6 pt-4 border-t border-[var(--color-line)]">
+          <span class="text-[11px] tracking-[1.5px] uppercase" style="color: var(--color-rit-orange-text);">Then</span>
+          <h3 class="font-normal" style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;">Past Research Cohort</h3>
+          <span class="text-[13px] text-[var(--color-text-dim)]">2015–2022 · Mobile security · Android attacks · Wearable sensors · Data quality · Computational intelligence</span>
+        </div>
+
+        <p class="text-sm text-[var(--color-text-dim)] max-w-[64ch] mb-8">
+          The work below was led by these researchers and remains foundational
+          to LDQIS today — including our Android security apps, the NSF Data
+          Quality &amp; Security Evaluation Framework, and the wearable-sensors
+          and computational-intelligence research lines that preceded today's
+          federated learning work.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+          {pastCohort.map((p) => (
+            <div class="bg-[var(--color-bg-elev)] border border-[var(--color-line)] rounded-[14px] p-6 hover:border-[var(--color-rit-orange)] transition-colors">
+              <div
+                class="w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg mb-4"
+                style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
+              >
+                {p.initials}
+              </div>
+              <div class="text-base font-medium mb-1">{p.name}</div>
+              <div class="text-[13px] text-[var(--color-text-dim)]">{p.role}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* GET INVOLVED */}
+    <section id="support" class="py-[100px] relative">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <div
+          class="relative overflow-hidden border border-[var(--color-line)] rounded-[14px] py-16 px-12 text-center"
+          style="background: linear-gradient(135deg, var(--color-bg-soft), var(--color-bg-elev));"
+        >
+          <div
+            class="absolute pointer-events-none"
+            style="top: -50%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, color-mix(in oklab, var(--color-rit-orange) 8%, transparent), transparent 70%);"
+          ></div>
+          <div class="relative">
+            <div class="text-xs tracking-[1.5px] uppercase mb-4" style="color: var(--color-rit-orange-text);">
+              Get Involved
+            </div>
+            <h3 class="mx-auto mb-4 max-w-[22ch]" style="font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.1;">
+              Support research that makes data trustworthy.
+            </h3>
+            <p class="mx-auto max-w-[50ch] text-[var(--color-text-dim)] mb-8">
+              Funding from individuals, foundations, and industry partners
+              directly supports graduate stipends, equipment, and open-source
+              releases. Every contribution compounds — in students trained,
+              papers published, and tools shipped.
+            </p>
+            <div class="flex gap-[14px] flex-wrap justify-center">
+              <a
+                href="https://www.rit.edu/giving/"
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-2 px-[22px] py-[14px] rounded-full text-sm font-medium transition-transform hover:-translate-y-[1px]"
+                style="background: var(--color-rit-orange); color: #0a0e13;"
+              >
+                Become a supporter →
+              </a>
+              <a
+                href="mailto:lrvcs@rit.edu?subject=LDQIS%20Industry%20Partnership"
+                class="inline-flex items-center gap-2 px-[22px] py-[14px] rounded-full text-sm font-medium border border-[var(--color-line)] hover:border-[var(--color-text-dim)]"
+              >
+                Partner with us
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {/* FOOTER */}
+  <footer class="border-t border-[var(--color-line)] pt-12 pb-8 mt-20 relative z-[1]">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="flex flex-wrap justify-between gap-8 items-start">
+        <div>
+          <div class="flex items-center gap-[10px] mb-3" style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;">
+            <span
+              class="w-7 h-7 rounded-lg relative"
+              style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow));"
+            ></span>
+            LDQIS
+          </div>
+          <p class="text-[13px] text-[var(--color-text-dim)] max-w-[32ch]">
+            Laboratory of Data Quality and Intelligent Security at Rochester
+            Institute of Technology.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs tracking-[1px] uppercase text-[var(--color-text-faint)] mb-[14px] font-medium">Research</h4>
+          <ul class="text-sm text-[var(--color-text-dim)] space-y-2">
+            <li><a href="#research" class="hover:text-[var(--color-rit-orange-text)]">Areas</a></li>
+            <li><a href="#publications" class="hover:text-[var(--color-rit-orange-text)]">Publications</a></li>
+            <li><a href="#projects" class="hover:text-[var(--color-rit-orange-text)]">Open-source</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs tracking-[1px] uppercase text-[var(--color-text-faint)] mb-[14px] font-medium">Lab</h4>
+          <ul class="text-sm text-[var(--color-text-dim)] space-y-2">
+            <li><a href="#people" class="hover:text-[var(--color-rit-orange-text)]">Current team</a></li>
+            <li><a href="#people" class="hover:text-[var(--color-rit-orange-text)]">Alumni</a></li>
+            <li><a href="mailto:lrvcs@rit.edu?subject=Joining%20LDQIS" class="hover:text-[var(--color-rit-orange-text)]">Join us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs tracking-[1px] uppercase text-[var(--color-text-faint)] mb-[14px] font-medium">Contact</h4>
+          <ul class="text-sm text-[var(--color-text-dim)] space-y-2">
+            <li><a href="https://www.rit.edu/computing/" target="_blank" rel="noopener" class="hover:text-[var(--color-rit-orange-text)]">RIT GCCIS</a></li>
+            <li><a href="mailto:lrvcs@rit.edu" class="hover:text-[var(--color-rit-orange-text)]">Get in touch</a></li>
+            <li><a href="https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en" target="_blank" rel="noopener" class="hover:text-[var(--color-rit-orange-text)]">Google Scholar</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-[var(--color-line)] flex flex-wrap justify-between gap-3 text-xs text-[var(--color-text-faint)]">
+        <div class="flex items-center gap-[14px] flex-wrap">
+          <a
+            href="https://www.rit.edu"
+            target="_blank"
+            rel="noopener"
+            aria-label="Rochester Institute of Technology"
+            class="inline-flex items-center opacity-85 hover:opacity-100 transition-opacity"
+          >
+            <img
+              src="https://www.rit.edu/brandportal/sites/rit.edu.brandportal/files/2020-04/RIT_RGB_hor_full_k.png"
+              alt="Rochester Institute of Technology"
+              class="h-7 w-auto dark:hidden"
+            />
+            <img
+              src="https://www.rit.edu/brandportal/sites/rit.edu.brandportal/files/2020-04/RIT_RGB_hor_full_w.png"
+              alt="Rochester Institute of Technology"
+              class="h-7 w-auto hidden dark:block"
+            />
+          </a>
+          <span class="text-[var(--color-text-faint)]">·</span>
+          <div>© 2026 LDQIS · A research laboratory at RIT</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  {/* Theme toggle script — vanilla, no island needed */}
+  <script is:inline>
+    document.getElementById("theme-toggle")?.addEventListener("click", function () {
+      var root = document.documentElement;
+      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      if (next === "light") {
+        root.removeAttribute("data-theme");
+      } else {
+        root.setAttribute("data-theme", "dark");
+      }
+      try {
+        localStorage.setItem("ldqis-theme", next);
+      } catch (e) {
+        /* localStorage blocked — toggle is in-memory only this session */
+      }
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/* research(2026-05): Tailwind 4 expects theme tokens in a `@theme` block
+   in the global stylesheet (no more tailwind.config.js for design tokens).
+   RIT brand palette is locked in here so every component gets the same
+   official orange/yellow without picking colors ad hoc. The PMS 1505c
+   orange and F6BE00 yellow are RIT's official secondary brand colors. */
+
+@theme {
+  /* official RIT palette */
+  --color-rit-orange: #f76902; /* PMS 1505c — primary accent */
+  --color-rit-orange-text: #c75502; /* darker for body-size text on light bg (WCAG AA) */
+  --color-rit-yellow: #f6be00; /* secondary, for gradients */
+
+  /* warm editorial light palette */
+  --color-bg: #fefefd;
+  --color-bg-elev: #faf9f7;
+  --color-bg-soft: #f4f2ee;
+  --color-line: #e5e3df;
+  --color-text: #1a1a17;
+  --color-text-dim: #57534e;
+  --color-text-faint: #a8a29e;
+
+  /* fonts — Instrument Serif for display, Inter for body */
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+}
+
+/* dark mode tokens. opt-in via [data-theme="dark"] on <html> so the
+   FOUC-prevention inline script can flip the theme before first paint. */
+[data-theme="dark"] {
+  --color-bg: #0a0e13;
+  --color-bg-elev: #11161d;
+  --color-bg-soft: #161c25;
+  --color-line: #1f2630;
+  --color-text: #e7ecef;
+  --color-text-dim: #93a0ad;
+  --color-text-faint: #5b6773;
+  --color-rit-orange-text: #f76902; /* full orange ok on dark */
+}
+
+/* ambient gradients borrowed from the dql.html demo — kept as a subtle
+   warm-radial wash so the editorial palette doesn't feel flat. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse at top right,
+      color-mix(in oklab, var(--color-rit-orange) 8%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at bottom left,
+      color-mix(in oklab, var(--color-rit-orange) 8%, transparent),
+      transparent 65%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* skip-link — visible only when keyboard-focused. WCAG 2.4.1 bypass. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--color-rit-orange);
+  color: #0a0e13;
+  border-radius: 0 0 8px 0;
+  font-weight: 500;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* respect prefers-reduced-motion (WCAG 2.2 success criterion 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

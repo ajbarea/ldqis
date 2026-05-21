@@ -19,12 +19,18 @@ import tailwindcss from "@tailwindcss/vite";
 // the Tailwind-vite bug is closed. Mirrors AJ's phalanx-fl PR #11
 // "unpatched-upstream ignore list" pattern.
 
+// Until the M5 DNS handoff lands `dataqualitylabs.com` on GitHub Pages,
+// the site is deployed as a project page at `ajbarea.github.io/ldqis/`.
+// Astro generates asset URLs against `site + base`, so without `base`
+// set, the CSS link in the rendered HTML resolves to `/_astro/...`
+// (which 404s under the project subpath). Flip `CUSTOM_DOMAIN=true` in
+// the deploy workflow once DNS resolves to make this drop the `/ldqis`
+// prefix and target the apex domain.
+const isCustomDomain = process.env.CUSTOM_DOMAIN === "true";
+
 export default defineConfig({
-  site: "https://dataqualitylabs.com",
-  // base is empty so canonical URLs match dataqualitylabs.com once the
-  // domain handoff completes. While deployed to ajbarea.github.io/ldqis/
-  // for development, links still resolve correctly because the routes
-  // use site-absolute paths.
+  site: isCustomDomain ? "https://dataqualitylabs.com" : "https://ajbarea.github.io",
+  base: isCustomDomain ? "/" : "/ldqis",
   vite: {
     plugins: [tailwindcss()],
   },

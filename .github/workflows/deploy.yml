@@ -1,10 +1,11 @@
 name: Deploy to GitHub Pages
 
-# research(2026-05): standard Astro static-deploy workflow. Action pins use
-# tags that match the broader sister-toolchain parity (actions/checkout@v5,
-# actions/upload-pages-artifact@v4, actions/deploy-pages@v4, all 2026-current).
-# `pages: write` + `id-token: write` permissions are the minimum required for
-# the deploy step; nothing else is granted.
+# research(2026-05): standard Astro static-deploy workflow. Action pins
+# match the broader sister-toolchain parity convention: exact
+# major.minor.patch tags so the sister-audit cron can detect drift, and
+# the family wave-bumps together. `pages: write` + `id-token: write`
+# permissions are the minimum required for the deploy step; nothing else
+# is granted.
 
 on:
   push:
@@ -25,10 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6.0.2
 
       - name: Set up Node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6.4.0
         with:
           node-version-file: ".nvmrc"
           cache: npm
@@ -40,7 +41,7 @@ jobs:
         run: npm run build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: dist/
 
@@ -53,4 +54,4 @@ jobs:
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5.0.0

@@ -11,6 +11,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# dev-runner archives (scripts/dev-runner.sh writes logs/dev-<ts>-<cmd>.log)
+logs/
+
 # environment
 .env
 .env.production

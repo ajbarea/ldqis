@@ -102,9 +102,17 @@ Any quantitative claim not traceable to one of those is slop.
 
 ## fragile_docs
 
-No fragile-claims CI script yet (M5 / sister-graduation follow-up). When README / docs claims accumulate, mirror the `ajbarea.github.io` `scripts/check-readme-claims.mjs` pattern.
+Marketing claims in `README.md` most likely to drift. The CI gate at `scripts/check-readme-claims.mjs` is wired into both `make lint` and the `lint` job in `.github/workflows/ci.yml`; extend the script (a new `// ─── …` block) and add a row here whenever a new fragile claim lands.
 
-Today the README claims live in `README.md`'s "What's here" + status sections; they reference structural facts (file paths, IMPL/ROADMAP existence) that drift slowly.
+| README claim                                                  | Ground truth                              | Verified by                                                                                                              |
+| ------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Quick-start `make <target>` invocations                       | `Makefile` recipe headers                 | `check-readme-claims.mjs` asserts every `make <target>` in the quick-start bash block + inline mentions resolves         |
+| GitHub Pages preview URL (`https://ajbarea.github.io/ldqis/`) | `astro.config.mjs` `site` + `base` values | `check-readme-claims.mjs` asserts both the host and base-path string literals appear in the config (handles the ternary) |
+
+The script does **not** gate the Project structure code block or the Sister ecosystem list:
+
+- Project structure is illustrative orientation, not an asserted claim — adding a file shouldn't fail CI.
+- Sister ecosystem cross-references are governed by `/techne:sisters` (cross-repo audit), not per-sister CI.
 
 ## scan_scope
 
@@ -139,12 +147,12 @@ The site **is** itself a documentation site — Astro renders to `dist/` and shi
 
 ## sister_graduation
 
-Promoted to a sister 2026-05-21 ahead of original M6 schedule (AJ requested visibility). Status of the M6 DoD items:
+Promoted to a sister 2026-05-21 ahead of original M6 schedule (AJ requested visibility). M6 DoD complete 2026-05-22 via [#5](https://github.com/ajbarea/ldqis/pull/5):
 
 - [x] Entry added to `~/.claude/techne.toml`
 - [x] `Makefile` exists with sister-shape targets (full Phase 1-5 audit grid landed with M4)
 - [x] `.claude/skill-context.md` filled in with per-skill facts (this file)
 - [x] CI workflow at `.github/workflows/ci.yml` runs lint / type / unit / e2e / lighthouse on every PR
-- [ ] First successful `/techne:audit` run against this repo
-- [ ] First successful `/techne:sisters` audit run that includes ldqis with no missing-primitive findings
-- [ ] `~/ajsoftworks/MEMORY.md` index entry updated to note ldqis is now a sister (already done 2026-05-21; check this off when the entry is verified)
+- [x] First successful `/techne:audit` run against this repo — surfaced the `scripts/dev-runner.sh` gap as the last missing primitive; closed in #5
+- [x] First successful `/techne:sisters` audit run that includes ldqis with no missing-primitive findings — surfaced the merge-setting drift (squash-only / delete-on-merge); fixed via `gh api PATCH repos/ajbarea/ldqis` in #5
+- [x] `~/ajsoftworks/MEMORY.md` index entry updated to note ldqis is now a sister — `project_ajsoftworks_keep_list.md` confirms ldqis on the active-sisters list as of 2026-05-21

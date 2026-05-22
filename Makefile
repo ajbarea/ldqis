@@ -86,9 +86,10 @@ fix:                        ## Auto-fix ESLint + Prettier
 # Phase 3 — Lint
 # ════════════════════════════════════════════════════════════════════════════
 
-lint:                       ## ESLint + Prettier check (no auto-fix)
+lint:                       ## ESLint + Prettier check + README claim gate (no auto-fix)
 	@npm run lint:check
 	@npm run format:check
+	@node scripts/check-readme-claims.mjs
 
 check:                      ## Astro template + TypeScript type check
 	@npm run check

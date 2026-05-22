@@ -33,9 +33,20 @@ astro.config.mjs                # site URL + base path + Vite Tailwind plugin
 
 `ROADMAP.md` has the long view (content collections, news, CI, custom domain handoff). `IMPL.md` has whatever is actively in flight.
 
+## What's here
+
+Content lives under `src/content/` as Markdown files and is rendered by Astro at build time. Adding a researcher, project, publication, or news post is one new file:
+
+- `src/content/people/` — current team + alumni cohort. Optional `scholar:` field on each entry adds a Google Scholar link to the homepage team card + the per-person detail page (`/people/<id>/`).
+- `src/content/projects/` — open-source frameworks the lab ships (InteFL, Phalanx-FL, VelocityFL, Kourai Khryseai).
+- `src/content/publications/` — papers, with year + venue + authors.
+- `src/content/news/` — dated posts, surfaced on `/news/` with an RSS feed at `/news/rss.xml`.
+
+Schemas live in `src/content.config.ts`; new fields go there first.
+
 ## Status
 
-Pre-release. v0 scaffold shipped 2026-05-21; preview at <https://ajbarea.github.io/ldqis/>. Custom domain handoff to `dataqualitylabs.com` is M5 work, gated on Dr. Reznik / DNS.
+Pre-release. Preview at <https://ajbarea.github.io/ldqis/>. Custom domain handoff to `dataqualitylabs.com` is M5 work, gated on Dr. Reznik / DNS.
 
 ## Sister ecosystem
 

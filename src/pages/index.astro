@@ -431,6 +431,18 @@ const pastCohort = peopleEntries
                     {p.email}
                   </a>
                 )}
+                {p.scholar && (
+                  <a
+                    href={p.scholar}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-1 inline-flex items-center gap-1 text-xs hover:underline"
+                    style="color: var(--color-rit-orange-text);"
+                    aria-label={`${p.name} on Google Scholar (opens in new tab)`}
+                  >
+                    Google Scholar <span aria-hidden="true">↗</span>
+                  </a>
+                )}
               </div>
             ))
           }

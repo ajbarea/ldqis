@@ -60,6 +60,19 @@ const people = defineCollection({
     name: z.string(),
     role: z.string(),
     email: z.string().email().optional(),
+    // Optional Google Scholar profile URL. When set, the homepage team
+    // card + the per-person detail page render a "Google Scholar" link
+    // alongside the email button. Constrained to the scholar.google.com
+    // host so a typo in the frontmatter (e.g. dropping the URL or
+    // pasting a researchgate link) doesn't silently surface as an
+    // ambiguous external link.
+    scholar: z
+      .string()
+      .url()
+      .regex(/^https:\/\/scholar\.google\.com\//, {
+        message: "scholar URL must point at https://scholar.google.com/",
+      })
+      .optional(),
     cohort: z.enum(["current", "past"]),
     lead: z.boolean().optional(),
     order: z.number().int().nonnegative(),

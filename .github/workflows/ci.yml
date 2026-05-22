@@ -35,6 +35,8 @@ jobs:
       - run: npm ci
       - run: npm run lint:check
       - run: npm run format:check
+      - run: node scripts/check-readme-claims.mjs
+        name: README claim drift
 
   type-check:
     name: Type check

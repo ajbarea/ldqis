@@ -22,9 +22,12 @@ Nothing currently open.
 
 Per ROADMAP, in order:
 
-1. **M3 — news / blog surface** with an RSS feed.
-2. **M2-followup — cross-linking detail pages.** Project pages → contributing people, people pages → project contributions, publications → author people pages. Needs schema extensions: `contributors: string[]` on projects, `projects_contributed: string[]` on people, `author_ids: string[]` on publications.
-3. **M5 — custom domain handoff to dataqualitylabs.com** (gated on Dr. Reznik / DNS).
-4. **M6 — sister graduation:** first successful `/techne:audit` and `/techne:sisters` runs against the now-complete M4 toolchain.
+1. **M2-followup — cross-linking detail pages.** Project pages → contributing people, people pages → project contributions, publications → author people pages. Needs schema extensions: `contributors: string[]` on projects, `projects_contributed: string[]` on people, `author_ids: string[]` on publications.
+2. **M5 — custom domain handoff to dataqualitylabs.com** (gated on Dr. Reznik / DNS).
+3. **fragile-claims CI script** (mentioned under `## fragile_docs` in `.claude/skill-context.md`). Mirror the `ajbarea.github.io/scripts/check-readme-claims.mjs` pattern once README claims accumulate beyond the current structural-only set.
+
+M3 (news / blog surface with RSS) shipped 2026-05-22. M6 (sister
+graduation) shipped 2026-05-22 — `scripts/dev-runner.sh` + the first
+`/techne:audit` and `/techne:sisters` runs closed it out.
 
 When picking one up, replace the "In flight" block above with a full session plan (Why / Decisions / Scope / Out of scope / Definition of done).

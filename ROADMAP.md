@@ -59,75 +59,6 @@ lives here so IMPL.md stays terse.
 
 ---
 
-## M1 — v0 scaffold (in flight)
-
-> Status: in flight 2026-05-21
-
-Stand up the Astro 5 project with the homepage ported from the demo.
-Single-page experience preserved; content collections wired even if
-some pages are empty. First push lands on `ajbarea/ldqis` (or whatever
-the chosen name is — see IMPL.md open questions). GH Pages deploy
-runs but custom domain is not connected yet.
-
-Definition of done:
-
-- [ ] `npm install && npm run build` runs clean
-- [ ] `npm run dev` serves a working homepage at `localhost:4321`
-- [ ] All sections from the demo render: hero, stats, research areas,
-      projects, publications, people (current + past), get-involved,
-      footer
-- [ ] Theme toggle works with `localStorage` persistence
-- [ ] Skip-link, prefers-reduced-motion, semantic heading hierarchy
-      preserved
-- [ ] First commit lands on `main` in a brand-new repo
-- [ ] GH Pages deploy is wired and green
-
----
-
-## M2 — Content collections + per-detail pages
-
-> Status: shipped 2026-05-22
-
-Migrated the four projects, three publications, and 24-person (7
-current + 17 past) cohort from the monolithic `index.astro` inline
-arrays to Astro 5 content collections. Each entry now lives in
-`src/content/{projects|publications|people}/<id>.md` with typed
-frontmatter validated by Zod schemas in `src/content.config.ts`.
-Three dynamic-route templates — `src/pages/projects/[id].astro`,
-`src/pages/publications/[id].astro`, `src/pages/people/[id].astro`
-— prerender 31 detail pages at build time. The build emits 32 pages
-total (home + 4 + 3 + 24 + 1 skip).
-
-Astro 5 content layer notes (research 2026-05): `glob({ pattern, base })`
-loader derives `entry.id` from the filename (URL-friendly); the
-reserved `slug` field of Astro 4 is gone. Detail routes key off
-`entry.id`. Sources: docs.astro.build/en/guides/content-collections,
-docs.astro.build/en/reference/content-loader-reference.
-
-Definition of done:
-
-- [x] All four projects seeded as Markdown
-- [x] All three publications seeded as Markdown
-- [x] Full 7-person current cohort seeded as Markdown
-- [x] All 17 past-cohort researchers seeded as Markdown (extended
-      scope from the original "current only" — past cohort also benefits
-      from stable per-person URLs for alumni CVs / LinkedIn)
-- [x] Each `[id]` route renders without errors (32-page build clean)
-- [x] Homepage cards link to detail pages (project name → details,
-      publication title → details, person name → details)
-- [x] A11y spec scans one representative detail per collection +
-      both lead/no-lead person variants + one past-cohort entry
-      (no-email path). 9 e2e tests pass.
-
-Cross-linking (project pages → contributing people, people pages →
-project contributions, publications → author people pages) was _not_
-shipped in this PR — the data dependency goes the wrong way (no
-co-author field on the publication schema, no `projects_contributed`
-on people). Filed as M2-followup; deferred to keep the migration
-PR surgical.
-
----
-
 ## M3 — News / blog surface
 
 > Status: planned
@@ -152,48 +83,14 @@ Definition of done:
 
 ---
 
-## M4 — CI / a11y / smoke testing
+## M4 — CI / a11y / smoke testing — follow-ups
 
-> Status: shipped 2026-05-21
+> Status: M4 shipped 2026-05-21 (see Shipped). Items below are post-M4 polish.
 
-Per-PR: lint, type-check, build, Playwright smoke (homepage loads,
-skip-link reachable, theme toggle persists), axe-core scan against
-every page.
+- [ ] Branch protection on `main`: 5 required checks (lint, type, unit, e2e, lighthouse) — toggle in GitHub repo settings.
+- [ ] Codecov upload — lcov reporter is on by default via `vitest.config.ts` but no upload step is in the workflow.
 
-Definition of done:
-
-- [x] `.github/workflows/ci.yml` runs on every PR (lint / type / unit / e2e / lighthouse)
-- [x] Lighthouse CI run with per-category assertions on the homepage.
-      Floor set to ≥0.95 for perf / a11y / best-practices / SEO rather
-      than 1.0 — Lighthouse run-to-run jitter makes 100/100/100/100 a
-      flake risk for CI, so the gate is "essentially perfect" while
-      the in-text aim stays at 100. The site is shooting for 100/100/100/100
-      in practice; the assertion exists to catch ≥5 point regressions.
-- [x] axe-core scan via Playwright on `/` (the only route in M1).
-      Routes `/people`, `/projects`, `/publications`, `/news` land
-      with M2 / M3; the `ROUTES_TO_SCAN` constant in
-      `tests/e2e/a11y.spec.ts` is the single point of update — append
-      slugs as content collections come online so a11y moves with
-      the surface, not in a separate sweep.
-- [x] Sister-shape `Makefile` audit grid (Phase 1 setup / Phase 2 fix /
-      Phase 3 lint / Phase 4 test / Phase 5 e2e gates) + matching
-      `.claude/skill-context.md`.
-- [ ] Branch protection on `main`: 5 required checks (lint, type,
-      unit, e2e, lighthouse) — toggle in GitHub repo settings.
-- [ ] Codecov upload optional; the lcov reporter is already on by
-      default via `vitest.config.ts` but no upload step is in the
-      workflow.
-
-Brand-vs-AA exception filed in this milestone: official PMS 1505c
-orange (`#f76902`) on the light-mode background (`#fefefd`) measures
-2.98:1 — fails WCAG AA's 3:1 large-text floor by 0.02. Per the
-"Identity stays constant" invariant the brand color is locked, so
-elements that opt in via `style="color: var(--color-rit-orange)"`
-are excluded from the contrast rule with a documented note. The
-brand-vs-AA call is escalated to Dr. Reznik as a separate decision;
-meanwhile the body-text variant `--color-rit-orange-text` was darkened
-to `#b04b00` (5.4:1) and `--color-text-faint` to `#6c6863` (5.3:1) so
-the non-brand text surfaces clear AA without ambiguity.
+**Brand-vs-AA exception (active policy).** Official PMS 1505c orange (`#f76902`) on light bg measures 2.98:1 — fails WCAG AA 3:1 large-text by 0.02. Per the "Identity stays constant" invariant, brand-color elements (`style="color: var(--color-rit-orange)"`) are axe-excluded with a documented note. Brand-vs-AA call escalated to Dr. Reznik; body-text variant `--color-rit-orange-text` darkened to `#b04b00` (5.4:1), `--color-text-faint` to `#6c6863` (5.3:1) so non-brand surfaces clear AA.
 
 ---
 
@@ -337,10 +234,8 @@ Definition of done:
 
 ## Shipped
 
-- 2026-05-22 — **M2 — Content collections + per-detail pages**. 4 projects + 3 publications + 24 people migrated to Astro 5 content collections; 3 dynamic-route templates prerender 31 detail pages. Homepage cards now link into the detail layer. 9 e2e a11y tests pass (5 new — one per representative variant).
-- 2026-05-21 — **M4 — CI / a11y / smoke testing** (full sister-shape testing pipeline; see milestone above for landed-vs-deferred DoD checklist + brand-vs-AA color exception).
+One-line per item, newest first. Detail moves to git history when work lands.
 
-One-line per item, newest first. Detail moves to git history when
-work lands.
-
-- 2026-05-21 — **M1 — v0 scaffold**. Astro 5.18.1 + Tailwind 4 + GitHub Pages, homepage cherry-picked from the audit-of-audit-approved dql.html demo. Two follow-up commits fixed the base-path and the Tailwind 4 named-utility port. Live at <https://ajbarea.github.io/ldqis/>.
+- 2026-05-22 — **M2 — Content collections + per-detail pages**. 4 projects + 3 publications + 24 people migrated to Astro 5 content collections (`glob({ pattern, base })` loader; `entry.id` derived from filename, no reserved `slug`). 3 dynamic-route templates prerender 31 detail pages. Homepage cards link into the detail layer. 9 e2e a11y tests (was 4).
+- 2026-05-21 — **M4 — CI / a11y / smoke testing**. ESLint 10 + Prettier 3, Vitest 4 + happy-dom, Playwright + @axe-core/playwright + Lighthouse CI. Per-PR pipeline + `make validate` pre-push. Brand-vs-AA exception (see M4 follow-ups).
+- 2026-05-21 — **M1 — v0 scaffold**. Astro 5.18.1 + Tailwind 4 + GitHub Pages, homepage cherry-picked from the audit-of-audit-approved dql.html demo. Live at <https://ajbarea.github.io/ldqis/>.

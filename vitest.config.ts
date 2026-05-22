@@ -1,7 +1,7 @@
 // research(2026-05): Astro recommends `getViteConfig()` from `astro/config`
 // to seed Vitest with the project's Vite resolution (path aliases, plugins,
 // `~` imports), so component tests use the same module graph as the build.
-// happy-dom is lighter than jsdom and supported by Vitest 4 out of the box.
+// happy-dom is lighter than jsdom and supported natively by Vitest 4.
 // Source: https://docs.astro.build/en/guides/testing/
 
 import { getViteConfig } from "astro/config";

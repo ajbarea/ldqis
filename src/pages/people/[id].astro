@@ -1,0 +1,85 @@
+---
+import { type GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Detail pages for people give each researcher (current + past cohort)
+// a stable shareable URL. The lab's pre-M2 site had no per-person page;
+// alumni had no canonical link to point at from CVs / LinkedIn.
+export const getStaticPaths = (async () => {
+  const people = await getCollection("people");
+  return people.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { initials, name, role, email, cohort } = entry.data;
+const cohortLabel = cohort === "current" ? "Current team" : "Past cohort";
+---
+
+<BaseLayout
+  title={`${name} · LDQIS`}
+  description={`${name} — ${role}. ${cohortLabel} member at the Laboratory of Data Quality and Intelligent Security, RIT.`}
+>
+  <nav
+    class="sticky top-0 z-50 border-b border-line backdrop-blur-md"
+    style="background: color-mix(in oklab, var(--color-bg) 78%, transparent);"
+    aria-label="Site"
+  >
+    <div class="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-[18px]">
+      <a
+        href={import.meta.env.BASE_URL}
+        class="flex items-center gap-[10px]"
+        style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;"
+      >
+        <span
+          class="h-7 w-7 rounded-lg"
+          style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow));"
+        ></span>
+        LDQIS
+      </a>
+      <a
+        href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/#people`}
+        class="text-sm text-text-dim hover:text-rit-orange-text"
+      >
+        ← All people
+      </a>
+    </div>
+  </nav>
+
+  <main id="main" class="relative z-[1] pt-16 pb-32">
+    <article class="mx-auto max-w-[640px] px-6 text-center">
+      <div
+        class="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-full text-3xl font-semibold"
+        style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
+      >
+        {initials}
+      </div>
+
+      <div class="mb-3 text-xs tracking-[1.5px] text-rit-orange-text uppercase">{cohortLabel}</div>
+
+      <h1
+        class="mb-6"
+        style="font-family: var(--font-display); font-size: clamp(32px, 5vw, 48px); line-height: 1.1; letter-spacing: -1px;"
+      >
+        {name}
+      </h1>
+
+      <p class="mb-8 text-lg text-text-dim">{role}</p>
+
+      {
+        email && (
+          <a
+            href={`mailto:${email}`}
+            class="inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] font-mono text-sm hover:border-rit-orange"
+            style="color: var(--color-rit-orange-text);"
+          >
+            {email}
+          </a>
+        )
+      }
+    </article>
+  </main>
+</BaseLayout>

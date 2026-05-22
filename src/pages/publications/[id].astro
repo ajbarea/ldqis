@@ -1,0 +1,85 @@
+---
+import { type GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Detail pages for publications keep the venue / authors / year / link
+// pattern from the homepage card but give each publication a stable URL
+// to cite from external surfaces (LinkedIn, CVs, reading lists). The
+// link still resolves off-site to the publisher (IEEE, NSF).
+export const getStaticPaths = (async () => {
+  const publications = await getCollection("publications");
+  return publications.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { year, venue, title, authors, link } = entry.data;
+---
+
+<BaseLayout
+  title={`${title} · LDQIS`}
+  description={`${title} — ${authors}, ${venue}, ${year}. A publication from the Laboratory of Data Quality and Intelligent Security at RIT.`}
+>
+  <nav
+    class="sticky top-0 z-50 border-b border-line backdrop-blur-md"
+    style="background: color-mix(in oklab, var(--color-bg) 78%, transparent);"
+    aria-label="Site"
+  >
+    <div class="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-[18px]">
+      <a
+        href={import.meta.env.BASE_URL}
+        class="flex items-center gap-[10px]"
+        style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;"
+      >
+        <span
+          class="h-7 w-7 rounded-lg"
+          style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow));"
+        ></span>
+        LDQIS
+      </a>
+      <a
+        href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/#publications`}
+        class="text-sm text-text-dim hover:text-rit-orange-text"
+      >
+        ← All publications
+      </a>
+    </div>
+  </nav>
+
+  <main id="main" class="relative z-[1] pt-16 pb-32">
+    <article class="mx-auto max-w-[800px] px-6">
+      <div class="mb-6 flex items-baseline gap-4">
+        <div
+          class="text-5xl leading-none"
+          style="font-family: var(--font-display); color: var(--color-rit-orange-text); letter-spacing: -1px;"
+        >
+          {year}
+        </div>
+        <div class="text-xs tracking-[1.5px] text-text-faint uppercase">{venue}</div>
+      </div>
+
+      <h1
+        class="mb-6"
+        style="font-family: var(--font-display); font-size: clamp(28px, 4vw, 42px); line-height: 1.15; letter-spacing: -0.5px;"
+      >
+        {title}
+      </h1>
+
+      <p class="mb-12 text-lg text-text-dim">{authors}</p>
+
+      <div class="border-t border-line pt-8">
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] text-sm hover:border-rit-orange hover:text-rit-orange-text"
+        >
+          {link.label}
+        </a>
+      </div>
+    </article>
+  </main>
+</BaseLayout>

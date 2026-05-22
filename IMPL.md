@@ -14,46 +14,55 @@ Nothing currently open.
 
 ## Just shipped
 
+**M2 — Content collections + per-detail pages** (2026-05-22). The
+monolithic `src/pages/index.astro` (5 inline `const X = [...]`
+arrays totaling ~200 lines of structured data) split into Astro 5
+content collections: 4 projects + 3 publications + 24 people (7
+current + 17 past cohort) each in their own Markdown file with
+typed frontmatter validated by Zod schemas in `src/content.config.ts`.
+Three dynamic-route templates — `src/pages/projects/[id].astro`,
+`src/pages/publications/[id].astro`, `src/pages/people/[id].astro`
+— prerender 31 detail pages. Build produces 32 pages total.
+
+Research basis (2026-05): Astro 5's content layer dropped the Astro
+4 `slug` reserved field — `glob({ pattern, base })` derives
+`entry.id` from filenames, and dynamic routes key off that.
+Verified against docs.astro.build/en/guides/content-collections
+and docs.astro.build/en/reference/content-loader-reference.
+
+Homepage cards now link into the detail layer:
+- Project name → `/projects/[id]/`
+- Publication title → `/publications/[id]/` (the IEEE / DOI link
+  on the side stays external)
+- Person name → `/people/[id]/`
+
+A11y spec `ROUTES_TO_SCAN` extended from 1 to 6 routes covering one
+representative detail per collection plus both lead/no-lead person
+variants and one past-cohort entry (no-email path). 9 e2e tests
+pass (was 4).
+
+Out-of-scope cross-linking (project pages → contributing people,
+people pages → project contributions, publications → author people
+pages) filed as M2-followup. The data dependency goes the wrong way
+(no co-author field on publications, no `projects_contributed` on
+people) and adding that scaffolding mid-migration would have
+ballooned the diff. The detail pages today are minimal but provide
+stable URLs alumni / authors can cite from CVs.
+
+`make validate` end-to-end clean: lint, astro check (0 errors / 0
+warnings / 0 hints over 14 Astro files), 4 unit tests, 9 e2e tests,
+build (32 pages).
+
+## Previously shipped
+
 **M4 — CI / a11y / smoke testing** (2026-05-21). Full sister-shape
 testing pipeline lands at once: ESLint 10 flat config + Prettier 3,
 Vitest 4 + happy-dom for unit, Playwright + @axe-core/playwright for
 smoke + a11y, Lighthouse CI for perf/SEO assertions. CI workflow at
 `.github/workflows/ci.yml` runs lint / type / unit / e2e / lighthouse
 in parallel on every PR. `make validate` is the fast pre-push gate.
-
-Real WCAG findings surfaced by axe-core and fixed in-flight: the
-`--color-rit-orange-text` body-text variant was 4.4:1 (under AA 4.5),
-darkened to `#b04b00` (≈5.4:1); `--color-text-faint` on `bg-elev` was
-2.39:1, darkened to `#6c6863` (≈5.3:1). Hero-orange identity element
-(`<em>Intelligent</em>` and `25+` stats using inline
-`color: var(--color-rit-orange)`) is excluded from the contrast rule
-via `axe.exclude('[style*="--color-rit-orange"]')` with a documented
-brand-vs-AA tradeoff note — the official PMS 1505c hits 2.98:1 against
-the light background, failing AA's 3:1 large-text floor by 0.02. Brand
-identity is locked per ROADMAP "Identity stays constant" invariant;
-the brand-vs-AA call belongs to Dr. Reznik.
-
-Also fixed pre-existing `astro check` failure on the
-`@tailwindcss/vite` + Astro nested-Vite type mismatch via a documented
-`@ts-expect-error` directive in `astro.config.mjs`. Same pattern
-applied to `vitest.config.ts` where Astro's `getViteConfig()` returns
-a different `UserConfig` type than Vitest's `defineConfig` expects.
-
-First CI run failed only on the Lighthouse `color-contrast` audit: same
-brand-color identity issue that axe-core caught — except Lighthouse
-has no per-selector exclusion mechanism, so the brand exception can't
-be documented inline. Turned that specific audit off in
-`.lighthouserc.json`; the four category-level assertions (perf /
-a11y / best-practices / SEO ≥0.95) still gate the broader a11y story,
-and `@axe-core/playwright` continues to enforce color-contrast on
-non-brand surfaces. Trade-off: Lighthouse's audit-level color-contrast
-findings won't fail CI, but axe-core in e2e provides the same
-coverage with the brand exclusion the design intent requires.
-
-4 e2e tests pass (3 smoke + 1 a11y), 4 unit tests pass. `make
-validate` passes end-to-end locally; CI runs the full lighthouse pass
-on Linux native Chromium (WSL2 can't bind across the cross-OS
-boundary, so local lighthouse is sometimes flaky).
+Real WCAG findings fixed in-flight; brand-vs-AA exception filed.
+See M4 in ROADMAP.md for the full landed-vs-deferred DoD checklist.
 
 ## Known unpatched-upstream notation
 
@@ -77,10 +86,12 @@ upstream catches up.
 
 Per ROADMAP, in order:
 
-1. **M2 — content collections + per-detail pages.** One Markdown file
-   per project / publication / person, replacing the inline arrays in
-   `src/pages/index.astro`.
-2. **M3 — news / blog surface** with an RSS feed.
+1. **M3 — news / blog surface** with an RSS feed.
+2. **M2-followup — cross-linking detail pages.** Project pages →
+   contributing people, people pages → project contributions,
+   publications → author people pages. Needs schema extensions:
+   `contributors: string[]` on projects, `projects_contributed:
+   string[]` on people, `author_ids: string[]` on publications.
 3. **M5 — custom domain handoff to dataqualitylabs.com** (gated on
    Dr. Reznik / DNS).
 4. **M6 — sister graduation:** first successful `/techne:audit` and

@@ -13,14 +13,17 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 // Paths are relative to baseURL (which already ends in `/ldqis/`), so the
-// homepage is the empty string. M2/M3 add the rest as content collections
-// come online.
+// homepage is the empty string. M2 shipped per-detail pages for projects /
+// publications / people; we scan one representative detail page per
+// collection so the a11y bar covers the dynamic-route template. M3 will
+// add the news index when that surface lands.
 const ROUTES_TO_SCAN: ReadonlyArray<{ name: string; path: string }> = [
   { name: "home", path: "" },
-  // M2 adds these:
-  // { name: "projects index", path: "projects/" },
-  // { name: "publications index", path: "publications/" },
-  // { name: "people index", path: "people/" },
+  { name: "project detail (intefl)", path: "projects/intefl/" },
+  { name: "publication detail (intefl-mis-2026)", path: "publications/intefl-mis-2026/" },
+  { name: "person detail (leon-reznik, lead)", path: "people/leon-reznik/" },
+  { name: "person detail (aj-barea, no-lead)", path: "people/aj-barea/" },
+  { name: "person detail (igor-khokhlov, past cohort, no email)", path: "people/igor-khokhlov/" },
   // M3 adds this:
   // { name: "news index", path: "news/" },
 ];

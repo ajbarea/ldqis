@@ -15,7 +15,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { initials, name, role, email, cohort } = entry.data;
+const { initials, name, role, email, scholar, cohort } = entry.data;
 const cohortLabel = cohort === "current" ? "Current team" : "Past cohort";
 ---
 
@@ -69,17 +69,33 @@ const cohortLabel = cohort === "current" ? "Current team" : "Past cohort";
 
       <p class="mb-8 text-lg text-text-dim">{role}</p>
 
-      {
-        email && (
-          <a
-            href={`mailto:${email}`}
-            class="inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] font-mono text-sm hover:border-rit-orange"
-            style="color: var(--color-rit-orange-text);"
-          >
-            {email}
-          </a>
-        )
-      }
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        {
+          email && (
+            <a
+              href={`mailto:${email}`}
+              class="inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] font-mono text-sm hover:border-rit-orange"
+              style="color: var(--color-rit-orange-text);"
+            >
+              {email}
+            </a>
+          )
+        }
+        {
+          scholar && (
+            <a
+              href={scholar}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] text-sm hover:border-rit-orange"
+              style="color: var(--color-rit-orange-text);"
+              aria-label={`${name} on Google Scholar (opens in new tab)`}
+            >
+              Google Scholar <span aria-hidden="true">↗</span>
+            </a>
+          )
+        }
+      </div>
     </article>
   </main>
 </BaseLayout>

@@ -4,6 +4,14 @@
 // dynamic segments key off `entry.id`. Source:
 // https://docs.astro.build/en/guides/content-collections/
 // https://docs.astro.build/en/reference/content-loader-reference/
+//
+// research(2026-05): @astrojs/rss exports an `rssSchema` helper, but
+// composing it via `rssSchema.extend(...)` fails because the package
+// bundles its own Zod 4 internals that don't compose with the Zod the
+// content layer hands us via `astro:content`. Define the news schema
+// directly with the same fields (title/description/pubDate/link/author)
+// — the rss endpoint reads these by name, not by type identity. Source:
+// https://docs.astro.build/en/recipes/rss/
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
@@ -58,4 +66,23 @@ const people = defineCollection({
   }),
 });
 
-export const collections = { projects, publications, people };
+// News / blog posts — dated, optional tags + author. Field names match
+// the RSS feed item shape so news/rss.xml.js can pass them straight
+// through to @astrojs/rss without re-mapping.
+const news = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/news" }),
+  schema: z.object({
+    title: z.string().min(1),
+    description: z.string().optional(),
+    summary: z.string().min(1).max(280),
+    pubDate: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+    author: z.string().default("LDQIS"),
+    // `draft: true` keeps a post out of indexes + RSS without removing the
+    // file. Future-dated posts (pubDate > now at build time) are also
+    // hidden — see news/index.astro + rss.xml.js filters.
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { projects, publications, people, news };

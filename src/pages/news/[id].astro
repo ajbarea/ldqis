@@ -1,0 +1,100 @@
+---
+import { type GetStaticPaths } from "astro";
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// research(2026-05): Astro 5 content layer uses `render(entry)` to compile
+// Markdown body to a Vue/Astro-renderable Content component. The reserved
+// `slug` field of Astro 4 is gone; routes key off `entry.id` (filename).
+// Drafts + future-dated posts are NOT prerendered — getStaticPaths filters
+// them out so a 404 is the public surface, not a leaked stub.
+export const getStaticPaths = (async () => {
+  const now = Date.now();
+  const posts = await getCollection("news");
+  return posts
+    .filter((post) => !post.data.draft && post.data.pubDate.getTime() <= now)
+    .map((entry) => ({
+      params: { id: entry.id },
+      props: { entry },
+    }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { title, description, summary, pubDate, tags, author } = entry.data;
+const { Content } = await render(entry);
+
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+---
+
+<BaseLayout title={`${title} · LDQIS News`} description={description ?? summary}>
+  <nav
+    class="sticky top-0 z-50 border-b border-line backdrop-blur-md"
+    style="background: color-mix(in oklab, var(--color-bg) 78%, transparent);"
+    aria-label="Site"
+  >
+    <div class="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-[18px]">
+      <a
+        href={base + "/"}
+        class="flex items-center gap-[10px]"
+        style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;"
+      >
+        <span
+          class="h-7 w-7 rounded-lg"
+          style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow));"
+        ></span>
+        LDQIS
+      </a>
+      <a href={base + "/news/"} class="text-sm text-text-dim hover:text-rit-orange-text">
+        ← All news
+      </a>
+    </div>
+  </nav>
+
+  <main id="main" class="relative z-[1] pt-16 pb-32">
+    <article class="mx-auto max-w-[760px] px-6">
+      <header class="mb-10">
+        <div class="mb-4 flex flex-wrap items-baseline gap-4">
+          <time
+            datetime={pubDate.toISOString()}
+            class="text-xs tracking-[1.5px] text-rit-orange-text uppercase"
+          >
+            {dateFmt.format(pubDate)}
+          </time>
+          <span class="text-xs tracking-[1.5px] text-text-faint uppercase">{author}</span>
+        </div>
+        <h1
+          class="mb-6"
+          style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.1; letter-spacing: -1px;"
+        >
+          {title}
+        </h1>
+        {summary && <p class="text-xl text-text-dim italic">{summary}</p>}
+      </header>
+
+      <div class="prose prose-invert max-w-none text-lg leading-relaxed text-text-dim">
+        <Content />
+      </div>
+
+      {
+        tags.length > 0 && (
+          <ul class="mt-12 flex flex-wrap gap-2 border-t border-line pt-8">
+            {tags.map((t) => (
+              <li
+                class="rounded-full border px-[10px] py-[3px] text-[11px] tracking-[1px] uppercase"
+                style="color: var(--color-rit-orange-text); background: color-mix(in oklab, var(--color-rit-orange) 8%, transparent); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
+              >
+                {t}
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </article>
+  </main>
+</BaseLayout>

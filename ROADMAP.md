@@ -120,7 +120,7 @@ Definition of done:
       (no-email path). 9 e2e tests pass.
 
 Cross-linking (project pages → contributing people, people pages →
-project contributions, publications → author people pages) was *not*
+project contributions, publications → author people pages) was _not_
 shipped in this PR — the data dependency goes the wrong way (no
 co-author field on the publication schema, no `projects_contributed`
 on people). Filed as M2-followup; deferred to keep the migration

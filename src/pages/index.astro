@@ -62,7 +62,6 @@ const pastCohort = peopleEntries
   .filter((entry) => entry.data.cohort === "past")
   .sort((a, b) => a.data.order - b.data.order)
   .map((entry) => ({ ...entry.data, id: entry.id }));
-
 ---
 
 <BaseLayout>

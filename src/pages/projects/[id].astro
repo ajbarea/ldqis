@@ -75,7 +75,10 @@ const { name, tagline, tags, stack, desc, links } = entry.data;
 
       <div class="mb-8 font-mono text-sm text-text-faint">{stack}</div>
 
-      <div class="prose prose-invert mb-12 max-w-none text-lg text-text-dim leading-relaxed" set:html={desc} />
+      <div
+        class="prose prose-invert mb-12 max-w-none text-lg leading-relaxed text-text-dim"
+        set:html={desc}
+      />
 
       <div class="flex flex-wrap gap-[14px] border-t border-line pt-8">
         {

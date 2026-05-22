@@ -31,6 +31,7 @@ Verified against docs.astro.build/en/guides/content-collections
 and docs.astro.build/en/reference/content-loader-reference.
 
 Homepage cards now link into the detail layer:
+
 - Project name → `/projects/[id]/`
 - Publication title → `/publications/[id]/` (the IEEE / DOI link
   on the side stays external)
@@ -91,7 +92,7 @@ Per ROADMAP, in order:
    contributing people, people pages → project contributions,
    publications → author people pages. Needs schema extensions:
    `contributors: string[]` on projects, `projects_contributed:
-   string[]` on people, `author_ids: string[]` on publications.
+string[]` on people, `author_ids: string[]` on publications.
 3. **M5 — custom domain handoff to dataqualitylabs.com** (gated on
    Dr. Reznik / DNS).
 4. **M6 — sister graduation:** first successful `/techne:audit` and

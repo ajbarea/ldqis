@@ -22,9 +22,7 @@ const projects = defineCollection({
     // long-term but the data is short enough that one-line desc stays
     // readable inside frontmatter.
     desc: z.string(),
-    links: z
-      .array(z.object({ label: z.string(), href: z.string().url() }))
-      .min(1),
+    links: z.array(z.object({ label: z.string(), href: z.string().url() })).min(1),
     // Ordering: lower numbers render first. Mirrors the prior array order
     // (InteFL → Phalanx-FL → VelocityFL → Kourai Khryseai) without
     // depending on filesystem listing.

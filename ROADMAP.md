@@ -59,30 +59,6 @@ lives here so IMPL.md stays terse.
 
 ---
 
-## M3 — News / blog surface
-
-> Status: planned
-
-Replaces the legacy site's "see my key address to NetWare 2014" style
-of news-as-stale-paragraph with proper dated posts. Each post is one
-Markdown file in `src/content/news/`, with frontmatter for date /
-authors / tags. Index at `/news/` shows newest first, with `[slug]`
-detail pages.
-
-First post: "Welcome to the rebuilt LDQIS website" — explains the
-move from Flask/Bootstrap to Astro, summarizes what's new, links to
-the GitHub repo so curious readers can see the source.
-
-Definition of done:
-
-- [ ] `/news/` index renders newest-first
-- [ ] `/news/[slug]` per-post pages work
-- [ ] First welcome post written and dated 2026-05
-- [ ] RSS feed auto-generated at `/news/rss.xml` (Astro has built-in
-      support)
-
----
-
 ## M4 — CI / a11y / smoke testing — follow-ups
 
 > Status: M4 shipped 2026-05-21 (see Shipped). Items below are post-M4 polish.
@@ -236,6 +212,7 @@ Definition of done:
 
 One-line per item, newest first. Detail moves to git history when work lands.
 
+- 2026-05-22 — **M3 — News / blog surface with RSS**. `news` content collection (title / description / summary / pubDate / tags / author / draft) loads from `src/content/news/`. `/news/` index renders newest-first; `/news/[id]/` detail pages prerender per post; `/news/rss.xml` is a valid RSS 2.0 feed with the atom namespace + `<atom:link rel="self">` self-reference (W3C-clean). Draft posts and future-dated posts are excluded from both the index and the feed at build time. First welcome post (`2026-05-welcome.md`) shipped. Nav grew a "News" entry; a11y `ROUTES_TO_SCAN` extended to cover both news routes (11 e2e tests total). `rssSchema.extend()` failed at build time because `@astrojs/rss` ships its own Zod 4 runtime — the news schema is defined directly with the same field shape instead.
 - 2026-05-22 — **M2 — Content collections + per-detail pages**. 4 projects + 3 publications + 24 people migrated to Astro 5 content collections (`glob({ pattern, base })` loader; `entry.id` derived from filename, no reserved `slug`). 3 dynamic-route templates prerender 31 detail pages. Homepage cards link into the detail layer. 9 e2e a11y tests (was 4).
 - 2026-05-21 — **M4 — CI / a11y / smoke testing**. ESLint 10 + Prettier 3, Vitest 4 + happy-dom, Playwright + @axe-core/playwright + Lighthouse CI. Per-PR pipeline + `make validate` pre-push. Brand-vs-AA exception (see M4 follow-ups).
 - 2026-05-21 — **M1 — v0 scaffold**. Astro 5.18.1 + Tailwind 4 + GitHub Pages, homepage cherry-picked from the audit-of-audit-approved dql.html demo. Live at <https://ajbarea.github.io/ldqis/>.

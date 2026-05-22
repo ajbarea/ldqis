@@ -15,11 +15,19 @@
     "lint:check": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "prepare": "husky",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
     "lighthouse": "lhci autorun",
     "validate": "npm run lint:check && npm run format:check && npm run check && npm run test:unit && npm run build"
+  },
+  "lint-staged": {
+    "*.{js,ts,astro,jsx,tsx,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css,html,yml,yaml}": "prettier --write"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.0",
@@ -36,6 +44,8 @@
     "eslint": "^10.4.0",
     "eslint-plugin-astro": "^1.7.0",
     "happy-dom": "^20.9.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.0",

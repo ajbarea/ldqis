@@ -100,28 +100,27 @@ Definition of done:
 
 ## M6 — Sister graduation
 
-> Status: **in flight as of 2026-05-21** — AJ promoted ldqis to a
-> sister ahead of schedule. The `~/.claude/techne.toml` entry was
-> added so `/techne:sisters` audits start including ldqis from the
-> next run. Supporting primitives (Makefile + `.claude/skill-context.md`)
-> still need to land; the first sister-audit pass will surface them
-> as missing-primitive findings, which is intentional eyeballs-on-it
-> work.
-
-Once the repo has a Makefile and `.claude/skill-context.md` (the
-remaining sister-shape primitives), the audit findings clear and
-ldqis is fully aligned with the other five sisters.
+> Status: **shipped 2026-05-22**. First `/techne:audit` run completed
+> green; dev-runner wrapper added for sister-convention parity (mirror
+> of techne's `scripts/dev-runner.sh`). `/techne:sisters` cross-sister
+> audit including ldqis runs next.
 
 Definition of done:
 
 - [x] Entry added to `~/.claude/techne.toml`
 - [x] `Makefile` with the current toolchain's targets (`setup`,
-      `dev`, `build`, `preview`, `check`, `clean`). The full
-      `lint` / `test` / `e2e` set lands with M4.
+      `dev`, `build`, `preview`, `check`, `clean`). Full
+      `lint` / `test` / `e2e` set landed with M4.
 - [x] `.claude/skill-context.md` filled in with per-skill facts
-- [ ] First successful `/techne:audit` run against this repo
-- [ ] First successful `/techne:sisters` audit run that includes
-      ldqis alongside the other five with no missing-primitive findings
+- [x] `scripts/dev-runner.sh` wrapper writes `logs/dev-<ts>-<cmd>.log`
+      archives with SUMMARY block — sister convention from techne
+- [x] First successful `/techne:audit` run (2026-05-22; 7 phases
+      passed: setup, lint, check, test-unit, build, test-e2e, audit;
+      lighthouse skipped per documented WSL2 caveat)
+- [x] First successful `/techne:sisters` audit run (2026-05-22; ldqis
+      included alongside the other five; one drift item surfaced and
+      fixed same-turn: merge settings → squash-only + delete-on-merge
+      to match sister convention)
 - [x] `~/ajsoftworks/MEMORY.md` updated to note ldqis is now a sister
 
 ---
@@ -212,6 +211,7 @@ Definition of done:
 
 One-line per item, newest first. Detail moves to git history when work lands.
 
+- 2026-05-22 — **M6 — Sister graduation**. Dev-runner wrapper at `scripts/dev-runner.sh` (mirror of techne's; writes `logs/dev-<ts>-<cmd>.log` + SUMMARY block). First `/techne:audit` run green across setup / lint / check / test-unit / build / test-e2e / audit. First `/techne:sisters` cross-sister audit found one drift item (ldqis merge settings) and fixed it to squash-only + delete-on-merge to match the other five sisters. Lighthouse skipped per documented WSL2 Chrome bind caveat (CI exercises it). Skill-context updated with the log-archive convention.
 - 2026-05-22 — **M3 — News / blog surface with RSS**. `news` content collection (title / description / summary / pubDate / tags / author / draft) loads from `src/content/news/`. `/news/` index renders newest-first; `/news/[id]/` detail pages prerender per post; `/news/rss.xml` is a valid RSS 2.0 feed with the atom namespace + `<atom:link rel="self">` self-reference (W3C-clean). Draft posts and future-dated posts are excluded from both the index and the feed at build time. First welcome post (`2026-05-welcome.md`) shipped. Nav grew a "News" entry; a11y `ROUTES_TO_SCAN` extended to cover both news routes (11 e2e tests total). `rssSchema.extend()` failed at build time because `@astrojs/rss` ships its own Zod 4 runtime — the news schema is defined directly with the same field shape instead.
 - 2026-05-22 — **M2 — Content collections + per-detail pages**. 4 projects + 3 publications + 24 people migrated to Astro 5 content collections (`glob({ pattern, base })` loader; `entry.id` derived from filename, no reserved `slug`). 3 dynamic-route templates prerender 31 detail pages. Homepage cards link into the detail layer. 9 e2e a11y tests (was 4).
 - 2026-05-21 — **M4 — CI / a11y / smoke testing**. ESLint 10 + Prettier 3, Vitest 4 + happy-dom, Playwright + @axe-core/playwright + Lighthouse CI. Per-PR pipeline + `make validate` pre-push. Brand-vs-AA exception (see M4 follow-ups).

@@ -48,6 +48,8 @@ Fast audit = `make setup → make lint → make check → make test-unit → mak
 
 Stop-early phase: Phase 1 (`make setup`). If install fails, abort — every downstream step depends on it.
 
+Log archive: `logs/dev-<YYYYMMDDTHHMMSS>-<cmd>.log` + pointer `logs/dev-latest.log`. Written by `scripts/dev-runner.sh <target>` (mirror of techne's wrapper). Invoke via `./scripts/dev-runner.sh <target>` to get the archive + SUMMARY block; bare `make <target>` runs the same command without logging. CI continues to use bare `make` / npm scripts; the wrapper is the local-audit entrypoint. Do **not** read `dev-latest.log` (overwritten each invocation).
+
 Do-not-run targets (long-running or interactive):
 
 - `make dev` (interactive Astro dev server)

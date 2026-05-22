@@ -1,10 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
-// research(2026-05): keeping the homepage as one inline-content file for v0.
-// Content collections (people/projects/publications/news/research-areas)
-// land in M2 once the build is verified. Faster path to a working deploy
-// than premature decomposition.
+// research(2026-05): M2 migrates projects / publications / people to Astro 5
+// content collections. The remaining inline `researchAreas` array stays
+// here — it's short structural copy that lives with the homepage section,
+// not the per-detail-page surface the collections target. See
+// `src/content.config.ts` for collection schemas. Sources:
+// https://docs.astro.build/en/guides/content-collections/
+// https://docs.astro.build/en/reference/content-loader-reference/
 
 const researchAreas = [
   {
@@ -39,152 +43,25 @@ const researchAreas = [
   },
 ];
 
-const projects = [
-  {
-    name: "InteFL",
-    tagline: "Knowledge Management Framework for Federated Learning",
-    tags: ["Federated Learning", "Agentic AI"],
-    stack: "Python · Flower · PyTorch · LoRA",
-    desc: "A configuration and execution framework for federated learning simulations built on Flower. Implements <strong>novel PID controller-inspired and Trust-based aggregation strategies</strong> alongside classical robust methods (Krum, Multi-Krum, Bulyan, RFA, Trimmed-Mean), adversarial attack scheduling, federated LLM fine-tuning with LoRA, and a wide range of medical imaging datasets. Published in <strong>IEEE Intelligent Systems, 2026.</strong>",
-    links: [
-      {
-        label: "GitHub ↗",
-        href: "https://github.com/dmitrykoro/fl-execution-framework",
-      },
-      { label: "IEEE DOI ↗", href: "https://doi.org/10.1109/MIS.2026.3658072" },
-    ],
-  },
-  {
-    name: "Phalanx-FL",
-    tagline: "Experimental fork of InteFL",
-    tags: ["Federated Learning", "Research Sandbox"],
-    stack: "FastAPI · React · Celery · Redis",
-    desc: "A personal sandbox built atop InteFL — exploring what a full-stack web interface (React frontend, FastAPI backend, Celery worker queue) could look like for federated learning simulations. A space for tooling and UI experiments; the canonical research framework remains InteFL.",
-    links: [
-      { label: "GitHub ↗", href: "https://github.com/ajbarea/phalanx-fl" },
-      { label: "Docs ↗", href: "https://ajbarea.github.io/phalanx-fl/" },
-    ],
-  },
-  {
-    name: "VelocityFL",
-    tagline: "Rust-core federated learning orchestration",
-    tags: ["Federated Learning", "High-Performance"],
-    stack: "Rust · PyO3 · Python",
-    desc: "A federated learning runtime with a Rust aggregation core and a Python-first interface. Eight paper-cited aggregation algorithms (FedAvg, FedProx, Krum, Bulyan, Geometric Median…), round-level and data-pipeline attack simulation, and aggregation kernels measured at ~92× the speed of pure Python.",
-    links: [
-      { label: "GitHub ↗", href: "https://github.com/ajbarea/vFL" },
-      { label: "Docs ↗", href: "https://ajbarea.github.io/vFL/" },
-    ],
-  },
-  {
-    name: "Kourai Khryseai",
-    tagline: "A multi-agent system with three interfaces",
-    tags: ["Multi-Agent System", "Federated Learning"],
-    stack: "MCP + A2A · CLI · Pygame · Ren'Py",
-    desc: "Ten specialized A2A-protocol agents — planner, coder, tester, reviewer, scribe, validators — that collaborate in a shared group chat to plan, build, and ship code. Three coordinated interfaces: terminal CLI, Pygame GUI, and a Ren'Py visual novel. Ongoing research into narrative interfaces for agent observability.",
-    links: [
-      { label: "GitHub ↗", href: "https://github.com/ajbarea/kourai-khryseai" },
-      { label: "Site ↗", href: "https://ajbarea.github.io/kourai-khryseai/" },
-    ],
-  },
-];
+const projectEntries = await getCollection("projects");
+const projects = projectEntries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({ ...entry.data, id: entry.id }));
 
-const publications = [
-  {
-    year: "2026",
-    venue: "IEEE Intelligent Systems",
-    title:
-      "InteFL Framework: Optimizing Federated Learning with Metacognition for Application Design and Deployment",
-    authors: "D. Korobeinikov, R. Zatsarenko, S. Chuprov, A. Barea, L. Reznik",
-    link: { label: "DOI ↗", href: "https://doi.org/10.1109/MIS.2026.3658072" },
-  },
-  {
-    year: "2024",
-    venue: "IEEE AIIoT 2024",
-    title: "Trust-Based Anomaly Detection in Federated Edge Learning",
-    authors: "D. Korobeinikov, et al.",
-    link: {
-      label: "IEEE Xplore ↗",
-      href: "https://ieeexplore.ieee.org/document/10578967/",
-    },
-  },
-  {
-    year: "2024",
-    venue: "ASIA '24 · 19th Annual Symposium on Information Assurance · Albany, NY",
-    title: "Federated Learning Robustness on Real World Data in Intelligent Transportation Systems",
-    authors: "D. Korobeinikov, S. Chuprov, R. Zatsarenko, L. Reznik",
-    link: {
-      label: "NSF Repository ↗",
-      href: "https://par.nsf.gov/biblio/10532530",
-    },
-  },
-];
+const publicationEntries = await getCollection("publications");
+const publications = publicationEntries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({ ...entry.data, id: entry.id }));
 
-const currentTeam = [
-  {
-    initials: "LR",
-    name: "Dr. Leon Reznik",
-    role: "Principal Investigator · Professor of Computer Science · RIT",
-    email: "lrvcs@rit.edu",
-    lead: true,
-  },
-  {
-    initials: "SC",
-    name: "Dr. Sergei Chuprov",
-    role: "Faculty Collaborator · Professor · UTRGV",
-    email: "sergei.chuprov@utrgv.edu",
-  },
-  {
-    initials: "DK",
-    name: "Dmitrii Korobeinikov",
-    role: "RIT Graduate Researcher · InteFL lead author",
-    email: "dk9148@g.rit.edu",
-  },
-  {
-    initials: "RZ",
-    name: "Raman Zatsarenko",
-    role: "RIT Graduate Researcher · PID-inspired aggregation lead",
-    email: "rz4983@rit.edu",
-  },
-  {
-    initials: "AB",
-    name: "AJ Barea",
-    role: "RIT Graduate Researcher · Phalanx-FL · VelocityFL · Kourai Khryseai",
-    email: "ajb6289@g.rit.edu",
-  },
-  {
-    initials: "TB",
-    name: "Tyler Black",
-    role: "RIT Graduate Researcher · InteFL contributor",
-    email: "tcb8683@rit.edu",
-  },
-  {
-    initials: "CS",
-    name: "Chris Soravilla",
-    role: "RIT Graduate Researcher · InteFL contributor",
-    email: "cs3346@rit.edu",
-  },
-];
-
-const pastCohort = [
-  { initials: "IK", name: "Dr. Igor Khokhlov", role: "2018 NSF Webinar Co-Presenter" },
-  { initials: "DY", name: "Dmitri Yudanov", role: "Alumnus · Neural network architectures" },
-  { initials: "AH", name: "Andrew Hoffman", role: "Mobile trust evaluation · 2015" },
-  { initials: "AH", name: "Andrew Heyman", role: "Fuzzy systems + CI software · 2015–18" },
-  { initials: "DP", name: "Darrel Pollard", role: "Mobile trust evaluation · 2015" },
-  { initials: "RD", name: "Rohan Dalvi", role: "Android security framework · 2017" },
-  { initials: "AM", name: "Ankan Mookherjee", role: "Data quality + Android security · 2017" },
-  { initials: "AK", name: "Ashish Kumar", role: "Android security framework · 2017" },
-  { initials: "RB", name: "Rohit Bhaskar", role: "Wearable sensors + ML · 2018–19" },
-  { initials: "SJ", name: "Suresh Babu Jothilingam", role: "Wearable sensor design · 2018" },
-  { initials: "AK", name: "Akhil Killawala", role: "Computational intelligence · FUZZ-IEEE 2018" },
-  { initials: "AS", name: "Akshay Salunke", role: "Sentiment analysis · MS thesis" },
-  { initials: "MP", name: "Michael Perez", role: "Android anomaly detection · 2019" },
-  { initials: "AP", name: "Akshay Pudage", role: "Sensor selection optimization · 2019" },
-  { initials: "NL", name: "Ninad Ligade", role: "RNNs for Android attacks · 2020" },
-  { initials: "SS", name: "Srujan Shetty", role: "Transfer learning + ML systems · 2022" },
-  { initials: "KM", name: "Karan Manghi", role: "Multi-modal sensor selection · 2022" },
-];
+const peopleEntries = await getCollection("people");
+const currentTeam = peopleEntries
+  .filter((entry) => entry.data.cohort === "current")
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({ ...entry.data, id: entry.id }));
+const pastCohort = peopleEntries
+  .filter((entry) => entry.data.cohort === "past")
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => ({ ...entry.data, id: entry.id }));
 ---
 
 <BaseLayout>
@@ -396,7 +273,7 @@ const pastCohort = [
                 </div>
                 <div class="mb-4 text-sm text-text-dim italic">{p.tagline}</div>
                 <p class="mb-6 flex-grow text-[15px] text-text-dim" set:html={p.desc} />
-                <div class="flex gap-[14px] border-t border-line pt-[18px] text-[13px]">
+                <div class="flex flex-wrap gap-[14px] border-t border-line pt-[18px] text-[13px]">
                   {p.links.map((l) => (
                     <a
                       href={l.href}
@@ -408,6 +285,13 @@ const pastCohort = [
                       {l.label}
                     </a>
                   ))}
+                  <a
+                    href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/projects/${p.id}/`}
+                    class="ml-auto inline-flex items-center gap-1 text-text-dim hover:text-rit-orange-text"
+                    aria-label={`Project page for ${p.name}`}
+                  >
+                    Project page →
+                  </a>
                 </div>
               </article>
             ))
@@ -451,7 +335,12 @@ const pastCohort = [
                   <div class="mb-[6px] text-[11px] tracking-[1.5px] text-text-faint uppercase">
                     {pub.venue}
                   </div>
-                  <div class="mb-1 text-[17px] leading-[1.35] font-medium">{pub.title}</div>
+                  <a
+                    href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/publications/${pub.id}/`}
+                    class="mb-1 inline-block text-[17px] leading-[1.35] font-medium hover:text-rit-orange-text"
+                  >
+                    {pub.title}
+                  </a>
                   <div class="text-[13px] text-text-dim">{pub.authors}</div>
                 </div>
                 <a
@@ -523,15 +412,22 @@ const pastCohort = [
                 >
                   {p.initials}
                 </div>
-                <div class="mb-1 text-base font-medium">{p.name}</div>
-                <div class="text-[13px] text-text-dim">{p.role}</div>
                 <a
-                  href={`mailto:${p.email}`}
-                  class="mt-2 inline-block font-mono text-xs break-all hover:underline"
-                  style="color: var(--color-rit-orange-text);"
+                  href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
+                  class="mb-1 inline-block text-base font-medium hover:text-rit-orange-text"
                 >
-                  {p.email}
+                  {p.name}
                 </a>
+                <div class="text-[13px] text-text-dim">{p.role}</div>
+                {p.email && (
+                  <a
+                    href={`mailto:${p.email}`}
+                    class="mt-2 inline-block font-mono text-xs break-all hover:underline"
+                    style="color: var(--color-rit-orange-text);"
+                  >
+                    {p.email}
+                  </a>
+                )}
               </div>
             ))
           }
@@ -571,7 +467,12 @@ const pastCohort = [
                 >
                   {p.initials}
                 </div>
-                <div class="mb-1 text-base font-medium">{p.name}</div>
+                <a
+                  href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
+                  class="mb-1 inline-block text-base font-medium hover:text-rit-orange-text"
+                >
+                  {p.name}
+                </a>
                 <div class="text-[13px] text-text-dim">{p.role}</div>
               </div>
             ))

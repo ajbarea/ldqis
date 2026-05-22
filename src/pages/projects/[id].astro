@@ -1,0 +1,99 @@
+---
+import { type GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// research(2026-05): Astro 5 dynamic-route IDs come from filenames via
+// `glob({ pattern })` — no reserved `slug` field anymore. `entry.id` is
+// the URL-friendly basename. Source:
+// https://docs.astro.build/en/reference/content-loader-reference/
+export const getStaticPaths = (async () => {
+  const projects = await getCollection("projects");
+  return projects.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { name, tagline, tags, stack, desc, links } = entry.data;
+---
+
+<BaseLayout
+  title={`${name} · LDQIS`}
+  description={`${name} — ${tagline}. An open-source project from the Laboratory of Data Quality and Intelligent Security at RIT.`}
+>
+  <nav
+    class="sticky top-0 z-50 border-b border-line backdrop-blur-md"
+    style="background: color-mix(in oklab, var(--color-bg) 78%, transparent);"
+    aria-label="Site"
+  >
+    <div class="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-[18px]">
+      <a
+        href={import.meta.env.BASE_URL}
+        class="flex items-center gap-[10px]"
+        style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;"
+      >
+        <span
+          class="h-7 w-7 rounded-lg"
+          style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow));"
+        ></span>
+        LDQIS
+      </a>
+      <a
+        href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/#projects`}
+        class="text-sm text-text-dim hover:text-rit-orange-text"
+      >
+        ← All projects
+      </a>
+    </div>
+  </nav>
+
+  <main id="main" class="relative z-[1] pt-16 pb-32">
+    <article class="mx-auto max-w-[800px] px-6">
+      <div class="mb-6 flex flex-wrap items-center gap-3">
+        {
+          tags.map((t) => (
+            <span
+              class="rounded-full border px-[10px] py-[3px] text-[11px] tracking-[1px] uppercase"
+              style="color: var(--color-rit-orange-text); background: color-mix(in oklab, var(--color-rit-orange) 8%, transparent); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
+            >
+              {t}
+            </span>
+          ))
+        }
+      </div>
+
+      <h1
+        class="mb-3"
+        style="font-family: var(--font-display); font-size: clamp(40px, 6vw, 64px); line-height: 1.05; letter-spacing: -1px;"
+      >
+        {name}
+      </h1>
+
+      <p class="mb-8 text-xl text-text-dim italic">{tagline}</p>
+
+      <div class="mb-8 font-mono text-sm text-text-faint">{stack}</div>
+
+      <div
+        class="prose prose-invert mb-12 max-w-none text-lg leading-relaxed text-text-dim"
+        set:html={desc}
+      />
+
+      <div class="flex flex-wrap gap-[14px] border-t border-line pt-8">
+        {
+          links.map((l) => (
+            <a
+              href={l.href}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] text-sm hover:border-rit-orange hover:text-rit-orange-text"
+            >
+              {l.label}
+            </a>
+          ))
+        }
+      </div>
+    </article>
+  </main>
+</BaseLayout>

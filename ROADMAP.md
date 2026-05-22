@@ -86,32 +86,45 @@ Definition of done:
 
 ## M2 — Content collections + per-detail pages
 
-> Status: planned
+> Status: shipped 2026-05-22
 
-Each project / publication / team member becomes its own Markdown
-file with frontmatter. Routes:
+Migrated the four projects, three publications, and 24-person (7
+current + 17 past) cohort from the monolithic `index.astro` inline
+arrays to Astro 5 content collections. Each entry now lives in
+`src/content/{projects|publications|people}/<id>.md` with typed
+frontmatter validated by Zod schemas in `src/content.config.ts`.
+Three dynamic-route templates — `src/pages/projects/[id].astro`,
+`src/pages/publications/[id].astro`, `src/pages/people/[id].astro`
+— prerender 31 detail pages at build time. The build emits 32 pages
+total (home + 4 + 3 + 24 + 1 skip).
 
-- `/projects/[slug]` — per-project detail (InteFL, Phalanx-FL, vFL,
-  Kourai Khryseai, future). Pulls the same fields the demo renders
-  inline (tag list, tech stack, description, GitHub + docs links,
-  paper DOIs) into a richer detail layout. Lists the project's
-  contributors by linking back to their `/people/[slug]` pages.
-- `/publications/[slug]` — per-publication detail (the IEEE IS 2026,
-  IEEE AIIoT 2024, ASIA '24 papers, future). Abstract, authors with
-  affiliations, links to PDF + DOI + bibtex.
-- `/people/[slug]` — per-person detail. Optional, only for current
-  cohort; past-cohort entries stay as one-liners on the `/people`
-  index. Bio, areas, links to the projects they contribute to.
+Astro 5 content layer notes (research 2026-05): `glob({ pattern, base })`
+loader derives `entry.id` from the filename (URL-friendly); the
+reserved `slug` field of Astro 4 is gone. Detail routes key off
+`entry.id`. Sources: docs.astro.build/en/guides/content-collections,
+docs.astro.build/en/reference/content-loader-reference.
 
 Definition of done:
 
-- [ ] All four existing projects seeded as Markdown
-- [ ] All three existing publications seeded as Markdown
-- [ ] Current cohort (Reznik / Chuprov / Korobeinikov / Zatsarenko /
-      Barea / Black / Soravilla) seeded as Markdown
-- [ ] Each `[slug]` route renders without errors
-- [ ] Cross-links work: project pages link to people, people pages
-      link to projects, publications link to authors
+- [x] All four projects seeded as Markdown
+- [x] All three publications seeded as Markdown
+- [x] Full 7-person current cohort seeded as Markdown
+- [x] All 17 past-cohort researchers seeded as Markdown (extended
+      scope from the original "current only" — past cohort also benefits
+      from stable per-person URLs for alumni CVs / LinkedIn)
+- [x] Each `[id]` route renders without errors (32-page build clean)
+- [x] Homepage cards link to detail pages (project name → details,
+      publication title → details, person name → details)
+- [x] A11y spec scans one representative detail per collection +
+      both lead/no-lead person variants + one past-cohort entry
+      (no-email path). 9 e2e tests pass.
+
+Cross-linking (project pages → contributing people, people pages →
+project contributions, publications → author people pages) was _not_
+shipped in this PR — the data dependency goes the wrong way (no
+co-author field on the publication schema, no `projects_contributed`
+on people). Filed as M2-followup; deferred to keep the migration
+PR surgical.
 
 ---
 
@@ -324,6 +337,7 @@ Definition of done:
 
 ## Shipped
 
+- 2026-05-22 — **M2 — Content collections + per-detail pages**. 4 projects + 3 publications + 24 people migrated to Astro 5 content collections; 3 dynamic-route templates prerender 31 detail pages. Homepage cards now link into the detail layer. 9 e2e a11y tests pass (5 new — one per representative variant).
 - 2026-05-21 — **M4 — CI / a11y / smoke testing** (full sister-shape testing pipeline; see milestone above for landed-vs-deferred DoD checklist + brand-vs-AA color exception).
 
 One-line per item, newest first. Detail moves to git history when

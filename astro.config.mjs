@@ -32,6 +32,12 @@ export default defineConfig({
   site: isCustomDomain ? "https://dataqualitylabs.com" : "https://ajbarea.github.io",
   base: isCustomDomain ? "/" : "/ldqis",
   vite: {
+    // research(2026-05): @tailwindcss/vite peer-Vite version differs from
+    // Astro's nested Vite (HotUpdatePluginContext vs MinimalPluginContext);
+    // PluginOption type assignability fails. The runtime path is fine —
+    // pinned to ^4.0.0 since that's what Tailwind 4 publishes. Re-evaluate
+    // when @tailwindcss/vite catches up to Astro's Vite minor.
+    // @ts-expect-error -- upstream type mismatch; runtime is unaffected.
     plugins: [tailwindcss()],
   },
 });

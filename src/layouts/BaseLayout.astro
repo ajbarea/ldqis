@@ -23,10 +23,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta
-      name="author"
-      content="LDQIS — Rochester Institute of Technology"
-    />
+    <meta name="author" content="LDQIS — Rochester Institute of Technology" />
     <link rel="canonical" href={canonical} />
 
     {/* Open Graph */}
@@ -43,16 +40,8 @@ const {
     <meta name="twitter:card" content="summary_large_image" />
 
     {/* theme-color matches active mode bg */}
-    <meta
-      name="theme-color"
-      content="#fefefd"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#0a0e13"
-      media="(prefers-color-scheme: dark)"
-    />
+    <meta name="theme-color" content="#fefefd" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0e13" media="(prefers-color-scheme: dark)" />
 
     {/* favicon — inline SVG matching the wordmark mark */}
     <link
@@ -72,17 +61,16 @@ const {
     <script is:inline>
       (function () {
         try {
-          var stored = localStorage.getItem("ldqis-theme");
-          if (stored === "dark")
-            document.documentElement.setAttribute("data-theme", "dark");
-        } catch (e) {
+          const stored = localStorage.getItem("ldqis-theme");
+          if (stored === "dark") document.documentElement.setAttribute("data-theme", "dark");
+        } catch {
           /* localStorage blocked is fine — stay on light theme */
         }
       })();
     </script>
   </head>
   <body
-    class="bg-bg text-text font-sans antialiased overflow-x-hidden transition-colors duration-200"
+    class="overflow-x-hidden bg-bg font-sans text-text antialiased transition-colors duration-200"
     style="font-family: var(--font-sans);"
   >
     <a href="#main" class="skip-link">Skip to main content</a>

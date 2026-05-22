@@ -7,12 +7,12 @@ tooling changes.
 ## repo
 
 - name: ldqis
-- package_root: `src/` (Astro pages + layouts + components + styles + content), `public/` (static assets served as-is)
+- package_root: `src/` (Astro pages + layouts + components + styles + content), `public/` (static assets served as-is), `tests/` (unit + e2e)
 - language: TypeScript (Astro 5 + Tailwind 4) — no Python, no Rust
 - cli_entrypoint: `npm run <script>` (see `package.json` `scripts`) wrapped by `make <target>` (see `Makefile`)
 - runner_module: no Python runner; npm scripts drive the pipeline
-- default_branch: `main` (deploy.yml triggers on push)
-- has: Astro 5 (output: "static"), Tailwind 4 via `@tailwindcss/vite`, TypeScript strict, GitHub Pages deploy via Actions, content cherry-picked from a 2026-02 Claude Cowork session (single-file demo for LDQIS lab site)
+- default_branch: `main` (ci.yml + deploy.yml triggers on push)
+- has: Astro 5 (output: "static"), Tailwind 4 via `@tailwindcss/vite`, TypeScript strict, ESLint 10 flat config + Prettier 3, Vitest 4 + happy-dom for unit, Playwright + @axe-core/playwright for e2e + a11y, Lighthouse CI for perf/SEO assertions, GitHub Pages deploy via Actions, content cherry-picked from a 2026-02 Claude Cowork session
 
 ## audit
 
@@ -24,21 +24,27 @@ Audit drives the wrapper `make` targets, in dependency order:
 
 ### Phase 2 — Fix (one-way door)
 
-No auto-fix yet. Lint + format land with M4 of `ROADMAP.md` (CI / a11y / smoke testing milestone).
+2. `make fix` — `eslint --fix` + `prettier --write` across the repo. Run before lint when iterating.
 
 ### Phase 3 — Granular lint
 
-2. `make check` — `astro check` (TypeScript + `.astro` template type-checking). The closest thing to a lint pass today; surfaces type errors and Astro template issues. ESLint + Prettier `format:check` / `lint:check` land with M4.
+3. `make lint` — `eslint .` + `prettier --check .` (no auto-fix).
+4. `make check` — `astro check` (TypeScript + `.astro` template type-checking). Surfaces type errors and Astro template issues.
 
 ### Phase 4 — Granular test
 
-Nothing yet. Vitest unit tests + Playwright e2e + axe-core a11y scan land with M4.
+5. `make test-unit` — Vitest. Astro `getViteConfig()` seeds Vitest with the project's Vite resolution; happy-dom is the test environment.
+6. `make test-e2e` — Playwright + @axe-core/playwright. Spawns `astro preview` via `playwright.config.ts`'s `webServer` block; serves the `dist/` build under the `/ldqis/` base path. **Requires `make build` first** (or any state that produced a valid `dist/`).
+7. `make test` — combined unit + e2e.
 
 ### Phase 5 — End-to-end gates
 
-3. `make build` — `astro build`, the "is it deployable" probe. Generates static HTML/CSS/JS into `dist/`.
+8. `make build` — `astro build`, the "is it deployable" probe. Generates static HTML/CSS/JS into `dist/`.
+9. `make validate` — fast pre-push gate (`lint + check + test-unit + build`). Skips e2e + lighthouse for speed; CI runs all gates.
+10. `make audit` — `npm audit`. Informational only. The Astro 5 CVEs and the `@lhci/cli` transitive-dep CVEs are deliberately accepted (unpatched-upstream pattern; see `astro.config.mjs` research comment + ROADMAP).
+11. `make lighthouse` — Lighthouse CI run, asserts performance / a11y / best-practices / SEO categories at ≥0.95. Loose-floor on category scores keeps CI stable against Lighthouse's run-to-run jitter while still gating the 100/100/100/100 ROADMAP intent.
 
-Fast audit (current state) = `make setup → make check → make build`. Three commands.
+Fast audit = `make setup → make lint → make check → make test-unit → make build`. Five commands. Mirrors `make validate`.
 
 Stop-early phase: Phase 1 (`make setup`). If install fails, abort — every downstream step depends on it.
 
@@ -47,11 +53,7 @@ Do-not-run targets (long-running or interactive):
 - `make dev` (interactive Astro dev server)
 - `make preview` (interactive preview server)
 
-Pending targets (file as findings until M4 lands them):
-
-- `make lint` (ESLint + Prettier check)
-- `make test` (Vitest unit)
-- `make e2e` (Playwright + axe-core)
+WSL2 caveat: `make lighthouse` may fail locally if Chrome can't bind across the WSL2 boundary; the CI ubuntu-latest runner with native Chromium handles this cleanly. If a local lighthouse run is needed, run from a native Linux box or use the `lhci` Docker image.
 
 ## ci_audit
 
@@ -61,8 +63,14 @@ Referenced configs a CI failure can trace to:
 - `astro.config.mjs` (site, base, Vite plugins including `@tailwindcss/vite`)
 - `tsconfig.json` (extends `astro/tsconfigs/strict`)
 - `src/styles/global.css` (Tailwind 4 `@theme` token registry — design tokens live in CSS, not config)
-- `.github/workflows/deploy.yml` (the only workflow)
-- `.nvmrc` (Node version pin)
+- `eslint.config.js` (ESLint 10 flat config; uses `eslint-plugin-astro` + `typescript-eslint`)
+- `.prettierrc.json` (Prettier + `prettier-plugin-astro` + `prettier-plugin-tailwindcss`)
+- `vitest.config.ts` (uses Astro's `getViteConfig()` so test resolution matches the build)
+- `playwright.config.ts` (chromium project + `webServer` block; `baseURL` ends in `/ldqis/`)
+- `.lighthouserc.json` (URL list + per-category score assertions + chrome flags)
+- `.github/workflows/ci.yml` (lint / type / unit / e2e / lighthouse jobs)
+- `.github/workflows/deploy.yml` (Pages deploy on push to main)
+- `.nvmrc` (Node version pin: 22)
 
 Tool error markers (extend the default grep set):
 
@@ -70,24 +78,29 @@ Tool error markers (extend the default grep set):
 - `vite` (dev / build pipeline errors)
 - `@tailwindcss/vite` (Tailwind processing errors — note the Astro 5 vs Astro 6 rolldown incompat tracked in `astro.config.mjs` research comment)
 - `rolldown` (Vite-side build errors when Astro 6 is in play; current pin is Astro 5.18.x to avoid)
+- `eslint` / `prettier` (lint + format errors)
+- `vitest` (unit test failures)
+- `playwright` (e2e failures — also `axe`, `WCAG`, `color-contrast` for a11y findings)
+- `lhci` / `lighthouse` (lighthouse-ci category-score regressions)
 - `pages` / `Pages` (deploy workflow errors)
 
-Expected external PR checks: none. `deploy.yml` is the single workflow and is push-on-`main` only.
+Expected external PR checks: none specific to PRs today; the in-repo CI defines five required gates (lint, type-check, unit, e2e, lighthouse).
 
 ## slop_ground_truth
 
 Source of truth for quantitative claims in README / docs:
 
-- **Stack version pins:** `package.json` dependencies block — claims about Astro / Tailwind / TypeScript major versions must trace here.
+- **Stack version pins:** `package.json` dependencies block — claims about Astro / Tailwind / TypeScript / ESLint / Vitest / Playwright major versions must trace here.
 - **Site identity strings:** `astro.config.mjs` (`site`, `base`) and `src/layouts/BaseLayout.astro` (`<title>`, `<meta>`) — claims about the deployed URL or site title trace here.
-- **Theme tokens:** `src/styles/global.css` `@theme` block — claims about brand colors (PMS 1505c, F6BE00) or font choices (Instrument Serif, Inter) trace here.
+- **Theme tokens:** `src/styles/global.css` `@theme` block — claims about brand colors (PMS 1505c, F6BE00), font choices (Instrument Serif, Inter), or the AA-text variants trace here.
+- **Test counts:** `tests/unit/`, `tests/e2e/` directory contents — any "N tests" claim must `wc -l` to the actual count.
 - **Deploy artifacts:** `dist/` after `make build`; ephemeral. Persistent claims need to point at source files, not the build output.
 
 Any quantitative claim not traceable to one of those is slop.
 
 ## fragile_docs
 
-No fragile-claims CI script yet (would land alongside M4). When README / docs claims accumulate, mirror the `ajbarea.github.io` `scripts/check-readme-claims.mjs` pattern.
+No fragile-claims CI script yet (M5 / sister-graduation follow-up). When README / docs claims accumulate, mirror the `ajbarea.github.io` `scripts/check-readme-claims.mjs` pattern.
 
 Today the README claims live in `README.md`'s "What's here" + status sections; they reference structural facts (file paths, IMPL/ROADMAP existence) that drift slowly.
 
@@ -95,7 +108,7 @@ Today the README claims live in `README.md`'s "What's here" + status sections; t
 
 Skip paths:
 
-- `.astro/`, `dist/`, `node_modules/`
+- `.astro/`, `dist/`, `node_modules/`, `coverage/`, `playwright-report/`, `test-results/`, `.lighthouseci/`
 - `package-lock.json`
 - `public/` is fine to scan but most files there are assets, not source
 
@@ -105,7 +118,8 @@ Subagent scan-area split:
 - Components: `src/components/**/*.astro` (none yet — homepage is monolithic until M2 content-collections work)
 - Content collections: `src/content/**/*.md` (none yet — land with M2)
 - Styles: `src/styles/*.css`
-- Config / build: `astro.config.mjs`, `tsconfig.json`, `package.json`, `.github/workflows/**`, `Makefile`, `.nvmrc`
+- Tests: `tests/unit/**/*.test.ts`, `tests/e2e/**/*.spec.ts`
+- Config / build: `astro.config.mjs`, `tsconfig.json`, `package.json`, `eslint.config.js`, `.prettierrc.json`, `vitest.config.ts`, `playwright.config.ts`, `.lighthouserc.json`, `.github/workflows/**`, `Makefile`, `.nvmrc`
 - Docs / repo: `README.md`, `IMPL.md`, `ROADMAP.md`
 
 ## docs_site
@@ -114,21 +128,21 @@ The site **is** itself a documentation site — Astro renders to `dist/` and shi
 
 - config: `astro.config.mjs` (Astro 5 SSG mode + Vite Tailwind plugin)
 - workflow: `.github/workflows/deploy.yml` (Actions-driven Pages deploy)
+- ci_workflow: `.github/workflows/ci.yml` (per-PR lint / type / unit / e2e / lighthouse)
 - build_command: `make build` / `npm run build` / `astro build`
 - output_dir: `dist/`
 - preview_url: `https://ajbarea.github.io/ldqis/` (current; subject to base path = `/ldqis`)
 - production_url: `https://dataqualitylabs.com` (planned; gates on M5 DNS handoff, then `astro.config.mjs` `CUSTOM_DOMAIN=true` env flip)
-- action_pins (expected current, 2026-05): `actions/checkout@v5`, `actions/setup-node@v5`, `actions/upload-pages-artifact@v4`, `actions/deploy-pages@v4`
+- action_pins (expected current, 2026-05): `actions/checkout@v6.0.2`, `actions/setup-node@v6.4.0`, `actions/upload-pages-artifact@v5.0.0`, `actions/deploy-pages@v5.0.0`, `actions/upload-artifact@v7.0.1`
 
 ## sister_graduation
 
 Promoted to a sister 2026-05-21 ahead of original M6 schedule (AJ requested visibility). Status of the M6 DoD items:
 
 - [x] Entry added to `~/.claude/techne.toml`
-- [x] `Makefile` exists with sister-shape targets (current scope: `setup / dev / build / preview / check / clean`; `lint / test / e2e` are M4 follow-ons)
+- [x] `Makefile` exists with sister-shape targets (full Phase 1-5 audit grid landed with M4)
 - [x] `.claude/skill-context.md` filled in with per-skill facts (this file)
+- [x] CI workflow at `.github/workflows/ci.yml` runs lint / type / unit / e2e / lighthouse on every PR
 - [ ] First successful `/techne:audit` run against this repo
 - [ ] First successful `/techne:sisters` audit run that includes ldqis with no missing-primitive findings
 - [ ] `~/ajsoftworks/MEMORY.md` index entry updated to note ldqis is now a sister (already done 2026-05-21; check this off when the entry is verified)
-
-The audit will surface the `lint / test / e2e` gap and the unwritten `fragile_docs` script as findings until M4 lands them. That's expected — the gap was intentionally pulled forward.

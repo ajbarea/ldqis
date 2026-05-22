@@ -24,5 +24,11 @@ pnpm-debug.log*
 # typechecking
 *.tsbuildinfo
 
+# test artifacts (Vitest coverage, Playwright reports, Lighthouse CI)
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/
+
 # never commit — AJ's per-repo working scratch convention
 COMMITS.md

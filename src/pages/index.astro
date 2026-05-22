@@ -45,7 +45,7 @@ const projects = [
     tagline: "Knowledge Management Framework for Federated Learning",
     tags: ["Federated Learning", "Agentic AI"],
     stack: "Python · Flower · PyTorch · LoRA",
-    desc: 'A configuration and execution framework for federated learning simulations built on Flower. Implements <strong>novel PID controller-inspired and Trust-based aggregation strategies</strong> alongside classical robust methods (Krum, Multi-Krum, Bulyan, RFA, Trimmed-Mean), adversarial attack scheduling, federated LLM fine-tuning with LoRA, and a wide range of medical imaging datasets. Published in <strong>IEEE Intelligent Systems, 2026.</strong>',
+    desc: "A configuration and execution framework for federated learning simulations built on Flower. Implements <strong>novel PID controller-inspired and Trust-based aggregation strategies</strong> alongside classical robust methods (Krum, Multi-Krum, Bulyan, RFA, Trimmed-Mean), adversarial attack scheduling, federated LLM fine-tuning with LoRA, and a wide range of medical imaging datasets. Published in <strong>IEEE Intelligent Systems, 2026.</strong>",
     links: [
       {
         label: "GitHub ↗",
@@ -111,8 +111,7 @@ const publications = [
   {
     year: "2024",
     venue: "ASIA '24 · 19th Annual Symposium on Information Assurance · Albany, NY",
-    title:
-      "Federated Learning Robustness on Real World Data in Intelligent Transportation Systems",
+    title: "Federated Learning Robustness on Real World Data in Intelligent Transportation Systems",
     authors: "D. Korobeinikov, S. Chuprov, R. Zatsarenko, L. Reznik",
     link: {
       label: "NSF Repository ↗",
@@ -191,13 +190,17 @@ const pastCohort = [
 <BaseLayout>
   {/* NAV */}
   <nav
-    class="sticky top-0 z-50 backdrop-blur-md border-b border-line"
+    class="sticky top-0 z-50 border-b border-line backdrop-blur-md"
     style="background: color-mix(in oklab, var(--color-bg) 78%, transparent);"
   >
-    <div class="max-w-[1200px] mx-auto px-6 flex items-center justify-between py-[18px]">
-      <a href="/" class="flex items-center gap-[10px]" style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;">
+    <div class="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-[18px]">
+      <a
+        href="/"
+        class="flex items-center gap-[10px]"
+        style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;"
+      >
         <span
-          class="w-7 h-7 rounded-lg relative"
+          class="relative h-7 w-7 rounded-lg"
           style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow));"
         >
           <span
@@ -207,7 +210,7 @@ const pastCohort = [
         </span>
         LDQIS
       </a>
-      <div class="hidden md:flex gap-7 text-sm text-text-dim">
+      <div class="hidden gap-7 text-sm text-text-dim md:flex">
         <a href="#research" class="hover:text-text">Research</a>
         <a href="#projects" class="hover:text-text">Projects</a>
         <a href="#publications" class="hover:text-text">Publications</a>
@@ -217,14 +220,36 @@ const pastCohort = [
         type="button"
         id="theme-toggle"
         aria-label="Toggle color theme"
-        class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-line text-text-dim hover:text-rit-orange-text hover:border-rit-orange transition-transform hover:rotate-[15deg]"
+        class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-text-dim transition-transform hover:rotate-[15deg] hover:border-rit-orange hover:text-rit-orange-text"
       >
-        <svg id="icon-moon" class="w-4 h-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        <svg
+          id="icon-moon"
+          class="h-4 w-4 dark:hidden"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
-        <svg id="icon-sun" class="w-4 h-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="4"/>
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        <svg
+          id="icon-sun"
+          class="hidden h-4 w-4 dark:block"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path
+            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+          ></path>
         </svg>
       </button>
     </div>
@@ -232,303 +257,372 @@ const pastCohort = [
 
   <main id="main" class="relative z-[1]">
     {/* HERO */}
-    <header class="pt-[120px] pb-[100px] relative">
-      <div class="max-w-[1200px] mx-auto px-6">
-        <div class="inline-flex items-center gap-2 px-3 py-[6px] border border-line rounded-full text-xs text-text-dim mb-8 bg-bg-soft">
-          <span class="w-[6px] h-[6px] rounded-full bg-rit-orange" style="box-shadow: 0 0 12px var(--color-rit-orange);"></span>
+    <header class="relative pt-[120px] pb-[100px]">
+      <div class="mx-auto max-w-[1200px] px-6">
+        <div
+          class="mb-8 inline-flex items-center gap-2 rounded-full border border-line bg-bg-soft px-3 py-[6px] text-xs text-text-dim"
+        >
+          <span
+            class="h-[6px] w-[6px] rounded-full bg-rit-orange"
+            style="box-shadow: 0 0 12px var(--color-rit-orange);"></span>
           Rochester Institute of Technology · Department of Computer Science
         </div>
-        <h1 class="mb-7 max-w-[14ch]" style="font-family: var(--font-display); font-size: clamp(48px, 8vw, 96px); font-weight: 400; line-height: 1.02; letter-spacing: -2px;">
-          Trustworthy data.<br/><em class="italic" style="color: var(--color-rit-orange);">Intelligent</em> security.
+        <h1
+          class="mb-7 max-w-[14ch]"
+          style="font-family: var(--font-display); font-size: clamp(48px, 8vw, 96px); font-weight: 400; line-height: 1.02; letter-spacing: -2px;"
+        >
+          Trustworthy data.<br /><em class="italic" style="color: var(--color-rit-orange);"
+            >Intelligent</em
+          > security.
         </h1>
-        <p class="text-lg text-text-dim max-w-[56ch] mb-10">
-          The Laboratory of Data Quality and Intelligent Security at RIT builds
-          the methods, models, and systems that make modern data infrastructure
-          verifiable, resilient, and worthy of trust — from sensor networks at
-          the edge to large-scale ML systems at the core.
+        <p class="mb-10 max-w-[56ch] text-lg text-text-dim">
+          The Laboratory of Data Quality and Intelligent Security at RIT builds the methods, models,
+          and systems that make modern data infrastructure verifiable, resilient, and worthy of
+          trust — from sensor networks at the edge to large-scale ML systems at the core.
         </p>
-        <div class="flex gap-[14px] flex-wrap">
+        <div class="flex flex-wrap gap-[14px]">
           <a
             href="#research"
-            class="inline-flex items-center gap-2 px-[22px] py-[14px] rounded-full text-sm font-medium transition-transform hover:-translate-y-[1px]"
+            class="inline-flex items-center gap-2 rounded-full px-[22px] py-[14px] text-sm font-medium transition-transform hover:-translate-y-[1px]"
             style="background: var(--color-rit-orange); color: #0a0e13;"
           >
             Explore the research →
           </a>
           <a
             href="#support"
-            class="inline-flex items-center gap-2 px-[22px] py-[14px] rounded-full text-sm font-medium border border-line text-text hover:border-text-dim"
+            class="inline-flex items-center gap-2 rounded-full border border-line px-[22px] py-[14px] text-sm font-medium text-text hover:border-text-dim"
           >
             Support our work
           </a>
         </div>
 
         {/* STATS */}
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-px mt-20 border border-line rounded-[14px] overflow-hidden" style="background: var(--color-line);">
-          {[
-            { num: "4", label: "Active OSS projects" },
-            { num: "25+", label: "Researchers trained" },
-            { num: "3", label: "Peer-reviewed publications" },
-            { num: "12+", label: "Years of funded work" },
-          ].map(({ num, label }) => (
-            <div class="bg-bg py-7 px-6">
-              <div style="font-family: var(--font-display); font-size: 44px; line-height: 1; color: var(--color-rit-orange);">
-                {num}
+        <div
+          class="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-[14px] border border-line md:grid-cols-4"
+          style="background: var(--color-line);"
+        >
+          {
+            [
+              { num: "4", label: "Active OSS projects" },
+              { num: "25+", label: "Researchers trained" },
+              { num: "3", label: "Peer-reviewed publications" },
+              { num: "12+", label: "Years of funded work" },
+            ].map(({ num, label }) => (
+              <div class="bg-bg px-6 py-7">
+                <div style="font-family: var(--font-display); font-size: 44px; line-height: 1; color: var(--color-rit-orange);">
+                  {num}
+                </div>
+                <div class="mt-[6px] text-[13px] tracking-[0.5px] text-text-dim uppercase">
+                  {label}
+                </div>
               </div>
-              <div class="text-[13px] text-text-dim uppercase tracking-[0.5px] mt-[6px]">
-                {label}
-              </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </header>
 
     {/* RESEARCH AREAS */}
-    <section id="research" class="py-[100px] relative">
-      <div class="max-w-[1200px] mx-auto px-6">
-        <div class="text-xs tracking-[1.5px] uppercase text-rit-orange-text mb-4">
+    <section id="research" class="relative py-[100px]">
+      <div class="mx-auto max-w-[1200px] px-6">
+        <div class="mb-4 text-xs tracking-[1.5px] text-rit-orange-text uppercase">
           Research Areas
         </div>
-        <h2 class="mb-6 max-w-[22ch]" style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;">
+        <h2
+          class="mb-6 max-w-[22ch]"
+          style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;"
+        >
           Six frontiers we're pushing in parallel.
         </h2>
-        <p class="text-lg text-text-dim max-w-[64ch] mb-14">
-          Our work sits at the intersection of data quality, security, and
-          intelligent systems — with a hard focus on what's deployable,
-          measurable, and trustworthy.
+        <p class="mb-14 max-w-[64ch] text-lg text-text-dim">
+          Our work sits at the intersection of data quality, security, and intelligent systems —
+          with a hard focus on what's deployable, measurable, and trustworthy.
         </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {researchAreas.map((area) => (
-            <article
-              class="p-8 bg-bg-elev border border-line rounded-[14px] transition-all hover:-translate-y-[2px] hover:border-rit-orange"
-            >
-              <span class="block text-sm italic mb-6" style="font-family: var(--font-display); color: var(--color-rit-orange-text);">
-                — {area.n}
-              </span>
-              <div class="text-[22px] font-medium mb-3 leading-[1.2]">{area.title}</div>
-              <p class="text-text-dim text-[15px]">{area.desc}</p>
-            </article>
-          ))}
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {
+            researchAreas.map((area) => (
+              <article class="rounded-[14px] border border-line bg-bg-elev p-8 transition-all hover:-translate-y-[2px] hover:border-rit-orange">
+                <span
+                  class="mb-6 block text-sm italic"
+                  style="font-family: var(--font-display); color: var(--color-rit-orange-text);"
+                >
+                  — {area.n}
+                </span>
+                <div class="mb-3 text-[22px] leading-[1.2] font-medium">{area.title}</div>
+                <p class="text-[15px] text-text-dim">{area.desc}</p>
+              </article>
+            ))
+          }
         </div>
       </div>
     </section>
 
     {/* PROJECTS */}
-    <section id="projects" class="py-[100px] relative">
-      <div class="max-w-[1200px] mx-auto px-6">
-        <div class="text-xs tracking-[1.5px] uppercase text-rit-orange-text mb-4">
+    <section id="projects" class="relative py-[100px]">
+      <div class="mx-auto max-w-[1200px] px-6">
+        <div class="mb-4 text-xs tracking-[1.5px] text-rit-orange-text uppercase">
           Active Projects
         </div>
-        <h2 class="mb-6 max-w-[22ch]" style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;">
+        <h2
+          class="mb-6 max-w-[22ch]"
+          style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;"
+        >
           What we're shipping right now.
         </h2>
-        <p class="text-lg text-text-dim max-w-[64ch] mb-14">
-          Open-source frameworks, peer-reviewed methods, and end-to-end
-          systems — built by the current cohort and used by researchers beyond
-          LDQIS.
+        <p class="mb-14 max-w-[64ch] text-lg text-text-dim">
+          Open-source frameworks, peer-reviewed methods, and end-to-end systems — built by the
+          current cohort and used by researchers beyond LDQIS.
         </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((p) => (
-            <article class="bg-bg-elev border border-line rounded-[14px] p-8 transition-all hover:-translate-y-[2px] hover:border-rit-orange flex flex-col">
-              <div class="flex items-center gap-3 mb-[18px] flex-wrap">
-                {p.tags.map((t) => (
-                  <span
-                    class="text-[11px] tracking-[1px] uppercase px-[10px] py-[3px] rounded-full border"
-                    style="color: var(--color-rit-orange-text); background: color-mix(in oklab, var(--color-rit-orange) 8%, transparent); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
-                  >
-                    {t}
-                  </span>
-                ))}
-                <span class="text-[11px] text-text-faint font-mono">{p.stack}</span>
-              </div>
-              <div class="mb-[6px] leading-[1.1]" style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;">
-                {p.name}
-              </div>
-              <div class="text-sm text-text-dim italic mb-4">{p.tagline}</div>
-              <p class="text-[15px] text-text-dim mb-6 flex-grow" set:html={p.desc}></p>
-              <div class="flex gap-[14px] text-[13px] pt-[18px] border-t border-line">
-                {p.links.map((l) => (
-                  <a
-                    href={l.href}
-                    target="_blank"
-                    rel="noopener"
-                    class="inline-flex items-center gap-1 hover:underline"
-                    style="color: var(--color-rit-orange-text);"
-                  >
-                    {l.label}
-                  </a>
-                ))}
-              </div>
-            </article>
-          ))}
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {
+            projects.map((p) => (
+              <article class="flex flex-col rounded-[14px] border border-line bg-bg-elev p-8 transition-all hover:-translate-y-[2px] hover:border-rit-orange">
+                <div class="mb-[18px] flex flex-wrap items-center gap-3">
+                  {p.tags.map((t) => (
+                    <span
+                      class="rounded-full border px-[10px] py-[3px] text-[11px] tracking-[1px] uppercase"
+                      style="color: var(--color-rit-orange-text); background: color-mix(in oklab, var(--color-rit-orange) 8%, transparent); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                  <span class="font-mono text-[11px] text-text-faint">{p.stack}</span>
+                </div>
+                <div
+                  class="mb-[6px] leading-[1.1]"
+                  style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;"
+                >
+                  {p.name}
+                </div>
+                <div class="mb-4 text-sm text-text-dim italic">{p.tagline}</div>
+                <p class="mb-6 flex-grow text-[15px] text-text-dim" set:html={p.desc} />
+                <div class="flex gap-[14px] border-t border-line pt-[18px] text-[13px]">
+                  {p.links.map((l) => (
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener"
+                      class="inline-flex items-center gap-1 hover:underline"
+                      style="color: var(--color-rit-orange-text);"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
+                </div>
+              </article>
+            ))
+          }
         </div>
       </div>
     </section>
 
     {/* PUBLICATIONS */}
-    <section id="publications" class="py-[100px] relative">
-      <div class="max-w-[1200px] mx-auto px-6">
-        <div class="text-xs tracking-[1.5px] uppercase text-rit-orange-text mb-4">
-          Publications
-        </div>
-        <h2 class="mb-6 max-w-[22ch]" style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;">
+    <section id="publications" class="relative py-[100px]">
+      <div class="mx-auto max-w-[1200px] px-6">
+        <div class="mb-4 text-xs tracking-[1.5px] text-rit-orange-text uppercase">Publications</div>
+        <h2
+          class="mb-6 max-w-[22ch]"
+          style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;"
+        >
           Recent peer-reviewed work.
         </h2>
-        <p class="text-lg text-text-dim max-w-[64ch] mb-14">
-          Selected recent publications from the lab. For the complete record,
-          see Dr. Reznik's
+        <p class="mb-14 max-w-[64ch] text-lg text-text-dim">
+          Selected recent publications from the lab. For the complete record, see Dr. Reznik's
           <a
             href="https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en"
             target="_blank"
             rel="noopener"
             class="border-b"
             style="color: var(--color-rit-orange-text); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
-          >Google Scholar profile</a>.
+            >Google Scholar profile</a
+          >.
         </p>
         <div class="flex flex-col gap-4">
-          {publications.map((pub) => (
-            <article class="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 items-center p-6 md:px-7 bg-bg-elev border border-line rounded-[14px] hover:border-rit-orange">
-              <div class="text-4xl leading-none" style="font-family: var(--font-display); color: var(--color-rit-orange-text); letter-spacing: -1px;">
-                {pub.year}
-              </div>
-              <div class="min-w-0">
-                <div class="text-[11px] tracking-[1.5px] uppercase text-text-faint mb-[6px]">
-                  {pub.venue}
+          {
+            publications.map((pub) => (
+              <article class="grid grid-cols-1 items-center gap-6 rounded-[14px] border border-line bg-bg-elev p-6 hover:border-rit-orange md:grid-cols-[auto_1fr_auto] md:px-7">
+                <div
+                  class="text-4xl leading-none"
+                  style="font-family: var(--font-display); color: var(--color-rit-orange-text); letter-spacing: -1px;"
+                >
+                  {pub.year}
                 </div>
-                <div class="text-[17px] font-medium leading-[1.35] mb-1">{pub.title}</div>
-                <div class="text-[13px] text-text-dim">{pub.authors}</div>
-              </div>
-              <a
-                href={pub.link.href}
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center gap-[6px] px-[14px] py-2 border border-line rounded-full text-[13px] text-text-dim hover:border-rit-orange hover:text-rit-orange-text whitespace-nowrap justify-self-start md:justify-self-auto"
-              >
-                {pub.link.label}
-              </a>
-            </article>
-          ))}
+                <div class="min-w-0">
+                  <div class="mb-[6px] text-[11px] tracking-[1.5px] text-text-faint uppercase">
+                    {pub.venue}
+                  </div>
+                  <div class="mb-1 text-[17px] leading-[1.35] font-medium">{pub.title}</div>
+                  <div class="text-[13px] text-text-dim">{pub.authors}</div>
+                </div>
+                <a
+                  href={pub.link.href}
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center gap-[6px] justify-self-start rounded-full border border-line px-[14px] py-2 text-[13px] whitespace-nowrap text-text-dim hover:border-rit-orange hover:text-rit-orange-text md:justify-self-auto"
+                >
+                  {pub.link.label}
+                </a>
+              </article>
+            ))
+          }
         </div>
       </div>
     </section>
 
     {/* PEOPLE */}
-    <section id="people" class="py-[100px] relative" style="background: var(--color-bg-elev); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line);">
-      <div class="max-w-[1200px] mx-auto px-6">
-        <div class="text-xs tracking-[1.5px] uppercase text-rit-orange-text mb-4">
-          People
-        </div>
-        <h2 class="mb-6 max-w-[22ch]" style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;">
+    <section
+      id="people"
+      class="relative py-[100px]"
+      style="background: var(--color-bg-elev); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line);"
+    >
+      <div class="mx-auto max-w-[1200px] px-6">
+        <div class="mb-4 text-xs tracking-[1.5px] text-rit-orange-text uppercase">People</div>
+        <h2
+          class="mb-6 max-w-[22ch]"
+          style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;"
+        >
           The team — past and present.
         </h2>
-        <p class="text-lg text-text-dim max-w-[64ch] mb-14">
-          LDQIS is the work of every researcher who has passed through it.
-          Today's team is pushing on federated learning and agentic AI;
-          previous cohorts built the foundations in mobile security, data
-          quality evaluation, wearable sensors, and computational intelligence
-          that made today's work possible.
+        <p class="mb-14 max-w-[64ch] text-lg text-text-dim">
+          LDQIS is the work of every researcher who has passed through it. Today's team is pushing
+          on federated learning and agentic AI; previous cohorts built the foundations in mobile
+          security, data quality evaluation, wearable sensors, and computational intelligence that
+          made today's work possible.
         </p>
 
-        <div class="flex items-baseline gap-4 mb-6">
-          <span class="text-[11px] tracking-[1.5px] uppercase" style="color: var(--color-rit-orange-text);">Now</span>
-          <h3 class="font-normal" style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;">Current Team</h3>
-          <span class="text-[13px] text-text-dim">Federated learning · agentic AI · 2024–present</span>
+        <div class="mb-6 flex items-baseline gap-4">
+          <span
+            class="text-[11px] tracking-[1.5px] uppercase"
+            style="color: var(--color-rit-orange-text);">Now</span
+          >
+          <h3
+            class="font-normal"
+            style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;"
+          >
+            Current Team
+          </h3>
+          <span class="text-[13px] text-text-dim"
+            >Federated learning · agentic AI · 2024–present</span
+          >
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
-          {currentTeam.map((p) => (
-            <div
-              class={`bg-bg-elev border border-line rounded-[14px] p-6 hover:border-rit-orange transition-colors ${p.lead ? "sm:col-span-2 md:col-span-2" : ""}`}
-              style={p.lead ? "background: linear-gradient(135deg, var(--color-bg-elev), var(--color-bg-soft));" : undefined}
-            >
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">
+          {
+            currentTeam.map((p) => (
               <div
-                class="w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg mb-4"
-                style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
+                class={`rounded-[14px] border border-line bg-bg-elev p-6 transition-colors hover:border-rit-orange ${p.lead ? "sm:col-span-2 md:col-span-2" : ""}`}
+                style={
+                  p.lead
+                    ? "background: linear-gradient(135deg, var(--color-bg-elev), var(--color-bg-soft));"
+                    : undefined
+                }
               >
-                {p.initials}
+                <div
+                  class="mb-4 flex h-12 w-12 items-center justify-center rounded-full text-lg font-semibold"
+                  style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
+                >
+                  {p.initials}
+                </div>
+                <div class="mb-1 text-base font-medium">{p.name}</div>
+                <div class="text-[13px] text-text-dim">{p.role}</div>
+                <a
+                  href={`mailto:${p.email}`}
+                  class="mt-2 inline-block font-mono text-xs break-all hover:underline"
+                  style="color: var(--color-rit-orange-text);"
+                >
+                  {p.email}
+                </a>
               </div>
-              <div class="text-base font-medium mb-1">{p.name}</div>
-              <div class="text-[13px] text-text-dim">{p.role}</div>
-              <a
-                href={`mailto:${p.email}`}
-                class="inline-block text-xs font-mono mt-2 hover:underline break-all"
-                style="color: var(--color-rit-orange-text);"
-              >
-                {p.email}
-              </a>
-            </div>
-          ))}
+            ))
+          }
         </div>
 
-        <div class="flex items-baseline gap-4 mt-14 mb-6 pt-4 border-t border-line">
-          <span class="text-[11px] tracking-[1.5px] uppercase" style="color: var(--color-rit-orange-text);">Then</span>
-          <h3 class="font-normal" style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;">Past Research Cohort</h3>
-          <span class="text-[13px] text-text-dim">2015–2022 · Mobile security · Android attacks · Wearable sensors · Data quality · Computational intelligence</span>
+        <div class="mt-14 mb-6 flex items-baseline gap-4 border-t border-line pt-4">
+          <span
+            class="text-[11px] tracking-[1.5px] uppercase"
+            style="color: var(--color-rit-orange-text);">Then</span
+          >
+          <h3
+            class="font-normal"
+            style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;"
+          >
+            Past Research Cohort
+          </h3>
+          <span class="text-[13px] text-text-dim"
+            >2015–2022 · Mobile security · Android attacks · Wearable sensors · Data quality ·
+            Computational intelligence</span
+          >
         </div>
 
-        <p class="text-sm text-text-dim max-w-[64ch] mb-8">
-          The work below was led by these researchers and remains foundational
-          to LDQIS today — including our Android security apps, the NSF Data
-          Quality &amp; Security Evaluation Framework, and the wearable-sensors
-          and computational-intelligence research lines that preceded today's
-          federated learning work.
+        <p class="mb-8 max-w-[64ch] text-sm text-text-dim">
+          The work below was led by these researchers and remains foundational to LDQIS today —
+          including our Android security apps, the NSF Data Quality &amp; Security Evaluation
+          Framework, and the wearable-sensors and computational-intelligence research lines that
+          preceded today's federated learning work.
         </p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
-          {pastCohort.map((p) => (
-            <div class="bg-bg-elev border border-line rounded-[14px] p-6 hover:border-rit-orange transition-colors">
-              <div
-                class="w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg mb-4"
-                style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
-              >
-                {p.initials}
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">
+          {
+            pastCohort.map((p) => (
+              <div class="rounded-[14px] border border-line bg-bg-elev p-6 transition-colors hover:border-rit-orange">
+                <div
+                  class="mb-4 flex h-12 w-12 items-center justify-center rounded-full text-lg font-semibold"
+                  style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
+                >
+                  {p.initials}
+                </div>
+                <div class="mb-1 text-base font-medium">{p.name}</div>
+                <div class="text-[13px] text-text-dim">{p.role}</div>
               </div>
-              <div class="text-base font-medium mb-1">{p.name}</div>
-              <div class="text-[13px] text-text-dim">{p.role}</div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </section>
 
     {/* GET INVOLVED */}
-    <section id="support" class="py-[100px] relative">
-      <div class="max-w-[1200px] mx-auto px-6">
+    <section id="support" class="relative py-[100px]">
+      <div class="mx-auto max-w-[1200px] px-6">
         <div
-          class="relative overflow-hidden border border-line rounded-[14px] py-16 px-12 text-center"
+          class="relative overflow-hidden rounded-[14px] border border-line px-12 py-16 text-center"
           style="background: linear-gradient(135deg, var(--color-bg-soft), var(--color-bg-elev));"
         >
           <div
-            class="absolute pointer-events-none"
+            class="pointer-events-none absolute"
             style="top: -50%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, color-mix(in oklab, var(--color-rit-orange) 8%, transparent), transparent 70%);"
-          ></div>
+          >
+          </div>
           <div class="relative">
-            <div class="text-xs tracking-[1.5px] uppercase mb-4" style="color: var(--color-rit-orange-text);">
+            <div
+              class="mb-4 text-xs tracking-[1.5px] uppercase"
+              style="color: var(--color-rit-orange-text);"
+            >
               Get Involved
             </div>
-            <h3 class="mx-auto mb-4 max-w-[22ch]" style="font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.1;">
+            <h3
+              class="mx-auto mb-4 max-w-[22ch]"
+              style="font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); line-height: 1.1;"
+            >
               Support research that makes data trustworthy.
             </h3>
-            <p class="mx-auto max-w-[50ch] text-text-dim mb-8">
-              Funding from individuals, foundations, and industry partners
-              directly supports graduate stipends, equipment, and open-source
-              releases. Every contribution compounds — in students trained,
-              papers published, and tools shipped.
+            <p class="mx-auto mb-8 max-w-[50ch] text-text-dim">
+              Funding from individuals, foundations, and industry partners directly supports
+              graduate stipends, equipment, and open-source releases. Every contribution compounds —
+              in students trained, papers published, and tools shipped.
             </p>
-            <div class="flex gap-[14px] flex-wrap justify-center">
+            <div class="flex flex-wrap justify-center gap-[14px]">
               <a
                 href="https://www.rit.edu/giving/"
                 target="_blank"
                 rel="noopener"
-                class="inline-flex items-center gap-2 px-[22px] py-[14px] rounded-full text-sm font-medium transition-transform hover:-translate-y-[1px]"
+                class="inline-flex items-center gap-2 rounded-full px-[22px] py-[14px] text-sm font-medium transition-transform hover:-translate-y-[1px]"
                 style="background: var(--color-rit-orange); color: #0a0e13;"
               >
                 Become a supporter →
               </a>
               <a
                 href="mailto:lrvcs@rit.edu?subject=LDQIS%20Industry%20Partnership"
-                class="inline-flex items-center gap-2 px-[22px] py-[14px] rounded-full text-sm font-medium border border-line hover:border-text-dim"
+                class="inline-flex items-center gap-2 rounded-full border border-line px-[22px] py-[14px] text-sm font-medium hover:border-text-dim"
               >
                 Partner with us
               </a>
@@ -540,57 +634,89 @@ const pastCohort = [
   </main>
 
   {/* FOOTER */}
-  <footer class="border-t border-line pt-12 pb-8 mt-20 relative z-[1]">
-    <div class="max-w-[1200px] mx-auto px-6">
-      <div class="flex flex-wrap justify-between gap-8 items-start">
+  <footer class="relative z-[1] mt-20 border-t border-line pt-12 pb-8">
+    <div class="mx-auto max-w-[1200px] px-6">
+      <div class="flex flex-wrap items-start justify-between gap-8">
         <div>
-          <div class="flex items-center gap-[10px] mb-3" style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;">
+          <div
+            class="mb-3 flex items-center gap-[10px]"
+            style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;"
+          >
             <span
-              class="w-7 h-7 rounded-lg relative"
+              class="relative h-7 w-7 rounded-lg"
               style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow));"
             ></span>
             LDQIS
           </div>
-          <p class="text-[13px] text-text-dim max-w-[32ch]">
-            Laboratory of Data Quality and Intelligent Security at Rochester
-            Institute of Technology.
+          <p class="max-w-[32ch] text-[13px] text-text-dim">
+            Laboratory of Data Quality and Intelligent Security at Rochester Institute of
+            Technology.
           </p>
         </div>
 
         <div>
-          <h4 class="text-xs tracking-[1px] uppercase text-text-faint mb-[14px] font-medium">Research</h4>
-          <ul class="text-sm text-text-dim space-y-2">
+          <h4 class="mb-[14px] text-xs font-medium tracking-[1px] text-text-faint uppercase">
+            Research
+          </h4>
+          <ul class="space-y-2 text-sm text-text-dim">
             <li><a href="#research" class="hover:text-rit-orange-text">Areas</a></li>
             <li><a href="#publications" class="hover:text-rit-orange-text">Publications</a></li>
             <li><a href="#projects" class="hover:text-rit-orange-text">Open-source</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-xs tracking-[1px] uppercase text-text-faint mb-[14px] font-medium">Lab</h4>
-          <ul class="text-sm text-text-dim space-y-2">
+          <h4 class="mb-[14px] text-xs font-medium tracking-[1px] text-text-faint uppercase">
+            Lab
+          </h4>
+          <ul class="space-y-2 text-sm text-text-dim">
             <li><a href="#people" class="hover:text-rit-orange-text">Current team</a></li>
             <li><a href="#people" class="hover:text-rit-orange-text">Alumni</a></li>
-            <li><a href="mailto:lrvcs@rit.edu?subject=Joining%20LDQIS" class="hover:text-rit-orange-text">Join us</a></li>
+            <li>
+              <a
+                href="mailto:lrvcs@rit.edu?subject=Joining%20LDQIS"
+                class="hover:text-rit-orange-text">Join us</a
+              >
+            </li>
           </ul>
         </div>
         <div>
-          <h4 class="text-xs tracking-[1px] uppercase text-text-faint mb-[14px] font-medium">Contact</h4>
-          <ul class="text-sm text-text-dim space-y-2">
-            <li><a href="https://www.rit.edu/computing/" target="_blank" rel="noopener" class="hover:text-rit-orange-text">RIT GCCIS</a></li>
-            <li><a href="mailto:lrvcs@rit.edu" class="hover:text-rit-orange-text">Get in touch</a></li>
-            <li><a href="https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en" target="_blank" rel="noopener" class="hover:text-rit-orange-text">Google Scholar</a></li>
+          <h4 class="mb-[14px] text-xs font-medium tracking-[1px] text-text-faint uppercase">
+            Contact
+          </h4>
+          <ul class="space-y-2 text-sm text-text-dim">
+            <li>
+              <a
+                href="https://www.rit.edu/computing/"
+                target="_blank"
+                rel="noopener"
+                class="hover:text-rit-orange-text">RIT GCCIS</a
+              >
+            </li>
+            <li>
+              <a href="mailto:lrvcs@rit.edu" class="hover:text-rit-orange-text">Get in touch</a>
+            </li>
+            <li>
+              <a
+                href="https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en"
+                target="_blank"
+                rel="noopener"
+                class="hover:text-rit-orange-text">Google Scholar</a
+              >
+            </li>
           </ul>
         </div>
       </div>
 
-      <div class="mt-12 pt-6 border-t border-line flex flex-wrap justify-between gap-3 text-xs text-text-faint">
-        <div class="flex items-center gap-[14px] flex-wrap">
+      <div
+        class="mt-12 flex flex-wrap justify-between gap-3 border-t border-line pt-6 text-xs text-text-faint"
+      >
+        <div class="flex flex-wrap items-center gap-[14px]">
           <a
             href="https://www.rit.edu"
             target="_blank"
             rel="noopener"
             aria-label="Rochester Institute of Technology"
-            class="inline-flex items-center opacity-85 hover:opacity-100 transition-opacity"
+            class="inline-flex items-center opacity-85 transition-opacity hover:opacity-100"
           >
             <img
               src="https://www.rit.edu/brandportal/sites/rit.edu.brandportal/files/2020-04/RIT_RGB_hor_full_k.png"
@@ -600,7 +726,7 @@ const pastCohort = [
             <img
               src="https://www.rit.edu/brandportal/sites/rit.edu.brandportal/files/2020-04/RIT_RGB_hor_full_w.png"
               alt="Rochester Institute of Technology"
-              class="h-7 w-auto hidden dark:block"
+              class="hidden h-7 w-auto dark:block"
             />
           </a>
           <span class="text-text-faint">·</span>
@@ -613,8 +739,8 @@ const pastCohort = [
   {/* Theme toggle script — vanilla, no island needed */}
   <script is:inline>
     document.getElementById("theme-toggle")?.addEventListener("click", function () {
-      var root = document.documentElement;
-      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      const root = document.documentElement;
+      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       if (next === "light") {
         root.removeAttribute("data-theme");
       } else {
@@ -622,7 +748,7 @@ const pastCohort = [
       }
       try {
         localStorage.setItem("ldqis-theme", next);
-      } catch (e) {
+      } catch {
         /* localStorage blocked — toggle is in-memory only this session */
       }
     });

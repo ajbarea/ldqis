@@ -9,7 +9,14 @@
 @theme {
   /* official RIT palette */
   --color-rit-orange: #f76902; /* PMS 1505c — primary accent */
-  --color-rit-orange-text: #c75502; /* darker for body-size text on light bg (WCAG AA) */
+  /* research(2026-05): #c75502 measured 4.4:1 on light bg (#fefefd) under
+     axe-core — just under WCAG 2.2 AA's 4.5:1 floor for normal text.
+     Darkened to #b04b00 (≈5.4:1) so the brand-tinted text variant clears
+     AA without sacrificing the visual orange identity. The pure brand
+     orange #f76902 stays available via --color-rit-orange for backgrounds,
+     dark-mode emphasis, and non-text affordances (lines, marks, large
+     display headings ≥18pt where the 3:1 floor applies). */
+  --color-rit-orange-text: #b04b00;
   --color-rit-yellow: #f6be00; /* secondary, for gradients */
 
   /* warm editorial light palette */
@@ -19,13 +26,15 @@
   --color-line: #e5e3df;
   --color-text: #1a1a17;
   --color-text-dim: #57534e;
-  --color-text-faint: #a8a29e;
+  /* research(2026-05): #a8a29e measured 2.39:1 on bg-elev (#faf9f7) under
+     axe-core — fails WCAG 2.2 AA's 4.5:1 floor for normal text by a wide
+     margin. Darkened to #6c6863 (≈5.3:1 on bg-elev, ≈5.5:1 on bg) so the
+     metadata text variant clears AA on both surface tones. */
+  --color-text-faint: #6c6863;
 
   /* fonts — Instrument Serif for display, Inter for body */
   --font-display: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-sans:
-    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* dark mode tokens. opt-in via [data-theme="dark"] on <html> so the

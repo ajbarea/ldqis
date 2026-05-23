@@ -1,6 +1,6 @@
 ---
 import { type GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntries } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 // Detail pages for publications keep the venue / authors / year / link
@@ -16,7 +16,15 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { year, venue, title, authors, link } = entry.data;
+const { year, venue, title, authors, author_ids, link } = entry.data;
+
+// Author chip list: each `reference("people")` entry resolves to the full
+// person at build time, so a typo'd author id hard-fails the build.
+// The flat `authors` string still drives the canonical citation form
+// (kept for RSS / CV-style display); `author_ids` adds clickable cross-
+// links into per-person detail pages.
+const authorEntries = author_ids.length ? await getEntries(author_ids) : [];
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout
@@ -68,7 +76,31 @@ const { year, venue, title, authors, link } = entry.data;
         {title}
       </h1>
 
-      <p class="mb-12 text-lg text-text-dim">{authors}</p>
+      <p class="mb-8 text-lg text-text-dim">{authors}</p>
+
+      {
+        authorEntries.length > 0 && (
+          <ul class="mb-12 flex flex-wrap gap-3" role="list" aria-label="Author profile links">
+            {authorEntries.map((person) => (
+              <li>
+                <a
+                  href={`${baseUrl}/people/${person.id}/`}
+                  class="inline-flex items-center gap-2 rounded-full border border-line px-[14px] py-[8px] text-sm hover:border-rit-orange hover:text-rit-orange-text"
+                >
+                  <span
+                    class="flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold"
+                    style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
+                    aria-hidden="true"
+                  >
+                    {person.data.initials}
+                  </span>
+                  {person.data.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
 
       <div class="border-t border-line pt-8">
         <a

@@ -135,6 +135,7 @@ preview:                    ## Serve the production build locally
 # Cleanup
 # ════════════════════════════════════════════════════════════════════════════
 
-clean:                      ## Remove dist/, .astro/, caches
+clean:                      ## Remove dist/, .astro/, caches; prune log archives > 30d
 	@rm -rf dist .astro coverage playwright-report test-results .lighthouseci
+	@find logs -name 'dev-*-*.log' ! -name '*-latest.log' -mtime +30 -delete 2>/dev/null || true
 	@echo "Cleaned build + test caches"

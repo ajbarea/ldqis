@@ -63,8 +63,8 @@ lives here so IMPL.md stays terse.
 
 > Status: M4 shipped 2026-05-21 (see Shipped). Items below are post-M4 polish.
 
-- [ ] Branch protection on `main`: 5 required checks (lint, type, unit, e2e, lighthouse) — toggle in GitHub repo settings.
-- [ ] Codecov upload — lcov reporter is on by default via `vitest.config.ts` but no upload step is in the workflow.
+- [x] **Branch protection on `main` enabled 2026-05-23.** 5 required checks wired — `Lint + format`, `Type check`, `Unit (Vitest)`, `E2E + a11y (Playwright + axe-core)`, `Lighthouse CI`. Force-pushes + deletions blocked; `enforce_admins` left off so audit fixes ship same-session. `techne:sisters` audit now verifies this conditionally.
+- [x] **Codecov upload shipped [#10] + bot-comment silencing [#11].** `unit` job runs `vitest run --coverage` (lcov to `coverage/lcov.info`, junit to `test-results/junit.xml`), two `codecov/codecov-action@v6.0.1` steps mirror the vFL pattern, `codecov.yml` carries `comment: false` + sister-convention defaults.
 
 **Brand-vs-AA exception (active policy).** Official PMS 1505c orange (`#f76902`) on light bg measures 2.98:1 — fails WCAG AA 3:1 large-text by 0.02. Per the "Identity stays constant" invariant, brand-color elements (`style="color: var(--color-rit-orange)"`) are axe-excluded with a documented note. Brand-vs-AA call escalated to Dr. Reznik; body-text variant `--color-rit-orange-text` darkened to `#b04b00` (5.4:1), `--color-text-faint` to `#6c6863` (5.3:1) so non-brand surfaces clear AA.
 

@@ -10,31 +10,8 @@ crept in — extract it back to ROADMAP.
 
 ## In flight
 
-### 2026-05-23 — CI codecov upload
-
-**Why.** Vitest already emits lcov by default (configured in `vitest.config.ts`)
-but the `unit` job ran `vitest run` without `--coverage` and there was no
-upload step, so coverage was never visible in PRs. Sisters parity:
-vFL/kourai upload coverage already; ldqis was the outlier.
-
-**Decisions.**
-
-- Update the `unit` job CI step to run with `--coverage` and emit a junit
-  XML alongside the default reporter (Vitest 4 multi-reporter dot-notation).
-- Add two `codecov/codecov-action@v6.0.1` steps mirroring the vFL pattern:
-  coverage upload (`flags: unit`) and test-results upload
-  (`report_type: test_results`).
-- `disable_search: true` + `fail_ci_if_error: false` per the sister convention.
-- research(2026-05): v8 provider stays; the .vue-specific NaN BRDA bug
-  (vitest #9725) doesn't affect .astro/.ts sources, and 4.1.7 > the 4.0.18
-  reproducer.
-
-**Definition of done.**
-
-- Local: `npx vitest run --coverage --reporter=junit ...` emits
-  `coverage/lcov.info` + `test-results/junit.xml`. ✓
-- CI: codecov check appears on the PR with `unit` flag.
-- README claims gate still passes (no new fragile claims introduced).
+_Nothing currently open. CI codecov upload + bot-comment silencing
+shipped 2026-05-23 ([#10], [#11]) — see ROADMAP._
 
 ## Known unpatched-upstream notation
 

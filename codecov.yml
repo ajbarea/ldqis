@@ -1,0 +1,24 @@
+codecov:
+  require_ci_to_pass: true
+
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 2%
+        informational: true
+    patch:
+      default:
+        target: 80%
+        informational: true
+
+comment: false
+
+ignore:
+  - "tests/**"
+  - "scripts/**"
+  - "playwright.config.ts"
+  - "vitest.config.ts"
+  - "astro.config.mjs"
+  - "*.md"

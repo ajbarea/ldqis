@@ -64,7 +64,32 @@ jobs:
           node-version-file: ".nvmrc"
           cache: npm
       - run: npm ci
-      - run: npm run test:unit
+      - name: Run unit tests with coverage + junit
+        # research(2026-05): Vitest 4 multi-reporter dot-notation lets us emit
+        # both the dev-friendly default reporter and a junit.xml file in one
+        # run. The lcov report goes to ./coverage/lcov.info (configured in
+        # vitest.config.ts). vitest 4.1.7 + v8 provider — the .vue-specific
+        # NaN BRDA bug from #9725 doesn't apply to .astro/.ts sources.
+        run: npx vitest run --coverage --reporter=default --reporter=junit --outputFile.junit=./test-results/junit.xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v6.0.1
+        with:
+          files: coverage/lcov.info
+          flags: unit
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+          disable_search: true
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/codecov-action@v6.0.1
+        with:
+          files: test-results/junit.xml
+          report_type: test_results
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+          disable_search: true
 
   e2e:
     name: E2E + a11y (Playwright + axe-core)

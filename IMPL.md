@@ -10,8 +10,10 @@ crept in — extract it back to ROADMAP.
 
 ## In flight
 
-_Nothing currently open. CI codecov upload + bot-comment silencing
-shipped 2026-05-23 ([#10], [#11]) — see ROADMAP._
+_Nothing currently open. M2-followup cross-linking shipped 2026-05-23 —
+projects ↔ people ↔ publications cross-references via Astro
+`reference()` with one-direction storage + build-time computation. See
+ROADMAP._
 
 ## Known unpatched-upstream notation
 
@@ -23,7 +25,7 @@ shipped 2026-05-23 ([#10], [#11]) — see ROADMAP._
 
 Per ROADMAP, in order:
 
-1. **M2-followup — cross-linking detail pages.** Project pages → contributing people, people pages → project contributions, publications → author people pages. Needs schema extensions: `contributors: string[]` on projects, `projects_contributed: string[]` on people, `author_ids: string[]` on publications.
+1. **Backfill the remaining cross-links.** M2-followup landed the schema + 1 project (InteFL) + 3 publications. Phalanx-FL / VelocityFL / Kourai Khryseai still have empty `contributors` arrays (no canonical "lab team" attribution yet beyond AJ; needs Reznik input). Add as the data becomes clear.
 2. **M5 — custom domain handoff to dataqualitylabs.com** (gated on Dr. Reznik / DNS).
 
 M3 (news / blog surface with RSS) shipped 2026-05-22. M6 (sister

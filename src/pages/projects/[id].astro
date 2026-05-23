@@ -1,6 +1,6 @@
 ---
 import { type GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntries } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 // research(2026-05): Astro 5 dynamic-route IDs come from filenames via
@@ -16,7 +16,13 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { name, tagline, tags, stack, desc, links } = entry.data;
+const { name, tagline, tags, stack, desc, links, contributors } = entry.data;
+
+// `getEntries` resolves each `reference("people")` into the full entry, in
+// the order the IDs were listed in frontmatter. Build hard-fails if any ID
+// doesn't resolve, so a typo can't silently render a broken card.
+const contributorEntries = contributors.length ? await getEntries(contributors) : [];
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout
@@ -94,6 +100,38 @@ const { name, tagline, tags, stack, desc, links } = entry.data;
           ))
         }
       </div>
+
+      {
+        contributorEntries.length > 0 && (
+          <section class="mt-12 border-t border-line pt-8" aria-labelledby="contributors-heading">
+            <h2
+              id="contributors-heading"
+              class="mb-4 text-xs tracking-[1.5px] text-text-faint uppercase"
+            >
+              Contributors
+            </h2>
+            <ul class="flex flex-wrap gap-3" role="list">
+              {contributorEntries.map((person) => (
+                <li>
+                  <a
+                    href={`${baseUrl}/people/${person.id}/`}
+                    class="inline-flex items-center gap-2 rounded-full border border-line px-[14px] py-[8px] text-sm hover:border-rit-orange hover:text-rit-orange-text"
+                  >
+                    <span
+                      class="flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold"
+                      style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
+                      aria-hidden="true"
+                    >
+                      {person.data.initials}
+                    </span>
+                    {person.data.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
     </article>
   </main>
 </BaseLayout>

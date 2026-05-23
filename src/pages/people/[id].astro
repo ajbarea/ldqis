@@ -17,6 +17,23 @@ export const getStaticPaths = (async () => {
 const { entry } = Astro.props;
 const { initials, name, role, email, scholar, cohort } = entry.data;
 const cohortLabel = cohort === "current" ? "Current team" : "Past cohort";
+
+// Cross-links are computed at build time by walking the source collections
+// rather than denormalized on each person entry — one-direction storage
+// (project.contributors / publication.author_ids) avoids the bidirectional-
+// sync bug class. Order matches each collection's `order` field where
+// declared, falling back to filesystem order otherwise.
+const [allProjects, allPublications] = await Promise.all([
+  getCollection("projects"),
+  getCollection("publications"),
+]);
+const projectsContributed = allProjects
+  .filter((p) => p.data.contributors.some((ref) => ref.id === entry.id))
+  .sort((a, b) => a.data.order - b.data.order);
+const publicationsAuthored = allPublications
+  .filter((p) => p.data.author_ids.some((ref) => ref.id === entry.id))
+  .sort((a, b) => a.data.order - b.data.order);
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout
@@ -96,6 +113,67 @@ const cohortLabel = cohort === "current" ? "Current team" : "Past cohort";
           )
         }
       </div>
+
+      {
+        publicationsAuthored.length > 0 && (
+          <section
+            class="mt-16 border-t border-line pt-8 text-left"
+            aria-labelledby="publications-heading"
+          >
+            <h2
+              id="publications-heading"
+              class="mb-4 text-xs tracking-[1.5px] text-text-faint uppercase"
+            >
+              Publications
+            </h2>
+            <ul class="space-y-3" role="list">
+              {publicationsAuthored.map((pub) => (
+                <li>
+                  <a
+                    href={`${baseUrl}/publications/${pub.id}/`}
+                    class="group block rounded-lg border border-line p-4 hover:border-rit-orange"
+                  >
+                    <div class="mb-1 text-xs tracking-[1px] text-text-faint uppercase">
+                      {pub.data.year} · {pub.data.venue}
+                    </div>
+                    <div class="text-base text-text-dim group-hover:text-rit-orange-text">
+                      {pub.data.title}
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      {
+        projectsContributed.length > 0 && (
+          <section
+            class="mt-12 border-t border-line pt-8 text-left"
+            aria-labelledby="projects-heading"
+          >
+            <h2
+              id="projects-heading"
+              class="mb-4 text-xs tracking-[1.5px] text-text-faint uppercase"
+            >
+              Projects
+            </h2>
+            <ul class="flex flex-wrap gap-3" role="list">
+              {projectsContributed.map((project) => (
+                <li>
+                  <a
+                    href={`${baseUrl}/projects/${project.id}/`}
+                    class="inline-flex items-center gap-2 rounded-full border border-line px-[14px] py-[8px] text-sm hover:border-rit-orange hover:text-rit-orange-text"
+                  >
+                    {project.data.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
     </article>
   </main>
 </BaseLayout>

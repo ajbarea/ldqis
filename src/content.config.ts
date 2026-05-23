@@ -13,7 +13,7 @@
 // — the rss endpoint reads these by name, not by type identity. Source:
 // https://docs.astro.build/en/recipes/rss/
 import { glob } from "astro/loaders";
-import { defineCollection, z } from "astro:content";
+import { defineCollection, reference, z } from "astro:content";
 
 // Projects — open-source frameworks + research artifacts the lab ships.
 // Each entry's frontmatter mirrors the prior inline array in index.astro
@@ -35,6 +35,14 @@ const projects = defineCollection({
     // (InteFL → Phalanx-FL → VelocityFL → Kourai Khryseai) without
     // depending on filesystem listing.
     order: z.number().int().nonnegative(),
+    // research(2026-05): Astro 5's `reference("people")` validates each
+    // string against the people collection's IDs at build time, so a typo
+    // hard-fails the build instead of rendering a broken link silently.
+    // Source: https://docs.astro.build/en/guides/content-collections/#defining-collection-references
+    // The reverse direction (people → projects_contributed) is computed
+    // in `src/pages/people/[id].astro` by walking the projects collection.
+    // One-direction storage avoids the bidirectional-sync bug class.
+    contributors: z.array(reference("people")).default([]),
   }),
 });
 
@@ -44,7 +52,13 @@ const publications = defineCollection({
     year: z.string(),
     venue: z.string(),
     title: z.string(),
+    // The `authors` string is the canonical citation form ("D. Korobeinikov,
+    // R. Zatsarenko, …") — kept for venues like RSS that need a flat string.
+    // `author_ids` is the structured form that resolves to per-person detail
+    // pages; it can be a subset when not every author is in the people
+    // collection (e.g. external collaborators on multi-institution papers).
     authors: z.string(),
+    author_ids: z.array(reference("people")).default([]),
     link: z.object({ label: z.string(), href: z.string().url() }),
     order: z.number().int().nonnegative(),
   }),

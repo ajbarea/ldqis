@@ -211,6 +211,7 @@ Definition of done:
 
 One-line per item, newest first. Detail moves to git history when work lands.
 
+- 2026-05-25 — **Dependabot dependency automation**. `.github/dependabot.yml` adds npm + GitHub Actions version updates (weekly, minor/patch grouped one PR per ecosystem). Matches the sister convention; automates the action-pin bumps previously tracked by hand.
 - 2026-05-23 — **codecov.yml** [#11]. Silences Codecov-bot PR comments and scopes coverage targets to deployable Astro/TS source. Matches the sister convention (`comment: false`, `target: auto`, `threshold: 2%`, `informational: true`).
 - 2026-05-23 — **Codecov upload wiring** [#10]. `unit` CI job now runs with `--coverage` and emits `test-results/junit.xml` via Vitest 4 multi-reporter dot-notation. Adds two `codecov/codecov-action@v6.0.1` steps (lcov upload + test-results upload) mirroring the vFL pattern. v8 provider stays — the .vue-specific NaN-BRDA bug in vitest#9725 doesn't affect .astro/.ts sources.
 - 2026-05-22 — **M6 — Sister graduation**. Dev-runner wrapper at `scripts/dev-runner.sh` (mirror of techne's; writes `logs/dev-<ts>-<cmd>.log` + SUMMARY block). First `/techne:audit` run green across setup / lint / check / test-unit / build / test-e2e / audit. First `/techne:sisters` cross-sister audit found one drift item (ldqis merge settings) and fixed it to squash-only + delete-on-merge to match the other five sisters. Lighthouse skipped per documented WSL2 Chrome bind caveat (CI exercises it). Skill-context updated with the log-archive convention.

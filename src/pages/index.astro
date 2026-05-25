@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import ContactLinks from "../components/ContactLinks.astro";
 
 // research(2026-05): M2 migrates projects / publications / people to Astro 5
 // content collections. The remaining inline `researchAreas` array stays
@@ -257,7 +258,7 @@ const pastCohort = peopleEntries
           {
             projects.map((p) => (
               <article class="flex flex-col rounded-[14px] border border-line bg-bg-elev p-8 transition-all hover:-translate-y-[2px] hover:border-rit-orange">
-                <div class="mb-[18px] flex flex-wrap items-center gap-3">
+                <div class="mb-2 flex flex-wrap items-center gap-3">
                   {p.tags.map((t) => (
                     <span
                       class="rounded-full border px-[10px] py-[3px] text-[11px] tracking-[1px] uppercase"
@@ -266,8 +267,8 @@ const pastCohort = peopleEntries
                       {t}
                     </span>
                   ))}
-                  <span class="font-mono text-[11px] text-text-faint">{p.stack}</span>
                 </div>
+                <div class="mb-[18px] font-mono text-[11px] text-text-faint">{p.stack}</div>
                 <div
                   class="mb-[6px] leading-[1.1]"
                   style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;"
@@ -422,27 +423,7 @@ const pastCohort = peopleEntries
                   {p.name}
                 </a>
                 <div class="text-[13px] text-text-dim">{p.role}</div>
-                {p.email && (
-                  <a
-                    href={`mailto:${p.email}`}
-                    class="mt-2 inline-block font-mono text-xs break-all hover:underline"
-                    style="color: var(--color-rit-orange-text);"
-                  >
-                    {p.email}
-                  </a>
-                )}
-                {p.scholar && (
-                  <a
-                    href={p.scholar}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="mt-1 inline-flex items-center gap-1 text-xs hover:underline"
-                    style="color: var(--color-rit-orange-text);"
-                    aria-label={`${p.name} on Google Scholar (opens in new tab)`}
-                  >
-                    Google Scholar <span aria-hidden="true">↗</span>
-                  </a>
-                )}
+                <ContactLinks email={p.email} scholar={p.scholar} ieee={p.ieee} name={p.name} />
               </div>
             ))
           }
@@ -466,10 +447,10 @@ const pastCohort = peopleEntries
         </div>
 
         <p class="mb-8 max-w-[64ch] text-sm text-text-dim">
-          The work below was led by these researchers and remains foundational to LDQIS today —
-          including our Android security apps, the NSF Data Quality &amp; Security Evaluation
-          Framework, and the wearable-sensors and computational-intelligence research lines that
-          preceded today's federated learning work.
+          These researchers led work that remains foundational to LDQIS today, including our Android
+          security apps, the NSF Data Quality &amp; Security Evaluation Framework, and the
+          wearable-sensors and computational-intelligence research lines that preceded today's
+          federated learning work.
         </p>
 
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">

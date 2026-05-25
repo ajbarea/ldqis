@@ -25,7 +25,7 @@ make check    # astro check (type-check + template validation)
 Each kind of content is a folder under `src/content/`, and adding an entry is one new file. Schemas live in `src/content.config.ts`, so a typo in a cross-reference fails the build instead of shipping a broken page.
 
 - **`people/`**: current team and alumni. An optional `scholar:` field adds a Google Scholar link to the homepage card and the person's detail page.
-- **`projects/`**: the lab's open-source frameworks (InteFL, Phalanx-FL, VelocityFL, Kourai Khryseai), each credited to its contributors.
+- **`projects/`**: the lab's open-source frameworks (InteFL, Phalanx-FL, Velocity-FL, Kourai Khryseai), each credited to its contributors.
 - **`publications/`**: papers, with year, venue, and authors linked to their people entries.
 - **`news/`**: dated posts, surfaced at `/news/` with an RSS feed at `/news/rss.xml`.
 

@@ -1,5 +1,5 @@
 ---
-name: VelocityFL
+name: Velocity-FL
 tagline: Rust-core federated learning orchestration
 tags: ["Federated Learning", "High-Performance"]
 stack: "Rust · PyO3 · Python"

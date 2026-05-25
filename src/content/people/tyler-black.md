@@ -3,6 +3,6 @@ initials: TB
 name: Tyler Black
 role: "RIT Graduate Researcher · InteFL contributor"
 email: tcb8683@rit.edu
-cohort: current
+cohort: past
 order: 6
 ---

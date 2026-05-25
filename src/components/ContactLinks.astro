@@ -1,0 +1,101 @@
+---
+// Shared contact-link row for a person: email + Google Scholar + IEEE Xplore.
+// Single source of truth for which links render, their labels, icons, and
+// external-link a11y (rel + aria-label). Used by the homepage team cards
+// (variant="compact") and the per-person detail page (variant="pill").
+interface Props {
+  email?: string;
+  scholar?: string;
+  ieee?: string;
+  name: string;
+  variant?: "compact" | "pill";
+}
+const { email, scholar, ieee, name, variant = "compact" } = Astro.props;
+
+type LinkKind = "email" | "scholar" | "ieee";
+type Link = { kind: LinkKind; href: string; label: string; external: boolean };
+const links: Link[] = [
+  email ? { kind: "email", href: `mailto:${email}`, label: email, external: false } : null,
+  scholar ? { kind: "scholar", href: scholar, label: "Google Scholar", external: true } : null,
+  ieee ? { kind: "ieee", href: ieee, label: "IEEE Xplore", external: true } : null,
+].filter((l): l is Link => l !== null);
+
+const isPill = variant === "pill";
+const wrapClass = isPill
+  ? "flex flex-wrap items-center justify-center gap-3"
+  : "mt-3 flex flex-col items-start gap-1.5 text-xs";
+const linkClass = isPill
+  ? "inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] text-sm hover:border-rit-orange"
+  : "inline-flex items-center gap-1.5 hover:underline";
+const iconClass = isPill ? "h-4 w-4 shrink-0" : "h-3.5 w-3.5 shrink-0";
+---
+
+{
+  links.length > 0 && (
+    <div class={wrapClass}>
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class={linkClass}
+          style="color: var(--color-rit-orange-text);"
+          {...(link.external
+            ? {
+                target: "_blank",
+                rel: "noopener noreferrer",
+                "aria-label": `${name} on ${link.label} (opens in new tab)`,
+              }
+            : {})}
+        >
+          {link.kind === "email" && (
+            <svg
+              class={iconClass}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+          )}
+          {link.kind === "scholar" && (
+            <svg
+              class={iconClass}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 4 2 9l10 5 10-5-10-5Z" />
+              <path d="M5 11v5c0 1.1 3.1 3 7 3s7-1.9 7-3v-5" />
+            </svg>
+          )}
+          {link.kind === "ieee" && (
+            <svg
+              class={iconClass}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+              <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z" />
+              <path d="M9 13h6M9 17h6" />
+            </svg>
+          )}
+          <span class={link.kind === "email" ? "break-all" : ""}>{link.label}</span>
+          {link.external && <span aria-hidden="true">↗</span>}
+        </a>
+      ))}
+    </div>
+  )
+}

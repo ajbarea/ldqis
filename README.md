@@ -1,11 +1,13 @@
-# LDQIS — Lab Website
+# LDQIS Lab Website
 
-Source for the Laboratory of Data Quality and Intelligent Security website at RIT. Static site, Astro 5 + Tailwind 4, deploys to GitHub Pages. Replaces the legacy Flask + Bootstrap-4 site at `dataqualitylabs.com`.
+Source for the website of RIT's **Laboratory of Data Quality and Intelligent Security (LDQIS)**. A static [Astro 5](https://astro.build/) site with Tailwind 4, deployed to GitHub Pages. It replaces the lab's older Flask + Bootstrap-4 site at `dataqualitylabs.com`.
 
 [![Astro](https://img.shields.io/badge/Astro-5-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind](https://img.shields.io/badge/Tailwind-4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?style=flat-square&logo=github)](https://ajbarea.github.io/ldqis/)
+
+This is the lab's website: our people, research, projects, publications, and news. It is content as code, which is mostly a way of saying it stays easy to keep current. Adding your project, paper, profile, or a news post is one Markdown file and a pull request. No CMS, no database, no logins to manage.
 
 ## Quick start
 
@@ -18,42 +20,39 @@ make check    # astro check (type-check + template validation)
 
 `make help` lists every target.
 
+## Adding content
+
+Each kind of content is a folder under `src/content/`, and adding an entry is one new file. Schemas live in `src/content.config.ts`, so a typo in a cross-reference fails the build instead of shipping a broken page.
+
+- **`people/`**: current team and alumni. An optional `scholar:` field adds a Google Scholar link to the homepage card and the person's detail page.
+- **`projects/`**: the lab's open-source frameworks (InteFL, Phalanx-FL, VelocityFL, Kourai Khryseai), each credited to its contributors.
+- **`publications/`**: papers, with year, venue, and authors linked to their people entries.
+- **`news/`**: dated posts, surfaced at `/news/` with an RSS feed at `/news/rss.xml`.
+
+Every person, project, and paper renders to a stable per-page URL you can cite from a CV or profile. Cross-links (a paper's authors, a project's contributors) are computed at build time, so there is no bidirectional state to keep in sync.
+
 ## Project structure
 
 ```
 src/
-├── layouts/BaseLayout.astro    # head + theme + skip-link + slot
-├── pages/index.astro           # homepage (single-page until M2)
-└── styles/global.css           # Tailwind 4 @theme tokens (RIT palette)
+├── content/            # the editorial surface: people, projects, publications, news
+├── content.config.ts   # collection schemas
+├── layouts/            # base layout: head, theme, skip-link
+├── pages/              # routes, per-entry detail pages, and the news RSS endpoint
+└── styles/global.css   # Tailwind 4 @theme tokens (RIT palette)
 
-public/                         # static assets
-.github/workflows/deploy.yml    # Pages deploy on push to main
-astro.config.mjs                # site URL + base path + Vite Tailwind plugin
+.github/workflows/      # CI gates + Pages deploy on push to main
+astro.config.mjs        # site URL, base path, Tailwind plugin
 ```
 
-`ROADMAP.md` has the long view (content collections, news, CI, custom domain handoff). `IMPL.md` has whatever is actively in flight.
+## Accessibility
 
-## What's here
+The site targets WCAG 2.2 AA, enforced on every PR by axe-core + Playwright, with Lighthouse running in CI as well. Theme toggle, skip link, semantic heading hierarchy, and `prefers-reduced-motion` are covered because they are tested, not assumed.
 
-Content lives under `src/content/` as Markdown files and is rendered by Astro at build time. Adding a researcher, project, publication, or news post is one new file:
+## Contributing
 
-- `src/content/people/` — current team + alumni cohort. Optional `scholar:` field on each entry adds a Google Scholar link to the homepage team card + the per-person detail page (`/people/<id>/`).
-- `src/content/projects/` — open-source frameworks the lab ships (InteFL, Phalanx-FL, VelocityFL, Kourai Khryseai).
-- `src/content/publications/` — papers, with year + venue + authors.
-- `src/content/news/` — dated posts, surfaced on `/news/` with an RSS feed at `/news/rss.xml`.
-
-Schemas live in `src/content.config.ts`; new fields go there first.
+If you are in the lab and want something added or changed, open a pull request or just ask. The setup is deliberately low-friction, so nobody needs to be a web developer to get their work on the site.
 
 ## Status
 
-Pre-release. Preview at <https://ajbarea.github.io/ldqis/>. Custom domain handoff to `dataqualitylabs.com` is M5 work, gated on Dr. Reznik / DNS.
-
-## Sister ecosystem
-
-Part of a family of repos exploring agentic AI and federated learning from complementary angles. Each is independently invocable; together they form one research program.
-
-- **[kourai-khryseai](https://github.com/ajbarea/kourai-khryseai)** — Innovation. Multi-agent software-development forge: maidens-as-specialists over A2A, MCP sidecars, transparent human-on-the-loop.
-- **[phalanx-fl](https://github.com/ajbarea/phalanx-fl)** — Research. Federated-learning reference platform on Flower + Ray. Eight aggregation strategies (FedAvg, Krum, Multi-Krum, Bulyan, Geometric Median, Trimmed Mean, FedMedian, FedProx) with the attack vocabulary.
-- **[vFL](https://github.com/ajbarea/vFL)** — Performance. Same FL strategies as Rust kernels via PyO3 + FastMCP + Prefect Horizon; crowd-scale speed lane.
-- **[techne](https://github.com/ajbarea/techne)** — Governance. Claude Code skills plugin: audits, lint/test gates, cross-repo drift detection.
-- **[ajbarea.github.io](https://github.com/ajbarea/ajbarea.github.io)** — Visibility. Portfolio that tells the ecosystem story end-to-end.
+Live in preview at <https://ajbarea.github.io/ldqis/>, with a move to `dataqualitylabs.com` coming. MIT licensed.

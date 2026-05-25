@@ -87,6 +87,15 @@ const people = defineCollection({
         message: "scholar URL must point at https://scholar.google.com/",
       })
       .optional(),
+    // Optional IEEE Xplore author-profile URL. Same treatment as `scholar`:
+    // host-constrained so a mistyped or wrong-host link fails the build.
+    ieee: z
+      .string()
+      .url()
+      .regex(/^https:\/\/ieeexplore\.ieee\.org\//, {
+        message: "ieee URL must point at https://ieeexplore.ieee.org/",
+      })
+      .optional(),
     cohort: z.enum(["current", "past"]),
     lead: z.boolean().optional(),
     order: z.number().int().nonnegative(),

@@ -2,6 +2,7 @@
 import { type GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactLinks from "../../components/ContactLinks.astro";
 
 // Detail pages for people give each researcher (current + past cohort)
 // a stable shareable URL. The lab's pre-M2 site had no per-person page;
@@ -15,7 +16,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { initials, name, role, email, scholar, cohort } = entry.data;
+const { initials, name, role, email, scholar, ieee, cohort } = entry.data;
 const cohortLabel = cohort === "current" ? "Current team" : "Past cohort";
 
 // Cross-links are computed at build time by walking the source collections
@@ -86,33 +87,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
       <p class="mb-8 text-lg text-text-dim">{role}</p>
 
-      <div class="flex flex-wrap items-center justify-center gap-3">
-        {
-          email && (
-            <a
-              href={`mailto:${email}`}
-              class="inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] font-mono text-sm hover:border-rit-orange"
-              style="color: var(--color-rit-orange-text);"
-            >
-              {email}
-            </a>
-          )
-        }
-        {
-          scholar && (
-            <a
-              href={scholar}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] text-sm hover:border-rit-orange"
-              style="color: var(--color-rit-orange-text);"
-              aria-label={`${name} on Google Scholar (opens in new tab)`}
-            >
-              Google Scholar <span aria-hidden="true">↗</span>
-            </a>
-          )
-        }
-      </div>
+      <ContactLinks email={email} scholar={scholar} ieee={ieee} name={name} variant="pill" />
 
       {
         publicationsAuthored.length > 0 && (

@@ -1,27 +1,29 @@
 ---
 title: "Welcome to the rebuilt LDQIS website"
-description: "The lab's public website moved off the legacy Flask/Bootstrap stack to an Astro 5 + Tailwind 4 static build. Same identity, different posture: content as code, no backend, no auth, no database."
-summary: "The lab's public website moved to Astro 5 + Tailwind 4. Content as code, no backend, no auth, no database."
+description: "The lab's website moved off the legacy Flask/Bootstrap stack to an Astro 5 + Tailwind 4 static build. Content as code, so the whole lab can keep it current."
+summary: "The lab's website moved to Astro 5 + Tailwind 4. Content as code, so anyone in the lab can add their work."
 pubDate: 2026-05-22
 tags: ["site", "open-source"]
 author: "LDQIS"
 ---
 
-The lab's public site has been rebuilt from the ground up.
+The lab's website has a new home, and it is built so the whole lab can keep it current.
 
-The previous site — a Flask + Bootstrap deployment with `/login`, `/register`, and `/dataView` routes wired to a Postgres backend — accumulated the attack surface that comes with any auth-and-database web app. We retired it.
+The old site ran on Flask and Bootstrap with login, registration, and a Postgres backend behind it. That was more moving parts than a lab site needs, so we replaced it with something simpler and sturdier.
 
-What's here now is deliberately simpler: an [Astro 5](https://astro.build/) project that compiles to static HTML, hosted on GitHub Pages, with the source tree as the editorial surface. Adding a project, publication, team member, or news post means committing one Markdown file. No CMS, no database, no surface for the kind of incident the legacy site was bait for.
+What is here now is an [Astro 5](https://astro.build/) project that compiles to static HTML and is hosted on GitHub Pages. The source tree _is_ the site: adding a project, publication, team member, or news post means committing one Markdown file. No CMS to log into, no database to maintain.
 
 ## What's already live
 
-- **Research areas, projects, publications, and people** rendered from content collections. Click through any of the four homepage sections for the detail layer — every project, paper, and researcher (current + past cohort) has a stable per-page URL you can cite from a CV or LinkedIn.
-- **WCAG 2.2 AA accessibility** across the site, gated on every PR by axe-core + Playwright. The brand-orange identity element (PMS 1505c at 2.98:1) is a documented exception escalated to Dr. Reznik; non-brand text hits AA cleanly.
-- **Theme toggle** with `localStorage` persistence. Skip link, semantic heading hierarchy, and `prefers-reduced-motion` work because they're tested.
-- **This RSS feed** at [/news/rss.xml](rss.xml) — readers can subscribe and you'll see new posts here as the lab ships them.
+- **Research areas, projects, publications, and people**, rendered from the content files. Click through any of the four homepage sections for the detail layer. Every project, paper, and researcher (current and past) has a stable per-page URL you can cite from a CV or LinkedIn.
+- **WCAG 2.2 AA accessibility** across the site, gated on every PR by axe-core + Playwright.
+- **Theme toggle** with `localStorage` persistence. Skip link, semantic heading hierarchy, and `prefers-reduced-motion` work because they are tested.
+- **RSS feed** for the news section, so you can subscribe in any reader and get new posts automatically as the lab publishes them.
+
+## Adding your work
+
+This is the lab's site, and it is meant to be easy to contribute to. Your projects, papers, and profile live here, and adding or updating any of them is a single Markdown file under `src/content/`. Open a pull request, or send it my way and I will wire it in.
 
 ## What's next
 
-[M5](https://github.com/ajbarea/ldqis/blob/main/ROADMAP.md) is the custom-domain handoff to `dataqualitylabs.com`, gated on DNS coordination with Dr. Reznik. [M6](https://github.com/ajbarea/ldqis/blob/main/ROADMAP.md) graduates the repo into the sister-shape audit pipeline alongside `phalanx-fl`, `vFL`, `kourai-khryseai`, `techne`, and `ajbarea.github.io`.
-
-The repo is public: [github.com/ajbarea/ldqis](https://github.com/ajbarea/ldqis). PRs welcome on the lab's own work, and the design itself is shared under the MIT license if any of the patterns are useful elsewhere.
+A move to a custom domain at `dataqualitylabs.com` is coming. The repo is public at [github.com/ajbarea/ldqis](https://github.com/ajbarea/ldqis), and contributions from the lab are welcome.

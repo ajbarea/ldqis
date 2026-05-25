@@ -8,4 +8,6 @@ links:
   - { label: "GitHub ↗", href: "https://github.com/ajbarea/vFL" }
   - { label: "Docs ↗", href: "https://ajbarea.github.io/vFL/" }
 order: 3
+contributors:
+  - aj-barea
 ---

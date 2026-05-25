@@ -1,6 +1,7 @@
 ---
 year: "2026"
 venue: "IEEE Intelligent Systems"
+venue_type: journal
 title: "InteFL Framework: Optimizing Federated Learning with Metacognition for Application Design and Deployment"
 authors: "D. Korobeinikov, R. Zatsarenko, S. Chuprov, A. Barea, L. Reznik"
 author_ids:

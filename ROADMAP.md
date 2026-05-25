@@ -61,10 +61,7 @@ lives here so IMPL.md stays terse.
 
 ## M4 — CI / a11y / smoke testing — follow-ups
 
-> Status: M4 shipped 2026-05-21 (see Shipped). Items below are post-M4 polish.
-
-- [x] **Branch protection on `main` enabled 2026-05-23.** 5 required checks wired — `Lint + format`, `Type check`, `Unit (Vitest)`, `E2E + a11y (Playwright + axe-core)`, `Lighthouse CI`. Force-pushes + deletions blocked; `enforce_admins` left off so audit fixes ship same-session. `techne:sisters` audit now verifies this conditionally.
-- [x] **Codecov upload shipped [#10] + bot-comment silencing [#11].** `unit` job runs `vitest run --coverage` (lcov to `coverage/lcov.info`, junit to `test-results/junit.xml`), two `codecov/codecov-action@v6.0.1` steps mirror the vFL pattern, `codecov.yml` carries `comment: false` + sister-convention defaults.
+> M4 shipped 2026-05-21. Active follow-up policy below.
 
 **Brand-vs-AA exception (active policy).** Official PMS 1505c orange (`#f76902`) on light bg measures 2.98:1 — fails WCAG AA 3:1 large-text by 0.02. Per the "Identity stays constant" invariant, brand-color elements (`style="color: var(--color-rit-orange)"`) are axe-excluded with a documented note. Brand-vs-AA call escalated to Dr. Reznik; body-text variant `--color-rit-orange-text` darkened to `#b04b00` (5.4:1), `--color-text-faint` to `#6c6863` (5.3:1) so non-brand surfaces clear AA.
 
@@ -100,28 +97,7 @@ Definition of done:
 
 ## M6 — Sister graduation
 
-> Status: **shipped 2026-05-22**. First `/techne:audit` run completed
-> green; dev-runner wrapper added for sister-convention parity (mirror
-> of techne's `scripts/dev-runner.sh`). `/techne:sisters` cross-sister
-> audit including ldqis runs next.
-
-Definition of done:
-
-- [x] Entry added to `~/.claude/techne.toml`
-- [x] `Makefile` with the current toolchain's targets (`setup`,
-      `dev`, `build`, `preview`, `check`, `clean`). Full
-      `lint` / `test` / `e2e` set landed with M4.
-- [x] `.claude/skill-context.md` filled in with per-skill facts
-- [x] `scripts/dev-runner.sh` wrapper writes `logs/dev-<ts>-<cmd>.log`
-      archives with SUMMARY block — sister convention from techne
-- [x] First successful `/techne:audit` run (2026-05-22; 7 phases
-      passed: setup, lint, check, test-unit, build, test-e2e, audit;
-      lighthouse skipped per documented WSL2 caveat)
-- [x] First successful `/techne:sisters` audit run (2026-05-22; ldqis
-      included alongside the other five; one drift item surfaced and
-      fixed same-turn: merge settings → squash-only + delete-on-merge
-      to match sister convention)
-- [x] `~/ajsoftworks/MEMORY.md` updated to note ldqis is now a sister
+Shipped 2026-05-22 — `scripts/dev-runner.sh` + `/techne:audit` / `/techne:sisters` parity with the other sisters. Detail in git history.
 
 ---
 
@@ -209,14 +185,8 @@ Definition of done:
 
 ## Shipped
 
-One-line per item, newest first. Detail moves to git history when work lands.
+Full log in git history. Entries kept below carry a durable Astro/content pattern worth referencing.
 
-- 2026-05-25 — **Dependabot dependency automation**. `.github/dependabot.yml` adds npm + GitHub Actions version updates (weekly, minor/patch grouped one PR per ecosystem). Matches the sister convention; automates the action-pin bumps previously tracked by hand.
-- 2026-05-23 — **codecov.yml** [#11]. Silences Codecov-bot PR comments and scopes coverage targets to deployable Astro/TS source. Matches the sister convention (`comment: false`, `target: auto`, `threshold: 2%`, `informational: true`).
-- 2026-05-23 — **Codecov upload wiring** [#10]. `unit` CI job now runs with `--coverage` and emits `test-results/junit.xml` via Vitest 4 multi-reporter dot-notation. Adds two `codecov/codecov-action@v6.0.1` steps (lcov upload + test-results upload) mirroring the vFL pattern. v8 provider stays — the .vue-specific NaN-BRDA bug in vitest#9725 doesn't affect .astro/.ts sources.
-- 2026-05-22 — **M6 — Sister graduation**. Dev-runner wrapper at `scripts/dev-runner.sh` (mirror of techne's; writes `logs/dev-<ts>-<cmd>.log` + SUMMARY block). First `/techne:audit` run green across setup / lint / check / test-unit / build / test-e2e / audit. First `/techne:sisters` cross-sister audit found one drift item (ldqis merge settings) and fixed it to squash-only + delete-on-merge to match the other five sisters. Lighthouse skipped per documented WSL2 Chrome bind caveat (CI exercises it). Skill-context updated with the log-archive convention.
 - 2026-05-22 — **M3 — News / blog surface with RSS**. `news` content collection (title / description / summary / pubDate / tags / author / draft) loads from `src/content/news/`. `/news/` index renders newest-first; `/news/[id]/` detail pages prerender per post; `/news/rss.xml` is a valid RSS 2.0 feed with the atom namespace + `<atom:link rel="self">` self-reference (W3C-clean). Draft posts and future-dated posts are excluded from both the index and the feed at build time. First welcome post (`2026-05-welcome.md`) shipped. Nav grew a "News" entry; a11y `ROUTES_TO_SCAN` extended to cover both news routes (11 e2e tests total). `rssSchema.extend()` failed at build time because `@astrojs/rss` ships its own Zod 4 runtime — the news schema is defined directly with the same field shape instead.
 - 2026-05-23 — **M2-followup — cross-linking detail pages**. Added `contributors: reference("people")[]` to projects + `author_ids: reference("people")[]` to publications. People detail pages compute their authored publications + contributed projects at build time by walking the source collections (one-direction storage avoids bidirectional sync bugs). InteFL + 3 publications backfilled with their author lists; `reference()` makes typo'd IDs a build failure. research(2026-05): `reference()` from `astro:content` validates each ID at build time; `getEntries()` returns the full referenced entries in declaration order.
 - 2026-05-22 — **M2 — Content collections + per-detail pages**. 4 projects + 3 publications + 24 people migrated to Astro 5 content collections (`glob({ pattern, base })` loader; `entry.id` derived from filename, no reserved `slug`). 3 dynamic-route templates prerender 31 detail pages. Homepage cards link into the detail layer. 9 e2e a11y tests (was 4).
-- 2026-05-21 — **M4 — CI / a11y / smoke testing**. ESLint 10 + Prettier 3, Vitest 4 + happy-dom, Playwright + @axe-core/playwright + Lighthouse CI. Per-PR pipeline + `make validate` pre-push. Brand-vs-AA exception (see M4 follow-ups).
-- 2026-05-21 — **M1 — v0 scaffold**. Astro 5.18.1 + Tailwind 4 + GitHub Pages, homepage cherry-picked from the audit-of-audit-approved dql.html demo. Live at <https://ajbarea.github.io/ldqis/>.

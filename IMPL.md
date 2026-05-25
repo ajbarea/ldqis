@@ -10,10 +10,7 @@ crept in — extract it back to ROADMAP.
 
 ## In flight
 
-_Nothing currently open. M2-followup cross-linking shipped 2026-05-23 —
-projects ↔ people ↔ publications cross-references via Astro
-`reference()` with one-direction storage + build-time computation. See
-ROADMAP._
+_Nothing currently open._
 
 ## Known unpatched-upstream notation
 
@@ -27,11 +24,5 @@ Per ROADMAP, in order:
 
 1. **Backfill the remaining team cross-links.** M2-followup landed the schema + 1 project (InteFL) + 3 publications. Phalanx-FL / VelocityFL / Kourai Khryseai now carry AJ as sole `contributor` (self-attribution, 2026-05-24); canonical lab-team attribution beyond AJ still needs Reznik input. Add the rest as the data becomes clear.
 2. **M5 — custom domain handoff to dataqualitylabs.com** (gated on Dr. Reznik / DNS).
-
-M3 (news / blog surface with RSS) shipped 2026-05-22. M6 (sister
-graduation) shipped 2026-05-22 — `scripts/dev-runner.sh` + the first
-`/techne:audit` and `/techne:sisters` runs closed it out. Fragile-
-claims CI gate (`scripts/check-readme-claims.mjs`) shipped 2026-05-23
-covering Makefile target list + GitHub Pages preview URL.
 
 When picking one up, replace the "In flight" block above with a full session plan (Why / Decisions / Scope / Out of scope / Definition of done).

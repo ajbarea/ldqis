@@ -39,6 +39,16 @@ jobs:
 
       - name: Build site
         run: npm run build
+        env:
+          # M5 custom-domain switch. Set repo variable CUSTOM_DOMAIN=true
+          # (Settings > Secrets and variables > Actions > Variables) once
+          # Dr. Reznik points dataqualitylabs.com DNS at GitHub Pages.
+          # astro.config flips site/base to the apex; the next step emits CNAME.
+          CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
+
+      - name: Write CNAME (custom domain only)
+        if: ${{ vars.CUSTOM_DOMAIN == 'true' }}
+        run: echo "dataqualitylabs.com" > dist/CNAME
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5.0.0

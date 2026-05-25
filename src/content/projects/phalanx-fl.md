@@ -8,4 +8,6 @@ links:
   - { label: "GitHub ↗", href: "https://github.com/ajbarea/phalanx-fl" }
   - { label: "Docs ↗", href: "https://ajbarea.github.io/phalanx-fl/" }
 order: 2
+contributors:
+  - aj-barea
 ---

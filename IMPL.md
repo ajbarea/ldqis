@@ -25,7 +25,7 @@ ROADMAP._
 
 Per ROADMAP, in order:
 
-1. **Backfill the remaining cross-links.** M2-followup landed the schema + 1 project (InteFL) + 3 publications. Phalanx-FL / VelocityFL / Kourai Khryseai still have empty `contributors` arrays (no canonical "lab team" attribution yet beyond AJ; needs Reznik input). Add as the data becomes clear.
+1. **Backfill the remaining team cross-links.** M2-followup landed the schema + 1 project (InteFL) + 3 publications. Phalanx-FL / VelocityFL / Kourai Khryseai now carry AJ as sole `contributor` (self-attribution, 2026-05-24); canonical lab-team attribution beyond AJ still needs Reznik input. Add the rest as the data becomes clear.
 2. **M5 — custom domain handoff to dataqualitylabs.com** (gated on Dr. Reznik / DNS).
 
 M3 (news / blog surface with RSS) shipped 2026-05-22. M6 (sister

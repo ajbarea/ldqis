@@ -17,7 +17,7 @@ ROADMAP._
 
 ## Known unpatched-upstream notation
 
-**Astro 5.18.1 pin (not Astro 6).** `@tailwindcss/vite` (official Tailwind 4 path) has an open upstream incompat with Astro 6's rolldown pipeline ([withastro/astro#16542](https://github.com/withastro/astro/issues/16542)). The two CVEs flagged on Astro 5.x — `define:vars` XSS and server-island encrypted-param replay — don't affect this site (zero `define:vars`, no `output: "server"`). Migrate when #16542 closes.
+**Astro 5.18.1 pin (not Astro 6).** `@tailwindcss/vite` (official Tailwind 4 path) has an open upstream incompat with Astro 6's rolldown pipeline ([withastro/astro#16542](https://github.com/withastro/astro/issues/16542)). The two CVEs flagged on Astro 5.x — `define:vars` XSS and server-island encrypted-param replay — don't affect this site (zero `define:vars`, no `output: "server"`). Migrate when #16542 closes. Dependabot is configured to ignore the Astro 6 major (`.github/dependabot.yml`) so it stops re-proposing the blocked upgrade; drop that `ignore` entry when #16542 closes.
 
 **`@lhci/cli` transitive deps** (tmp, uuid, inquirer). Dev-only, informational. Fix path is a major-version downgrade that would break the lighthouse pipeline. Accepted.
 

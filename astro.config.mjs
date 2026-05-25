@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 // research(2026-05): Tailwind 4 ships as a Vite plugin (`@tailwindcss/vite`).
@@ -31,6 +32,12 @@ const isCustomDomain = process.env.CUSTOM_DOMAIN === "true";
 export default defineConfig({
   site: isCustomDomain ? "https://dataqualitylabs.com" : "https://ajbarea.github.io",
   base: isCustomDomain ? "/" : "/ldqis",
+  // research(2026-05): @astrojs/sitemap (Astro 5 line) auto-generates
+  // sitemap-index.xml from `site` + `base`, surfacing the publication /
+  // people / project detail pages to crawlers (incl. Google Scholar). The
+  // build-time robots.txt endpoint (src/pages/robots.txt.ts) points at it.
+  // Source: https://docs.astro.build/en/guides/integrations-guide/sitemap/
+  integrations: [sitemap()],
   vite: {
     // research(2026-05): @tailwindcss/vite peer-Vite version differs from
     // Astro's nested Vite (HotUpdatePluginContext vs MinimalPluginContext);

@@ -68,6 +68,9 @@ const {
         }
       })();
     </script>
+
+    {/* Per-page head extras — e.g. citation_* meta + JSON-LD on publications */}
+    <slot name="head" />
   </head>
   <body
     class="overflow-x-hidden bg-bg font-sans text-text antialiased transition-colors duration-200"

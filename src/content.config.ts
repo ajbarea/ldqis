@@ -51,6 +51,12 @@ const publications = defineCollection({
   schema: z.object({
     year: z.string(),
     venue: z.string(),
+    // research(2026-05): venue_type drives citation_journal_title vs
+    // citation_conference_title (Highwire — the tags Google Scholar parses)
+    // and Periodical vs CreativeWorkSeries in the ScholarlyArticle JSON-LD.
+    // Required (no default) so a journal paper can't silently inherit a
+    // wrong venue type. Consumed by src/pages/publications/[id].astro.
+    venue_type: z.enum(["journal", "conference"]),
     title: z.string(),
     // The `authors` string is the canonical citation form ("D. Korobeinikov,
     // R. Zatsarenko, …") — kept for venues like RSS that need a flat string.

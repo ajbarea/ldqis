@@ -19,7 +19,7 @@ import { defineCollection, reference, z } from "astro:content";
 // Each entry's frontmatter mirrors the prior inline array in index.astro
 // (name, tagline, tags[], stack, desc with allowed inline HTML, links[]).
 const projects = defineCollection({
-  loader: glob({ pattern: "*.md", base: "./src/content/projects" }),
+  loader: glob({ pattern: "[^_]*.md", base: "./src/content/projects" }),
   schema: z.object({
     name: z.string(),
     tagline: z.string(),
@@ -47,7 +47,7 @@ const projects = defineCollection({
 });
 
 const publications = defineCollection({
-  loader: glob({ pattern: "*.md", base: "./src/content/publications" }),
+  loader: glob({ pattern: "[^_]*.md", base: "./src/content/publications" }),
   schema: z.object({
     year: z.string(),
     venue: z.string(),
@@ -74,7 +74,9 @@ const publications = defineCollection({
 // person lands in on the homepage. `lead: true` reserves the wider card
 // for the principal investigator.
 const people = defineCollection({
-  loader: glob({ pattern: "*.md", base: "./src/content/people" }),
+  // `[^_]*.md` ignores files prefixed with "_" (e.g. people/_example.md, the
+  // copy-me profile template). Astro 5's glob loader no longer auto-skips them.
+  loader: glob({ pattern: "[^_]*.md", base: "./src/content/people" }),
   schema: z.object({
     initials: z.string().min(1).max(3),
     name: z.string(),
@@ -112,7 +114,7 @@ const people = defineCollection({
 // the RSS feed item shape so news/rss.xml.js can pass them straight
 // through to @astrojs/rss without re-mapping.
 const news = defineCollection({
-  loader: glob({ pattern: "*.md", base: "./src/content/news" }),
+  loader: glob({ pattern: "[^_]*.md", base: "./src/content/news" }),
   schema: z.object({
     title: z.string().min(1),
     description: z.string().optional(),

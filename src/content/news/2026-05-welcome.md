@@ -22,7 +22,7 @@ What is here now is an [Astro 5](https://astro.build/) project that compiles to 
 
 ## Adding your work
 
-This is the lab's site, and it is meant to be easy to contribute to. Your projects, papers, and profile live here, and adding or updating any of them is a single Markdown file under `src/content/`. Open a pull request, or send it my way and I will wire it in.
+This is the lab's site, and it is meant to be easy to contribute to. Your projects, papers, and profile live here, and adding or updating any of them is a single Markdown file under `src/content/`. For your profile, copy `src/content/people/_example.md`, rename it to your name, and fill in the fields. Open a pull request, or send it my way and I will wire it in.
 
 ## What's next
 

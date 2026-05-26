@@ -1,0 +1,53 @@
+---
+// Profile photo with a graceful fallback chain:
+//   1. an uploaded image (`avatar` frontmatter, optimized via astro:assets)
+//   2. the person's GitHub avatar, derived from their `github` handle
+//   3. their initials in the lab's gradient circle (the original look)
+// Square container + object-cover means non-square uploads still crop cleanly.
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  avatar?: ImageMetadata;
+  github?: string;
+  initials: string;
+  name: string;
+  size?: number; // rendered px (square); default suits the team-grid cards
+  class?: string;
+}
+const { avatar, github, initials, name, size = 48, class: extra = "" } = Astro.props;
+const boxStyle = `width:${size}px;height:${size}px`;
+// GitHub serves a square avatar at github.com/<handle>.png; request ~2× for retina.
+const ghSrc = github ? `https://github.com/${github}.png?size=${Math.min(size * 2, 460)}` : null;
+---
+
+<span class={`inline-flex shrink-0 overflow-hidden rounded-full ${extra}`} style={boxStyle}>
+  {
+    avatar ? (
+      <Image
+        src={avatar}
+        alt={name}
+        width={Math.max(size * 2, 96)}
+        class="h-full w-full object-cover"
+      />
+    ) : ghSrc ? (
+      <img
+        src={ghSrc}
+        alt={name}
+        width={size}
+        height={size}
+        loading="lazy"
+        decoding="async"
+        class="h-full w-full object-cover"
+      />
+    ) : (
+      <span
+        class="flex h-full w-full items-center justify-center font-semibold"
+        style={`font-size:${Math.round(size * 0.4)}px; background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;`}
+        aria-hidden="true"
+      >
+        {initials}
+      </span>
+    )
+  }
+</span>

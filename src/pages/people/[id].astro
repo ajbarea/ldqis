@@ -3,6 +3,7 @@ import { type GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ContactLinks from "../../components/ContactLinks.astro";
+import Avatar from "../../components/Avatar.astro";
 
 // Detail pages for people give each researcher (current + past cohort)
 // a stable shareable URL. The lab's pre-M2 site had no per-person page;
@@ -16,7 +17,22 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { initials, name, role, email, scholar, ieee, cohort } = entry.data;
+const {
+  initials,
+  name,
+  role,
+  email,
+  scholar,
+  ieee,
+  website,
+  github,
+  linkedin,
+  youtube,
+  orcid,
+  avatar,
+  years,
+  cohort,
+} = entry.data;
 const cohortLabel = cohort === "current" ? "Current team" : "Past cohort";
 
 // Cross-links are computed at build time by walking the source collections
@@ -69,12 +85,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   <main id="main" class="relative z-[1] pt-16 pb-32">
     <article class="mx-auto max-w-[640px] px-6 text-center">
-      <div
-        class="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-full text-3xl font-semibold"
-        style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
-      >
-        {initials}
-      </div>
+      <Avatar
+        avatar={avatar}
+        github={github}
+        initials={initials}
+        name={name}
+        size={96}
+        class="mx-auto mb-8"
+      />
 
       <div class="mb-3 text-xs tracking-[1.5px] text-rit-orange-text uppercase">{cohortLabel}</div>
 
@@ -85,9 +103,21 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         {name}
       </h1>
 
-      <p class="mb-8 text-lg text-text-dim">{role}</p>
+      <p class={`text-lg text-text-dim ${years ? "mb-2" : "mb-8"}`}>{role}</p>
+      {years && <p class="mb-8 text-sm text-text-dim">{years}</p>}
 
-      <ContactLinks email={email} scholar={scholar} ieee={ieee} name={name} variant="pill" />
+      <ContactLinks
+        email={email}
+        scholar={scholar}
+        ieee={ieee}
+        website={website}
+        github={github}
+        linkedin={linkedin}
+        youtube={youtube}
+        orcid={orcid}
+        name={name}
+        variant="pill"
+      />
 
       {
         publicationsAuthored.length > 0 && (

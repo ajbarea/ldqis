@@ -2,7 +2,13 @@
 initials: AB
 name: AJ Barea
 role: "RIT Graduate Researcher · Phalanx-FL · Velocity-FL · Kourai Khryseai"
+years: "2024–present"
 email: ajb6289@rit.edu
+website: https://ajbarea.github.io
+github: ajbarea
+linkedin: https://linkedin.com/in/aj-barea
+youtube: https://youtube.com/@ajbarea
+orcid: 0009-0001-7938-2376
 scholar: https://scholar.google.com/citations?user=YT5d1FkAAAAJ&hl=en
 ieee: https://ieeexplore.ieee.org/author/828865192179610
 cohort: current

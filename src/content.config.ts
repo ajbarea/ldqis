@@ -77,37 +77,74 @@ const people = defineCollection({
   // `[^_]*.md` ignores files prefixed with "_" (e.g. people/_example.md, the
   // copy-me profile template). Astro 5's glob loader no longer auto-skips them.
   loader: glob({ pattern: "[^_]*.md", base: "./src/content/people" }),
-  schema: z.object({
-    initials: z.string().min(1).max(3),
-    name: z.string(),
-    role: z.string(),
-    email: z.string().email().optional(),
-    // Optional Google Scholar profile URL. When set, the homepage team
-    // card + the per-person detail page render a "Google Scholar" link
-    // alongside the email button. Constrained to the scholar.google.com
-    // host so a typo in the frontmatter (e.g. dropping the URL or
-    // pasting a researchgate link) doesn't silently surface as an
-    // ambiguous external link.
-    scholar: z
-      .string()
-      .url()
-      .regex(/^https:\/\/scholar\.google\.com\//, {
-        message: "scholar URL must point at https://scholar.google.com/",
-      })
-      .optional(),
-    // Optional IEEE Xplore author-profile URL. Same treatment as `scholar`:
-    // host-constrained so a mistyped or wrong-host link fails the build.
-    ieee: z
-      .string()
-      .url()
-      .regex(/^https:\/\/ieeexplore\.ieee\.org\//, {
-        message: "ieee URL must point at https://ieeexplore.ieee.org/",
-      })
-      .optional(),
-    cohort: z.enum(["current", "past"]),
-    lead: z.boolean().optional(),
-    order: z.number().int().nonnegative(),
-  }),
+  // `({ image })` unlocks the image() helper so `avatar` can be an optimized
+  // local image (Astro processes + hashes it at build).
+  schema: ({ image }) =>
+    z.object({
+      initials: z.string().min(1).max(3),
+      name: z.string(),
+      role: z.string(),
+      email: z.string().email().optional(),
+      // Optional Google Scholar profile URL. When set, the homepage team
+      // card + the per-person detail page render a "Google Scholar" link
+      // alongside the email button. Constrained to the scholar.google.com
+      // host so a typo in the frontmatter (e.g. dropping the URL or
+      // pasting a researchgate link) doesn't silently surface as an
+      // ambiguous external link.
+      scholar: z
+        .string()
+        .url()
+        .regex(/^https:\/\/scholar\.google\.com\//, {
+          message: "scholar URL must point at https://scholar.google.com/",
+        })
+        .optional(),
+      // Optional IEEE Xplore author-profile URL. Same treatment as `scholar`:
+      // host-constrained so a mistyped or wrong-host link fails the build.
+      ieee: z
+        .string()
+        .url()
+        .regex(/^https:\/\/ieeexplore\.ieee\.org\//, {
+          message: "ieee URL must point at https://ieeexplore.ieee.org/",
+        })
+        .optional(),
+      // --- Social / web links (all optional; paste the full URL unless noted) ---
+      // Personal website or homepage.
+      website: z.string().url().optional(),
+      // GitHub *handle* (e.g. "ajbarea", not a URL). Drives the GitHub link and —
+      // when no `avatar` image is set — the profile photo (github.com/<handle>.png).
+      github: z
+        .string()
+        .regex(/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/, {
+          message: 'github must be a handle like "ajbarea", not a URL',
+        })
+        .optional(),
+      linkedin: z
+        .string()
+        .url()
+        .regex(/linkedin\.com\//, { message: "linkedin must be a linkedin.com URL" })
+        .optional(),
+      youtube: z
+        .string()
+        .url()
+        .regex(/youtube\.com\/|youtu\.be\//, { message: "youtube must be a youtube.com URL" })
+        .optional(),
+      // ORCID iD in canonical 0000-0000-0000-0000 form (the link is built from it).
+      orcid: z
+        .string()
+        .regex(/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/, {
+          message: "orcid must be an iD like 0000-0002-1825-0097",
+        })
+        .optional(),
+      // Profile photo: drop a file in src/content/people/avatars/ and set
+      // `avatar: ./avatars/your-name.jpg`. Astro optimizes it. Falls back to the
+      // GitHub avatar (if `github` set), then initials.
+      avatar: image().optional(),
+      // Years in the lab, e.g. "2018–2022" or "2021" (handy for alumni).
+      years: z.string().optional(),
+      cohort: z.enum(["current", "past"]),
+      lead: z.boolean().optional(),
+      order: z.number().int().nonnegative(),
+    }),
 });
 
 // News / blog posts — dated, optional tags + author. Field names match

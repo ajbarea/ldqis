@@ -46,7 +46,7 @@ jobs:
           body: |
             Generated from #${{ github.event.issue.number }} via the profile form.
 
-            Please review the card (adjust `order` if needed), then merge — it deploys automatically.
+            Please review, then merge — it deploys automatically. New cards auto-append to the end of the list; edit `order` in the file only if you want to feature this person higher.
 
             Closes #${{ github.event.issue.number }}
           labels: profile

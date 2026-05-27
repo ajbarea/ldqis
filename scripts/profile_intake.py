@@ -154,6 +154,20 @@ def clear_avatar_files(slug: str) -> None:
             f.unlink()
 
 
+def next_order() -> int:
+    """A new card's order = one past the current max, so submissions append to the end
+    of the list — no ties, and nobody has to pick a number. Maintainers can still feature
+    someone by editing `order` to a lower value; updates keep their existing order."""
+    orders = []
+    for p in PEOPLE.glob("*.md"):
+        if p.name.startswith("_"):  # skip the _example template
+            continue
+        m = re.search(r"^order:\s*(\d+)", p.read_text(encoding="utf-8"), re.M)
+        if m:
+            orders.append(int(m.group(1)))
+    return max(orders) + 1 if orders else 1
+
+
 def main() -> None:
     fields = json.loads(os.environ["ISSUE_JSON"])
     name = clean(fields.get("name")) or sys.exit("::error::name is required")
@@ -187,7 +201,7 @@ def main() -> None:
         if chosen:
             lines.append(f"{key}: {yaml_quote(chosen)}")
     lines.append(f"cohort: {cohort}")
-    lines.append(f"order: {existing.get('order', '100')}")
+    lines.append(f"order: {existing.get('order') or next_order()}")
     new_photo = download_photo(fields.get("photo") or "", slug)
     if new_photo:
         avatar = new_photo  # uploaded a new photo

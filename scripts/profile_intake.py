@@ -59,6 +59,10 @@ CLEAR_LABEL_TO_KEY = {
     "Years in the lab": "years",
 }
 
+# URL fields where students often paste a bare domain ("abhik-roy.com"); we prepend
+# https:// before validating so a missing protocol doesn't silently drop the link.
+URL_FIELDS = {"website", "linkedin", "youtube", "scholar", "ieee"}
+
 
 def clean(value: object) -> str | None:
     """Empty / unanswered form fields come through as "" or "_No response_"."""
@@ -173,6 +177,8 @@ def main() -> None:
     lines = [f"initials: {yaml_quote(initials[:3])}", f"name: {yaml_quote(name)}", f"role: {yaml_quote(role)}"]
     for key, validator in STRING_FIELDS:
         val = clean(fields.get(key))
+        if val and key in URL_FIELDS and not val.lower().startswith(("http://", "https://")):
+            val = "https://" + val  # bare domain → add the protocol the validator needs
         if val and validator and not validator.match(val):
             print(f"::warning::ignoring {key}={val!r} — doesn't match the expected format")
             val = None

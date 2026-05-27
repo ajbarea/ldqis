@@ -24,7 +24,7 @@ make check    # astro check (type-check + template validation)
 
 Each kind of content is a folder under `src/content/`, and adding an entry is one new file. Schemas live in `src/content.config.ts`, so a typo in a cross-reference fails the build instead of shipping a broken page.
 
-- **`people/`**: current team and alumni. An optional `scholar:` field adds a Google Scholar link to the homepage card and the person's detail page.
+- **`people/`**: current team and alumni. Optional fields add a profile photo (an upload, or auto-pulled from a `github:` handle), social and academic links (website, GitHub, LinkedIn, YouTube, ORCID, Scholar, IEEE), and years in the lab. Lab members can fill all of this from the [profile form](https://github.com/ajbarea/ldqis/issues/new/choose) — no file editing.
 - **`projects/`**: the lab's open-source frameworks (InteFL, Phalanx-FL, Velocity-FL, Kourai Khryseai), each credited to its contributors.
 - **`publications/`**: papers, with year, venue, and authors linked to their people entries.
 - **`news/`**: dated posts, surfaced at `/news/` with an RSS feed at `/news/rss.xml`.
@@ -51,8 +51,8 @@ The site targets WCAG 2.2 AA, enforced on every PR by axe-core + Playwright, wit
 
 ## Contributing
 
-If you are in the lab and want something added or changed, open a pull request or just ask. The setup is deliberately low-friction, so nobody needs to be a web developer to get their work on the site.
+If you are in the lab, the easiest way onto the site is the [**Add or update your profile** form](https://github.com/ajbarea/ldqis/issues/new/choose) — fill it in and you get a pull request to review, no files to touch. For projects, papers, and news, open a pull request or just ask. The setup is deliberately low-friction, so nobody needs to be a web developer to get their work on the site.
 
 ## Status
 
-Live in preview at <https://ajbarea.github.io/ldqis/>, with a move to `dataqualitylabs.com` coming. MIT licensed.
+Live at <https://ajbarea.github.io/ldqis/>; a move to `dataqualitylabs.com` is planned. MIT licensed.

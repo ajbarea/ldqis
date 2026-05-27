@@ -64,16 +64,26 @@ def yaml_quote(value: str) -> str:
     return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
-def existing_meta(md_path: Path) -> dict[str, str]:
-    """Preserve order / lead when a teammate updates an existing card."""
-    meta: dict[str, str] = {}
-    if md_path.exists():
-        text = md_path.read_text(encoding="utf-8")
-        if m := re.search(r"^order:\s*(\d+)", text, re.M):
-            meta["order"] = m.group(1)
-        if re.search(r"^lead:\s*true", text, re.M):
-            meta["lead"] = "true"
-    return meta
+def parse_existing(md_path: Path) -> dict[str, str]:
+    """Parse an existing card's frontmatter so an update can MERGE into it.
+    research(2026-05): partial update (PATCH) is the least-surprising default for
+    user-driven profile edits — a field the form leaves blank keeps its current
+    value rather than being wiped (PUT). Required identity fields still come from
+    the form; everything optional merges."""
+    fields: dict[str, str] = {}
+    if not md_path.exists():
+        return fields
+    text = md_path.read_text(encoding="utf-8")
+    m = re.match(r"^---\n(.*?)\n---", text, re.S)
+    for line in (m.group(1) if m else "").splitlines():
+        lm = re.match(r"^([A-Za-z_]+):\s*(.*)$", line)
+        if not lm:
+            continue
+        key, val = lm.group(1), lm.group(2).strip()
+        if len(val) >= 2 and val[0] == '"' and val[-1] == '"':
+            val = val[1:-1].replace('\\"', '"').replace("\\\\", "\\")
+        fields[key] = val
+    return fields
 
 
 def download_photo(markdown: str, slug: str) -> str | None:
@@ -116,31 +126,30 @@ def main() -> None:
         cohort = "current"
     slug = slugify(name)
     md_path = PEOPLE / f"{slug}.md"
-    meta = existing_meta(md_path)
-
-    avatar = download_photo(fields.get("photo") or "", slug)
+    existing = parse_existing(md_path)  # {} for a new person; an update merges into this
 
     lines = [f"initials: {yaml_quote(initials[:3])}", f"name: {yaml_quote(name)}", f"role: {yaml_quote(role)}"]
     for key, validator in STRING_FIELDS:
         val = clean(fields.get(key))
-        if not val:
-            continue
-        if validator and not validator.match(val):
-            print(f"::warning::dropping {key}={val!r} — doesn't match the expected format")
-            continue
-        lines.append(f"{key}: {yaml_quote(val)}")
+        if val and validator and not validator.match(val):
+            print(f"::warning::ignoring {key}={val!r} — doesn't match the expected format")
+            val = None
+        chosen = val or existing.get(key)  # form value wins; otherwise keep what's already on the card
+        if chosen:
+            lines.append(f"{key}: {yaml_quote(chosen)}")
     lines.append(f"cohort: {cohort}")
-    lines.append(f"order: {meta.get('order', '100')}")
+    lines.append(f"order: {existing.get('order', '100')}")
+    avatar = download_photo(fields.get("photo") or "", slug) or existing.get("avatar")
     if avatar:
         lines.append(f"avatar: {avatar}")
-    if meta.get("lead"):
+    if existing.get("lead") == "true":
         lines.append("lead: true")
 
     md_path.write_text("---\n" + "\n".join(lines) + "\n---\n", encoding="utf-8")
     print(f"wrote {md_path} (photo: {'yes' if avatar else 'no'})")
 
     if gh_out := os.environ.get("GITHUB_OUTPUT"):
-        action = "Update" if meta else "Add"
+        action = "Update" if existing else "Add"
         safe_name = name.replace("\n", " ").replace("\r", " ")
         with open(gh_out, "a", encoding="utf-8") as f:
             f.write(f"slug={slug}\nname={safe_name}\naction={action}\n")

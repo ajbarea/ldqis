@@ -98,3 +98,17 @@ body::before {
     scroll-behavior: auto !important;
   }
 }
+
+/* Cross-document view transitions: a person's avatar morphs from the team grid
+   into their detail page on navigation. research(2026-05): native MPA view
+   transitions (Chromium + Safari 18.2+); unsupported browsers just navigate. */
+@view-transition {
+  navigation: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

@@ -14,9 +14,18 @@ interface Props {
   name: string;
   size?: number; // rendered px (square); default suits the team-grid cards
   class?: string;
+  transitionName?: string; // set → the avatar morphs across navigation (view transitions)
 }
-const { avatar, github, initials, name, size = 48, class: extra = "" } = Astro.props;
-const boxStyle = `width:${size}px;height:${size}px`;
+const {
+  avatar,
+  github,
+  initials,
+  name,
+  size = 48,
+  class: extra = "",
+  transitionName,
+} = Astro.props;
+const boxStyle = `width:${size}px;height:${size}px${transitionName ? `;view-transition-name:${transitionName}` : ""}`;
 // GitHub serves a square avatar at github.com/<handle>.png; request ~2× for retina.
 const ghSrc = github ? `https://github.com/${github}.png?size=${Math.min(size * 2, 460)}` : null;
 ---

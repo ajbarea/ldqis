@@ -412,7 +412,13 @@ const pastCohort = peopleEntries
                 }
               >
                 <div class="mb-4 flex items-center gap-3">
-                  <Avatar avatar={p.avatar} github={p.github} initials={p.initials} name={p.name} />
+                  <Avatar
+                    avatar={p.avatar}
+                    github={p.github}
+                    initials={p.initials}
+                    name={p.name}
+                    transitionName={`avatar-${p.id}`}
+                  />
                   <a
                     href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
                     class="inline-block text-base font-medium hover:text-rit-orange-text"
@@ -467,7 +473,13 @@ const pastCohort = peopleEntries
             pastCohort.map((p) => (
               <div class="rounded-[14px] border border-line bg-bg-elev p-6 transition-colors hover:border-rit-orange">
                 <div class="mb-4 flex items-center gap-3">
-                  <Avatar avatar={p.avatar} github={p.github} initials={p.initials} name={p.name} />
+                  <Avatar
+                    avatar={p.avatar}
+                    github={p.github}
+                    initials={p.initials}
+                    name={p.name}
+                    transitionName={`avatar-${p.id}`}
+                  />
                   <a
                     href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
                     class="inline-block text-base font-medium hover:text-rit-orange-text"

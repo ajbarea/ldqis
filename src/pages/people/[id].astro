@@ -92,6 +92,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         name={name}
         size={96}
         class="mx-auto mb-8"
+        transitionName={`avatar-${entry.id}`}
       />
 
       <div class="mb-3 text-xs tracking-[1.5px] text-rit-orange-text uppercase">{cohortLabel}</div>

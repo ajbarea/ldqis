@@ -12,8 +12,13 @@ const {
   title = "LDQIS — Laboratory of Data Quality & Intelligent Security at RIT",
   description = "Research at the frontier of federated learning, agentic AI, and intelligent security. A research laboratory at the Rochester Institute of Technology.",
   canonical = Astro.url.href,
-  ogImage = "https://dataqualitylabs.com/og-image.png",
+  ogImage,
 } = Astro.props;
+// Default the share image to /og-image.png at the current origin — works on the
+// GitHub Pages base path now and on the apex domain after the DNS flip.
+const ogImageUrl =
+  ogImage ??
+  new URL(`${import.meta.env.BASE_URL.replace(/\/$/, "")}/og-image.png`, Astro.site).href;
 ---
 
 <!doctype html>
@@ -32,7 +37,7 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 

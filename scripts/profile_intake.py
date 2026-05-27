@@ -44,6 +44,21 @@ STRING_FIELDS: list[tuple[str, "re.Pattern[str] | None"]] = [
     ("years", None),  # free text
 ]
 
+# "Remove fields" checkbox labels (profile.yml) → the card field each one clears.
+# Keep in sync with the `clear` checkboxes options in .github/ISSUE_TEMPLATE/profile.yml.
+CLEAR_LABEL_TO_KEY = {
+    "Photo": "avatar",
+    "Email": "email",
+    "Website": "website",
+    "GitHub": "github",
+    "LinkedIn": "linkedin",
+    "YouTube": "youtube",
+    "ORCID": "orcid",
+    "Google Scholar": "scholar",
+    "IEEE Xplore": "ieee",
+    "Years in the lab": "years",
+}
+
 
 def clean(value: object) -> str | None:
     """Empty / unanswered form fields come through as "" or "_No response_"."""
@@ -120,8 +135,19 @@ def download_photo(markdown: str, slug: str) -> str | None:
         print("::warning::photo exceeds 8 MB; skipping")
         return None
     AVATARS.mkdir(parents=True, exist_ok=True)
+    # drop any prior avatar of a different extension so a format change doesn't orphan a file
+    for old in AVATARS.glob(f"{slug}.*"):
+        if old.name != f"{slug}.{ext}":
+            old.unlink()
     (AVATARS / f"{slug}.{ext}").write_bytes(data)
     return f"./avatars/{slug}.{ext}"
+
+
+def clear_avatar_files(slug: str) -> None:
+    """Remove any avatars/<slug>.* so a removed photo leaves no orphan image file."""
+    if AVATARS.exists():
+        for f in AVATARS.glob(f"{slug}.*"):
+            f.unlink()
 
 
 def main() -> None:
@@ -136,25 +162,41 @@ def main() -> None:
     md_path = PEOPLE / f"{slug}.md"
     existing = parse_existing(md_path)  # {} for a new person; an update merges into this
 
+    # "Remove fields" checkboxes — github-issue-parser v3 emits an array of the
+    # checked option labels; map each to the card field it clears. An explicit
+    # clear beats "keep existing", but a freshly-typed value still wins over it.
+    checked = fields.get("clear") or []
+    if isinstance(checked, str):  # defensive: a non-array form → treat as a single item
+        checked = [checked]
+    to_clear = {CLEAR_LABEL_TO_KEY[c.strip()] for c in checked if c.strip() in CLEAR_LABEL_TO_KEY}
+
     lines = [f"initials: {yaml_quote(initials[:3])}", f"name: {yaml_quote(name)}", f"role: {yaml_quote(role)}"]
     for key, validator in STRING_FIELDS:
         val = clean(fields.get(key))
         if val and validator and not validator.match(val):
             print(f"::warning::ignoring {key}={val!r} — doesn't match the expected format")
             val = None
-        chosen = val or existing.get(key)  # form value wins; otherwise keep what's already on the card
+        # new value wins → else an explicit clear removes it → else keep the card's value
+        chosen = val or (None if key in to_clear else existing.get(key))
         if chosen:
             lines.append(f"{key}: {yaml_quote(chosen)}")
     lines.append(f"cohort: {cohort}")
     lines.append(f"order: {existing.get('order', '100')}")
-    avatar = download_photo(fields.get("photo") or "", slug) or existing.get("avatar")
+    new_photo = download_photo(fields.get("photo") or "", slug)
+    if new_photo:
+        avatar = new_photo  # uploaded a new photo
+    elif "avatar" in to_clear:
+        clear_avatar_files(slug)  # explicit remove → drop the file, fall back to GitHub avatar / initials
+        avatar = None
+    else:
+        avatar = existing.get("avatar")  # keep current
     if avatar:
         lines.append(f"avatar: {avatar}")
     if existing.get("lead") == "true":
         lines.append("lead: true")
 
     md_path.write_text("---\n" + "\n".join(lines) + "\n---\n", encoding="utf-8")
-    print(f"wrote {md_path} (photo: {'yes' if avatar else 'no'})")
+    print(f"wrote {md_path} (photo: {'yes' if avatar else 'no'}, cleared: {','.join(sorted(to_clear)) or 'none'})")
 
     if gh_out := os.environ.get("GITHUB_OUTPUT"):
         action = "Update" if existing else "Add"

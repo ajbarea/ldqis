@@ -8,6 +8,8 @@ body:
       value: |
         Fill this in and submit. A maintainer gets a pull request to review — you don't touch any files.
         Most fields are optional; add what you want and leave the rest blank.
+
+        **Updating an existing card?** Filling a field changes it; leaving a field **blank keeps** what's there now. To **remove** something, tick it in the checkboxes at the bottom.
   - type: input
     id: name
     attributes:
@@ -92,3 +94,19 @@ body:
     attributes:
       label: Years in the lab (optional)
       placeholder: 2018–2022
+  - type: checkboxes
+    id: clear
+    attributes:
+      label: Remove fields (only when updating an existing card)
+      description: Leaving a field blank above KEEPS your current value. To DELETE something from your card, check it here.
+      options:
+        - label: Photo
+        - label: Email
+        - label: Website
+        - label: GitHub
+        - label: LinkedIn
+        - label: YouTube
+        - label: ORCID
+        - label: Google Scholar
+        - label: IEEE Xplore
+        - label: Years in the lab

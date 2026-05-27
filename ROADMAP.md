@@ -88,6 +88,13 @@ These hold across redesigns:
 
 Highlights below; full history in git.
 
+- **Project/publication intake + email copy chip.** Alongside the profile form, issue forms
+  for projects and publications open auto-generated, reviewed PRs; they take comma-separated
+  tags/stack (rendered with `·` separators) and derive the entry's name/title from the
+  issue's own title, so nothing is typed twice. Each intake workflow runs `astro build` to
+  validate the generated entry before opening the PR, since a `GITHUB_TOKEN` PR doesn't trigger
+  the normal CI. On profile and detail pages the email is a single chip: the address opens mail
+  and an inline copy icon copies it with a green check and a "Copied!" confirmation.
 - **Profile cards: photos, links, and a submission form.** Team cards show a photo
   (uploaded, auto-pulled from a GitHub handle, or initials), social and academic links
   (website, GitHub, LinkedIn, YouTube, ORCID, Scholar, IEEE), and years in the lab. An

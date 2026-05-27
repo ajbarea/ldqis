@@ -8,4 +8,5 @@ scholar: "https://scholar.google.com/citations?user=xE85dYoAAAAJ&hl=en"
 ieee: "https://ieeexplore.ieee.org/author/400553251745705"
 cohort: current
 order: 4
+avatar: ./avatars/raman-zatsarenko.jpg
 ---

@@ -9,13 +9,6 @@ body:
         Fill this in and submit — a maintainer gets a pull request to review, no files to touch.
         Contributors (which lab members worked on it) are linked in by a maintainer on review.
   - type: input
-    id: name
-    attributes:
-      label: Project name
-      placeholder: InteFL
-    validations:
-      required: true
-  - type: input
     id: tagline
     attributes:
       label: Tagline
@@ -27,7 +20,7 @@ body:
     id: tags
     attributes:
       label: Tags
-      description: Comma-separated topic tags.
+      description: Topic tags, separated by commas.
       placeholder: Federated Learning, Agentic AI
     validations:
       required: true
@@ -35,15 +28,15 @@ body:
     id: stack
     attributes:
       label: Stack
-      description: Tech stack, separated however reads best.
-      placeholder: Python · Flower · PyTorch · LoRA
+      description: Main tools, separated by commas.
+      placeholder: Python, Flower, PyTorch
     validations:
       required: true
   - type: textarea
     id: desc
     attributes:
       label: Description
-      description: A sentence or two. You can wrap a key phrase in <strong>…</strong> to bold it.
+      description: A sentence or two.
     validations:
       required: true
   - type: input

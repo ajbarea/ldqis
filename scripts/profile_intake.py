@@ -2,7 +2,8 @@
 """Turn a parsed "profile" issue form into a people/<slug>.md (+ optional avatar).
 
 Run by .github/workflows/profile-intake.yml. Reads the issue-parser JSON from
-$ISSUE_JSON (passed via env, never interpolated into a shell — no injection),
+$ISSUE_JSON and the person's name from $ISSUE_TITLE (both via env, never
+interpolated into a shell — no injection),
 writes the Markdown + downloads any attached photo, and leaves the result in the
 working tree for create-pull-request to commit. Output is always a reviewed PR.
 
@@ -170,7 +171,10 @@ def next_order() -> int:
 
 def main() -> None:
     fields = json.loads(os.environ["ISSUE_JSON"])
-    name = clean(fields.get("name")) or sys.exit("::error::name is required")
+    # Name is the issue's own title (category prefix stripped) — not asked twice.
+    name = re.sub(r"^\s*\[[^\]]*\]\s*", "", os.environ.get("ISSUE_TITLE", "")).strip()
+    if not name:
+        sys.exit("::error::name (the issue title) is required")
     initials = clean(fields.get("initials")) or "?"
     role = clean(fields.get("role")) or ""
     cohort = clean(fields.get("cohort")) or "current"

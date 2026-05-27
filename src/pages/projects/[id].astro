@@ -79,7 +79,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
       <p class="mb-8 text-xl text-text-dim italic">{tagline}</p>
 
-      <div class="mb-8 font-mono text-sm text-text-faint">{stack}</div>
+      <div class="mb-8 font-mono text-sm text-text-faint">{stack.join(" · ")}</div>
 
       <div
         class="prose prose-invert mb-12 max-w-none text-lg leading-relaxed text-text-dim"

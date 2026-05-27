@@ -11,14 +11,6 @@ body:
 
         **Updating an existing card?** Filling a field changes it; leaving a field **blank keeps** what's there now. To **remove** something, tick it in the checkboxes at the bottom.
   - type: input
-    id: name
-    attributes:
-      label: Name
-      description: How your name should display (add a title like "Dr." if you like).
-      placeholder: First Last
-    validations:
-      required: true
-  - type: input
     id: initials
     attributes:
       label: Initials

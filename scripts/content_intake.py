@@ -4,7 +4,7 @@ src/content/<collection>/<slug>.md, left in the working tree for
 create-pull-request to commit.
 
 Routed by content-intake.yml on the `project` / `publication` labels. The issue
-body reaches this only through $ISSUE_JSON (env, never interpolated into a shell).
+body reaches this via $ISSUE_JSON and the name/title via $ISSUE_TITLE (both env, never shell-interpolated).
 People references (a project's `contributors`, a paper's `author_ids`) are
 deliberately NOT set from the form — a maintainer attaches them on review, so a
 mistyped name can't mis-credit anyone or fail the build. Any references already
@@ -61,10 +61,12 @@ def preserve_refs(md_path: Path, key: str) -> str | None:
     return m.group(0) if m else None
 
 
-def build_project(f: dict) -> tuple[Path, list[str]]:
-    name = clean(f.get("name")) or sys.exit("::error::project name is required")
+def build_project(f: dict, name: str) -> tuple[Path, list[str]]:
+    if not name:
+        sys.exit("::error::project name (the issue title) is required")
     md_path = ROOT / "projects" / f"{slugify(name)}.md"
     tags = [t.strip() for t in (clean(f.get("tags")) or "").split(",") if t.strip()]
+    stack = [s.strip() for s in (clean(f.get("stack")) or "").split(",") if s.strip()]
     links: list[tuple[str, str]] = []
     for key, label in (("github", "GitHub ↗"), ("site", "Site ↗"), ("docs", "Docs ↗")):
         u = clean(f.get(key))
@@ -80,7 +82,8 @@ def build_project(f: dict) -> tuple[Path, list[str]]:
     ]
     out.append("tags: []" if not tags else "tags:")
     out += [f"  - {yaml_quote(t)}" for t in tags]
-    out.append(f"stack: {yaml_quote(clean(f.get('stack')) or '')}")
+    out.append("stack: []" if not stack else "stack:")
+    out += [f"  - {yaml_quote(s)}" for s in stack]
     out.append(f"desc: {yaml_quote(clean(f.get('desc')) or '')}")
     out.append("links:")
     out += [f"  - {{ label: {yaml_quote(la)}, href: {yaml_quote(h)} }}" for la, h in links]
@@ -90,8 +93,9 @@ def build_project(f: dict) -> tuple[Path, list[str]]:
     return md_path, out
 
 
-def build_publication(f: dict) -> tuple[Path, list[str]]:
-    title = clean(f.get("title")) or sys.exit("::error::paper title is required")
+def build_publication(f: dict, title: str) -> tuple[Path, list[str]]:
+    if not title:
+        sys.exit("::error::paper title (the issue title) is required")
     md_path = ROOT / "publications" / f"{slugify(title)[:60].rstrip('-')}.md"
     link_url = clean(f.get("link_url"))
     if not is_url(link_url):
@@ -116,10 +120,12 @@ def build_publication(f: dict) -> tuple[Path, list[str]]:
 def main() -> None:
     ctype = os.environ.get("CONTENT_TYPE")
     fields = json.loads(os.environ["ISSUE_JSON"])
+    # Name/title is the issue's own title (category prefix stripped) — not asked twice.
+    title = re.sub(r"^\s*\[[^\]]*\]\s*", "", os.environ.get("ISSUE_TITLE", "")).strip()
     if ctype == "project":
-        md_path, out = build_project(fields)
+        md_path, out = build_project(fields, title)
     elif ctype == "publication":
-        md_path, out = build_publication(fields)
+        md_path, out = build_publication(fields, title)
     else:
         sys.exit(f"::error::unknown CONTENT_TYPE {ctype!r}")
     md_path.parent.mkdir(parents=True, exist_ok=True)

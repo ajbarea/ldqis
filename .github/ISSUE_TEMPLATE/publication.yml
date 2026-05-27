@@ -10,13 +10,6 @@ body:
         Author links (to lab-member pages) are added by a maintainer on review; the typed author
         list below is what shows as the citation.
   - type: input
-    id: title
-    attributes:
-      label: Title
-      placeholder: "InteFL Framework: Optimizing Federated Learning with Metacognition"
-    validations:
-      required: true
-  - type: input
     id: authors
     attributes:
       label: Authors

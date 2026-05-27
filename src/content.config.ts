@@ -24,7 +24,8 @@ const projects = defineCollection({
     name: z.string(),
     tagline: z.string(),
     tags: z.array(z.string()),
-    stack: z.string(),
+    // research(2026-05): array, not a "A · B" string — the separator lives at the display layer.
+    stack: z.array(z.string()),
     // `desc` retains the inline-HTML escape hatch (e.g. <strong>...</strong>)
     // that the prior inline data leaned on. Markdown body could replace it
     // long-term but the data is short enough that one-line desc stays

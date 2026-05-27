@@ -1,0 +1,54 @@
+name: Profile intake
+
+# A submitted "profile" issue form becomes a reviewed PR (people/<slug>.md +
+# optional avatar). The issue body is untrusted input: it reaches the script
+# only through `env` (never interpolated into a shell), the script host-allowlists
+# the photo URL and sanitises the slug, and the sole repo write is an isolated PR
+# a maintainer reviews — nothing auto-merges.
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+
+jobs:
+  intake:
+    # The profile form auto-applies the `profile` label; ignore every other issue.
+    if: contains(github.event.issue.labels.*.name, 'profile')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - uses: stefanbuck/github-issue-parser@cb6e97157cbf851e3a393ff8d57c93a484cc323f # v3
+        id: parse
+        with:
+          template-path: .github/ISSUE_TEMPLATE/profile.yml
+
+      - name: Build profile from the issue
+        id: build
+        env:
+          ISSUE_JSON: ${{ steps.parse.outputs.jsonString }}
+        run: python3 scripts/profile_intake.py
+
+      - uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7
+        with:
+          branch: profile/intake-${{ github.event.issue.number }}
+          base: main
+          title: "${{ steps.build.outputs.action }} profile: ${{ steps.build.outputs.name }}"
+          commit-message: "feat(people): profile from #${{ github.event.issue.number }}"
+          body: |
+            Generated from #${{ github.event.issue.number }} via the profile form.
+
+            Please review the card (adjust `order` if needed), then merge — it deploys automatically.
+
+            Closes #${{ github.event.issue.number }}
+          labels: profile
+          add-paths: |
+            src/content/people/**

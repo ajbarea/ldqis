@@ -1,0 +1,94 @@
+name: Add or update your profile
+description: Add yourself to the LDQIS people page, or update your card — no git needed.
+title: "[profile] Your name"
+labels: ["profile"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill this in and submit. A maintainer gets a pull request to review — you don't touch any files.
+        Most fields are optional; add what you want and leave the rest blank.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: How your name should display (add a title like "Dr." if you like).
+      placeholder: First Last
+    validations:
+      required: true
+  - type: input
+    id: initials
+    attributes:
+      label: Initials
+      description: 1–3 letters, shown in your avatar circle if you have no photo.
+      placeholder: FL
+    validations:
+      required: true
+  - type: input
+    id: role
+    attributes:
+      label: Role / focus
+      description: One line shown under your name.
+      placeholder: Focus area, affiliation, or a notable paper
+    validations:
+      required: true
+  - type: dropdown
+    id: cohort
+    attributes:
+      label: Cohort
+      options:
+        - current
+        - past
+    validations:
+      required: true
+  - type: textarea
+    id: photo
+    attributes:
+      label: Profile photo (optional)
+      description: Drag an image file into this box to upload it. Or leave it blank and fill in your GitHub username below — your GitHub photo is used automatically.
+  - type: input
+    id: github
+    attributes:
+      label: GitHub username (optional)
+      description: Just the handle, e.g. ajbarea. Also sets your photo if you didn't upload one.
+      placeholder: yourhandle
+  - type: input
+    id: linkedin
+    attributes:
+      label: LinkedIn URL (optional)
+      placeholder: https://linkedin.com/in/you
+  - type: input
+    id: youtube
+    attributes:
+      label: YouTube URL (optional)
+      placeholder: https://youtube.com/@you
+  - type: input
+    id: website
+    attributes:
+      label: Personal website (optional)
+      placeholder: https://your-site.com
+  - type: input
+    id: email
+    attributes:
+      label: Email (optional)
+      placeholder: you@rit.edu
+  - type: input
+    id: scholar
+    attributes:
+      label: Google Scholar URL (optional)
+      placeholder: https://scholar.google.com/citations?user=...
+  - type: input
+    id: ieee
+    attributes:
+      label: IEEE Xplore author URL (optional)
+      placeholder: https://ieeexplore.ieee.org/author/...
+  - type: input
+    id: orcid
+    attributes:
+      label: ORCID iD (optional)
+      placeholder: 0000-0000-0000-0000
+  - type: input
+    id: years
+    attributes:
+      label: Years in the lab (optional)
+      placeholder: 2018–2022

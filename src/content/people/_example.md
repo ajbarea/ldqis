@@ -1,11 +1,16 @@
 ---
 # ───────────────────────────────────────────────────────────────────────────
-# Add yourself to the lab site
-#   1. Copy this file to "first-last.md"  (lowercase, hyphens). That filename
-#      becomes your page URL:  /people/first-last/
-#   2. Fill in the Required fields. Add any Optional lines you want; delete the
-#      rest. (Quotes are only needed when a value contains a colon or comma.)
-#   3. Open a pull request, or just send this file to AJ and he'll add it.
+# Add yourself to the lab site — two ways:
+#
+# EASIEST (no git): open a New Issue → "Add or update your profile", fill the
+#   form (you can drag in a photo), submit. A maintainer gets a PR to merge.
+#
+# OR edit a file directly:
+#   1. Copy this file to "first-last.md" (lowercase, hyphens) — that filename
+#      becomes your page URL: /people/first-last/
+#   2. Fill in the Required fields; add any Optional lines you want, delete the
+#      rest. (Quotes are only needed when a value has a colon or comma.)
+#   3. Open a pull request, or send this file to AJ and he'll add it.
 # Files starting with "_" (like this one) never show on the site.
 # ───────────────────────────────────────────────────────────────────────────
 

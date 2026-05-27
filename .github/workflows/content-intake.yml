@@ -1,0 +1,67 @@
+name: Content intake
+
+# A submitted "project" or "research paper" issue form becomes a reviewed PR
+# (src/content/projects|publications/<slug>.md). Same safety model as the profile
+# intake: the issue body reaches the script only via env (no shell interpolation),
+# the slug is sanitised, people-references are left for a maintainer, and the only
+# write is an isolated PR — nothing auto-merges.
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+
+jobs:
+  intake:
+    if: ${{ contains(github.event.issue.labels.*.name, 'project') || contains(github.event.issue.labels.*.name, 'publication') }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Determine content type from the label
+        id: t
+        env:
+          LABELS: ${{ join(github.event.issue.labels.*.name, ',') }}
+        run: |
+          if [[ ",$LABELS," == *",project,"* ]]; then
+            echo "type=project" >> "$GITHUB_OUTPUT"
+          elif [[ ",$LABELS," == *",publication,"* ]]; then
+            echo "type=publication" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error::no project/publication label"; exit 1
+          fi
+
+      - uses: stefanbuck/github-issue-parser@cb6e97157cbf851e3a393ff8d57c93a484cc323f # v3
+        id: parse
+        with:
+          template-path: .github/ISSUE_TEMPLATE/${{ steps.t.outputs.type }}.yml
+
+      - name: Build content from the issue
+        id: build
+        env:
+          ISSUE_JSON: ${{ steps.parse.outputs.jsonString }}
+          CONTENT_TYPE: ${{ steps.t.outputs.type }}
+        run: python3 scripts/content_intake.py
+
+      - uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7
+        with:
+          branch: content/intake-${{ github.event.issue.number }}
+          base: main
+          title: "Add ${{ steps.build.outputs.type }}: ${{ steps.build.outputs.slug }}"
+          commit-message: "feat(content): ${{ steps.build.outputs.type }} from #${{ github.event.issue.number }}"
+          body: |
+            Generated from #${{ github.event.issue.number }} via the ${{ steps.build.outputs.type }} form.
+
+            Please review, attach contributor / author people-links if relevant, then merge — it deploys automatically.
+
+            Closes #${{ github.event.issue.number }}
+          add-paths: |
+            src/content/projects/**
+            src/content/publications/**

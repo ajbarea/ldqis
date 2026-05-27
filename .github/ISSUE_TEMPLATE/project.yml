@@ -1,0 +1,65 @@
+name: Add a project
+description: Add one of the lab's projects or open-source frameworks to the website.
+title: "[project] Project name"
+labels: ["project"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill this in and submit — a maintainer gets a pull request to review, no files to touch.
+        Contributors (which lab members worked on it) are linked in by a maintainer on review.
+  - type: input
+    id: name
+    attributes:
+      label: Project name
+      placeholder: InteFL
+    validations:
+      required: true
+  - type: input
+    id: tagline
+    attributes:
+      label: Tagline
+      description: One short line shown under the name.
+      placeholder: Knowledge Management Framework for Federated Learning
+    validations:
+      required: true
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated topic tags.
+      placeholder: Federated Learning, Agentic AI
+    validations:
+      required: true
+  - type: input
+    id: stack
+    attributes:
+      label: Stack
+      description: Tech stack, separated however reads best.
+      placeholder: Python · Flower · PyTorch · LoRA
+    validations:
+      required: true
+  - type: textarea
+    id: desc
+    attributes:
+      label: Description
+      description: A sentence or two. You can wrap a key phrase in <strong>…</strong> to bold it.
+    validations:
+      required: true
+  - type: input
+    id: github
+    attributes:
+      label: GitHub / repository URL
+      placeholder: https://github.com/ajbarea/intefl
+    validations:
+      required: true
+  - type: input
+    id: site
+    attributes:
+      label: Project site URL (optional)
+      placeholder: https://ajbarea.github.io/intefl/
+  - type: input
+    id: docs
+    attributes:
+      label: Docs or paper URL (optional)
+      placeholder: https://doi.org/...

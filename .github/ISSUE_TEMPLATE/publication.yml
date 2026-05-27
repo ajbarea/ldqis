@@ -1,0 +1,63 @@
+name: Add a research paper
+description: Add a publication to the website.
+title: "[paper] Paper title"
+labels: ["publication"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill this in and submit — a maintainer gets a pull request to review, no files to touch.
+        Author links (to lab-member pages) are added by a maintainer on review; the typed author
+        list below is what shows as the citation.
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      placeholder: "InteFL Framework: Optimizing Federated Learning with Metacognition"
+    validations:
+      required: true
+  - type: input
+    id: authors
+    attributes:
+      label: Authors
+      description: The full author list as it should read, in order.
+      placeholder: D. Korobeinikov, R. Zatsarenko, A. Barea, I. Khokhlov, L. Reznik
+    validations:
+      required: true
+  - type: input
+    id: year
+    attributes:
+      label: Year
+      placeholder: "2026"
+    validations:
+      required: true
+  - type: input
+    id: venue
+    attributes:
+      label: Venue
+      description: Journal or conference name.
+      placeholder: IEEE Intelligent Systems
+    validations:
+      required: true
+  - type: dropdown
+    id: venue_type
+    attributes:
+      label: Venue type
+      options:
+        - journal
+        - conference
+    validations:
+      required: true
+  - type: input
+    id: link_url
+    attributes:
+      label: Link (DOI or paper URL)
+      placeholder: https://doi.org/10.1109/MIS.2026.0000000
+    validations:
+      required: true
+  - type: input
+    id: link_label
+    attributes:
+      label: Link label (optional)
+      description: Defaults to "DOI ↗".
+      placeholder: DOI ↗

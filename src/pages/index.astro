@@ -411,19 +411,15 @@ const pastCohort = peopleEntries
                     : undefined
                 }
               >
-                <Avatar
-                  avatar={p.avatar}
-                  github={p.github}
-                  initials={p.initials}
-                  name={p.name}
-                  class="mb-4"
-                />
-                <a
-                  href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
-                  class="mb-1 inline-block text-base font-medium hover:text-rit-orange-text"
-                >
-                  {p.name}
-                </a>
+                <div class="mb-4 flex items-center gap-3">
+                  <Avatar avatar={p.avatar} github={p.github} initials={p.initials} name={p.name} />
+                  <a
+                    href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
+                    class="inline-block text-base font-medium hover:text-rit-orange-text"
+                  >
+                    {p.name}
+                  </a>
+                </div>
                 <div class="text-[13px] text-text-dim">{p.role}</div>
                 {p.years && <div class="mt-1 text-xs text-text-dim">{p.years}</div>}
                 <ContactLinks
@@ -470,19 +466,15 @@ const pastCohort = peopleEntries
           {
             pastCohort.map((p) => (
               <div class="rounded-[14px] border border-line bg-bg-elev p-6 transition-colors hover:border-rit-orange">
-                <Avatar
-                  avatar={p.avatar}
-                  github={p.github}
-                  initials={p.initials}
-                  name={p.name}
-                  class="mb-4"
-                />
-                <a
-                  href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
-                  class="mb-1 inline-block text-base font-medium hover:text-rit-orange-text"
-                >
-                  {p.name}
-                </a>
+                <div class="mb-4 flex items-center gap-3">
+                  <Avatar avatar={p.avatar} github={p.github} initials={p.initials} name={p.name} />
+                  <a
+                    href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
+                    class="inline-block text-base font-medium hover:text-rit-orange-text"
+                  >
+                    {p.name}
+                  </a>
+                </div>
                 <div class="text-[13px] text-text-dim">{p.role}</div>
                 {p.years && <div class="mt-1 text-xs text-text-dim">{p.years}</div>}
                 <ContactLinks

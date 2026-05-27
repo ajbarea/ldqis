@@ -89,10 +89,18 @@ def parse_existing(md_path: Path) -> dict[str, str]:
 def download_photo(markdown: str, slug: str) -> str | None:
     """Pull the first image URL out of the photo field and save it. Returns the
     frontmatter-relative path, or None (then we fall back to GitHub avatar / initials)."""
-    m = re.search(r"\((<)?(https://[^)\s>]+)>?\)", markdown) or re.search(r"(https://\S+)", markdown)
+    # GitHub issue-form photo uploads arrive as `<img src="URL">` HTML (not
+    # markdown), so match that first; also handle markdown `](URL)` / `(<URL>)`
+    # and a bare URL. Each pattern captures the URL as group 1 and stops before a
+    # closing quote / angle bracket / paren so no trailing `"` sneaks into the URL.
+    m = (
+        re.search(r'src=["\'](https://[^"\'>\s]+)', markdown)
+        or re.search(r"\(<?(https://[^)\s>]+)>?\)", markdown)
+        or re.search(r"(https://[^\s\"'<>)]+)", markdown)
+    )
     if not m:
         return None
-    url = m.group(2) if m.lastindex and m.lastindex >= 2 else m.group(1)
+    url = m.group(1)
     if not ALLOWED_HOST_RE.match(url):
         print(f"::warning::ignoring photo URL from a non-GitHub host: {url}")
         return None

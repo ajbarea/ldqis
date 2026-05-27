@@ -1,28 +1,28 @@
-# LDQIS — Implementation scratchpad
+# LDQIS site — implementation notes
 
-The active TODO for whatever's in flight right now: current PR, open
-design question blocking me, immediate next pickup. Queued specs,
-cross-cutting invariants, and "next up" ordering live in
-[ROADMAP.md](./ROADMAP.md). Git history is the archive.
+Where things stand right now, known issues, and the immediate next steps. The
+longer-term plan lives in [ROADMAP.md](./ROADMAP.md); git history has the full record.
 
-If this file is more than ~50 lines, something queued or referential has
-crept in — extract it back to ROADMAP.
+## In progress
 
-## In flight
+_Nothing open right now._
 
-_Nothing currently open._
+## Known issues
 
-## Known unpatched-upstream notation
+- **Astro is pinned to 5.18.1 (not 6).** `@tailwindcss/vite` — the official Tailwind 4
+  setup — has an open incompatibility with Astro 6's build pipeline
+  ([withastro/astro#16542](https://github.com/withastro/astro/issues/16542)). The two CVEs
+  flagged on the Astro 5.x line don't affect this site: it's a fully static build that
+  exercises neither code path. Dependabot ignores the Astro 6 major until the upstream
+  issue closes (`.github/dependabot.yml`); bump then.
+- **`@lhci/cli` transitive dev dependencies** (tmp, uuid, inquirer) — dev-only and
+  informational. The fix is a major downgrade that would break the Lighthouse pipeline,
+  so it's accepted as-is.
 
-**Astro 5.18.1 pin (not Astro 6).** `@tailwindcss/vite` (official Tailwind 4 path) has an open upstream incompat with Astro 6's rolldown pipeline ([withastro/astro#16542](https://github.com/withastro/astro/issues/16542)). The two CVEs flagged on Astro 5.x — `define:vars` XSS and server-island encrypted-param replay — don't affect this site (zero `define:vars`, no `output: "server"`). Migrate when #16542 closes. Dependabot is configured to ignore the Astro 6 major (`.github/dependabot.yml`) so it stops re-proposing the blocked upgrade; drop that `ignore` entry when #16542 closes.
+## Next up
 
-**`@lhci/cli` transitive deps** (tmp, uuid, inquirer). Dev-only, informational. Fix path is a major-version downgrade that would break the lighthouse pipeline. Accepted.
-
-## Next pickups
-
-Per ROADMAP, in order:
-
-1. **Backfill the remaining team cross-links.** M2-followup landed the schema + 1 project (InteFL) + 3 publications. Phalanx-FL / VelocityFL / Kourai Khryseai now carry AJ as sole `contributor` (self-attribution, 2026-05-24); canonical lab-team attribution beyond AJ still needs Reznik input. Add the rest as the data becomes clear.
-2. **M5 — custom domain handoff to dataqualitylabs.com** (gated on Dr. Reznik / DNS).
-
-When picking one up, replace the "In flight" block above with a full session plan (Why / Decisions / Scope / Out of scope / Definition of done).
+1. **Backfill team cross-links.** Projects and publications link to their lab-member
+   authors and contributors through the `people` collection. The schema and the first
+   entries are in place; add the remaining lists as authorship is confirmed.
+2. **Custom domain.** Move the site to `dataqualitylabs.com` once DNS is ready (steps in
+   ROADMAP).

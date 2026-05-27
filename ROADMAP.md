@@ -1,191 +1,98 @@
 # LDQIS Lab Website — Roadmap
 
-Long-horizon plan for the lab's new public website. Session-by-session
-execution lives in [IMPL.md](./IMPL.md). When a milestone ships, it
-collapses to a one-liner under [Shipped](#shipped).
+The plan for the lab's public website: what's shipped, what's planned, and the
+principles behind it. Day-to-day status lives in [IMPL.md](./IMPL.md); git history has
+the full record.
 
-Last reviewed: 2026-05-21. Pre-release: no production deploy yet.
-The design was cherry-picked from a single-file Claude Cowork output
-("Cosmic Horror" / DQL demo) that survived the 2026-05-21
-audit-of-audit as paper-grade; that demo HTML lived briefly in
-`docs/legacy/` but has been deleted (the original Cowork session is
-the authoritative record if we ever need the source again). Will
-graduate to a sister in `~/.claude/techne.toml` once Makefile +
-`.claude/skill-context.md` + CI workflows are in place.
+The site is built with [Astro](https://astro.build) and deploys automatically to GitHub
+Pages on every push to `main`. It's intentionally static — no backend, no database, no
+login.
 
----
+## Why it's built this way
 
-## Why this file exists
+- **Static over dynamic.** No backend, no auth, no database. The previous site's login /
+  register / data-view surface was its main source of risk. A feature tempted to add
+  server state should first be designed as a build-time artifact (Markdown + frontmatter
+  committed to git), and only escalate if a static answer truly can't work.
+- **Content as code.** Adding a publication, team member, project, or news post means
+  committing one Markdown file — no CMS to run. If editorial volume ever outgrows git, a
+  git-based editor (Decap or Sveltia CMS) can layer onto the existing content collections
+  without introducing a database.
+- **Fast and light.** Astro ships zero JavaScript by default; interactivity is added only
+  where it's needed (theme toggle, search). The bar is a perfect Lighthouse score across
+  all four categories.
+- **Accessibility is a check, not a vibe.** WCAG 2.2 AA on every page, enforced by
+  Playwright + axe-core in CI on every pull request: skip link, semantic headings,
+  reduced-motion and color-scheme support.
+- **Stable identity.** The LDQIS name and RIT branding (PMS 1505c orange, F6BE00 yellow,
+  Instrument Serif + Inter type) stay constant across redesigns. Changing any of them is
+  a deliberate decision, not incidental drift.
+- **Research before architecture.** Framework, library, and pattern choices are checked
+  against current best practice first, and the tradeoff is recorded in a
+  `research(YYYY-MM):` note in the code — the same provenance habit as the lab's published
+  work.
 
-If you've cloned the repo and want to know "what are they building next,
-and why," this is the answer. The lab website is public-facing
-infrastructure for a research lab; the roadmap is the inverse of the
-legacy site's opaque admin-driven shape. Anything queued or referential
-lives here so IMPL.md stays terse.
+## Planned
 
----
+### Custom domain — `dataqualitylabs.com`
 
-## Guiding principles
+The lab owns the domain; moving the site onto it (gated on DNS access):
 
-- **Static over dynamic.** No backend, no auth, no database. The
-  legacy site's `/login` + `/register` + `/dataView` attack surface
-  was exactly the thing that made it insecure. Whenever a feature is
-  tempted to add backend state, design it as a build-time artifact
-  first (Markdown + frontmatter + git commit) and only escalate if
-  there's a real reason a static answer can't work.
-- **Content as code.** Adding a publication, a team member, a
-  project, or a news post means committing one Markdown file. No
-  CMS in v1. If a non-technical lab member needs editorial access
-  later, layer Decap CMS or Sveltia CMS on top of the existing
-  content collections (both are git-based and zero-backend) instead
-  of introducing a database.
-- **Zero JS by default.** Astro islands let us add interactivity
-  only where it's needed (theme toggle, search, future demos).
-  Lighthouse 100 / 100 / 100 / 100 is the bar.
-- **A11y is non-negotiable.** WCAG 2.2 AA across every route.
-  Playwright + axe-core in CI on every PR. Skip-link, semantic
-  heading hierarchy, `prefers-reduced-motion`, color-scheme support
-  are already in the demo design; preserve them through the port.
-- **Identity stability.** The lab's identity is the LDQIS acronym
-  and the RIT branding. Both stay constant across redesigns. The
-  Instrument Serif headlines + Inter body pair survived audit; keep
-  them.
-- **Search before architectural decisions.** Web-search 2026 best
-  practice before any architectural call (framework choice,
-  deployment pattern, CMS pattern, accessibility convention).
-  Tradeoffs land in a `# research(YYYY-MM):` comment in code or
-  inline in the roadmap entry, matching the lab's published
-  research provenance convention.
+1. Verify the domain through
+   [GitHub's domain-verification flow](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages)
+   (prevents subdomain takeover).
+2. Add a `CNAME` file with `dataqualitylabs.com`.
+3. Point DNS (`dataqualitylabs.com` and `www`) at GitHub Pages.
+4. Let the HTTPS certificate auto-provision, then enable "Enforce HTTPS".
+5. Confirm the old site is fully offline (old URLs return 404, not stale data).
 
----
+A single build flag already switches between the GitHub Pages path and the apex domain,
+so the flip is one change once DNS resolves.
 
-## M4 — CI / a11y / smoke testing — follow-ups
+### Backlog (unprioritized)
 
-> M4 shipped 2026-05-21. Active follow-up policy below.
+- **Astro 6 upgrade** — blocked on the upstream Tailwind-vite fix
+  ([withastro/astro#16542](https://github.com/withastro/astro/issues/16542)); see IMPL.md.
+- **Editorial UI** — Decap or Sveltia CMS for non-technical editors, only once there's a
+  real second editor. (The profile intake form already covers self-service profile edits.)
+- **Search** — Pagefind or Astro's built-in, once the publication list grows enough to
+  warrant it.
+- **Per-project demo embeds** — interactive project demos as embedded islands, if and when
+  the demos have hosted surfaces.
+- **Multi-author news bylines** — when a post has more than one author.
+- **Internationalization** — only if a lab member needs it.
 
-**Brand-vs-AA exception (active policy).** Official PMS 1505c orange (`#f76902`) on light bg measures 2.98:1 — fails WCAG AA 3:1 large-text by 0.02. Per the "Identity stays constant" invariant, brand-color elements (`style="color: var(--color-rit-orange)"`) are axe-excluded with a documented note. Brand-vs-AA call escalated to Dr. Reznik; body-text variant `--color-rit-orange-text` darkened to `#b04b00` (5.4:1), `--color-text-faint` to `#6c6863` (5.3:1) so non-brand surfaces clear AA.
+## Invariants
 
----
+These hold across redesigns:
 
-## M5 — Custom domain handoff
-
-> Status: planned, gated on Dr. Reznik
-
-The lab owns `dataqualitylabs.com`. Migration steps:
-
-1. Verify the domain through GitHub's domain verification flow
-   ([GitHub docs: about-custom-domains-and-github-pages](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages))
-   to prevent subdomain takeover.
-2. Add `CNAME` file to the repo with `dataqualitylabs.com`.
-3. Coordinate with Dr. Reznik to update DNS at the current registrar
-   to point `dataqualitylabs.com` (and `www.dataqualitylabs.com`)
-   at GitHub Pages.
-4. Wait for Let's Encrypt cert to auto-provision.
-5. Enable "Enforce HTTPS" in Pages settings.
-6. Verify the legacy Flask backend is taken offline cleanly so the
-   old `/login` and `/dataView` URLs return 404 (not legacy data).
-
-Definition of done:
-
-- [ ] DNS resolution check passes
-- [ ] HTTPS enforced
-- [ ] Old site is offline or returning 404
-- [ ] `dataqualitylabs.com` redirects www → apex (or vice versa,
-      consistent choice)
-
----
-
-## M6 — Sister graduation
-
-Shipped 2026-05-22 — `scripts/dev-runner.sh` + `/techne:audit` / `/techne:sisters` parity with the other sisters. Detail in git history.
-
----
-
-## Cross-cutting invariants
-
-- **Identity stays constant.** LDQIS acronym, RIT branding (PMS
-  1505c orange, F6BE00 yellow), Instrument Serif + Inter font pair
-  survive every redesign. If a future redesign wants to change any
-  of these, it's a separate explicit decision, not a drift.
-- **No backend / no auth.** If a feature is tempted to need a
-  backend, the design has to first explain why a build-time
-  artifact (Markdown + frontmatter, JSON, generated TS data) can't
-  satisfy the requirement. Re-introducing auth re-introduces the
-  legacy site's class of vulnerability.
-- **Web-search before architectural calls.** Per AJ's
-  `feedback_web_search_when_in_doubt` standing instruction, any
-  framework / library / pattern call lands with a `# research(2026-MM):`
-  comment naming the tradeoff and source. Especially valuable for
-  negative-space decisions ("we did NOT use X because…").
-- **Content as code.** Adding a publication / person / project /
-  news post is a Markdown commit. If editorial volume grows past
-  what's tractable via git, layer Decap or Sveltia CMS on top of
-  the same content collections rather than introducing a database.
-- **Accessibility is a check, not a vibe.** Playwright + axe-core
-  in CI; no "passes my screen reader" assertions land without the
-  automated check passing too.
-- **YAGNI-refactored.** Don't build capability-compensating
-  scaffolding for limitations the ecosystem is about to fix. Astro 6
-  - Tailwind 4 + Nuxt Content evolve faster than this site does;
-    before hand-rolling an image-optimization helper, a custom RSS
-    feed generator, a markdown loader, or a content-collections shim,
-    check whether the framework already ships the primitive (or is
-    about to). Conversely, don't avoid forward-looking product /
-    content shape decisions waiting on capabilities you can already
-    see coming. The pair is complementary: stop building workarounds
-    for closed gaps, _and_ stop deferring shape decisions for closing
-    gaps.
-- **Stale-assumption audit.** Whenever Astro, Tailwind, or one of
-  the content-collection primitives ships a major version, audit
-  which workarounds in `src/` existed to compensate for a now-closed
-  gap. The Astro 5 `define:vars` XSS workaround, the Tailwind 4
-  named-token rewrite (vs `[var(--color-foo)]`), the
-  `@tailwindcss/vite` rolldown pin — all are scaffolding that should
-  unwind when upstream catches up.
-
----
-
-## Future / unprioritized backlog
-
-- **Astro 6 migration (gated on upstream Tailwind-vite fix)** — pinned
-  to Astro 5.18.1 because Astro 6 + `@tailwindcss/vite` breaks the build
-  with a rolldown-vite incompatibility (open upstream:
-  [withastro/astro#16542](https://github.com/withastro/astro/issues/16542)).
-  Two CVEs apply to the 5.x line (XSS in `define:vars`, server-island
-  encrypted-param replay) but our static build doesn't exercise either
-  code path — we use zero `define:vars` and no server islands. When the
-  upstream issue closes, bump to Astro 6.x and remove the
-  unpatched-upstream notation from astro.config.mjs + IMPL.md. This
-  mirrors AJ's `phalanx-fl` PR #11 "unpatched-upstream ignore list"
-  pattern.
-- **Decap or Sveltia CMS** — git-based editorial UI for non-technical
-  lab members. Only file when there's a real second editor.
-- **Lab-internal wiki or knowledge base** — public-vs-internal split.
-  Probably a separate repo with auth (if needed); don't bolt onto the
-  public site.
-- **Demo embeds** — interactive Phalanx-FL strategy explorer or
-  Kourai-Khryseai live chat as iframes / islands on per-project pages.
-  Probably only worth doing if the demos themselves have hosted
-  surfaces to embed.
-- **Multi-author bylines on news posts** — when more than one lab
-  member contributes to a post.
-- **Search** — Pagefind or Astro's built-in. Only when content
-  volume warrants it (probably after M3 ships and the publication
-  list grows past ~15 entries).
-- **Internationalization** — only if a lab member specifically needs
-  it. Cross-reference AJ's portfolio Language Selector IMPL.md if
-  the time comes; same Nuxt-i18n pattern doesn't directly translate
-  to Astro but the content model lessons do.
-
----
+- **Stable identity** — LDQIS name, RIT branding, the Instrument Serif / Inter type pair.
+- **No backend, no auth** — re-introducing server state re-introduces the old site's class
+  of vulnerability; justify why a build-time artifact can't do the job first.
+- **Content as code** — new content is a Markdown commit.
+- **Accessibility verified in CI** — axe-core must pass; no manual-only a11y claims.
+- **Research-backed architecture** — architectural calls cite current best practice in a
+  `research(YYYY-MM):` note.
+- **Don't build around gaps that are about to close** — before hand-rolling a shim (image
+  optimization, RSS, a content loader), check whether the framework already ships it or is
+  about to; when a major version lands, revisit the workarounds it makes unnecessary.
 
 ## Shipped
 
-Full log in git history. Entries kept below carry a durable Astro/content pattern worth referencing.
+Highlights below; full history in git.
 
-- 2026-05-25 — **GitHub Actions SHA-pinned (supply-chain hardening)**. All `uses:` refs in `ci.yml` + `deploy.yml` pinned to full commit SHAs (`# vX.Y.Z` comment kept); Dependabot `github-actions` gains a 7-day cooldown, freshness via the existing version updates. Mutable tags enabled the tj-actions/changed-files attack (2025-03); SHA-pinning runs exactly the reviewed code. Fleet convention + rationale in techne `docs/conventions.md`. research(2026-05): GitHub "Secure use reference"; CNCF GH-Actions CI-deps recipe.
-
-- 2026-05-25 — **Academic discovery metadata — Highwire `citation_*` + ScholarlyArticle JSON-LD + sitemap**. Publication detail pages now emit Highwire Press `citation_*` meta tags (`citation_title`, per-author `citation_author`, `citation_publication_date`, `citation_journal_title`/`citation_conference_title`, `citation_doi`). research(2026-05): **Google Scholar parses Highwire tags, not JSON-LD** — the original "JSON-LD `ScholarlyArticle` per publication" backlog note would have been invisible to Scholar, the lab's primary discovery channel. JSON-LD still ships as the complementary schema.org layer for general + AI-mode crawlers (`Periodical` vs `CreativeWorkSeries` keyed off the new required `venue_type`; DOI as a `PropertyValue` identifier, derived from a `doi.org` link — no new field). `@astrojs/sitemap` (3.7.2, Astro 5 line) generates `sitemap-index.xml`; a build-time `src/pages/robots.txt.ts` endpoint references it and tracks the `CUSTOM_DOMAIN` base switch instead of hardcoding a URL that goes stale at the M5 DNS handoff. Pure builders in `src/lib/citation.ts` (16 Vitest cases, TDD); a Playwright spec guards the rendered head. Sources: scholar.google.com inclusion/indexing guidelines, developers.google.com/search article structured data.
-- 2026-05-22 — **M3 — News / blog surface with RSS**. `news` content collection (title / description / summary / pubDate / tags / author / draft) loads from `src/content/news/`. `/news/` index renders newest-first; `/news/[id]/` detail pages prerender per post; `/news/rss.xml` is a valid RSS 2.0 feed with the atom namespace + `<atom:link rel="self">` self-reference (W3C-clean). Draft posts and future-dated posts are excluded from both the index and the feed at build time. First welcome post (`2026-05-welcome.md`) shipped. Nav grew a "News" entry; a11y `ROUTES_TO_SCAN` extended to cover both news routes (11 e2e tests total). `rssSchema.extend()` failed at build time because `@astrojs/rss` ships its own Zod 4 runtime — the news schema is defined directly with the same field shape instead.
-- 2026-05-23 — **M2-followup — cross-linking detail pages**. Added `contributors: reference("people")[]` to projects + `author_ids: reference("people")[]` to publications. People detail pages compute their authored publications + contributed projects at build time by walking the source collections (one-direction storage avoids bidirectional sync bugs). InteFL + 3 publications backfilled with their author lists; `reference()` makes typo'd IDs a build failure. research(2026-05): `reference()` from `astro:content` validates each ID at build time; `getEntries()` returns the full referenced entries in declaration order.
-- 2026-05-22 — **M2 — Content collections + per-detail pages**. 4 projects + 3 publications + 24 people migrated to Astro 5 content collections (`glob({ pattern, base })` loader; `entry.id` derived from filename, no reserved `slug`). 3 dynamic-route templates prerender 31 detail pages. Homepage cards link into the detail layer. 9 e2e a11y tests (was 4).
+- **Profile cards: photos, links, and a submission form.** Team cards show a photo
+  (uploaded, auto-pulled from a GitHub handle, or initials), social and academic links
+  (website, GitHub, LinkedIn, YouTube, ORCID, Scholar, IEEE), and years in the lab. An
+  "Add or update your profile" issue form lets members submit a card — photo and all —
+  without touching git; it opens a reviewed pull request.
+- **Academic discovery metadata.** Publication pages emit Highwire `citation_*` tags (what
+  Google Scholar actually reads), complemented by schema.org JSON-LD and a sitemap.
+- **News + RSS.** A `news` collection with an index, per-post pages, and a valid RSS 2.0
+  feed; drafts and future-dated posts are excluded at build time.
+- **Content collections + detail pages.** Projects, publications, and people are Astro
+  content collections; each gets a prerendered detail page, and projects/publications
+  cross-link to the people who authored or built them.
+- **Supply-chain hardening + CI.** GitHub Actions are pinned to commit SHAs with a
+  Dependabot cooldown; accessibility, Lighthouse, lint, type-check, and unit tests run on
+  every pull request.

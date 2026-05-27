@@ -25,7 +25,8 @@ What is here now is an [Astro 5](https://astro.build/) project that compiles to 
 This is the lab's site, and it is meant to be easy to contribute to — you don't need to be a web developer, and for your profile you don't need to touch a single file.
 
 - **Your profile.** Open the [**Add or update your profile** form](https://github.com/ajbarea/ldqis/issues/new/choose), fill it in (you can drag in a photo), and submit. You get a pull request to review — no Markdown, no git. Tip: set your GitHub username and your GitHub photo is used automatically.
-- **Projects, papers, and news.** Each is a single Markdown file under `src/content/`. Add or edit the file and open a pull request, or send it my way and I'll wire it in.
+- **Projects and papers.** Same idea — the [**Add a project**](https://github.com/ajbarea/ldqis/issues/new/choose) and [**Add a research paper**](https://github.com/ajbarea/ldqis/issues/new/choose) forms turn a submission into a pull request for review.
+- **News posts.** Still a quick Markdown file under `src/content/news/` — add one and open a pull request, or send it my way and I'll wire it in.
 
 ## What's next
 

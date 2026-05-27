@@ -50,8 +50,7 @@
   --color-rit-orange-text: #f76902; /* full orange ok on dark */
 }
 
-/* ambient gradients borrowed from the dql.html demo — kept as a subtle
-   warm-radial wash so the editorial palette doesn't feel flat. */
+/* ambient warm-radial wash so the editorial palette doesn't feel flat */
 body::before {
   content: "";
   position: fixed;

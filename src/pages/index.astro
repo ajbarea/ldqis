@@ -62,7 +62,13 @@ const currentTeam = peopleEntries
   .map((entry) => ({ ...entry.data, id: entry.id }));
 const pastCohort = peopleEntries
   .filter((entry) => entry.data.cohort === "past")
-  .sort((a, b) => a.data.order - b.data.order)
+  // Alumni sort alphabetically by name (leading honorific ignored), so a new
+  // graduate slots in by name instead of inheriting an arbitrary `order`.
+  .sort((a, b) =>
+    a.data.name
+      .replace(/^(Dr|Prof)\.?\s+/i, "")
+      .localeCompare(b.data.name.replace(/^(Dr|Prof)\.?\s+/i, "")),
+  )
   .map((entry) => ({ ...entry.data, id: entry.id }));
 ---
 
@@ -456,8 +462,8 @@ const pastCohort = peopleEntries
             Past Research Cohort
           </h3>
           <span class="text-[13px] text-text-dim"
-            >2015–2022 · Mobile security · Android attacks · Wearable sensors · Data quality ·
-            Computational intelligence</span
+            >Mobile security · Android attacks · Wearable sensors · Data quality · Computational
+            intelligence</span
           >
         </div>
 

@@ -166,6 +166,55 @@ const iconClass = isPill ? "h-4 w-4 shrink-0" : "h-5 w-5 shrink-0";
           {isPill && link.external && <span aria-hidden="true">↗</span>}
         </a>
       ))}
+      {isPill && email && (
+        <button
+          type="button"
+          class="copy-email inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] text-sm hover:border-rit-orange"
+          style="color: var(--color-rit-orange-text);"
+          data-copy={email}
+        >
+          <svg
+            class="h-4 w-4 shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          <span class="copy-label">Copy</span>
+          <span class="sr-only"> {name}'s email address</span>
+        </button>
+      )}
     </div>
   )
 }
+
+{
+  /* Progressive enhancement: copy the email to the clipboard. The address is
+    still visible and the mailto link still works with JS off — this is a bonus. */
+}
+<script>
+  document.querySelectorAll("button.copy-email[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const text = btn.getAttribute("data-copy");
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        return;
+      }
+      const label = btn.querySelector(".copy-label");
+      if (!label) return;
+      const prev = label.textContent;
+      label.textContent = "Copied";
+      setTimeout(() => {
+        label.textContent = prev;
+      }, 1500);
+    });
+  });
+</script>

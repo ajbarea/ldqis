@@ -61,6 +61,13 @@ so the flip is one change once DNS resolves.
   the demos have hosted surfaces.
 - **Multi-author news bylines** — when a post has more than one author.
 - **Internationalization** — only if a lab member needs it.
+- **Slim the content-PR gate.** A profile or content PR currently waits on the full app
+  suite (lint/format, type-check, unit, E2E + a11y, Lighthouse, pin-check) to merge what is
+  often a one-line Markdown edit — yet only the build's schema validation actually gates
+  content correctness. Planned: gate content PRs on a fast build/validate + pin-check (the
+  heavy suite still runs, just non-blocking) and add lab members as repo collaborators
+  (removes the first-time-contributor workflow-approval step). It's a branch-protection
+  settings change, deferred behind feature work.
 
 ## Invariants
 

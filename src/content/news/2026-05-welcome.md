@@ -22,11 +22,11 @@ What is here now is an [Astro 5](https://astro.build/) project that compiles to 
 
 ## Adding your work
 
-This is the lab's site, and it is meant to be easy to contribute to — you don't need to be a web developer, and for your profile you don't need to touch a single file.
+This is the lab's site, and it's meant to be easy to keep current. You don't need to be a web developer.
 
-- **Your profile.** Open the [**Add or update your profile** form](https://github.com/ajbarea/ldqis/issues/new/choose), fill it in (you can drag in a photo), and submit. You get a pull request to review — no Markdown, no git. Tip: set your GitHub username and your GitHub photo is used automatically.
-- **Projects and publications.** Same idea — the [**Add a project**](https://github.com/ajbarea/ldqis/issues/new/choose) and [**Add a publication**](https://github.com/ajbarea/ldqis/issues/new/choose) forms turn a submission into a pull request for review.
-- **News posts.** Still a quick Markdown file under `src/content/news/` — add one and open a pull request, or send it my way and I'll wire it in.
+- **Edit anything.** With write access to the repo, sign in at [the editor](https://ajbarea.github.io/ldqis/admin/) with GitHub and update your profile, a project, a publication, or a news post in a simple form. It saves and redeploys for you. (Ask me for access.)
+- **No account? Use a form.** The [**Add or update your profile**](https://github.com/ajbarea/ldqis/issues/new/choose), [**Add a project**](https://github.com/ajbarea/ldqis/issues/new/choose), and [**Add a publication**](https://github.com/ajbarea/ldqis/issues/new/choose) forms turn a submission into a pull request for review. No Markdown, no git, and your GitHub photo is used automatically if you add your username.
+- **Prefer git?** Open a pull request directly, or send a news post my way and I'll wire it in.
 
 ## What's next
 

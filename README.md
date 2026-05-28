@@ -51,13 +51,17 @@ The site targets WCAG 2.2 AA, enforced on every PR by axe-core + Playwright, wit
 
 ## Contributing
 
-If you are in the lab, three issue forms put your work on the site with no file editing. Fill one in and you get a pull request to review:
+If you're in the lab, there are two no-code ways onto the site, plus git if you prefer.
 
-- [**Add or update your profile**](https://github.com/ajbarea/ldqis/issues/new?template=profile.yml): your photo and links. Submit again anytime to update; blank fields keep their current value, and a checkbox removes one.
+**Edit anything (the CMS).** Ask a maintainer for write access to this repo, then sign in at [`/admin`](https://ajbarea.github.io/ldqis/admin/) with GitHub. You get a form editor for every person, project, publication, and news post: add, change, reorder, or delete. It commits and redeploys for you. Best for updating or fixing something that's already on the site.
+
+**No account needed (issue forms).** Fill one in and a maintainer gets a pull request to review, no files to touch.
+
+- [**Add or update your profile**](https://github.com/ajbarea/ldqis/issues/new?template=profile.yml): your photo and links.
 - [**Add a project**](https://github.com/ajbarea/ldqis/issues/new?template=project.yml): an open-source project, its links, and stack.
 - [**Add a publication**](https://github.com/ajbarea/ldqis/issues/new?template=publication.yml): a journal paper, conference paper, or book (with DOI or ISBN).
 
-A maintainer reviews the pull request, adds people cross-links, and merges; the site redeploys automatically. Prefer git, or adding a news post? Open a pull request directly (news posts are a Markdown file under `src/content/news/`).
+Prefer git? Open a pull request directly; news posts are a Markdown file under `src/content/news/`.
 
 ## Status
 

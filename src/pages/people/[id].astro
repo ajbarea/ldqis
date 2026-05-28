@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ContactLinks from "../../components/ContactLinks.astro";
 import Avatar from "../../components/Avatar.astro";
+import Nav from "../../components/Nav.astro";
 
 // Detail pages for people give each researcher (current + past cohort)
 // a stable shareable URL. The lab's pre-M2 site had no per-person page;
@@ -61,31 +62,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
   title={`${name} · LDQIS`}
   description={`${name} — ${role}. ${cohortLabel} member at the Laboratory of Data Quality and Intelligent Security, RIT.`}
 >
-  <nav
-    class="sticky top-0 z-50 border-b border-line backdrop-blur-md"
-    style="background: color-mix(in oklab, var(--color-bg) 78%, transparent);"
-    aria-label="Site"
-  >
-    <div class="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-[18px]">
-      <a
-        href={import.meta.env.BASE_URL}
-        class="flex items-center gap-[10px]"
-        style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;"
-      >
-        <span
-          class="h-7 w-7 rounded-lg"
-          style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow));"
-        ></span>
-        LDQIS
-      </a>
-      <a
-        href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/#people`}
-        class="text-sm text-text-dim hover:text-rit-orange-text"
-      >
-        ← All people
-      </a>
-    </div>
-  </nav>
+  <Nav back={{ href: `${baseUrl}/#people`, label: "← All people" }} />
 
   <main id="main" class="relative z-[1] pt-16 pb-32">
     <article class="mx-auto max-w-[640px] px-6 text-center">

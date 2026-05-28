@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* research(2026-05): Tailwind 4 expects theme tokens in a `@theme` block
    in the global stylesheet (no more tailwind.config.js for design tokens).
@@ -48,6 +49,28 @@
   --color-text-dim: #93a0ad;
   --color-text-faint: #5b6773;
   --color-rit-orange-text: #f76902; /* full orange ok on dark */
+}
+
+/* Map the typography plugin's prose colors to the site's theme tokens so
+   rendered Markdown (news / project / publication bodies) follows light/dark
+   automatically — the tokens flip via [data-theme="dark"], so no prose-invert. */
+.prose {
+  --tw-prose-body: var(--color-text-dim);
+  --tw-prose-headings: var(--color-text);
+  --tw-prose-lead: var(--color-text-dim);
+  --tw-prose-links: var(--color-rit-orange-text);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-counters: var(--color-text-faint);
+  --tw-prose-bullets: var(--color-text-faint);
+  --tw-prose-hr: var(--color-line);
+  --tw-prose-quotes: var(--color-text);
+  --tw-prose-quote-borders: var(--color-line);
+  --tw-prose-captions: var(--color-text-faint);
+  --tw-prose-code: var(--color-text);
+  --tw-prose-pre-code: var(--color-text-dim);
+  --tw-prose-pre-bg: var(--color-bg-elev);
+  --tw-prose-th-borders: var(--color-line);
+  --tw-prose-td-borders: var(--color-line);
 }
 
 /* ambient warm-radial wash so the editorial palette doesn't feel flat */

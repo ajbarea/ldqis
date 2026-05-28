@@ -13,6 +13,8 @@ backend:
   name: github
   repo: ajbarea/ldqis
   branch: main
+  # OAuth proxy (Cloudflare Worker) for password-free "Sign in with GitHub".
+  base_url: https://ldqis-cms-auth.ajbareaa.workers.dev
 
 # Local FS editing during `astro dev` — no auth or proxy needed.
 local_backend: true

@@ -6,3 +6,8 @@ playwright-report/
 test-results/
 .lighthouseci/
 package-lock.json
+
+# Editorial content is written by the issue-form intake + Sveltia CMS, which
+# emit their own frontmatter style. Let the schema (astro check / build) gate it
+# instead of prettier, so CMS commits don't redden `prettier --check` on main.
+src/content/

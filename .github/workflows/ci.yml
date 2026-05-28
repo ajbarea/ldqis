@@ -21,9 +21,52 @@ permissions:
   contents: read
 
 jobs:
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    outputs:
+      app: ${{ steps.filter.outputs.app }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      # research(2026-05): GitHub required checks are repo-wide, so a content-only
+      # PR can't drop the app suite via a workflow `paths:` filter — a workflow
+      # skipped that way leaves its required check Pending and blocks merge. The
+      # endorsed pattern is a job-level `if:` (a job skipped via `if:` reports
+      # success). predicate-quantifier=every + a single negation makes `app` mean
+      # "a file outside src/content/** changed" — fail-safe: any path not carved
+      # out as content defaults to app and runs the full suite.
+      - uses: dorny/paths-filter@d1c1ffe0248fe513906c8e24db8ea791d46f8590 # v3.0.3
+        id: filter
+        with:
+          predicate-quantifier: every
+          filters: |
+            app:
+              - '!src/content/**'
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    # Always runs (content + app PRs): `astro build` validates content-collection
+    # frontmatter against the Zod schemas, so it's the gate that actually protects
+    # a content-only PR. The app suite below skips on content-only PRs.
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
   lint:
     name: Lint + format
     runs-on: ubuntu-latest
+    needs: changes
+    if: ${{ needs.changes.outputs.app == 'true' }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -41,6 +84,8 @@ jobs:
   type-check:
     name: Type check
     runs-on: ubuntu-latest
+    needs: changes
+    if: ${{ needs.changes.outputs.app == 'true' }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -55,6 +100,8 @@ jobs:
   unit:
     name: Unit (Vitest)
     runs-on: ubuntu-latest
+    needs: changes
+    if: ${{ needs.changes.outputs.app == 'true' }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -95,6 +142,8 @@ jobs:
     name: E2E + a11y (Playwright + axe-core)
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    needs: changes
+    if: ${{ needs.changes.outputs.app == 'true' }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -122,6 +171,8 @@ jobs:
     name: Lighthouse CI
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    needs: changes
+    if: ${{ needs.changes.outputs.app == 'true' }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:

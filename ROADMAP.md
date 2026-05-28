@@ -61,13 +61,6 @@ so the flip is one change once DNS resolves.
   the demos have hosted surfaces.
 - **Multi-author news bylines** — when a post has more than one author.
 - **Internationalization** — only if a lab member needs it.
-- **Slim the content-PR gate.** A profile or content PR currently waits on the full app
-  suite (lint/format, type-check, unit, E2E + a11y, Lighthouse, pin-check) to merge what is
-  often a one-line Markdown edit — yet only the build's schema validation actually gates
-  content correctness. Planned: gate content PRs on a fast build/validate + pin-check (the
-  heavy suite still runs, just non-blocking) and add lab members as repo collaborators
-  (removes the first-time-contributor workflow-approval step). It's a branch-protection
-  settings change, deferred behind feature work.
 
 ## Invariants
 
@@ -88,6 +81,16 @@ These hold across redesigns:
 
 Highlights below; full history in git.
 
+- **Slim content-PR gate (faster merges for lab contributors).** A profile / project /
+  publication PR (a Markdown edit under `src/content/**`) now gates to merge on a fast
+  `Build` (`astro build` schema validation) + `pin-check` only. The app suite (lint,
+  type-check, unit, E2E + a11y, Lighthouse) is conditioned on a `dorny/paths-filter`
+  `changes` job and **skips — reporting success, not blocking** — when nothing outside
+  `src/content/**` changed; app PRs still run the full suite. research(2026-05): GitHub
+  required checks are repo-wide, so job-level `if:` (a job skipped via `if:` reports
+  success) is the endorsed way to drop heavy checks on content PRs without leaving a
+  required check stuck Pending. Still open: add lab members as repo collaborators to drop
+  the first-time-contributor workflow-approval click (pending the handle list).
 - **Project/publication intake + email copy chip.** Alongside the profile form, issue forms
   for projects and publications open auto-generated, reviewed PRs; they take comma-separated
   tags/stack (rendered with `·` separators) and derive the entry's name/title from the

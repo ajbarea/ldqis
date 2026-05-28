@@ -61,3 +61,8 @@ body:
       label: Link label (optional)
       description: Defaults to "DOI ↗".
       placeholder: DOI ↗
+  - type: textarea
+    id: abstract
+    attributes:
+      label: Abstract or summary (optional)
+      description: "A short paragraph for the publication page: a paper's abstract, or a book's summary."

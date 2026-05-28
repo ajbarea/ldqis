@@ -1,0 +1,192 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+#
+# Sveltia CMS — a browser editor for the existing content collections. It lists
+# every person / project / publication / news post and opens each one in a
+# pre-filled form, committing back to GitHub. This is the "edit or delete what's
+# already there" surface; the GitHub issue forms remain the no-account ADD path.
+#
+# Try it locally (Chrome/Edge): `npm run dev`, open /ldqis/admin/, choose
+# "Work with Local Repository". For the live site, sign in with a GitHub token
+# (or wire the sveltia-cms-auth Worker later for password-free team access).
+
+backend:
+  name: github
+  repo: ajbarea/ldqis
+  branch: main
+
+# Local FS editing during `astro dev` — no auth or proxy needed.
+local_backend: true
+
+site_url: https://ajbarea.github.io/ldqis
+
+# Fallback media location (no collection uses it yet; people override below).
+media_folder: public/media
+public_folder: /media
+
+collections:
+  - name: people
+    label: People
+    label_singular: Person
+    folder: src/content/people
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    identifier_field: name
+    summary: "{{name}} · {{role}}"
+    # Avatars live beside the cards and are referenced as ./avatars/<file>.
+    media_folder: avatars
+    public_folder: ./avatars
+    fields:
+      - {
+          label: Initials,
+          name: initials,
+          widget: string,
+          hint: "1-3 letters, shown when there is no photo",
+        }
+      - { label: Name, name: name, widget: string }
+      - { label: Role, name: role, widget: string, hint: "one line under the name" }
+      - { label: Cohort, name: cohort, widget: select, options: [current, past], default: current }
+      - {
+          label: Order,
+          name: order,
+          widget: number,
+          value_type: int,
+          default: 100,
+          hint: "lower shows first",
+        }
+      - { label: Photo, name: avatar, widget: image, required: false }
+      - { label: Email, name: email, widget: string, required: false }
+      - { label: Website, name: website, widget: string, required: false }
+      - {
+          label: GitHub handle,
+          name: github,
+          widget: string,
+          required: false,
+          hint: "just the handle, not a URL",
+        }
+      - { label: LinkedIn URL, name: linkedin, widget: string, required: false }
+      - { label: YouTube URL, name: youtube, widget: string, required: false }
+      - { label: Google Scholar URL, name: scholar, widget: string, required: false }
+      - { label: IEEE Xplore URL, name: ieee, widget: string, required: false }
+      - { label: ORCID iD, name: orcid, widget: string, required: false }
+      - { label: Years in the lab, name: years, widget: string, required: false }
+      - { label: Lab lead, name: lead, widget: boolean, required: false, default: false }
+
+  - name: publications
+    label: Publications
+    label_singular: Publication
+    folder: src/content/publications
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    identifier_field: title
+    summary: "{{year}} · {{title}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - {
+          label: Authors (citation form),
+          name: authors,
+          widget: string,
+          hint: "e.g. D. Korobeinikov, R. Zatsarenko, L. Reznik",
+        }
+      - { label: Year, name: year, widget: string }
+      - { label: Venue or publisher, name: venue, widget: string }
+      - {
+          label: Type,
+          name: venue_type,
+          widget: select,
+          options: [journal, conference, book],
+          default: conference,
+        }
+      - { label: ISBN (books only), name: isbn, widget: string, required: false }
+      - label: Link
+        name: link
+        widget: object
+        fields:
+          - { label: Label, name: label, widget: string, default: "DOI ↗" }
+          - { label: URL, name: href, widget: string }
+      - label: Author profile links
+        name: author_ids
+        widget: relation
+        required: false
+        multiple: true
+        collection: people
+        value_field: "{{slug}}"
+        search_fields: [name]
+        display_fields: [name]
+      - { label: Order, name: order, widget: number, value_type: int, default: 100 }
+      - { label: Abstract / about this book, name: body, widget: markdown, required: false }
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: src/content/projects
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    identifier_field: name
+    summary: "{{name}} · {{tagline}}"
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: Tagline, name: tagline, widget: string }
+      - { label: Tags, name: tags, widget: list, field: { label: Tag, name: tag, widget: string } }
+      - {
+          label: Stack,
+          name: stack,
+          widget: list,
+          field: { label: Item, name: item, widget: string },
+        }
+      - { label: Description, name: desc, widget: text, hint: "inline HTML allowed" }
+      - label: Links
+        name: links
+        widget: list
+        fields:
+          - { label: Label, name: label, widget: string }
+          - { label: URL, name: href, widget: string }
+      - label: Contributors
+        name: contributors
+        widget: relation
+        required: false
+        multiple: true
+        collection: people
+        value_field: "{{slug}}"
+        search_fields: [name]
+        display_fields: [name]
+      - { label: Order, name: order, widget: number, value_type: int, default: 100 }
+
+  - name: news
+    label: News
+    label_singular: Post
+    folder: src/content/news
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    identifier_field: title
+    summary: "{{pubDate}} · {{title}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - {
+          label: Summary,
+          name: summary,
+          widget: string,
+          hint: "max 280 chars; shown in lists + RSS",
+        }
+      - {
+          label: Publish date,
+          name: pubDate,
+          widget: datetime,
+          format: "YYYY-MM-DD",
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+        }
+      - { label: Author, name: author, widget: string, default: LDQIS }
+      - { label: Description, name: description, widget: string, required: false }
+      - {
+          label: Tags,
+          name: tags,
+          widget: list,
+          required: false,
+          field: { label: Tag, name: tag, widget: string },
+        }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }

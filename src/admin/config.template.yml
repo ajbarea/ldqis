@@ -5,9 +5,14 @@
 # pre-filled form, committing back to GitHub. This is the "edit or delete what's
 # already there" surface; the GitHub issue forms remain the no-account ADD path.
 #
-# Try it locally (Chrome/Edge): `npm run dev`, open /ldqis/admin/, choose
-# "Work with Local Repository". For the live site, sign in with a GitHub token
-# (or wire the sveltia-cms-auth Worker later for password-free team access).
+# NOT the served file. This is a template rendered by src/pages/admin/config.yml.ts,
+# which substitutes __SITE_URL__ and __BASE_PREFIX__ from astro's `site` + base so
+# the live config tracks the CUSTOM_DOMAIN switch (project page /ldqis/ → apex /)
+# with no manual edit. See that endpoint for the why.
+#
+# Try it locally (Chrome/Edge): `npm run dev`, open the /admin/ page, choose
+# "Work with Local Repository". For the live site, sign in with GitHub
+# (the sveltia-cms-auth Worker handles OAuth).
 
 backend:
   name: github
@@ -21,10 +26,12 @@ backend:
 # Local FS editing during `astro dev` — no auth or proxy needed.
 local_backend: true
 
-# Trailing slash required: the preview link resolves preview_path via
-# new URL(path, site_url); without it, /ldqis is treated as a file and the
-# base path is dropped from "View on Live Site" links.
-site_url: https://ajbarea.github.io/ldqis/
+# Only the origin of site_url is consumed for "View on Live Site" links: Sveltia
+# takes new URL(site_url).origin and discards the path, so the base path can't
+# ride here — it rides on each collection's preview_path via __BASE_PREFIX__. The
+# full value below still feeds the "open production site" top-bar link. Both are
+# rendered from astro's site + base by src/pages/admin/config.yml.ts.
+site_url: __SITE_URL__
 
 # Fallback media location (no collection uses it yet; people override below).
 media_folder: public/media
@@ -35,7 +42,7 @@ collections:
     label: People
     label_singular: Person
     icon: group
-    preview_path: "people/{{slug}}"
+    preview_path: "__BASE_PREFIX__people/{{slug}}/"
     folder: src/content/people
     extension: md
     format: yaml-frontmatter
@@ -85,7 +92,7 @@ collections:
     label: Publications
     label_singular: Publication
     icon: menu_book
-    preview_path: "publications/{{slug}}"
+    preview_path: "__BASE_PREFIX__publications/{{slug}}/"
     folder: src/content/publications
     extension: md
     format: yaml-frontmatter
@@ -132,7 +139,7 @@ collections:
     label: Projects
     label_singular: Project
     icon: deployed_code
-    preview_path: "projects/{{slug}}"
+    preview_path: "__BASE_PREFIX__projects/{{slug}}/"
     folder: src/content/projects
     extension: md
     format: yaml-frontmatter
@@ -171,7 +178,7 @@ collections:
     label: News
     label_singular: Post
     icon: newspaper
-    preview_path: "news/{{slug}}"
+    preview_path: "__BASE_PREFIX__news/{{slug}}/"
     folder: src/content/news
     extension: md
     format: yaml-frontmatter

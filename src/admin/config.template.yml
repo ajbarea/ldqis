@@ -26,6 +26,15 @@ backend:
 # Local FS editing during `astro dev` — no auth or proxy needed.
 local_backend: true
 
+# Branding — match the LDQIS site instead of Sveltia's defaults. app_title
+# replaces the "Sveltia CMS" tab/login title; logo.src sets BOTH the entrance
+# logo and the browser-tab favicon (sveltia-cms branding.js). A base64 data URI
+# keeps the mark self-contained and base-path-independent (no /ldqis vs apex
+# concern). Same orange rounded-square "L" as src/layouts/BaseLayout.astro.
+app_title: "LDQIS — RIT"
+logo:
+  src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiNGNzY5MDIiLz48cGF0aCBkPSJNMjIgMTh2MjhoMjIiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+PC9zdmc+"
+
 # Only the origin of site_url is consumed for "View on Live Site" links: Sveltia
 # takes new URL(site_url).origin and discards the path, so the base path can't
 # ride here — it rides on each collection's preview_path via __BASE_PREFIX__. The

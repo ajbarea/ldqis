@@ -21,7 +21,14 @@ export default getViteConfig(
       coverage: {
         provider: "v8",
         reporter: ["text", "html", "lcov"],
-        include: ["src/**/*.{ts,astro}"],
+        // research(2026-05): scope coverage to the unit-testable logic in
+        // src/lib. The .astro components/layouts/pages and content.config.ts
+        // are validated by `astro build` + the Playwright e2e suite, never by
+        // Vitest, so a broad `src/**` sweep only reported them at 0% and sank
+        // the metric (citation.ts is 100%, the blended "All files" was 18%).
+        // Vitest's guidance is to `include` only the files you measure rather
+        // than exclude from a sweep. https://vitest.dev/guide/coverage.html
+        include: ["src/lib/**/*.ts"],
         exclude: ["src/**/*.test.ts", "src/**/__tests__/**"],
       },
     },

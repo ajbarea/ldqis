@@ -11,14 +11,15 @@ The lab's website has a new home, and it is built so the whole lab can keep it c
 
 The old site ran on Flask and Bootstrap with login, registration, and a Postgres backend behind it. That was more moving parts than a lab site needs, so we replaced it with something simpler and sturdier.
 
-What is here now is an [Astro 5](https://astro.build/) project that compiles to static HTML and is hosted on GitHub Pages. The source tree _is_ the site: adding a project, publication, team member, or news post means committing one Markdown file. No CMS to log into, no database to maintain.
+What is here now is an [Astro 5](https://astro.build/) project that compiles to static HTML and is hosted on GitHub Pages. The source tree _is_ the site: every project, publication, team member, and news post is a Markdown file. No database to maintain, and you can edit it from a browser editor, an issue form, or a pull request.
 
 ## What's already live
 
-- **Research areas, projects, publications, and people**, rendered from the content files. Click through any of the four homepage sections for the detail layer. Every project, paper, and researcher (current and past) has a stable per-page URL you can cite from a CV or LinkedIn.
+- **Research areas, projects, publications, and people**, rendered from the content files. Click through any of the four homepage sections for the detail layer. Every project, publication, and researcher (current and past) has a stable per-page URL you can cite from a CV or LinkedIn.
 - **WCAG 2.2 AA accessibility** across the site, gated on every PR by axe-core + Playwright.
 - **Theme toggle** with `localStorage` persistence. Skip link, semantic heading hierarchy, and `prefers-reduced-motion` work because they are tested.
 - **RSS feed** for the news section, so you can subscribe in any reader and get new posts automatically as the lab publishes them.
+- **A browser editor** at `/admin`: lab members with repo access can add, edit, or delete any entry through a form, no Markdown or Git needed. Newcomers and one-off contributors can still use the issue forms.
 
 ## Adding your work
 

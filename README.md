@@ -7,7 +7,7 @@ Source for the website of RIT's **Laboratory of Data Quality and Intelligent Sec
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?style=flat-square&logo=github)](https://ajbarea.github.io/ldqis/)
 
-This is the lab's website: our people, research, projects, publications, and news. It is content as code, which is mostly a way of saying it stays easy to keep current. Adding your project, paper, profile, or a news post is one Markdown file and a pull request. No CMS, no database, no logins to manage.
+This is the lab's website: our people, research, projects, publications, and news. It is content as code: every project, publication, profile, and news post is a Markdown file in git. Add or edit yours through the browser editor at `/admin`, an issue form, or a pull request. No database to maintain.
 
 ## Quick start
 
@@ -29,7 +29,7 @@ Each kind of content is a folder under `src/content/`, and adding an entry is on
 - **`publications/`**: papers and books, with year, venue or publisher, and authors linked to their people entries.
 - **`news/`**: dated posts, surfaced at `/news/` with an RSS feed at `/news/rss.xml`.
 
-Every person, project, and paper renders to a stable per-page URL you can cite from a CV or profile. Cross-links (a paper's authors, a project's contributors) are computed at build time, so there is no bidirectional state to keep in sync.
+Every person, project, and publication renders to a stable per-page URL you can cite from a CV or profile. Cross-links (a publication's authors, a project's contributors) are computed at build time, so there is no bidirectional state to keep in sync.
 
 ## Project structure
 

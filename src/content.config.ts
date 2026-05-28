@@ -52,12 +52,17 @@ const publications = defineCollection({
   schema: z.object({
     year: z.string(),
     venue: z.string(),
-    // research(2026-05): venue_type drives citation_journal_title vs
-    // citation_conference_title (Highwire — the tags Google Scholar parses)
-    // and Periodical vs CreativeWorkSeries in the ScholarlyArticle JSON-LD.
-    // Required (no default) so a journal paper can't silently inherit a
-    // wrong venue type. Consumed by src/pages/publications/[id].astro.
-    venue_type: z.enum(["journal", "conference"]),
+    // research(2026-05): venue_type drives the venue tag Google Scholar parses
+    // (citation_journal_title / citation_conference_title, or citation_publisher
+    // + citation_isbn for a book) and the JSON-LD type (Periodical /
+    // CreativeWorkSeries / Book). Required (no default) so a paper can't
+    // silently inherit a wrong venue type. Consumed by publications/[id].astro.
+    venue_type: z.enum(["journal", "conference", "book"]),
+    // ISBN (books only) → citation_isbn. ISBN-10 or -13, hyphens optional.
+    isbn: z
+      .string()
+      .regex(/^[\dX-]{10,17}$/i, { message: "isbn must be an ISBN-10 or ISBN-13" })
+      .optional(),
     title: z.string(),
     // The `authors` string is the canonical citation form ("D. Korobeinikov,
     // R. Zatsarenko, …") — kept for venues like RSS that need a flat string.

@@ -101,12 +101,16 @@ def build_publication(f: dict, title: str) -> tuple[Path, list[str]]:
     if not is_url(link_url):
         sys.exit("::error::a valid link URL (DOI or paper) is required")
     venue_type = clean(f.get("venue_type"))
-    if venue_type not in ("journal", "conference"):
+    if venue_type not in ("journal", "conference", "book"):
         venue_type = "conference"
     out = [
         f"year: {yaml_quote(clean(f.get('year')) or '')}",
         f"venue: {yaml_quote(clean(f.get('venue')) or '')}",
         f"venue_type: {venue_type}",
+    ]
+    if isbn := clean(f.get("isbn")):
+        out.append(f"isbn: {yaml_quote(isbn)}")
+    out += [
         f"title: {yaml_quote(title)}",
         f"authors: {yaml_quote(clean(f.get('authors')) or '')}",
         f"link: {{ label: {yaml_quote(clean(f.get('link_label')) or 'DOI ↗')}, href: {yaml_quote(link_url)} }}",

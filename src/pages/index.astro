@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import ContactLinks from "../components/ContactLinks.astro";
 import Avatar from "../components/Avatar.astro";
+import Nav from "../components/Nav.astro";
 
 // research(2026-05): M2 migrates projects / publications / people to Astro 5
 // content collections. The remaining inline `researchAreas` array stays
@@ -74,74 +75,7 @@ const pastCohort = peopleEntries
 
 <BaseLayout>
   {/* NAV */}
-  <nav
-    class="sticky top-0 z-50 border-b border-line backdrop-blur-md"
-    style="background: color-mix(in oklab, var(--color-bg) 78%, transparent);"
-  >
-    <div class="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-[18px]">
-      <a
-        href={import.meta.env.BASE_URL}
-        class="flex items-center gap-[10px]"
-        style="font-family: var(--font-display); font-size: 26px; letter-spacing: -0.5px;"
-      >
-        <span
-          class="relative h-7 w-7 rounded-lg"
-          style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow));"
-        >
-          <span
-            class="absolute inset-[6px] rounded-[4px] border-[1.5px]"
-            style="border-color: color-mix(in oklab, var(--color-bg) 92%, transparent); border-bottom: none; border-right: none;"
-          ></span>
-        </span>
-        LDQIS
-      </a>
-      <div class="hidden gap-7 text-sm text-text-dim md:flex">
-        <a href="#research" class="hover:text-text">Research</a>
-        <a href="#projects" class="hover:text-text">Projects</a>
-        <a href="#publications" class="hover:text-text">Publications</a>
-        <a href="#people" class="hover:text-text">People</a>
-        <a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/news/`} class="hover:text-text"
-          >News</a
-        >
-      </div>
-      <button
-        type="button"
-        id="theme-toggle"
-        aria-label="Toggle color theme"
-        class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-text-dim transition-transform hover:rotate-[15deg] hover:border-rit-orange hover:text-rit-orange-text"
-      >
-        <svg
-          id="icon-moon"
-          class="h-4 w-4 dark:hidden"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-        <svg
-          id="icon-sun"
-          class="hidden h-4 w-4 dark:block"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="4"></circle>
-          <path
-            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
-          ></path>
-        </svg>
-      </button>
-    </div>
-  </nav>
+  <Nav />
 
   <main id="main" class="relative z-[1]">
     {/* HERO */}
@@ -668,22 +602,4 @@ const pastCohort = peopleEntries
       </div>
     </div>
   </footer>
-
-  {/* Theme toggle script — vanilla, no island needed */}
-  <script is:inline>
-    document.getElementById("theme-toggle")?.addEventListener("click", function () {
-      const root = document.documentElement;
-      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      if (next === "light") {
-        root.removeAttribute("data-theme");
-      } else {
-        root.setAttribute("data-theme", "dark");
-      }
-      try {
-        localStorage.setItem("ldqis-theme", next);
-      } catch {
-        /* localStorage blocked — toggle is in-memory only this session */
-      }
-    });
-  </script>
 </BaseLayout>

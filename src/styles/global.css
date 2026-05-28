@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Align Tailwind's `dark:` variant with the site's [data-theme="dark"] toggle.
+   The default `dark:` keys off prefers-color-scheme, which the manual theme
+   switch ignores — so without this the toggle's sun/moon icons followed the OS,
+   not the chosen theme. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /* research(2026-05): Tailwind 4 expects theme tokens in a `@theme` block
    in the global stylesheet (no more tailwind.config.js for design tokens).
    RIT brand palette is locked in here so every component gets the same

@@ -26,7 +26,7 @@ Each kind of content is a folder under `src/content/`, and adding an entry is on
 
 - **`people/`**: current team and alumni. Optional fields add a profile photo (an upload, or auto-pulled from a `github:` handle), social and academic links (website, GitHub, LinkedIn, YouTube, ORCID, Scholar, IEEE), and years in the lab. Lab members can fill all of this from the [profile form](https://github.com/ajbarea/ldqis/issues/new/choose) — no file editing.
 - **`projects/`**: the lab's open-source frameworks (InteFL, Phalanx-FL, Velocity-FL, Kourai Khryseai), each credited to its contributors.
-- **`publications/`**: papers, with year, venue, and authors linked to their people entries.
+- **`publications/`**: papers and books, with year, venue or publisher, and authors linked to their people entries.
 - **`news/`**: dated posts, surfaced at `/news/` with an RSS feed at `/news/rss.xml`.
 
 Every person, project, and paper renders to a stable per-page URL you can cite from a CV or profile. Cross-links (a paper's authors, a project's contributors) are computed at build time, so there is no bidirectional state to keep in sync.
@@ -51,7 +51,13 @@ The site targets WCAG 2.2 AA, enforced on every PR by axe-core + Playwright, wit
 
 ## Contributing
 
-If you are in the lab, the easiest way onto the site is the [**Add or update your profile** form](https://github.com/ajbarea/ldqis/issues/new/choose) — fill it in and you get a pull request to review, no files to touch. For projects, papers, and news, open a pull request or just ask. The setup is deliberately low-friction, so nobody needs to be a web developer to get their work on the site.
+If you are in the lab, three issue forms put your work on the site with no file editing. Fill one in and you get a pull request to review:
+
+- [**Add or update your profile**](https://github.com/ajbarea/ldqis/issues/new?template=profile.yml): your photo and links. Submit again anytime to update; blank fields keep their current value, and a checkbox removes one.
+- [**Add a project**](https://github.com/ajbarea/ldqis/issues/new?template=project.yml): an open-source project, its links, and stack.
+- [**Add a publication**](https://github.com/ajbarea/ldqis/issues/new?template=publication.yml): a journal paper, conference paper, or book (with DOI or ISBN).
+
+A maintainer reviews the pull request, adds people cross-links, and merges; the site redeploys automatically. Prefer git, or adding a news post? Open a pull request directly (news posts are a Markdown file under `src/content/news/`).
 
 ## Status
 

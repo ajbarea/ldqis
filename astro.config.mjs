@@ -27,6 +27,14 @@ import tailwindcss from "@tailwindcss/vite";
 // (which 404s under the project subpath). Flip `CUSTOM_DOMAIN=true` in
 // the deploy workflow once DNS resolves to make this drop the `/ldqis`
 // prefix and target the apex domain.
+//
+// Domain-migration checklist (the app pages need NO changes — they resolve
+// URLs via import.meta.env.BASE_URL, which flips with `base`). Beyond setting
+// CUSTOM_DOMAIN=true: (1) update the apex literal below if it isn't
+// dataqualitylabs.com; (2) public/admin/config.yml `site_url` → new origin,
+// keep the trailing slash; (3) the hardcoded links in README.md,
+// src/content/news/2026-05-welcome.md, and scripts/check-readme-claims.mjs;
+// (4) add the new domain to the sveltia-cms-auth Worker's ALLOWED_DOMAINS.
 const isCustomDomain = process.env.CUSTOM_DOMAIN === "true";
 
 export default defineConfig({

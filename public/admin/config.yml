@@ -21,7 +21,10 @@ backend:
 # Local FS editing during `astro dev` — no auth or proxy needed.
 local_backend: true
 
-site_url: https://ajbarea.github.io/ldqis
+# Trailing slash required: the preview link resolves preview_path via
+# new URL(path, site_url); without it, /ldqis is treated as a file and the
+# base path is dropped from "View on Live Site" links.
+site_url: https://ajbarea.github.io/ldqis/
 
 # Fallback media location (no collection uses it yet; people override below).
 media_folder: public/media

@@ -1,6 +1,6 @@
 ---
 import { type GetStaticPaths } from "astro";
-import { getCollection, getEntries } from "astro:content";
+import { getCollection, getEntries, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import {
   buildCitationTags,
@@ -41,6 +41,10 @@ const jsonLdScript = JSON.stringify(buildPublicationJsonLd(pub, Astro.url.href))
 // (kept for RSS / CV-style display); `author_ids` adds clickable cross-
 // links into per-person detail pages.
 const authorEntries = author_ids.length ? await getEntries(author_ids) : [];
+// An optional Markdown body renders as the abstract (papers) or "About this
+// book" (books); a publication without a body simply omits the section.
+const { Content } = await render(entry);
+const hasBody = Boolean(entry.body?.trim());
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
@@ -121,6 +125,19 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
               </li>
             ))}
           </ul>
+        )
+      }
+
+      {
+        hasBody && (
+          <section class="mb-12" aria-labelledby="about-heading">
+            <h2 id="about-heading" class="mb-4 text-xs tracking-[1.5px] text-text-faint uppercase">
+              {venue_type === "book" ? "About this book" : "Abstract"}
+            </h2>
+            <div class="prose prose-invert max-w-none leading-relaxed text-text-dim">
+              <Content />
+            </div>
+          </section>
         )
       }
 

@@ -61,6 +61,15 @@ def preserve_refs(md_path: Path, key: str) -> str | None:
     return m.group(0) if m else None
 
 
+def preserve_body(md_path: Path) -> str:
+    """Keep an existing Markdown body (an abstract / about-this-book blurb) when an
+    update leaves the form's abstract field blank — same spirit as preserve_refs."""
+    if not md_path.exists():
+        return ""
+    m = re.match(r"^---\n.*?\n---\n(.*)$", md_path.read_text(encoding="utf-8"), re.S)
+    return m.group(1) if m else ""
+
+
 def build_project(f: dict, name: str) -> tuple[Path, list[str]]:
     if not name:
         sys.exit("::error::project name (the issue title) is required")
@@ -133,7 +142,11 @@ def main() -> None:
     else:
         sys.exit(f"::error::unknown CONTENT_TYPE {ctype!r}")
     md_path.parent.mkdir(parents=True, exist_ok=True)
-    md_path.write_text("---\n" + "\n".join(out) + "\n---\n", encoding="utf-8")
+    body = ""
+    if ctype == "publication":
+        abstract = clean(fields.get("abstract"))
+        body = f"\n{abstract}\n" if abstract else preserve_body(md_path)
+    md_path.write_text("---\n" + "\n".join(out) + "\n---\n" + body, encoding="utf-8")
     print(f"wrote {md_path}")
     if gh_out := os.environ.get("GITHUB_OUTPUT"):
         with open(gh_out, "a", encoding="utf-8") as fh:

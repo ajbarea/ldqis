@@ -1,6 +1,6 @@
-name: Add a research paper
-description: Add a publication to the website.
-title: "[paper] Paper title"
+name: Add a publication
+description: Add a journal paper, conference paper, or book to the website.
+title: "[publication] Title"
 labels: ["publication"]
 body:
   - type: markdown
@@ -28,7 +28,7 @@ body:
     id: venue
     attributes:
       label: Venue
-      description: Journal or conference name.
+      description: Journal or conference name — or the publisher, for a book.
       placeholder: IEEE Intelligent Systems
     validations:
       required: true
@@ -39,12 +39,19 @@ body:
       options:
         - journal
         - conference
+        - book
     validations:
       required: true
   - type: input
+    id: isbn
+    attributes:
+      label: ISBN (books only, optional)
+      description: ISBN-10 or ISBN-13.
+      placeholder: "978-1-119-77153-1"
+  - type: input
     id: link_url
     attributes:
-      label: Link (DOI or paper URL)
+      label: Link (DOI, paper, or publisher URL)
       placeholder: https://doi.org/10.1109/MIS.2026.0000000
     validations:
       required: true

@@ -14,4 +14,6 @@ contributors:
   - sergei-chuprov
   - aj-barea
   - leon-reznik
+  - chris-soravilla
+  - tyler-black
 ---

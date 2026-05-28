@@ -1,6 +1,6 @@
 name: Content intake
 
-# A submitted "project" or "research paper" issue form becomes a reviewed PR
+# A submitted "project" or "publication" issue form becomes a reviewed PR
 # (src/content/projects|publications/<slug>.md). Same safety model as the profile
 # intake: the issue body reaches the script only via env (no shell interpolation),
 # the slug is sanitised, people-references are left for a maintainer, and the only

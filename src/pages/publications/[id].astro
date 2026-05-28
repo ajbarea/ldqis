@@ -4,7 +4,7 @@ import { getCollection, getEntries } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import {
   buildCitationTags,
-  buildScholarlyArticleJsonLd,
+  buildPublicationJsonLd,
   type PublicationData,
 } from "../../lib/citation";
 
@@ -21,16 +21,16 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { year, venue, venue_type, title, authors, author_ids, link } = entry.data;
+const { year, venue, venue_type, title, authors, author_ids, link, isbn } = entry.data;
 
 // research(2026-05): publication detail pages carry Highwire `citation_*`
 // meta tags (the format Google Scholar parses) plus a schema.org
 // ScholarlyArticle JSON-LD (general search + AI-mode crawlers). Builders +
 // rationale live in src/lib/citation.ts.
-const pub: PublicationData = { title, authors, year, venue, venueType: venue_type, link };
+const pub: PublicationData = { title, authors, year, venue, venueType: venue_type, isbn, link };
 const citationTags = buildCitationTags(pub);
 // Escape "<" so a title containing "</script>" can't break out of the tag.
-const jsonLdScript = JSON.stringify(buildScholarlyArticleJsonLd(pub, Astro.url.href)).replace(
+const jsonLdScript = JSON.stringify(buildPublicationJsonLd(pub, Astro.url.href)).replace(
   /</g,
   "\\u003c",
 );

@@ -7,7 +7,7 @@
 import { describe, expect, it } from "vitest";
 import {
   buildCitationTags,
-  buildScholarlyArticleJsonLd,
+  buildPublicationJsonLd,
   extractDoi,
   parseAuthors,
   type PublicationData,
@@ -29,6 +29,17 @@ const conferencePub: PublicationData = {
   venue: "IEEE AIIoT 2024",
   venueType: "conference",
   link: { label: "IEEE Xplore ↗", href: "https://ieeexplore.ieee.org/document/10578967/" },
+};
+
+const bookPub: PublicationData = {
+  title:
+    "Intelligent Security Systems: How AI, ML and Data Science Work For and Against Computer Security",
+  authors: "L. Reznik",
+  year: "2022",
+  venue: "Wiley-IEEE Press",
+  venueType: "book",
+  isbn: "9781119771531",
+  link: { label: "Wiley ↗", href: "https://doi.org/10.1002/9781119771579" },
 };
 
 describe("parseAuthors", () => {
@@ -102,6 +113,14 @@ describe("buildCitationTags", () => {
     expect(tags.some((t) => t.name === "citation_journal_title")).toBe(false);
   });
 
+  it("uses citation_publisher + citation_isbn for book venues", () => {
+    const tags = buildCitationTags(bookPub);
+    expect(tags).toContainEqual({ name: "citation_publisher", content: "Wiley-IEEE Press" });
+    expect(tags).toContainEqual({ name: "citation_isbn", content: "9781119771531" });
+    expect(tags.some((t) => t.name === "citation_journal_title")).toBe(false);
+    expect(tags.some((t) => t.name === "citation_conference_title")).toBe(false);
+  });
+
   it("emits citation_doi when the link is a DOI and omits it otherwise", () => {
     expect(buildCitationTags(journalPub)).toContainEqual({
       name: "citation_doi",
@@ -111,11 +130,11 @@ describe("buildCitationTags", () => {
   });
 });
 
-describe("buildScholarlyArticleJsonLd", () => {
+describe("buildPublicationJsonLd", () => {
   const url = "https://dataqualitylabs.com/publications/intefl-mis-2026/";
 
   it("produces a schema.org ScholarlyArticle with headline, authors, date, and links", () => {
-    const ld = buildScholarlyArticleJsonLd(journalPub, url);
+    const ld = buildPublicationJsonLd(journalPub, url);
     expect(ld["@context"]).toBe("https://schema.org");
     expect(ld["@type"]).toBe("ScholarlyArticle");
     expect(ld.headline).toBe(journalPub.title);
@@ -132,17 +151,32 @@ describe("buildScholarlyArticleJsonLd", () => {
   });
 
   it("models a journal venue as a Periodical in isPartOf", () => {
-    const ld = buildScholarlyArticleJsonLd(journalPub, url);
+    const ld = buildPublicationJsonLd(journalPub, url);
     expect(ld.isPartOf).toEqual({ "@type": "Periodical", name: "IEEE Intelligent Systems" });
   });
 
   it("models a conference venue as a CreativeWorkSeries in isPartOf", () => {
-    const ld = buildScholarlyArticleJsonLd(conferencePub, url);
+    const ld = buildPublicationJsonLd(conferencePub, url);
     expect(ld.isPartOf).toEqual({ "@type": "CreativeWorkSeries", name: "IEEE AIIoT 2024" });
   });
 
+  it("models a book as a schema.org Book with isbn + publisher", () => {
+    const ld = buildPublicationJsonLd(bookPub, url);
+    expect(ld["@type"]).toBe("Book");
+    expect(ld.name).toBe(bookPub.title);
+    expect(ld.isbn).toBe("9781119771531");
+    expect(ld.publisher).toEqual({ "@type": "Organization", name: "Wiley-IEEE Press" });
+    expect(ld.identifier).toEqual({
+      "@type": "PropertyValue",
+      propertyID: "DOI",
+      value: "10.1002/9781119771579",
+    });
+    expect(ld.isPartOf).toBeUndefined();
+    expect(ld.headline).toBeUndefined();
+  });
+
   it("includes a DOI PropertyValue identifier when present", () => {
-    const ld = buildScholarlyArticleJsonLd(journalPub, url);
+    const ld = buildPublicationJsonLd(journalPub, url);
     expect(ld.identifier).toEqual({
       "@type": "PropertyValue",
       propertyID: "DOI",
@@ -151,7 +185,7 @@ describe("buildScholarlyArticleJsonLd", () => {
   });
 
   it("omits the identifier field when there is no DOI", () => {
-    const ld = buildScholarlyArticleJsonLd(conferencePub, url);
+    const ld = buildPublicationJsonLd(conferencePub, url);
     expect(ld.identifier).toBeUndefined();
   });
 });

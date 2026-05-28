@@ -89,8 +89,9 @@ Highlights below; full history in git.
   `src/content/**` changed; app PRs still run the full suite. research(2026-05): GitHub
   required checks are repo-wide, so job-level `if:` (a job skipped via `if:` reports
   success) is the endorsed way to drop heavy checks on content PRs without leaving a
-  required check stuck Pending. Still open: add lab members as repo collaborators to drop
-  the first-time-contributor workflow-approval click (pending the handle list).
+  required check stuck Pending. (Lab members are deliberately _not_ added as repo
+  collaborators — AJ prefers approving first-time-contributor workflow runs manually over
+  granting write access; decided 2026-05-27.)
 - **Project/publication intake + email copy chip.** Alongside the profile form, issue forms
   for projects and publications open auto-generated, reviewed PRs; they take comma-separated
   tags/stack (rendered with `·` separators) and derive the entry's name/title from the

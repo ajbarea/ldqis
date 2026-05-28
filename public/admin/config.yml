@@ -31,6 +31,8 @@ collections:
   - name: people
     label: People
     label_singular: Person
+    icon: group
+    preview_path: "people/{{slug}}"
     folder: src/content/people
     extension: md
     format: yaml-frontmatter
@@ -79,6 +81,8 @@ collections:
   - name: publications
     label: Publications
     label_singular: Publication
+    icon: menu_book
+    preview_path: "publications/{{slug}}"
     folder: src/content/publications
     extension: md
     format: yaml-frontmatter
@@ -124,6 +128,8 @@ collections:
   - name: projects
     label: Projects
     label_singular: Project
+    icon: deployed_code
+    preview_path: "projects/{{slug}}"
     folder: src/content/projects
     extension: md
     format: yaml-frontmatter
@@ -161,6 +167,8 @@ collections:
   - name: news
     label: News
     label_singular: Post
+    icon: newspaper
+    preview_path: "news/{{slug}}"
     folder: src/content/news
     extension: md
     format: yaml-frontmatter

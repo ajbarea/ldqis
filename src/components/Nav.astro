@@ -1,14 +1,20 @@
 ---
-// Shared site navigation: logo, section links, News, and the theme toggle.
-// Used on the homepage and every detail page so navigation + theming are
-// consistent everywhere (detail pages previously had only a back-link, and
-// the toggle script lived solely in index.astro). `back` adds an optional
-// contextual "return to the list" link on detail pages.
+// Shared site navigation: logo, section links, News, theme toggle, and an
+// optional contextual back-link. Below the md breakpoint the section links
+// collapse into a hamburger dropdown so mobile keeps full navigation (the
+// theme-toggle script lived only in index.astro before this component).
 interface Props {
   back?: { href: string; label: string };
 }
 const { back } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const links = [
+  { href: `${base}/#research`, label: "Research" },
+  { href: `${base}/#projects`, label: "Projects" },
+  { href: `${base}/#publications`, label: "Publications" },
+  { href: `${base}/#people`, label: "People" },
+  { href: `${base}/news/`, label: "News" },
+];
 ---
 
 <nav
@@ -34,21 +40,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       LDQIS
     </a>
 
-    <div class="flex items-center gap-5 text-sm text-text-dim md:gap-7">
-      <div class="hidden items-center gap-7 md:flex">
-        <a href={`${base}/#research`} class="hover:text-text">Research</a>
-        <a href={`${base}/#projects`} class="hover:text-text">Projects</a>
-        <a href={`${base}/#publications`} class="hover:text-text">Publications</a>
-        <a href={`${base}/#people`} class="hover:text-text">People</a>
-        <a href={`${base}/news/`} class="hover:text-text">News</a>
+    <div class="flex items-center gap-5 md:gap-7">
+      <div class="hidden items-center gap-7 text-sm text-text-dim md:flex">
+        {
+          links.map((l) => (
+            <a href={l.href} class="hover:text-text">
+              {l.label}
+            </a>
+          ))
+        }
+        {
+          back && (
+            <a href={back.href} class="whitespace-nowrap hover:text-rit-orange-text">
+              {back.label}
+            </a>
+          )
+        }
       </div>
-      {
-        back && (
-          <a href={back.href} class="whitespace-nowrap hover:text-rit-orange-text">
-            {back.label}
-          </a>
-        )
-      }
+
       <button
         type="button"
         id="theme-toggle"
@@ -83,13 +92,54 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
           ></path>
         </svg>
       </button>
+
+      <button
+        type="button"
+        id="nav-menu-btn"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line text-text-dim hover:border-rit-orange hover:text-rit-orange-text md:hidden"
+      >
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M3 6h18M3 12h18M3 18h18"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-line md:hidden">
+    <div class="mx-auto flex max-w-[1200px] flex-col px-6 py-2 text-sm text-text-dim">
+      {
+        links.map((l) => (
+          <a href={l.href} class="py-2 hover:text-text">
+            {l.label}
+          </a>
+        ))
+      }
+      {
+        back && (
+          <a href={back.href} class="py-2 hover:text-rit-orange-text">
+            {back.label}
+          </a>
+        )
+      }
     </div>
   </div>
 </nav>
 
 <script>
+  const root = document.documentElement;
   document.getElementById("theme-toggle")?.addEventListener("click", () => {
-    const root = document.documentElement;
     const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
     if (next === "light") root.removeAttribute("data-theme");
     else root.setAttribute("data-theme", "dark");
@@ -98,5 +148,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     } catch {
       /* localStorage blocked — toggle is in-memory only this session */
     }
+  });
+
+  const menuBtn = document.getElementById("nav-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  menuBtn?.addEventListener("click", () => {
+    const open = menu?.classList.toggle("hidden") === false;
+    menuBtn.setAttribute("aria-expanded", String(open));
   });
 </script>

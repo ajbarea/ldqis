@@ -1,5 +1,6 @@
 ---
 # ───────────────────────────────────────────────────────────────────────────
+# (temporary: CI content-gate verification probe — this PR will be closed, not merged)
 # Add yourself to the lab site — two ways:
 #
 # EASIEST (no git): open a New Issue → "Add or update your profile", fill the

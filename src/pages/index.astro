@@ -128,14 +128,16 @@ const pastCohort = peopleEntries
             [
               { num: "4", label: "Active OSS projects" },
               { num: "25+", label: "Researchers trained" },
-              // research(2026-05): refereed-paper count from L. Reznik's CV
-              // "List of Products" summary — 23 journal + 125 conference = 148
-              // refereed papers (cs.rit.edu/~lr/publications.pdf). The list
-              // rendered below is a curated subset; full record on Google Scholar.
-              { num: "140+", label: "Peer-reviewed publications" },
-              // research(2026-05): publishing since 1992 per L. Reznik's CV
-              // (1992-2025); "30+" rounds down from ~34 years.
-              { num: "30+", label: "Years of research" },
+              // research(2026-05): RIT-era refereed papers from L. Reznik's CV
+              // "List of Products": 148 refereed total (23 journal + 125
+              // conference) minus ~51 pre-RIT (1992-2001, Victoria U.) is ~95
+              // since he joined RIT ~2003; "90+" rounds down. Scoped to the RIT
+              // lab to match "years of research"; the list below is a subset.
+              { num: "90+", label: "Peer-reviewed publications" },
+              // research(2026-05): RIT lab era. L. Reznik joined RIT ~2003
+              // (Victoria U. 1996-2001, UT El Paso ~2002), so ~22 years;
+              // "20+" rounds down. Pre-RIT career work is excluded here.
+              { num: "20+", label: "Years of research" },
             ].map(({ num, label }) => (
               <div class="bg-bg px-6 py-7">
                 <div style="font-family: var(--font-display); font-size: 44px; line-height: 1; color: var(--color-rit-orange);">

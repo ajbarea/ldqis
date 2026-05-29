@@ -14,7 +14,8 @@ updates:
     cooldown:
       default-days: 7
     commit-message:
-      prefix: "chore(deps)"
+      # bare prefix; include:scope appends the scope -> "chore(deps):" (not doubled)
+      prefix: "chore"
       include: "scope"
     groups:
       npm:
@@ -33,7 +34,8 @@ updates:
     cooldown:
       default-days: 7
     commit-message:
-      prefix: "ci(deps)"
+      # bare prefix; include:scope appends the scope -> "ci(deps):" (not doubled)
+      prefix: "ci"
       include: "scope"
     groups:
       github-actions:

@@ -46,7 +46,6 @@ __pycache__/
 # local verification screenshots (root-level scratch, not site assets)
 /Screenshot *.png
 
-# source material dropped in for content extraction (papers, email exports) +
-# Windows download tags; the site links out to PDFs, never stores them in-repo
+# source PDFs + Windows download tags
 *.pdf
 *:Zone.Identifier

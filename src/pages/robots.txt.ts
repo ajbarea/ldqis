@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 
 // research(2026-05): generate robots.txt at build time so the `Sitemap:`
 // directive tracks the CUSTOM_DOMAIN switch (project-page base `/ldqis/`
-// vs apex `/`) instead of hardcoding a URL that goes stale at the M5 DNS
+// vs apex `/`) instead of hardcoding a URL that goes stale at the DNS
 // handoff. @astrojs/sitemap emits `sitemap-index.xml` at the site root.
 // Source: https://docs.astro.build/en/guides/integrations-guide/sitemap/
 const body = (sitemap: string): string => `User-agent: *

@@ -1,36 +1,35 @@
 # LDQIS Lab Website — Roadmap
 
-The plan for the lab's public website: what's shipped, what's planned, and the
-principles behind it. Day-to-day status lives in [IMPL.md](./IMPL.md); git history has
-the full record.
+The plan for the lab's public website: what's shipped, what's planned, and the principles
+behind it. Day-to-day status lives in [IMPL.md](./IMPL.md); git history has the full record.
 
 The site is built with [Astro](https://astro.build) and deploys automatically to GitHub
-Pages on every push to `main`. It's intentionally static — no backend, no database, no
-login.
+Pages on every push to `main`. It's intentionally static — no backend, no database, no login.
 
-## Why it's built this way
+## Principles
 
-- **Static over dynamic.** No backend, no auth, no database. The previous site's login /
-  register / data-view surface was its main source of risk. A feature tempted to add
-  server state should first be designed as a build-time artifact (Markdown + frontmatter
-  committed to git), and only escalate if a static answer truly can't work.
-- **Content as code.** Adding a publication, team member, project, or news post means
-  committing one Markdown file — no CMS to run. If editorial volume ever outgrows git, a
-  git-based editor (Decap or Sveltia CMS) can layer onto the existing content collections
-  without introducing a database.
+These hold across redesigns; changing any is a deliberate decision, not drift.
+
+- **No backend, no auth, no database.** The previous site's login / register / data-view
+  surface was its main source of risk. Design any new feature as a build-time artifact
+  (Markdown + frontmatter in git) first; only escalate to server state if a static answer
+  truly can't do the job.
+- **Content as code.** Adding a person, project, publication, or news post is one Markdown
+  commit. If editorial volume outgrows git, layer a git-based editor (Sveltia / Decap) onto
+  the existing content collections — never a database.
 - **Fast and light.** Astro ships zero JavaScript by default; interactivity is added only
-  where it's needed (theme toggle, search). The bar is a perfect Lighthouse score across
-  all four categories.
-- **Accessibility is a check, not a vibe.** WCAG 2.2 AA on every page, enforced by
-  Playwright + axe-core in CI on every pull request: skip link, semantic headings,
-  reduced-motion and color-scheme support.
+  where it's needed (theme toggle, search). The bar is a perfect Lighthouse score across all
+  four categories.
+- **Accessibility is a check, not a vibe.** WCAG 2.2 AA on every page, enforced on every
+  pull request by Playwright and axe-core. No manual-only a11y claims.
 - **Stable identity.** The LDQIS name and RIT branding (PMS 1505c orange, F6BE00 yellow,
-  Instrument Serif + Inter type) stay constant across redesigns. Changing any of them is
-  a deliberate decision, not incidental drift.
+  Instrument Serif + Inter type) stay constant across redesigns.
 - **Research before architecture.** Framework, library, and pattern choices are checked
-  against current best practice first, and the tradeoff is recorded in a
-  `research(YYYY-MM):` note in the code — the same provenance habit as the lab's published
-  work.
+  against current best practice and recorded in a `research(YYYY-MM):` note in the code —
+  the same provenance habit as the lab's published work.
+- **Don't build around gaps that are about to close.** Before hand-rolling a shim (image
+  optimization, RSS, a content loader), check whether the framework already ships it or is
+  about to; when a major version lands, revisit the workarounds it makes unnecessary.
 
 ## Planned
 
@@ -46,17 +45,15 @@ The lab owns the domain; moving the site onto it (gated on DNS access):
 4. Let the HTTPS certificate auto-provision, then enable "Enforce HTTPS".
 5. Confirm the old site is fully offline (old URLs return 404, not stale data).
 
-A single build flag already switches between the GitHub Pages path and the apex domain,
-so the flip is one change once DNS resolves.
+A single build flag (`CUSTOM_DOMAIN`) already switches between the GitHub Pages path and the
+apex domain, so the flip is one change once DNS resolves.
 
 ### Backlog (unprioritized)
 
-- **Astro 6 upgrade** — blocked on the upstream Tailwind-vite fix
-  ([withastro/astro#16542](https://github.com/withastro/astro/issues/16542)); see IMPL.md.
 - **Admin (Sveltia CMS) UX** — the no-code `/admin` editor is live; streamline its editing
   experience (clearer fields, smoother flows) as more lab members start using it.
-- **Sponsors / funding** — a section crediting the organizations that support and fund the
-  lab, once there's a confirmed list to show.
+- **Sponsors / funding** — a section crediting the organizations that support the lab, once
+  there's a confirmed list to show.
 - **Search** — Pagefind or Astro's built-in, once the publication list grows enough to
   warrant it.
 - **Per-project demo embeds** — interactive project demos as embedded islands, if and when
@@ -64,55 +61,39 @@ so the flip is one change once DNS resolves.
 - **Multi-author news bylines** — when a post has more than one author.
 - **Internationalization** — only if a lab member needs it.
 
-## Invariants
-
-These hold across redesigns:
-
-- **Stable identity** — LDQIS name, RIT branding, the Instrument Serif / Inter type pair.
-- **No backend, no auth** — re-introducing server state re-introduces the old site's class
-  of vulnerability; justify why a build-time artifact can't do the job first.
-- **Content as code** — new content is a Markdown commit.
-- **Accessibility verified in CI** — axe-core must pass; no manual-only a11y claims.
-- **Research-backed architecture** — architectural calls cite current best practice in a
-  `research(YYYY-MM):` note.
-- **Don't build around gaps that are about to close** — before hand-rolling a shim (image
-  optimization, RSS, a content loader), check whether the framework already ships it or is
-  about to; when a major version lands, revisit the workarounds it makes unnecessary.
-
 ## Shipped
 
 Highlights below; full history in git.
 
-- **Slim content-PR gate (faster merges for lab contributors).** A profile / project /
-  publication PR (a Markdown edit under `src/content/**`) now gates to merge on a fast
-  `Build` (`astro build` schema validation) + `pin-check` only. The app suite (lint,
-  type-check, unit, E2E + a11y, Lighthouse) is conditioned on a `dorny/paths-filter`
-  `changes` job and **skips — reporting success, not blocking** — when nothing outside
-  `src/content/**` changed; app PRs still run the full suite. research(2026-05): GitHub
-  required checks are repo-wide, so job-level `if:` (a job skipped via `if:` reports
-  success) is the endorsed way to drop heavy checks on content PRs without leaving a
-  required check stuck Pending. (Lab members are deliberately _not_ added as repo
-  collaborators — AJ prefers approving first-time-contributor workflow runs manually over
-  granting write access; decided 2026-05-27.)
-- **Project/publication intake + email copy chip.** Alongside the profile form, issue forms
-  for projects and publications open auto-generated, reviewed PRs; they take comma-separated
-  tags/stack (rendered with `·` separators) and derive the entry's name/title from the
-  issue's own title, so nothing is typed twice. Each intake workflow runs `astro build` to
-  validate the generated entry before opening the PR, since a `GITHUB_TOKEN` PR doesn't trigger
-  the normal CI. On profile and detail pages the email is a single chip: the address opens mail
-  and an inline copy icon copies it with a green check and a "Copied!" confirmation.
-- **Profile cards: photos, links, and a submission form.** Team cards show a photo
-  (uploaded, auto-pulled from a GitHub handle, or initials), social and academic links
-  (website, GitHub, LinkedIn, YouTube, ORCID, Scholar, IEEE), and years in the lab. An
-  "Add or update your profile" issue form lets members submit a card — photo and all —
-  without touching git; it opens a reviewed pull request.
+- **Astro 6.** Upgraded from the 5.x line. `@tailwindcss/vite`'s wide peer range is pinned
+  out with `overrides.vite: ^7` (npm would otherwise hoist Vite 8 and break the build); this
+  also cleared the two Astro 5.x advisories.
+- **Slim content-PR gate.** A profile / project / publication PR (a Markdown edit under
+  `src/content/**`) gates to merge on a fast `Build` (`astro build` schema validation) +
+  `pin-check`. The app suite (lint, type-check, unit, E2E + a11y, Lighthouse) is conditioned
+  on a `dorny/paths-filter` job and skips — reporting success — when nothing outside
+  `src/content/**` changed. research(2026-05): GitHub required checks are repo-wide, so a
+  job-level `if:` skip is the endorsed way to drop heavy checks on content PRs without
+  leaving a required check stuck Pending. (Lab members are deliberately not repo
+  collaborators — AJ approves first-time-contributor workflow runs manually rather than
+  granting write access.)
+- **Project / publication intake + email copy chip.** Issue forms for profiles, projects,
+  and publications open auto-generated, reviewed PRs; they take comma-separated tags/stack
+  and derive the entry's name/title from the issue title, so nothing is typed twice. Each
+  intake workflow runs `astro build` to validate the generated entry before opening the PR.
+  On profile and detail pages the email is a single chip: clicking opens mail, and an inline
+  icon copies the address with a "Copied!" confirmation.
+- **Profile cards: photos, links, and a submission form.** Team cards show a photo (uploaded,
+  auto-pulled from a GitHub handle, or initials), social and academic links (website, GitHub,
+  LinkedIn, YouTube, ORCID, Scholar, IEEE), and years in the lab. An issue form lets members
+  submit a card — photo and all — without touching git.
 - **Academic discovery metadata.** Publication pages emit Highwire `citation_*` tags (what
-  Google Scholar actually reads), complemented by schema.org JSON-LD and a sitemap.
+  Google Scholar reads), complemented by schema.org JSON-LD and a sitemap.
 - **News + RSS.** A `news` collection with an index, per-post pages, and a valid RSS 2.0
   feed; drafts and future-dated posts are excluded at build time.
 - **Content collections + detail pages.** Projects, publications, and people are Astro
   content collections; each gets a prerendered detail page, and projects/publications
   cross-link to the people who authored or built them.
-- **Supply-chain hardening + CI.** GitHub Actions are pinned to commit SHAs with a
-  Dependabot cooldown; accessibility, Lighthouse, lint, type-check, and unit tests run on
-  every pull request.
+- **Supply-chain hardening + CI.** GitHub Actions pinned to commit SHAs with a Dependabot
+  cooldown; accessibility, Lighthouse, lint, type-check, and unit tests run on every pull
+  request.

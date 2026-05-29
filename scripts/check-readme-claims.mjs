@@ -51,8 +51,8 @@ if (!quickStartBlock) {
 
 // ─── GitHub Pages preview URL claim ────────────────────────────────────────
 // Status section claims `https://ajbarea.github.io/ldqis/`. The site URL
-// is composed from astro.config's `site` + `base`; until M5 DNS handoff
-// lands the apex domain, the preview path must remain in sync.
+// is composed from astro.config's `site` + `base`; until the custom-domain
+// cutover lands the apex domain, the preview path must remain in sync.
 const claimedPreviewUrl = readme.match(/https:\/\/([\w.-]+)\.github\.io\/([\w-]+)\//);
 if (!claimedPreviewUrl) {
   failures.push(
@@ -65,7 +65,7 @@ if (!claimedPreviewUrl) {
   // `site:` and `base:` may be ternaries (e.g. `isCustomDomain ? "/" : "/ldqis"`),
   // so verify the expected string literal appears somewhere in the config
   // rather than parsing the assignment value. The CUSTOM_DOMAIN branch keeps
-  // the other (apex-domain) literals; both must stay present until M5 ships.
+  // the other (apex-domain) literals; both must stay present until the custom domain ships.
   if (!astroConfig.includes(`"${expectedSite}"`)) {
     failures.push(
       `README preview URL: claims \`${expectedSite}\` but astro.config.mjs has no matching site literal`,

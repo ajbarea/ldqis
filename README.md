@@ -1,11 +1,12 @@
 # LDQIS Lab Website
 
-Source for the website of RIT's **Laboratory of Data Quality and Intelligent Security (LDQIS)**. A static [Astro 5](https://astro.build/) site with Tailwind 4, deployed to GitHub Pages. It replaces the lab's older Flask + Bootstrap-4 site at `dataqualitylabs.com`.
+Source for the website of RIT's **Laboratory of Data Quality and Intelligent Security (LDQIS)**. A static [Astro](https://astro.build/) site with Tailwind 4, deployed to GitHub Pages. It replaces the lab's older Flask + Bootstrap-4 site at `dataqualitylabs.com`.
 
 [![Astro](https://img.shields.io/badge/Astro-5-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind](https://img.shields.io/badge/Tailwind-4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?style=flat-square&logo=github)](https://ajbarea.github.io/ldqis/)
+[![codecov](https://codecov.io/github/ajbarea/ldqis/graph/badge.svg?token=odipJPLUQV)](https://codecov.io/github/ajbarea/ldqis)
 
 This is the lab's website: our people, research, projects, publications, and news. It is content as code: every project, publication, profile, and news post is a Markdown file in git. Add or edit yours through the browser editor at `/admin`, an issue form, or a pull request. No database to maintain.
 

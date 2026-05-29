@@ -1,7 +1,7 @@
 // Smoke tests: confirm the homepage loads, the skip-link is reachable from
-// keyboard, and the theme toggle round-trips through localStorage. The M4
-// definition-of-done calls out theme-toggle and skip-link as preserved
-// affordances; this spec is the per-PR guard.
+// keyboard, and the theme toggle round-trips through localStorage. Theme
+// toggle and skip-link are preserved affordances; this spec is the per-PR
+// guard.
 import { expect, test } from "@playwright/test";
 
 test.describe("LDQIS homepage smoke", () => {

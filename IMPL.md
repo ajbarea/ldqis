@@ -9,15 +9,14 @@ _Nothing open right now._
 
 ## Known issues
 
-- **Astro is pinned to 5.18.1 (not 6).** `@tailwindcss/vite` — the official Tailwind 4
-  setup — has an open incompatibility with Astro 6's build pipeline
-  ([withastro/astro#16542](https://github.com/withastro/astro/issues/16542)). The two CVEs
-  flagged on the Astro 5.x line don't affect this site: it's a fully static build that
-  exercises neither code path. Dependabot ignores the Astro 6 major until the upstream
-  issue closes (`.github/dependabot.yml`); bump then.
-- **`@lhci/cli` transitive dev dependencies** (tmp, uuid, inquirer) — dev-only and
-  informational. The fix is a major downgrade that would break the Lighthouse pipeline,
-  so it's accepted as-is.
+Only dev/CI-only npm advisories remain (`npm audit`: 10 total, none reach the deployed
+static site). Both are accepted because the only fix npm offers is a breaking downgrade of
+the tool itself:
+
+- **`@lhci/cli` → tmp (High), uuid, inquirer** — Lighthouse-CI tooling; the fix downgrades
+  `@lhci/cli` to `0.1.0` and breaks the pipeline.
+- **`@astrojs/check` → yaml-language-server → `yaml`** (moderate) — the type-checker's
+  dependency chain; the fix is a breaking `@astrojs/check` downgrade.
 
 ## Next up
 

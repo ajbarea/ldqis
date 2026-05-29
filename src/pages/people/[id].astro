@@ -8,7 +8,7 @@ import Nav from "../../components/Nav.astro";
 import { byRecency } from "../../lib/publications";
 
 // Detail pages for people give each researcher (current + past cohort)
-// a stable shareable URL. The lab's pre-M2 site had no per-person page;
+// a stable shareable URL. The lab's previous site had no per-person page;
 // alumni had no canonical link to point at from CVs / LinkedIn.
 export const getStaticPaths = (async () => {
   const people = await getCollection("people");

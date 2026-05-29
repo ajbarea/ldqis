@@ -4,9 +4,9 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 
-// research(2026-05): Astro 5 content layer uses `render(entry)` to compile
-// Markdown body to a Vue/Astro-renderable Content component. The reserved
-// `slug` field of Astro 4 is gone; routes key off `entry.id` (filename).
+// research(2026-05): Astro's content layer uses `render(entry)` to compile
+// Markdown body to a Vue/Astro-renderable Content component. There's no
+// reserved `slug` field; routes key off `entry.id` (filename).
 // Drafts + future-dated posts are NOT prerendered — getStaticPaths filters
 // them out so a 404 is the public surface, not a leaked stub.
 export const getStaticPaths = (async () => {

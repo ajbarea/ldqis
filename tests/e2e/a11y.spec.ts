@@ -1,8 +1,7 @@
-// Per-PR axe-core scan. The M4 definition-of-done names `/`, `/people`,
-// `/projects`, `/publications`, `/news` — only `/` exists in M1, the rest
-// land in M2/M3. The routes array below is the single point of update;
-// add slugs as the content collections come online so the a11y bar moves
-// with the surface area, not in a separate sweep.
+// Per-PR axe-core scan covering `/`, `/people`, `/projects`,
+// `/publications`, and `/news`. The routes array below is the single point
+// of update; add slugs as new content surfaces come online so the a11y bar
+// moves with the surface area, not in a separate sweep.
 //
 // research(2026-05): axe-core (via @axe-core/playwright) catches ~57% of
 // WCAG violations by volume per the Deque eval. The remainder requires

@@ -1,6 +1,6 @@
 ##
 ## ldqis — LDQIS lab website
-## Astro 5 + Tailwind 4 + GitHub Pages
+## Astro + Tailwind 4 + GitHub Pages
 ##
 ## Usage:
 ##   make help       Show all available commands

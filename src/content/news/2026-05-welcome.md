@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the rebuilt LDQIS website"
-description: "The lab's website moved off the legacy Flask/Bootstrap stack to an Astro 5 + Tailwind 4 static build. Content as code, so the whole lab can keep it current."
-summary: "The lab's website moved to Astro 5 + Tailwind 4. Content as code, so anyone in the lab can add their work."
+description: "The lab's website moved off the legacy Flask/Bootstrap stack to an Astro + Tailwind 4 static build. Content as code, so the whole lab can keep it current."
+summary: "The lab's website moved to Astro + Tailwind 4. Content as code, so anyone in the lab can add their work."
 pubDate: 2026-05-22
 tags: ["site", "open-source"]
 author: "LDQIS"
@@ -11,7 +11,7 @@ The lab's website has a new home, and it is built so the whole lab can keep it c
 
 The old site ran on Flask and Bootstrap with login, registration, and a Postgres backend behind it. That was more moving parts than a lab site needs, so we replaced it with something simpler and sturdier.
 
-What is here now is an [Astro 5](https://astro.build/) project that compiles to static HTML and is hosted on GitHub Pages. The source tree _is_ the site: every project, publication, team member, and news post is a Markdown file. No database to maintain, and you can edit it from a browser editor, an issue form, or a pull request.
+What is here now is an [Astro](https://astro.build/) project that compiles to static HTML and is hosted on GitHub Pages. The source tree _is_ the site: every project, publication, team member, and news post is a Markdown file. No database to maintain, and you can edit it from a browser editor, an issue form, or a pull request.
 
 ## What's already live
 

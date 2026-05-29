@@ -1,7 +1,9 @@
-// Per-PR axe-core scan covering `/`, `/people`, `/projects`,
-// `/publications`, and `/news`. The routes array below is the single point
-// of update; add slugs as new content surfaces come online so the a11y bar
-// moves with the surface area, not in a separate sweep.
+// Per-PR axe-core scan. ROUTES_TO_SCAN covers the homepage, one representative
+// variant of each dynamic-route template (project / publication / person
+// detail), the news index, a news post, and the 404 page. The nav's section
+// links (`/#research`, `/#projects`, ...) are anchors on the homepage, not
+// separate pages. The array below is the single point of update; add a route
+// as new page templates come online so the a11y bar moves with surface area.
 //
 // research(2026-05): axe-core (via @axe-core/playwright) catches ~57% of
 // WCAG violations by volume per the Deque eval. The remainder requires
@@ -24,6 +26,7 @@ const ROUTES_TO_SCAN: ReadonlyArray<{ name: string; path: string }> = [
   { name: "person detail (igor-khokhlov, past cohort, no email)", path: "people/igor-khokhlov/" },
   { name: "news index", path: "news/" },
   { name: "news detail (2026-05-welcome)", path: "news/2026-05-welcome/" },
+  { name: "404 (not found)", path: "404.html" },
 ];
 
 for (const { name, path } of ROUTES_TO_SCAN) {

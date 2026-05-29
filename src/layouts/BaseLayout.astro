@@ -62,14 +62,21 @@ const ogImageUrl =
       rel="stylesheet"
     />
 
-    {/* FOUC prevention — flip theme before first paint */}
+    {
+      /* FOUC prevention — set the theme before first paint: an explicit stored
+        choice wins, otherwise follow the OS via prefers-color-scheme, else light. */
+    }
     <script is:inline>
       (function () {
         try {
           const stored = localStorage.getItem("ldqis-theme");
-          if (stored === "dark") document.documentElement.setAttribute("data-theme", "dark");
+          const prefersDark =
+            window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (stored === "dark" || (stored !== "light" && prefersDark)) {
+            document.documentElement.setAttribute("data-theme", "dark");
+          }
         } catch {
-          /* localStorage blocked is fine — stay on light theme */
+          /* localStorage / matchMedia blocked is fine — stay on light theme */
         }
       })();
     </script>

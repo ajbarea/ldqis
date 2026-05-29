@@ -128,7 +128,11 @@ const pastCohort = peopleEntries
             [
               { num: "4", label: "Active OSS projects" },
               { num: "25+", label: "Researchers trained" },
-              { num: "3", label: "Peer-reviewed publications" },
+              // research(2026-05): refereed-paper count from L. Reznik's CV
+              // "List of Products" summary — 23 journal + 125 conference = 148
+              // refereed papers (cs.rit.edu/~lr/publications.pdf). The list
+              // rendered below is a curated subset; full record on Google Scholar.
+              { num: "140+", label: "Peer-reviewed publications" },
               { num: "12+", label: "Years of funded work" },
             ].map(({ num, label }) => (
               <div class="bg-bg px-6 py-7">

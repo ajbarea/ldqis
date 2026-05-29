@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<BaseLayout
+  title="Page not found — LDQIS"
+  description="The page you're looking for doesn't exist or may have moved."
+>
+  <meta slot="head" name="robots" content="noindex" />
+
+  <Nav back={{ href: import.meta.env.BASE_URL, label: "← Home" }} />
+
+  <main
+    id="main"
+    class="relative z-[1] mx-auto flex min-h-[62vh] max-w-[1200px] flex-col items-center justify-center px-6 py-[120px] text-center"
+  >
+    <div class="mb-4 text-xs tracking-[1.5px] text-rit-orange-text uppercase">Error 404</div>
+    <h1
+      class="mb-6"
+      style="font-family: var(--font-display); font-size: clamp(56px, 10vw, 120px); font-weight: 400; line-height: 1; letter-spacing: -2px;"
+    >
+      Page <em class="italic" style="color: var(--color-rit-orange);">not found</em>.
+    </h1>
+    <p class="mb-10 max-w-[48ch] text-lg text-text-dim">
+      The page you're looking for doesn't exist or may have moved. Head back to the homepage, or
+      browse the latest from the lab.
+    </p>
+    <div class="flex flex-wrap justify-center gap-[14px]">
+      <a
+        href={import.meta.env.BASE_URL}
+        class="inline-flex items-center gap-2 rounded-full px-[22px] py-[14px] text-sm font-medium transition-transform hover:-translate-y-[1px]"
+        style="background: var(--color-rit-orange); color: #0a0e13;"
+      >
+        Back to home →
+      </a>
+      <a
+        href={`${base}/news/`}
+        class="inline-flex items-center gap-2 rounded-full border border-line px-[22px] py-[14px] text-sm font-medium text-text hover:border-text-dim"
+      >
+        Latest news
+      </a>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,44 +1,82 @@
-// Smoke test for the theme-toggle behavior baked into BaseLayout / index.astro.
-// The toggle is vanilla JS (no island, no framework) so the unit test scope is
-// the localStorage <-> data-theme contract. The full DOM wiring is covered by
-// the Playwright e2e suite — this test just guards the storage key.
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+// Smoke test for the theme behavior baked into BaseLayout / Nav.astro. The
+// toggle is vanilla JS (no island, no framework), so the unit scope is the
+// resolution contract: localStorage + prefers-color-scheme -> data-theme. The
+// full DOM wiring is covered by the Playwright e2e suite — this test guards the
+// resolution order and the storage key.
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const STORAGE_KEY = "ldqis-theme";
 
+// Mirror the FOUC-prevention snippet from src/layouts/BaseLayout.astro: an
+// explicit stored choice wins, otherwise follow the OS, otherwise light.
 function applyStoredTheme(): void {
-  // Mirror the FOUC-prevention snippet from src/layouts/BaseLayout.astro.
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === "dark") document.documentElement.setAttribute("data-theme", "dark");
+    const prefersDark =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (stored === "dark" || (stored !== "light" && prefersDark)) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
   } catch {
-    /* localStorage blocked is fine */
+    /* localStorage / matchMedia blocked is fine */
   }
 }
 
-describe("theme toggle storage contract", () => {
+// Stub the OS color-scheme preference for a test.
+function mockOSPrefersDark(prefersDark: boolean): void {
+  vi.stubGlobal("matchMedia", (query: string) => ({
+    matches: query.includes("dark") ? prefersDark : false,
+    media: query,
+    onchange: null,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    addListener: () => {},
+    removeListener: () => {},
+    dispatchEvent: () => false,
+  }));
+}
+
+describe("theme resolution contract", () => {
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.removeAttribute("data-theme");
+    mockOSPrefersDark(false); // default to a light OS unless a test overrides
   });
 
   afterEach(() => {
     localStorage.clear();
     document.documentElement.removeAttribute("data-theme");
+    vi.unstubAllGlobals();
   });
 
-  it("leaves light theme alone when no preference is stored", () => {
+  it("stays light when nothing is stored and the OS prefers light", () => {
     applyStoredTheme();
     expect(document.documentElement.getAttribute("data-theme")).toBeNull();
   });
 
-  it("flips to dark theme when the stored preference is 'dark'", () => {
+  it("follows the OS to dark when nothing is stored and the OS prefers dark", () => {
+    mockOSPrefersDark(true);
+    applyStoredTheme();
+    expect(document.documentElement.getAttribute("data-theme")).toBe("dark");
+  });
+
+  it("applies dark for a stored 'dark' even when the OS prefers light", () => {
+    mockOSPrefersDark(false);
     localStorage.setItem(STORAGE_KEY, "dark");
     applyStoredTheme();
     expect(document.documentElement.getAttribute("data-theme")).toBe("dark");
   });
 
-  it("ignores unknown stored values (degrades to light)", () => {
+  it("keeps light for a stored 'light' even when the OS prefers dark", () => {
+    mockOSPrefersDark(true);
+    localStorage.setItem(STORAGE_KEY, "light");
+    applyStoredTheme();
+    expect(document.documentElement.getAttribute("data-theme")).toBeNull();
+  });
+
+  it("ignores unknown stored values and falls back to the OS preference", () => {
+    mockOSPrefersDark(false);
     localStorage.setItem(STORAGE_KEY, "nope");
     applyStoredTheme();
     expect(document.documentElement.getAttribute("data-theme")).toBeNull();
@@ -46,7 +84,7 @@ describe("theme toggle storage contract", () => {
 
   it("uses the documented storage key", () => {
     // If this assertion ever fails, the storage key in BaseLayout.astro and
-    // src/pages/index.astro got out of sync with the unit-test contract.
+    // src/components/Nav.astro got out of sync with the unit-test contract.
     expect(STORAGE_KEY).toBe("ldqis-theme");
   });
 });

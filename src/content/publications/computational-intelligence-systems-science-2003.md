@@ -6,6 +6,6 @@ title: "General Principles and Purposes of Computational Intelligence in Systems
 authors: "L. Reznik"
 author_ids:
   - leon-reznik
-link: { label: "EOLSS ↗", href: "https://www.eolss.net/sample-chapters/c02/E6-46-04-01.pdf" }
+link: { label: "EOLSS ↗", href: "http://www.eolss.net/" }
 order: 100
 ---

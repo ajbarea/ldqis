@@ -64,5 +64,5 @@ body:
   - type: textarea
     id: abstract
     attributes:
-      label: Abstract or summary (optional)
-      description: "A short paragraph for the publication page: a paper's abstract, or a book's summary."
+      label: Abstract or summary (recommended)
+      description: "Shown on the publication's page, so it's well worth adding. Paste the paper's published abstract, or a short summary for a book. A maintainer can add it on review if you skip it."

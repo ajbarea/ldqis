@@ -123,7 +123,6 @@ def build_publication(f: dict, title: str) -> tuple[Path, list[str]]:
         f"title: {yaml_quote(title)}",
         f"authors: {yaml_quote(clean(f.get('authors')) or '')}",
         f"link: {{ label: {yaml_quote(clean(f.get('link_label')) or 'DOI ↗')}, href: {yaml_quote(link_url)} }}",
-        f"order: {preserve_order(md_path)}",
     ]
     if refs := preserve_refs(md_path, "author_ids"):
         out.append(refs)

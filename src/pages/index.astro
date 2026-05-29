@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import ContactLinks from "../components/ContactLinks.astro";
 import Avatar from "../components/Avatar.astro";
 import Nav from "../components/Nav.astro";
+import { byRecency } from "../lib/publications";
 
 // research(2026-05): M2 migrates projects / publications / people to Astro 5
 // content collections. The remaining inline `researchAreas` array stays
@@ -53,7 +54,7 @@ const projects = projectEntries
 
 const publicationEntries = await getCollection("publications");
 const publications = publicationEntries
-  .sort((a, b) => a.data.order - b.data.order)
+  .sort(byRecency)
   .map((entry) => ({ ...entry.data, id: entry.id }));
 
 const peopleEntries = await getCollection("people");

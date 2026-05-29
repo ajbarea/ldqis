@@ -5,6 +5,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ContactLinks from "../../components/ContactLinks.astro";
 import Avatar from "../../components/Avatar.astro";
 import Nav from "../../components/Nav.astro";
+import { byRecency } from "../../lib/publications";
 
 // Detail pages for people give each researcher (current + past cohort)
 // a stable shareable URL. The lab's pre-M2 site had no per-person page;
@@ -39,8 +40,7 @@ const cohortLabel = cohort === "current" ? "Current team" : "Past cohort";
 // Cross-links are computed at build time by walking the source collections
 // rather than denormalized on each person entry — one-direction storage
 // (project.contributors / publication.author_ids) avoids the bidirectional-
-// sync bug class. Order matches each collection's `order` field where
-// declared, falling back to filesystem order otherwise.
+// sync bug class. Projects keep their curated `order`; publications by recency.
 const [allProjects, allPublications] = await Promise.all([
   getCollection("projects"),
   getCollection("publications"),
@@ -50,7 +50,7 @@ const projectsContributed = allProjects
   .sort((a, b) => a.data.order - b.data.order);
 const publicationsAuthored = allPublications
   .filter((p) => p.data.author_ids.some((ref) => ref.id === entry.id))
-  .sort((a, b) => a.data.order - b.data.order);
+  .sort(byRecency);
 // Books lead (academic-CV convention: a monograph outweighs papers) and get a
 // highlighted card; journal/conference papers follow in the Publications list.
 const books = publicationsAuthored.filter((p) => p.data.venue_type === "book");

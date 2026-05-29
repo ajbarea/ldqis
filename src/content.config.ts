@@ -72,7 +72,6 @@ const publications = defineCollection({
     authors: z.string(),
     author_ids: z.array(reference("people")).default([]),
     link: z.object({ label: z.string(), href: z.string().url() }),
-    order: z.number().int().nonnegative(),
   }),
 });
 

@@ -141,7 +141,6 @@ collections:
         value_field: "{{slug}}"
         search_fields: [name]
         display_fields: [name]
-      - { label: Order, name: order, widget: number, value_type: int, default: 100 }
       - {
           label: Abstract / about this book,
           name: body,

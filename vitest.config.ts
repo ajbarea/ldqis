@@ -8,12 +8,6 @@ import { getViteConfig } from "astro/config";
 import { defineConfig } from "vitest/config";
 
 export default getViteConfig(
-  // research(2026-05): Vitest's defineConfig returns the top-level Vite
-  // UserConfig type; Astro's getViteConfig expects its own nested-Vite
-  // UserConfig type (same Vite version pinned differently in the dep tree).
-  // The runtime path is fine. Same pattern as the `@tailwindcss/vite`
-  // workaround in astro.config.mjs.
-  // @ts-expect-error -- upstream type mismatch; runtime is unaffected.
   defineConfig({
     test: {
       environment: "happy-dom",

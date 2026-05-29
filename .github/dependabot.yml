@@ -20,12 +20,6 @@ updates:
       npm:
         patterns: ["*"]
         update-types: ["minor", "patch"]
-    ignore:
-      # Astro held at 5.x until withastro/astro#16542 (the @tailwindcss/vite
-      # vs Astro 6 rolldown incompatibility) closes — see IMPL.md. Minor/patch
-      # 5.x updates still flow; only the 6.x major is held back.
-      - dependency-name: "astro"
-        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"

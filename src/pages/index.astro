@@ -133,7 +133,9 @@ const pastCohort = peopleEntries
               // refereed papers (cs.rit.edu/~lr/publications.pdf). The list
               // rendered below is a curated subset; full record on Google Scholar.
               { num: "140+", label: "Peer-reviewed publications" },
-              { num: "12+", label: "Years of funded work" },
+              // research(2026-05): publishing since 1992 per L. Reznik's CV
+              // (1992-2025); "30+" rounds down from ~34 years.
+              { num: "30+", label: "Years of research" },
             ].map(({ num, label }) => (
               <div class="bg-bg px-6 py-7">
                 <div style="font-family: var(--font-display); font-size: 44px; line-height: 1; color: var(--color-rit-orange);">
@@ -260,10 +262,11 @@ const pastCohort = peopleEntries
           class="mb-6 max-w-[22ch]"
           style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;"
         >
-          Recent peer-reviewed work.
+          Selected publications.
         </h2>
         <p class="mb-14 max-w-[64ch] text-lg text-text-dim">
-          Selected recent publications from the lab. For the complete record, see Dr. Reznik's
+          A selection of the lab's work, from foundational to recent. For the complete record, see
+          Dr. Reznik's
           <a
             href="https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en"
             target="_blank"

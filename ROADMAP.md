@@ -53,8 +53,10 @@ so the flip is one change once DNS resolves.
 
 - **Astro 6 upgrade** — blocked on the upstream Tailwind-vite fix
   ([withastro/astro#16542](https://github.com/withastro/astro/issues/16542)); see IMPL.md.
-- **Editorial UI** — Decap or Sveltia CMS for non-technical editors, only once there's a
-  real second editor. (The profile intake form already covers self-service profile edits.)
+- **Admin (Sveltia CMS) UX** — the no-code `/admin` editor is live; streamline its editing
+  experience (clearer fields, smoother flows) as more lab members start using it.
+- **Sponsors / funding** — a section crediting the organizations that support and fund the
+  lab, once there's a confirmed list to show.
 - **Search** — Pagefind or Astro's built-in, once the publication list grows enough to
   warrant it.
 - **Per-project demo embeds** — interactive project demos as embedded islands, if and when

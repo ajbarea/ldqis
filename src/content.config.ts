@@ -16,6 +16,12 @@ import { glob } from "astro/loaders";
 import { defineCollection, reference } from "astro:content";
 import { z } from "astro/zod";
 
+// Sveltia writes "" for a cleared optional field, which would fail the .url() /
+// .regex() refinements below and block the build. Treat a blank string as absent
+// so leaving an optional link/social field empty in the CMS stays valid.
+const blankable = <T extends z.ZodType>(schema: T) =>
+  z.preprocess((v) => (v === "" ? undefined : v), schema.optional());
+
 // Projects — open-source frameworks + research artifacts the lab ships.
 // Each entry's frontmatter mirrors the prior inline array in index.astro
 // (name, tagline, tags[], stack, desc with allowed inline HTML, links[]).
@@ -90,53 +96,49 @@ const people = defineCollection({
       initials: z.string().min(1).max(3),
       name: z.string(),
       role: z.string(),
-      email: z.email().optional(),
+      email: blankable(z.email()),
       // Optional Google Scholar profile URL. When set, the homepage team
       // card + the per-person detail page render a "Google Scholar" link
       // alongside the email button. Constrained to the scholar.google.com
       // host so a typo in the frontmatter (e.g. dropping the URL or
       // pasting a researchgate link) doesn't silently surface as an
       // ambiguous external link.
-      scholar: z
-        .url()
-        .regex(/^https:\/\/scholar\.google\.com\//, {
+      scholar: blankable(
+        z.url().regex(/^https:\/\/scholar\.google\.com\//, {
           message: "scholar URL must point at https://scholar.google.com/",
-        })
-        .optional(),
+        }),
+      ),
       // Optional IEEE Xplore author-profile URL. Same treatment as `scholar`:
       // host-constrained so a mistyped or wrong-host link fails the build.
-      ieee: z
-        .url()
-        .regex(/^https:\/\/ieeexplore\.ieee\.org\//, {
+      ieee: blankable(
+        z.url().regex(/^https:\/\/ieeexplore\.ieee\.org\//, {
           message: "ieee URL must point at https://ieeexplore.ieee.org/",
-        })
-        .optional(),
+        }),
+      ),
       // --- Social / web links (all optional; paste the full URL unless noted) ---
       // Personal website or homepage.
-      website: z.url().optional(),
+      website: blankable(z.url()),
       // GitHub *handle* (e.g. "ajbarea", not a URL). Drives the GitHub link and —
       // when no `avatar` image is set — the profile photo (github.com/<handle>.png).
-      github: z
-        .string()
-        .regex(/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/, {
+      github: blankable(
+        z.string().regex(/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/, {
           message: 'github must be a handle like "ajbarea", not a URL',
-        })
-        .optional(),
-      linkedin: z
-        .url()
-        .regex(/linkedin\.com\//, { message: "linkedin must be a linkedin.com URL" })
-        .optional(),
-      youtube: z
-        .url()
-        .regex(/youtube\.com\/|youtu\.be\//, { message: "youtube must be a youtube.com URL" })
-        .optional(),
+        }),
+      ),
+      linkedin: blankable(
+        z.url().regex(/linkedin\.com\//, { message: "linkedin must be a linkedin.com URL" }),
+      ),
+      youtube: blankable(
+        z.url().regex(/youtube\.com\/|youtu\.be\//, {
+          message: "youtube must be a youtube.com URL",
+        }),
+      ),
       // ORCID iD in canonical 0000-0000-0000-0000 form (the link is built from it).
-      orcid: z
-        .string()
-        .regex(/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/, {
+      orcid: blankable(
+        z.string().regex(/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/, {
           message: "orcid must be an iD like 0000-0002-1825-0097",
-        })
-        .optional(),
+        }),
+      ),
       // Profile photo: drop a file in src/content/people/avatars/ and set
       // `avatar: ./avatars/your-name.jpg`. Astro optimizes it. Falls back to the
       // GitHub avatar (if `github` set), then initials.

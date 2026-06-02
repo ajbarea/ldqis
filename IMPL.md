@@ -5,7 +5,15 @@ longer-term plan lives in [ROADMAP.md](./ROADMAP.md); git history has the full r
 
 ## In progress
 
-_Nothing open right now._
+- **CMS publish pipeline.** A direct `/admin` save to protected `main` is rejected
+  ("required status checks are expected"), so editing only worked for the repo owner,
+  who bypasses protection. Fix: Sveltia commits to an unprotected `cms` branch;
+  `cms-publish.yml` opens an App-authored PR to `main` (so `ci.yml` actually runs) and
+  auto-merges once the required checks pass; `cms-sync.yml` then folds `main` back into
+  `cms`. `main`'s protection is never bypassed. Activation needs a one-time GitHub App
+  (`CMS_APP_ID` var + `CMS_APP_PRIVATE_KEY` secret), the `cms` branch, and flipping
+  `backend.branch` to `cms` in the admin config; until then `/admin` saves still fail
+  for non-owners.
 
 ## Known issues
 

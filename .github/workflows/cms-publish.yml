@@ -58,9 +58,10 @@ jobs:
             gh api -X POST "repos/$REPO/git/refs" -f ref="refs/heads/cms-pub" -f sha="$cms_sha" >/dev/null
           fi
           # One open PR at a time; an existing one already tracks the refreshed head.
-          if [ -z "$(gh pr list --head cms-pub --base main --state open --json number --jq '.[0].number')" ]; then
-            gh pr create --base main --head cms-pub \
+          # gh pr needs an explicit --repo since there's no checkout to infer it from.
+          if [ -z "$(gh pr list --repo "$REPO" --head cms-pub --base main --state open --json number --jq '.[0].number')" ]; then
+            gh pr create --repo "$REPO" --base main --head cms-pub \
               --title "Publish CMS content edits" \
               --body "Automated bridge from the cms branch; auto-merges once the required checks pass."
           fi
-          gh pr merge cms-pub --auto --squash --delete-branch
+          gh pr merge --repo "$REPO" cms-pub --auto --squash --delete-branch

@@ -17,7 +17,11 @@
 backend:
   name: github
   repo: ajbarea/ldqis
-  branch: main
+  # research(2026-06): the CMS commits to an unprotected `cms` branch, not `main`.
+  # main requires status checks and GitHub rejects a direct CMS write to it
+  # ("required status checks are expected"); Sveltia has no PR/editorial mode yet.
+  # .github/workflows/cms-publish.yml bridges cms -> main via an auto-merged PR.
+  branch: cms
   # OAuth proxy (Cloudflare Worker) for password-free "Sign in with GitHub".
   base_url: https://ldqis-cms-auth.ajbareaa.workers.dev
   # Only GitHub OAuth on the login screen (no personal-access-token option).

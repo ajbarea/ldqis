@@ -124,6 +124,9 @@ const projects = projectEntries
   .sort((a, b) => a.data.order - b.data.order)
   .map((entry) => ({ ...entry.data, id: entry.id }));
 
+// Lookup for the optional publication → project "Code" cross-link below.
+const projectNamesById = new Map(projectEntries.map((p) => [p.id, p.data.name]));
+
 const publicationEntries = await getCollection("publications");
 const publications = publicationEntries
   .sort(byRecency)
@@ -371,6 +374,16 @@ const pastCohort = peopleEntries
                     {pub.title}
                   </a>
                   <div class="text-[13px] text-text-dim">{pub.authors}</div>
+                  {pub.project && (
+                    <a
+                      href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/projects/${pub.project.id}/`}
+                      class="mt-[6px] inline-flex items-center gap-1 text-[12px] hover:underline"
+                      style="color: var(--color-rit-orange-text);"
+                    >
+                      <span aria-hidden="true">⟨/⟩</span> Code ·{" "}
+                      {projectNamesById.get(pub.project.id)} →
+                    </a>
+                  )}
                 </div>
                 <a
                   href={pub.link.href}

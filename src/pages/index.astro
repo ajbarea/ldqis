@@ -47,6 +47,51 @@ const researchAreas = [
   },
 ];
 
+// research(2026-06): the lab's funded awards, shown as a "Funded By" credibility
+// band. Inline like `researchAreas` (homepage-only, no detail page). NSF titles +
+// dates verified against the NSF Awards API (api.nsf.gov); non-NSF awards have no
+// public award page, so `url` is null and they link nowhere. The federal-funding
+// disclaimer under the grid follows NSF policy 14.9. Sources: nsf.gov/awardsearch,
+// research.howard.edu federal-sponsor acknowledgment guidance.
+const funders = [
+  {
+    agency: "National Science Foundation",
+    program: "Ideas Lab — Smarter Microbial Observatories for Realtime Experiments (SMORES)",
+    award: "#2321652",
+    years: "2023–2027",
+    url: "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2321652",
+  },
+  {
+    agency: "National Science Foundation",
+    program: "IMPRESS-U — Robust Machine Learning for Object Detection & Classification",
+    award: "#2415299",
+    years: "2024–2027",
+    url: "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2415299",
+  },
+  {
+    agency: "National Science Foundation",
+    program:
+      "CICI Data Provenance — Data Quality & Security Evaluation Framework for Mobile Platforms",
+    award: "#1547301",
+    years: "2016–2021",
+    url: "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=1547301",
+  },
+  {
+    agency: "U.S. Department of Defense",
+    program: "Army Research Office award",
+    award: "#W911NF2010337",
+    years: "2020–2022",
+    url: null,
+  },
+  {
+    agency: "CRDF Global · U.S. Department of State",
+    program: "International collaborative research award",
+    award: "#G-202102-67515",
+    years: "2021–2022",
+    url: null,
+  },
+];
+
 const projectEntries = await getCollection("projects");
 const projects = projectEntries
   .sort((a, b) => a.data.order - b.data.order)
@@ -457,6 +502,60 @@ const pastCohort = peopleEntries
       </div>
     </section>
 
+    {/* FUNDED BY */}
+    <section id="funding" class="relative py-[100px]">
+      <div class="mx-auto max-w-[1200px] px-6">
+        <div class="mb-4 text-xs tracking-[1.5px] text-rit-orange-text uppercase">Funded By</div>
+        <h2
+          class="mb-6 max-w-[22ch]"
+          style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;"
+        >
+          Backed by competitive research awards.
+        </h2>
+        <p class="mb-14 max-w-[64ch] text-lg text-text-dim">
+          LDQIS research has been supported by the National Science Foundation, the U.S. Department
+          of Defense, and CRDF Global with the U.S. Department of State.
+        </p>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {
+            funders.map((f) => (
+              <article class="flex flex-col rounded-[14px] border border-line bg-bg-elev p-8 transition-all hover:-translate-y-[2px] hover:border-rit-orange">
+                <div
+                  class="mb-3 text-[11px] tracking-[1.5px] uppercase"
+                  style="color: var(--color-rit-orange-text);"
+                >
+                  {f.agency}
+                </div>
+                <div class="mb-4 text-[19px] leading-[1.3] font-medium">{f.program}</div>
+                <div class="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-line pt-[18px] text-[13px] text-text-dim">
+                  <span class="font-mono text-text-faint">{f.award}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>{f.years}</span>
+                  {f.url && (
+                    <a
+                      href={f.url}
+                      target="_blank"
+                      rel="noopener"
+                      class="ml-auto inline-flex items-center gap-1 hover:text-rit-orange-text"
+                      style="color: var(--color-rit-orange-text);"
+                      aria-label={`NSF award ${f.award} on nsf.gov`}
+                    >
+                      View award →
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+        <p class="mt-10 max-w-[80ch] text-xs leading-[1.7] text-text-faint">
+          Any opinions, findings, and conclusions or recommendations expressed on this site are
+          those of the authors and do not necessarily reflect the views of the National Science
+          Foundation, the U.S. Department of Defense, or other funding agencies.
+        </p>
+      </div>
+    </section>
+
     {/* GET INVOLVED */}
     <section id="support" class="relative py-[100px]">
       <div class="mx-auto max-w-[1200px] px-6">
@@ -539,6 +638,7 @@ const pastCohort = peopleEntries
             <li><a href="#research" class="hover:text-rit-orange-text">Areas</a></li>
             <li><a href="#publications" class="hover:text-rit-orange-text">Publications</a></li>
             <li><a href="#projects" class="hover:text-rit-orange-text">Open-source</a></li>
+            <li><a href="#funding" class="hover:text-rit-orange-text">Funded by</a></li>
           </ul>
         </div>
         <div>

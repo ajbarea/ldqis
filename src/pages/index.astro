@@ -92,6 +92,33 @@ const funders = [
   },
 ];
 
+// research(2026-06): courses the lab teaches, shown as a thin "Teaching" list —
+// a curriculum + credibility signal, not a per-course collection. The ROADMAP
+// rules out hosting syllabi/schedules ourselves (catalog duplication + staleness),
+// so this links out to the instructor's maintained course pages instead. Inline
+// like `funders` (homepage-only, no detail page). Course codes are the identity
+// anchor; titles follow Dr. Reznik's current faculty list (cs.rit.edu/~lr) — the
+// official RIT AI listing names CSCI-630 "Foundations of Artificial Intelligence"
+// and confirms 735/736 verbatim. Sources: cs.rit.edu/~lr, rit.edu/ai/graduate-courses.
+const courses = [
+  { code: "CSCI-331", title: "Introduction to Intelligent Systems", level: "Undergraduate" },
+  { code: "CSCI-531", title: "Introduction to Security Measurement", level: "Undergraduate" },
+  {
+    code: "CSCI-532",
+    title: "Introduction to Intelligent Security Systems",
+    level: "Undergraduate",
+  },
+  { code: "CSCI-630", title: "Foundations of Intelligent Systems", level: "Graduate" },
+  {
+    code: "CSCI-734",
+    title: "Foundations of Security Measurement and Evaluation",
+    level: "Graduate",
+  },
+  { code: "CSCI-735", title: "Foundations of Intelligent Security Systems", level: "Graduate" },
+  { code: "CSCI-736", title: "Neural Networks and Machine Learning", level: "Graduate" },
+  { code: "CSCI-788", title: "MS Capstone Project", level: "Graduate" },
+];
+
 const projectEntries = await getCollection("projects");
 const projects = projectEntries
   .sort((a, b) => a.data.order - b.data.order)
@@ -502,6 +529,65 @@ const pastCohort = peopleEntries
       </div>
     </section>
 
+    {/* TEACHING */}
+    <section id="teaching" class="relative py-[100px]">
+      <div class="mx-auto max-w-[1200px] px-6">
+        <div class="mb-4 text-xs tracking-[1.5px] text-rit-orange-text uppercase">Teaching</div>
+        <h2
+          class="mb-6 max-w-[22ch]"
+          style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px; text-wrap: balance;"
+        >
+          From the lecture hall to the lab.
+        </h2>
+        <p class="mb-14 max-w-[64ch] text-lg text-text-dim">
+          Lab members teach across RIT's undergraduate and graduate computer science curriculum —
+          the same areas the lab researches, from intelligent systems and security measurement to
+          neural networks and intelligent security. For schedules and current materials, see Dr.
+          Reznik's
+          <a
+            href="https://www.cs.rit.edu/~lr/"
+            target="_blank"
+            rel="noopener"
+            class="border-b"
+            style="color: var(--color-rit-orange-text); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
+            >course pages</a
+          >.
+        </p>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {
+            ["Undergraduate", "Graduate"].map((level) => {
+              const items = courses.filter((c) => c.level === level);
+              return (
+                <article class="rounded-[14px] border border-line bg-bg-elev p-8">
+                  <div class="mb-6 flex items-baseline justify-between gap-3">
+                    <h3
+                      class="font-normal"
+                      style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.5px;"
+                    >
+                      {level}
+                    </h3>
+                    <span class="text-[12px] tracking-[1px] text-text-faint uppercase">
+                      {items.length} courses
+                    </span>
+                  </div>
+                  <ul class="flex flex-col">
+                    {items.map((c) => (
+                      <li class="flex flex-col gap-1 border-t border-line py-4 first:border-t-0 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:gap-4">
+                        <span class="font-mono text-[12px] tracking-[0.5px] text-text-faint sm:w-[84px] sm:shrink-0">
+                          {c.code}
+                        </span>
+                        <span class="text-[16px] leading-[1.3]">{c.title}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+
     {/* FUNDED BY */}
     <section id="funding" class="relative py-[100px]">
       <div class="mx-auto max-w-[1200px] px-6">
@@ -648,6 +734,7 @@ const pastCohort = peopleEntries
           <ul class="space-y-2 text-sm text-text-dim">
             <li><a href="#people" class="hover:text-rit-orange-text">Current team</a></li>
             <li><a href="#people" class="hover:text-rit-orange-text">Alumni</a></li>
+            <li><a href="#teaching" class="hover:text-rit-orange-text">Teaching</a></li>
             <li>
               <a
                 href="mailto:lrvcs@rit.edu?subject=Joining%20LDQIS"

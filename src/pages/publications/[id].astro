@@ -1,6 +1,6 @@
 ---
 import { type GetStaticPaths } from "astro";
-import { getCollection, getEntries, render } from "astro:content";
+import { getCollection, getEntries, getEntry, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import {
@@ -22,7 +22,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { year, venue, venue_type, title, authors, author_ids, link, isbn } = entry.data;
+const { year, venue, venue_type, title, authors, author_ids, link, isbn, project } = entry.data;
 
 // research(2026-05): publication detail pages carry Highwire `citation_*`
 // meta tags (the format Google Scholar parses) plus a schema.org
@@ -42,6 +42,9 @@ const jsonLdScript = JSON.stringify(buildPublicationJsonLd(pub, Astro.url.href))
 // (kept for RSS / CV-style display); `author_ids` adds clickable cross-
 // links into per-person detail pages.
 const authorEntries = author_ids.length ? await getEntries(author_ids) : [];
+// Resolve the optional implementing project so the page can surface a "Code"
+// cross-link to it (the project page carries the repo + docs + DOI).
+const projectEntry = project ? await getEntry(project) : null;
 // An optional Markdown body renders as the abstract (papers) or "About this
 // book" (books); a publication without a body simply omits the section.
 const { Content } = await render(entry);
@@ -118,7 +121,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         )
       }
 
-      <div class="border-t border-line pt-8">
+      <div class="flex flex-wrap gap-3 border-t border-line pt-8">
         <a
           href={link.href}
           target="_blank"
@@ -127,6 +130,16 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         >
           {link.label}
         </a>
+        {
+          projectEntry && (
+            <a
+              href={`${baseUrl}/projects/${projectEntry.id}/`}
+              class="inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] text-sm hover:border-rit-orange hover:text-rit-orange-text"
+            >
+              <span aria-hidden="true">⟨/⟩</span> Code · {projectEntry.data.name} →
+            </a>
+          )
+        }
       </div>
     </article>
   </main>

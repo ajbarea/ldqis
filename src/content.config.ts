@@ -79,6 +79,11 @@ const publications = defineCollection({
     authors: z.string(),
     author_ids: z.array(reference("people")).default([]),
     link: z.object({ label: z.string(), href: z.url() }),
+    // Optional link to the lab project that implements this paper (its code +
+    // artifacts). Surfaces a "Code" cross-link on the publication. `blankable`
+    // keeps a cleared CMS field valid; reference() hard-fails the build on a bad
+    // project id. The reverse (project → its papers) is intentionally not stored.
+    project: blankable(reference("projects")),
   }),
 });
 

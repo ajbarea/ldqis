@@ -50,10 +50,32 @@ apex domain, so the flip is one change once DNS resolves.
 
 ### Backlog (unprioritized)
 
+- **Research areas / themes** — group the lab's work by problem area (data quality,
+  integrity, security) on the homepage and a research page, each theme linking its projects,
+  publications, and people. research(2026-06): peer lab sites (Stanford AI, Oxford OATML)
+  and lab-website guidance lead with research _by theme_ over a flat paper list, so a
+  visitor grasps what the lab works on before the formal publications. Source:
+  theacademicdesigner.com, OpenScholar lab-site structure.
+- **Artifact links on publications** — optional code-repo and dataset-DOI fields per paper,
+  with room for an "Available / Reproducible" badge. research(2026-06): 2026 CS/security
+  venues award IEEE artifact badges for code+data deposited on Zenodo with a DOI, so
+  surfacing the artifact is now expected for a data-quality/security lab, not a nicety.
+  Source: sysartifacts.github.io, IEEE Access reproducibility pilot.
+- **Join the lab** — a static "open positions / prospective students" page (what the lab
+  looks for, how to apply via the existing intake form / contact), refreshed before
+  recruiting season. research(2026-06): all three peer sites surface a recruiting CTA, and
+  guidance names prospective students + collaborators as the primary audience judging a lab
+  site. Source: theacademicdesigner.com, SFU Library research-website tips.
+- **News post images** — one optional Astro-optimized image per news entry.
+  research(2026-06): every peer site pairs each news item with a thumbnail for scanability;
+  one field, no architecture cost.
 - **Admin (Sveltia CMS) UX** — the no-code `/admin` editor is live; streamline its editing
   experience (clearer fields, smoother flows) as more lab members start using it.
-- **Sponsors / funding** — a section crediting the organizations that support the lab, once
-  there's a confirmed list to show.
+- **Collaborators / partners** — credit the partner institutions and people the lab works
+  with (the funder list now ships as the **Funded By** section). research(2026-06): OATML
+  ("Collaborators") and Stanford ("Affiliates") surface partnerships as a credibility
+  signal, and the data already lives on the PI's page and in grant records, so it's ready to
+  build rather than "someday".
 - **Search** — Pagefind or Astro's built-in, once the publication list grows enough to
   warrant it.
 - **Per-project demo embeds** — interactive project demos as embedded islands, if and when
@@ -61,39 +83,54 @@ apex domain, so the flip is one change once DNS resolves.
 - **Multi-author news bylines** — when a post has more than one author.
 - **Internationalization** — only if a lab member needs it.
 
+### Looked at, deliberately not doing
+
+research(2026-06): reviewed three peer lab sites (Stanford AI, Oxford OATML, UTRGV MI) for
+ideas. These were weighed and declined, recorded so they aren't re-proposed:
+
+- **A live social-media feed** (Stanford embeds X/Twitter) — a third-party feed is JS-heavy,
+  breaks the zero-JS-by-default / perfect-Lighthouse / a11y bar, and rots when the platform
+  changes (cf. Storify's shutdown). If social presence matters, use a static "follow us"
+  link row or curate highlights as news. Source: Nieman Lab.
+- **A dedicated events / talks page** — events pages are the top staleness liability for lab
+  sites. The existing `news` collection already carries talks and defenses and auto-hides
+  drafts + future-dated posts at build; revisit a separate page only with a sustained,
+  maintained cadence and the same auto-archive. Source: The Academic Designer.
+- **A heavy per-course collection** (syllabi, schedules) — duplicates the RIT catalog and
+  goes stale; the shipped **Teaching** section (a thin link-out list) covers the need instead.
+- **A rotating / punny banner** (OATML's oat puns) — characterful, but it fights the "stable
+  identity" principle and isn't worth the churn.
+
 ## Shipped
 
 Highlights below; full history in git.
 
-- **Astro 6.** Upgraded from the 5.x line. `@tailwindcss/vite`'s wide peer range is pinned
-  out with `overrides.vite: ^7` (npm would otherwise hoist Vite 8 and break the build); this
-  also cleared the two Astro 5.x advisories.
-- **Slim content-PR gate.** A profile / project / publication PR (a Markdown edit under
-  `src/content/**`) gates to merge on a fast `Build` (`astro build` schema validation) +
-  `pin-check`. The app suite (lint, type-check, unit, E2E + a11y, Lighthouse) is conditioned
-  on a `dorny/paths-filter` job and skips — reporting success — when nothing outside
-  `src/content/**` changed. research(2026-05): GitHub required checks are repo-wide, so a
-  job-level `if:` skip is the endorsed way to drop heavy checks on content PRs without
-  leaving a required check stuck Pending. (Lab members are deliberately not repo
-  collaborators — AJ approves first-time-contributor workflow runs manually rather than
-  granting write access.)
-- **Project / publication intake + email copy chip.** Issue forms for profiles, projects,
-  and publications open auto-generated, reviewed PRs; they take comma-separated tags/stack
-  and derive the entry's name/title from the issue title, so nothing is typed twice. Each
-  intake workflow runs `astro build` to validate the generated entry before opening the PR.
-  On profile and detail pages the email is a single chip: clicking opens mail, and an inline
-  icon copies the address with a "Copied!" confirmation.
-- **Profile cards: photos, links, and a submission form.** Team cards show a photo (uploaded,
-  auto-pulled from a GitHub handle, or initials), social and academic links (website, GitHub,
-  LinkedIn, YouTube, ORCID, Scholar, IEEE), and years in the lab. An issue form lets members
-  submit a card — photo and all — without touching git.
+- **Teaching.** A homepage section lists the courses lab members teach — Dr. Reznik's
+  undergraduate CSCI-331/531/532 and graduate CSCI-630/734/735/736/788 — as a thin inline
+  list that links out to his maintained course pages rather than duplicating syllabi, with
+  the course code as the identity anchor.
+- **Funded By.** A homepage section credits the lab's competitive research awards — NSF
+  (incl. SMORES #2321652 and IMPRESS-U), DoD / Army Research Office, and CRDF Global with the
+  U.S. Department of State — NSF titles and dates verified against the NSF Awards API, under a
+  federal-funding disclaimer.
+- **Astro 6.** Upgraded from the 5.x line; `overrides.vite: ^7` keeps npm from hoisting
+  Vite 8 (which breaks the build) and cleared the 5.x advisories.
+- **Slim content-PR gate.** Content PRs (Markdown under `src/content/**`) merge on a fast
+  `Build` (schema validation) + `pin-check`; the full app suite (lint, type-check, unit,
+  E2E + a11y, Lighthouse) skips via a job-level `if:` (rationale in `ci.yml`).
+- **Intake forms + email chip.** Issue forms open auto-generated, reviewed PRs for profiles,
+  projects, and publications — comma-separated tags/stack, names derived from the issue
+  title, each validated by `astro build` before the PR opens. Email renders as a
+  click-to-mail chip with an inline copy button.
+- **Profile cards.** Team cards show a photo (uploaded, GitHub-handle, or initials), social
+  and academic links (website, GitHub, LinkedIn, YouTube, ORCID, Scholar, IEEE), and years
+  in the lab.
 - **Academic discovery metadata.** Publication pages emit Highwire `citation_*` tags (what
-  Google Scholar reads), complemented by schema.org JSON-LD and a sitemap.
+  Google Scholar reads), plus schema.org JSON-LD and a sitemap.
 - **News + RSS.** A `news` collection with an index, per-post pages, and a valid RSS 2.0
   feed; drafts and future-dated posts are excluded at build time.
 - **Content collections + detail pages.** Projects, publications, and people are Astro
-  content collections; each gets a prerendered detail page, and projects/publications
+  content collections, each with a prerendered detail page; projects and publications
   cross-link to the people who authored or built them.
 - **Supply-chain hardening + CI.** GitHub Actions pinned to commit SHAs with a Dependabot
-  cooldown; accessibility, Lighthouse, lint, type-check, and unit tests run on every pull
-  request.
+  cooldown; the per-PR suite runs lint, type-check, unit, a11y, and Lighthouse on app PRs.

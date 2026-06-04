@@ -1,0 +1,893 @@
+                               Leon Reznik                                        Curriculum Vitae
+
+
+                               IV. LIST OF PRODUCTS
+Summary:
+                                      1992-2001                  2002-11                   2012-25
+     Books                                2                         3                         2
+     Chapters in books                    5                         7                         8
+     Refereed journal                     7                         7                         9
+     articles
+     Refereed conference                  44                        32                        49
+     papers
+     Apps developed                        -                         -                         6
+     Data collections                      -                         -                         2
+     Patent applications                   -                         -                         2
+
+Products:
+    Applications developed
+       [1] Igor Khokhlov, Leon Reznik Sensor Selector- available at Google Play – see
+           https://play.google.com/store/apps/details?id=edu.rit.dataqualitylab.sensorselector, ver. June 3,
+           2022
+       [2] Igor Khokhlov, Leon Reznik System Security Evaluation application - available at Google Play
+           – see https://play.google.com/store/apps/details?id=com.igorkh.trustcheck.securitycheck , ver.
+           1.5, February 16, 2021
+       [3] Sahil Ajimera, Igor Khokhlov, Leon Reznik Sensor Quality Assessment - available at Google
+           Play – see available at Google Play – see
+           https://play.google.com/store/apps/details?id=com.dataqualitylab.sensorquality, ver. 1.1, January
+           20, 2020
+       [4] Igor Khokhlov, Leon Reznik Road pothole reporter, - available at Google Play – see
+           https://play.google.com/store/apps/details?id=sdh.application.reportthepotholes, ver. Jan. 9, 2020
+       [5] Igor Khokhlov, Leon Reznik Smartphone Data Collection Tool, - available at Google Play –
+           see https://play.google.com/store/apps/details?id=com.dataqualitylab.collectinfo.collectinfo, ver.
+           1.11, December 7, 2018
+       [6] Igor Khokhlov, Leon Reznik System Security Evaluation: Cloud version - available at Google
+           Play – see
+           https://play.google.com/store/apps/details?id=com.igorkh.trustcheck.securitycheckcloud, ver. 1,
+           November 1, 2018
+       [7] Igor Khokhlov, Milan Bhaskar, Leon Reznik Detector of Unverified Apps - available at
+           Google Play – see
+           https://play.google.com/store/apps/details?id=dataqualitylab.rit.ver_app_finder, updated March
+           12, 2018
+       [8] Milan Bhaskar, Igor Khokhlov, Leon Reznik Unverified App Finder - available at Google Play
+           – see https://play.google.com/store/apps/details?id=project.afinal.rit.capstone_milans_app,
+           updated March 2, 2018
+           Data collections
+       [9] Sensors incorporated in mobile devices, their characteristics and quality evaluation, 2018 - 21 –
+           available at http://www.dataqualitylabs.com/downloadDataFor/Sensor%20Info
+       [10]         Personal smartphones security evaluation, 2018-20 – available at
+           http://www.dataqualitylabs.com/downloadDataFor/Security%20Info
+
+    Patent pending applications:
+
+
+                                                                                                           1
+                          Leon Reznik                                         Curriculum Vitae
+
+[1]     L. Reznik, S. Chuprov, R. Zatsarenko `` Federated Learning with A Compromised Unit
+Exclusion from Receiving Global Model Updates''. Application No. 63/439,995 filed on January 19, 2023,
+- pending
+[2]     L. Reznik and S. Chuprov, ``Network Adjustment based on Machine Learning End System
+Performance Monitoring Feedback''. Application No. 63/406,514 filed on September 14, 2022- pending
+
+Publications:
+       Books
+   [1] L. Reznik Intelligent security systems: How artificial intelligence, machine learning and data
+       science work for and against computer security. IEEE Press-Wiley&Sons, ISBN-13: 978-
+       1119771531, ISBN-10: 1119771536, 2022
+   [2] L. Reznik and Popescu M./Eds. Proceedings of 4th International conference on wireless and
+       mobile communications 2008 (ICWMC 2008), 27 July - 1 August 2008, Athens, Greece, IEEE
+       2008, ISBN CD:978-0-7695-3274-5, doi: 10.1109/ICWMC.2008.
+   [3] L.Reznik/Ed. Advancing Computing and Information Sciences. RIT Cary Graphic Arts Press,
+       2005, ISBN 1-933360-05-4
+   [4] L.Reznik, V.Kreinovich/Eds. Soft Computing in Measurement and Information Acquisition,
+       Springer Verlag, Heidelberg-New York, 2003, ISBN 3-540-00246-4, 284 pp.
+   [5] L.Reznik, V.Dimitrov, J.Kacprzyk/Eds.          Fuzzy System Design: Social and Engineering
+       Applications, Physica Verlag, Heidelberg-New York, 1998, ISBN 3-7908-1118-1, 334 pp.
+   [6] L.Reznik Fuzzy Controllers Elsevier-Newnes, Oxford-Boston, 1997, ISBN 0-7506-3429-4, 287
+       pp.
+
+       Chapters in Books
+
+   [7] Chuprov S, Zatsarenko R, Reznik L. mLINK: Machine Learning Integration with Network and
+       Knowledge. In: Shakarian P, Wei H, eds. Metacognitive Artificial Intelligence. Cambridge
+       University Press; 2025:pp. 264-275. https://doi.org/10.1017/9781009522472 URL
+   [8] Chuprov, S., Belyaev, P., Gataullin, R., Reznik, L., Neverov, E., & Viksnin, I. (2024) ``Robust
+       Autonomous Vehicle Computer-Vision-Based Localization in Challenging Environmental
+       Conditions'' in Applied Sciences. 2024, pp. 34-48., doi: doi.org/10.3390/books978-3-7258-2184-
+       6. Reprint of the Special Issue ``Challenges in the Guidance, Navigation and Control of
+       Autonomous and Transport Vehicles''. URL
+   [9] L. Reznik, "Computer Security with Artificial Intelligence, Machine Learning, and Data Science
+       Combination," in Intelligent Security Systems: How Artificial Intelligence, Machine Learning and
+       Data Science Work For and Against Computer Security , IEEE, 2022, pp.1-56, doi:
+       10.1002/9781119771579.ch1.
+   [10]         L. Reznik, "Firewall Design and Implementation," in Intelligent Security Systems: How
+       Artificial Intelligence, Machine Learning and Data Science Work For and Against Computer
+       Security , IEEE, 2022, pp.57-108, doi: 10.1002/9781119771579.ch2.
+   [11]         L. Reznik, "Intrusion Detection Systems," in Intelligent Security Systems: How Artificial
+       Intelligence, Machine Learning and Data Science Work For and Against Computer Security ,
+       IEEE, 2022, pp.109-176, doi: 10.1002/9781119771579.ch3.
+   [12]         L. Reznik, "Malware and Vulnerabilities Detection and Protection," in Intelligent Security
+       Systems: How Artificial Intelligence, Machine Learning and Data Science Work For and Against
+       Computer Security , IEEE, 2022, pp.177-246, doi: 10.1002/9781119771579.ch4.
+   [13]         L. Reznik, "Hackers versus Normal Users," in Intelligent Security Systems: How Artificial
+       Intelligence, Machine Learning and Data Science Work For and Against Computer Security ,
+       IEEE, 2022, pp.247-313, doi: 10.1002/9781119771579.ch5.
+
+
+
+
+                                                                                                        2
+                      Leon Reznik                                         Curriculum Vitae
+
+[14]         L. Reznik, "Adversarial Machine Learning," in Intelligent Security Systems: How
+    Artificial Intelligence, Machine Learning and Data Science Work For and Against Computer
+    Security , IEEE, 2022, pp.315-335, doi: 10.1002/9781119771579.ch6.
+[15]         L. Reznik, "Front Matter," in Intelligent Security Systems: How Artificial Intelligence,
+    Machine Learning and Data Science Work For and Against Computer Security , IEEE, 2022, pp.i-
+    xxvi, doi: 10.1002/9781119771579.fmatter.
+[16]         L. Reznik Measurement Theory and Uncertainty in Measurements: Application of Interval
+    Analysis and Fuzzy Sets Methods In: Handbook of Granular Computing /Ed: W. Pedrycz,
+    A.Skowron and V.Kreinovich , Wiley and Sons , Chichester, England, 2008, ISBN 978-0-470-
+    03554-2, pp.517-532
+[17]         Von Pless G., Al Karim T., and Reznik L. Modified Time-Based Multilayer Perceptron
+    for Sensor Networks and Image Processing Applications. In Advancing Computing and
+    Information Sciences. Reznik L. /Eds. RIT Cary Graphic Arts Press, pp. 27-33, 2005, ISBN 1-
+    933360-05-4
+[18]         Yampolskiy R., Novikov D., and Reznik L. Performance of MLP and RBF in Character
+    Recognition Utilizing Fuzzy Zoning Feature. In Advancing Computing and Information Sciences.
+    Reznik L. /Eds. RIT Cary Graphic Arts Press, 2005, pp. 34-41, ISBN 1-933360-05-4
+[19]         Samant A., Reznik L., Carithers W. Using System Call Analysis to Stop Evasion Attacks.
+    In Advancing Computing and Information Sciences. Reznik L. /Eds. RIT Cary Graphic Arts Press,
+    2005, ISBN 1-933360-05-4
+[20]         L.Mari and L.Reznik Uncertainty in Measurement: Some Thoughts about its Expressing
+    and Processing In L.Reznik and V.Kreinovich/Eds. Soft Computing in Measurement and
+    Information Acquisition, Springer, Berlin-Heidelberg-New York, 2003, ISBN 3-540-00246- 4, pp.
+    1-9
+[21]         L.Reznik General Principles and Purposes of Computational Intelligence in Systems
+    Science and Cybernetics, [Ed. F. Parra-Luna], In: Encyclopedia of Life Support Systems,
+    Developed under the Auspices of the UNESCO, EOLSS Publishers, Oxford, UK, 2003 (available
+    on-line at http://www.eolss.net/)
+[22]         L.Reznik Neuro-Fuzzy Control Applications: Looking for New Areas and Techniques?
+    In:Fuzzy Logic: A Framework for the New Millennium Korotkich V. and V.Dimitrov/Eds.
+    Physica Verlag, Heidelberg – New York, 2002, ISBN 3-7908-1425-3, p.337 - 351
+[23]         G. Solopchenko, V.Kreinovich, L.Reznik Development of Mathematical Structure of the
+    Modern Measurement Science In: Measurement Science - a Discussion, K.Kariya and L.
+    Finkelstein /Eds. Ohmsha Ltd. and IOS Press, Amsterdam, Oxford, Tokyo, Washington, 2000,
+    ISBN 4-274-90398-2 and 1-58603-088-4, p.23-36
+[24]         L. Reznik What Is Intelligent Measurement? In: Computing with Words in Information
+    /Intelligent Systems, L.A. Zadeh and J.Kacprzyk/Eds. Physica Verlag, Heidelberg – New York,
+    1999, ISBN 3-7908-1217-X, p.78 - 89
+[25]         L.Reznik Fuzzy Controller Design for Different Applications: Evolution, Methods, and
+    Practical Recommendations In: Fuzzy System Design: Social and Engineering Applications, L.
+    Reznik, V.Dimitrov, J.Kacprzyk/Eds. Physica Verlag, Heidelberg- New York, 1998, p.185-201
+[26]         O.Ghanayem and L. Reznik A Universal Approach to Adaptive Fuzzy Logic Controller
+    Design With an Application to a Power Generator Excitation Control In: Fuzzy System Design:
+    Social and Engineering Applications, L. Reznik, V.Dimitrov, J.Kacprzyk/Eds.      Physica Verlag,
+    Heidelberg – New York, 1998, p. 287-308
+[27]         L.Reznik Intelligent Measurement: How to Achieve? In: Gorodetsky A.E. and Kurbanov
+    V.G./Eds. Physical Metrology: Theory and Application Aspects, St.Petersburg, KN Publishers,
+    1996, pp.86 - 106 (in English and Russian)
+
+    Journal articles (refereed)
+
+
+
+                                                                                                   3
+                      Leon Reznik                                         Curriculum Vitae
+
+[28]         D. Korobeinikov, R. Zatsarenko, S. Chuprov, A. Barea and L. Reznik, "IntelliFL
+    Framework: Optimizing Federated Learning with Metacognition for Application Design and
+    Deployment," in IEEE Intelligent Systems Journal, 2026, doi: 10.1109/MIS.2026.3658072.
+[29]         S. Chuprov, L. Reznik and R. Zatsarenko, "KISS: Knowledge Integration System
+    Service for ML End Attacks Detection and Classification," in IEEE Transactions on Dependable
+    and Secure Computing, vol. 22, no. 5, pp. 4783-4794, Sept.-Oct. 2025, doi:
+    10.1109/TDSC.2025.3553807
+[30]         Sergei Chuprov, Raman Zatsarenko, Leon Reznik, and Igor Khokhlov. Data Quality
+    Based Intelligent Instrument Selection with Security Integration. ACM Journal of Data and
+    Information Quality Vol. 16, Iss. 3, Article 15 (September 2024), 24 pages, doi: 10.1145/3695770
+[31]         Chuprov, S.; Belyaev, P.; Gataullin, R.; Reznik, L.; Neverov, E.; Viksnin, I. Robust
+    Autonomous Vehicle Computer-Vision-Based Localization in Challenging Environmental
+    Conditions. Appl. Sci. 2023, 13, 5735. Doi: 10.3390/app13095735I.
+[32]         I. Khokhlov, L. Reznik and S. Chuprov, “Framework for Integral Data Quality and
+    Security Evaluation in Smartphones”, IEEE Systems Journal, June 2021, vol. 15, iss. 2, pp. 2058-
+    2065, doi: 10.1109/JSYST.2020.2985343,
+[33]         I. Khokhlov, L. Reznik and S. Ajmera, "Sensors in Mobile Devices Knowledge Base,"
+    in IEEE Sensors Letters, vol. 4, no. 3, pp. 1-4, March 2020, Art no. 5500404. doi:
+    10.1109/LSENS.2020.2975161
+[34]         Alrubaye H. , Mkaouer M., Khokhlov, I., Reznik L., Ouni A., Mcgoff J. Learning to
+    recommend third-party library migration opportunities at the API level, Applied Soft Computing,
+    vol. 90, pp.106-140, 2020
+[35]         A. Heyman, L.Reznik, M.Negnevitsky, A. Hoffman Fuzzy System Design for Security
+    and Environment Control Applications, International Journal of Uncertainty, Fuzziness and
+    Knowledge-Based Systems, Vol. 23, Suppl. 1 (December 2015), pp. 43-56
+[36]         K. K. Semenov, L. Reznik, and G. N. Solopchenko Fuzzy Intervals Application for
+    Software Metrological Certification in Measurement and Information Systems, International
+    Journal of Uncertainty, Fuzziness and Knowledge-Based Systems, Vol. 23, Suppl. 1 (December
+    2015), pp. 95−104
+[37]         L. Reznik, S.E. Lyshevski Data Quality Indicators Composition and Calculus:
+    Engineering and Information Systems Approaches, Sensors & Transducers, Vol. 185, Issue 2,
+    February        2015,       pp.      140-148        (also           available       online     at
+    http://www.sensorsportal.com/HTML/DIGEST/february_2015/Vol_185/P_2612.pdf)
+[38]         G.P. Timms, P.A. de Souza, Jr., L. Reznik and D. V. Smith Automated Data Quality
+    Assessment of Marine Sensors, Sensors 2011, 11(10), p.9589-9602
+[39]         L. Reznik, Von Pless, G.; Al Karim, T. Distributed Neural Networks for Signal Change
+    Detection: On the Way to Cognition in Sensor Networks, IEEE Sensors Journal, Volume 11 , Issue
+    3, March 2011, pp. 791-798
+[40]         L. Reznik, M. J. Adams, and B. Woodard Intelligent Intrusion Detection Based on
+    Genetically Tuned Artificial Neural Networks, Journal of Advanced Computational Intelligence
+    and Intelligent Informatics, Vol.14, No.6 pp. 708-713, 2010
+[41]         G.N.Solopchenko, K.K. Semenov, V.Kreinovich and L.Reznik Measurement's Result
+    and its Error as Fuzzy Variables: Background and Perspectives, Key Engineering Materials, vol.
+    437, May 2010, pp 487-491
+[42]         J. Podpora, L.Reznik , and G. Von Pless, Intelligent Real Time Adaptation for Power
+    Efficiency in Sensor Networks, IEEE Sensors Journal, vol.8, issue 12, December 2008, pp.2066 –
+    2073
+[43]         L.Reznik and V.Kreinovich Fuzzy Models in Measurement, IEEE Transactions on Fuzzy
+    Systems, vol. 16, No.4, August 2008, pp. 851-862
+[44]         D. Novikov, R. V. Yampolskiy, L. Reznik. Traffic Analysis Based Identification of
+    Attacks. International Journal of Computer Science & Applications (IJCSA), vol. 5, Issue 2, 2008,
+    pp.69-88
+
+                                                                                                   4
+                      Leon Reznik                                       Curriculum Vitae
+
+[45]        L.Reznik and K.P.Dabke Measurement Models: Application of Intelligent Methods,
+    Measurement, 2004, vol. 35, pp. 47-58
+[46]        L.Reznik and S. Spiteri Embedded Smart Controller for an Industrial Reefer
+    Refrigeration, Australian Journal of Intelligent Information Processing Systems, vol.7, No.1/2,
+    2001, pp. 52-57
+[47]        A.Little and L.Reznik Improving the Approximation Smoothness of Radial Basis Neural
+    Networks Journal of Advanced Computational Intelligence, vol. 4, No. 6, 2000, pp.417-420
+[48]        L.Reznik, O. Gnanayem and A. Bourmistrov PID plus Fuzzy Controller Structures as
+    a Design Base for Industrial Applications, Engineering Applications of Artificial Intelligence,
+    2000, vol. 13, No.4, p. 419-430
+[49]        A.T. Popov, H. Nguyen, L.Reznik An Application of Fuzzy Mathematical Morphology
+    to Interval-Valued Knowledge Representation: A Remark Reliable Computing, 1998, No. 3, p.
+    283-290 - 20%
+[50]        L.Reznik Controller Design: The Combination of Techniques, Neural Network World,
+    1996, vol. 6, No. 4, pp. 691 - 699
+[51]        L.Reznik and A.Little Fuzzy Controller Design From A Practitioner’s Point Of View -
+    The Review of Methodologies, Australian Journal of Intelligent Information Processing Systems,
+    1995, vol.2, No.4, pp.1- 9
+[52]        L.Reznik and J.Shi. Fuzzy Controller Design From A Practitioner’s Point Of View -
+    Membership Fuction Choice , Australian Journal of Intelligent Information Processing Systems,
+    1995, vol.2, No.2, pp.38 - 46
+[53]        L. Reznik, G. Britov On Dynamics of Fuzzy Discrete Systems. AUTOMATION AND
+    REMOTE CONTROL, 1987, v. 48, 8, p.185-188
+[54]        L. Reznik          Fuzzy Models of a priori Information in the Measurements' Results
+    Processing        AMSE REVIEW, 1987, v.4, 2, p.1-12
+[55]        L. Reznik, G. Solopchenko                The USSR Patent: Method of Complexing of
+    Measurements, BULLETIN OF PATENTS, 1986, No. 47
+[56]        L. Reznik, G. Solopchenko           Use of a priori Information on Functional Relations
+    between Measured Quantities for Improving Accuracy of Measurement.          MEASUREMENT,
+    1986, v.3, 2, p.61-69
+[57]        G.Britov and L. Reznik Optimal Control on the Linear Fuzzy Systems.
+    AUTOMATION AND REMOTE CONTROL, 1981, v.42, 4, p. 462-465
+
+Conference Papers (peer reviewed)
+
+[58]        Zatsarenko R., Chuprov S., Korobeinikov D., Reznik L. & Pena A. (2026) “How to
+    Improve Federated Learning in Consumer Applications? Detect and Exclude Bad Clients” in
+    2026 IEEE 23rd Consumer Communications & Networking Conference (CCNC). 2026. doi:
+    10.1109/CCNC65079.2026.11366313.
+[59]        R. Zatsarenko, S. Chuprov, D. Korobeinikov, L.Reznik, A.Pefa MADE-PI: Framework
+    for Effective Anomaly Detection in Federated Learning Applications, 24th IEEE International
+    Conference on Machine Learning and Applications, Boca Raton, FL, December 3-5, 2025,
+    pp.446-451, doi: 10.1109/ICMLA66185.2025.00067
+[60]        Chuprov, S., Korobeinikov, D., Zatsarenko, R., and Reznik, L. (2025) “No trust, no
+    learning? Improving Federated Learning Security and Robustness with Reputation and Trust” in
+    Data Science AIMS 2025 Workshop “From Theory to Practice” URL
+[61]        A. Narayanan, S. Chuprov, L. Reznik, R. Zatsarenko, and D. Korobeinikov Intelligent
+    Soccer Event Detection and Highlights Generation with Broadcast Cues Integration, ICMLA’24,
+    IEEE International Conference on Machine Learning Applications, Miami, FL, Dec. 2024, pp.
+    554-559, doi: 10.1109/ICMLA61862.2024.00081
+[62]        D. Korobeinikov, S. Chuprov and L. Reznik, "Towards More Robust Federated Learning
+    with Medical Imaging Model Anomaly Detection," 2024 IEEE Western New York Image and
+
+                                                                                                 5
+                      Leon Reznik                                        Curriculum Vitae
+
+    Signal Processing Workshop (WNYISPW), Rochester, NY, USA, 2024, pp. 1-4, doi:
+    10.1109/WNYISPW63690.2024.10786500.
+[63]         Zatsarenko, R., Chuprov, S., Korobeinikov, D., and Reznik, L. (2024). ``Trust-Based
+    Anomaly Detection in Federated Edge Learning'' in the Proceedings of the 2024 5th Annual IEEE
+    World AI IoT Congress (AIIoT), Seattle, WA, USA, 29-31th May 2024, Eds.: R. Paul, A. Kundu,
+    R. Bhattacharyya, pp. 273-279, doi: 10.1109/AIIoT61789.2024.10578967 – won the BEST
+    PRESENTER award
+[64]         Chuprov, S., Zatsarenko, R., Korobeinikov, D., and Reznik, L. (2024). ``Robust Training
+    on the Edge: Federated vs. Transfer Learning for Computer Vision in Intelligent Transportation
+    Systems'' in the Proceedings of the 2024 5th Annual IEEE World AI IoT Congress (AIIoT),
+    Seattle, WA, USA, 29-31th May 2024, Eds.: R. Paul, A. Kundu, R. Bhattacharyya, pp. 172-178,
+    doi: 10.1109/AIIoT61789.2024.10578970
+[65]         Harshil Patel, Sergei Chuprov, Dmitrii Korobeinikov, Raman Zatsarenko and Leon
+    Reznik “Improving Federated Learning Security with Trust Evaluation to Detect Adversarial
+    Attacks” in of 19th Annual Symposium on Information Assurance (ASIA’ 24) , June 4-5, 2024,
+    Albany, NY /Eds. S. Goel
+[66]         Dmitrii Korobeinikov, Sergei Chuprov, Raman Zatsarenko, and Leon Reznik “Federated
+    Learning Robustness on Real World Data in Intelligent Transportation Systems” in Proceedings
+    of 19th Annual Symposium on Information Assurance (ASIA’ 24) , June 4-5, 2024, Albany, NY /
+    Eds. S. Goel
+[67]         S. Chuprov, K. M. Bhatt and L. Reznik, "Federated Learning for Robust Computer
+    Vision in Intelligent Transportation Systems," 2023 IEEE Conference on Artificial Intelligence
+    (CAI), Santa Clara, CA, USA, 2023, pp. 26-27, doi: 10.1109/CAI54212.2023.00019.
+[68]         S. Chuprov, M. Memon and L. Reznik, "Federated Learning with Trust Evaluation for
+    Industrial Applications," 2023 IEEE Conference on Artificial Intelligence (CAI), Santa Clara,
+    CA, USA, 2023, pp. 347-348, doi: 10.1109/CAI54212.2023.00153.
+[69]         S. Chuprov, Mahajan, S., Zatsarenko, R., Reznik, L., & Ruchkan, A. (2023). ``Are
+    Industrial ML Image Classifiers Robust to Withstand Adversarial Attacks on Videos?'' in 2023
+    IEEE Western New York Image and Signal Processing Workshop (WNYISPW), 2023, pp. 1-4,
+    doi: 10.1109/WNYISPW60588.2023.10349595. URL
+[70]         R. Zatsarenko, Marathe, C.A., Chuprov S, Hyland, M., & Reznik, L. (2023). ``Are
+    Industrial ML Image Classifiers Robust to Data Affected by Network QoS Degradation?'' in 2023
+    IEEE Western New York Image and Signal Processing Workshop (WNYISPW), 2023, pp. 1-4,
+    doi: 10.1109/WNYISPW60588.2023.10349560. URL
+[71]         Chuprov, S., Reznik, L., & Grigoryan, G. (2023). ``Study on Network Importance for
+    ML End Application Robustness'' in ICC 2023 - IEEE International Conference on
+    Communications, 2023, pp. 6627-6632, doi: 10.1109/ICC45041.2023.10279698. URL
+[72]         S. Chuprov, L. Reznik, I. Khokhlov and K. Manghi, "Multi-Modal Sensor Selection
+    with Genetic Algorithms," 2022 IEEE Sensors, Dallas, TX, USA, 2022, pp. 1-4.
+    doi: 10.1109/SENSORS52175.2022.9967296
+[73]         I. Khokhlov, S. Chuprov and L. Reznik, "Integrating Security with Accuracy
+    Evaluation in Sensors Fusion," 2022 IEEE Sensors, Dallas, TX, USA, 2022, pp. 1-4.
+    doi: 10.1109/SENSORS52175.2022.9967235
+[74]         S. Chuprov, A. N. Satam and L. Reznik, "Are ML Image Classifiers Robust to Medical
+    Image Quality Degradation?," 2022 IEEE Western New York Image and Signal Processing
+    Workshop (WNYISPW), Rochester, NY, USA, 2022, pp. 1-4.doi:
+    10.1109/WNYISPW57858.2022.9983488
+[75]         S. Chuprov, I. Khokhlov, L. Reznik and S. Shetty, "Influence of Transfer Learning on
+    Machine Learning Systems Robustness to Data Quality Degradation," 2022 International Joint
+    Conference on Neural Networks (IJCNN), Padua, Italy, 2022, pp. 1-8. doi:
+    10.1109/IJCNN55064.2022.9892247
+
+
+                                                                                                  6
+                      Leon Reznik                                       Curriculum Vitae
+
+[76]         S. Chuprov, L. Reznik, A. Obeid and S. Shetty, "How Degrading Network Conditions
+    Influence Machine Learning End Systems Performance?," IEEE INFOCOM 2022 - IEEE
+    Conference on Computer Communications Workshops (INFOCOM WKSHPS), May 2022,
+    London, UK, pp. 1-6, doi: 10.1109/INFOCOMWKSHPS54753.2022.9798388.
+[77]         S. Chuprov, I. Viksnin, I. Kim, T.Melnikov, L. Reznik, I. Khokhlov Improving
+    Knowledge Based Detection of Soft Attacks Against Autonomous Vehicles with Reputation,
+    Trust and Data Quality Service Models, IEEE World Congress on Services, Sep. 5-11, 2021,
+    Chicago, IL, USA 2021 IEEE International Conference on Smart Data Services (SMDS), 2021,
+    pp. 115-120, doi: 10.1109/SMDS53860.2021.00025
+[78]         L. Reznik, I. Khokhlov From Extensive Data Collection to Intensive Quality Knowledge
+    Production , NSF Workshop on Overcoming Measurement Barriers to Internet Research
+    (WOMBIR 2021), Jan. 11-12, 2021, accessed at
+    https://www.caida.org/workshops/wombir/slides/wombir2021-paper12.pdf on Jan. 11, 2021
+[79]         Khokhlov I., Ligade N., Reznik L., “Recurrent Neural Networks for Colluded
+    Applications Attack Detection in Android OS Devices”, IEEE World Congress on Computational
+    Intelligence (WCCI) 2020, Glasgow, UK, July 2020. doi: 10.1109/IJCNN48605.2020.9207339.
+[80]         Khokhlov I., Reznik L., “What is the Value of Data Value in Practical Security
+    Applications”, IEEE/NDIA/INCOSE Systems Security Symposium 2020, Crystal City, Virginia,
+    USA, July 2020 doi: 10.1109/SSS47320.2020.9174457.
+[81]         Chuprov S., Viksnin I., Kim I., Reznik L., Khokhlov I., “Reputation and Trust Models
+    with Data Quality Metrics for Improving Autonomous Vehicles Traffic Security and Safety”,
+    IEEE/NDIA/INCOSE Systems Security Symposium 2020, Crystal City, Virginia, USA, July
+    2020 doi: 10.1109/SSS47320.2020.9174269.
+[82]         Khokhlov I., Reznik L., “Knowledge Graph in Data Quality Evaluation for IoT
+    Applications”, 2020 IEEE World Forum on Internet of Things, New Orleans, Louisiana, USA,
+    June 2020. doi: 10.1109/WF-IoT48130.2020.9221091
+[83]         Chuprov S., Marinenkov E., Viksnin I., Reznik L., Khokhlov I., “Image Processing in
+    Autonomous Vehicle Model Positioning and Movement Control”, 2020 IEEE World Forum on
+    Internet of Things, New Orleans, Louisiana, USA, June 2020. doi: 10.1109/WF-
+    IoT48130.2020.9221258.
+[84]         I. Khokhlov, L. Reznik and S. E. Lyshevski, "Adaptive Data Fusion in Inertial Sensors
+    and Data Quality Analysis of Sensor Networks," 2020 IEEE 40th International Conference on
+    Electronics and Nanotechnology (ELNANO), Kyiv, Ukraine, 2020, pp. 430-435. doi:
+    10.1109/ELNANO50318.2020.9088859
+[85]         L.Reznik and I.Khokhlov. From Data Communication to Delivery of Quality Data,
+    Large Scale Networking (LSN) Workshop on Huge Data: A Computing, Networking and
+    Distributed Systems Perspective, Sponsored by the National Science Foundation (NSF), Chicago,
+    IL, April 13 -- 14, 2020 available online at
+    https://drive.google.com/drive/folders/1_rzzcVMv0jBGtZ8kvaelrXSZhOk4xgIz accessed on Dec.
+    11, 2020
+[86]         I. Khokhlov, M. Perez and L. Reznik, "Machine Learning in Anomaly Detection:
+    Example of Colluded Applications Attack in Android Devices," 2019 18th IEEE International
+    Conference On Machine Learning And Applications (ICMLA), Boca Raton, FL, USA, 2019, pp.
+    1328-1333, doi: 10.1109/ICMLA.2019.00216
+[87]         I. Khokhlov, L. Reznik and R. Bhaskar, "The Machine Learning Models for Activity
+    Recognition Applications with Wearable Sensors," 2019 18th IEEE International Conference On
+    Machine Learning And Applications (ICMLA), Boca Raton, FL, USA, 2019, pp. 387-391, doi:
+    10.1109/ICMLA.2019.00072
+[88]         I. Khokhlov, A. Pudage and L. Reznik, "Sensor Selection Optimization with Genetic
+    Algorithms," 2019 IEEE SENSORS, Montreal, QC, Canada, 2019, pp. 1-4, doi:
+    10.1109/SENSORS43011.2019.8956579
+
+
+                                                                                                7
+                      Leon Reznik                                      Curriculum Vitae
+
+[89]        I. Khokhlov, M. Perez and L. Reznik, "System Signals Monitoring and Processing for
+    Colluded Application Attacks Detection in Android OS," 2019 IEEE Western New York Image
+    and Signal Processing Workshop (WNYISPW), Rochester, NY, USA, 2019, pp. 1-5, doi:
+    10.1109/WNYIPW.2019.8923113
+[90]        I.Khokhlov, Q. Li, L.Reznik D.I.F.E.N.S.E.: Distributed Intelligent Framework for
+    Expendable Android Security Evaluation In the Proceedings of ASIA '19: 14th Annual
+    Symposium on Information Assurance (ASIA '19), June 4-6, 2019, Empire State Plaza, Albany,
+    NY.
+[91]        Khokhlov, I., Jain C., Miller-Jacobson B., Heyman A., Reznik L., St.Jacques R.,
+    “MeetCI: A Computational Intelligence Software Design Automation Framework”. In IEEE
+    World Congress on Computational Intelligence, Rio de Janeiro, Brazil, July 2018. (pp. 1499-
+    1506). IEEE
+[92]        Killawala A., Khokhlov, I., Reznik L., “Computational Intelligence Framework for
+    Automatic Quiz Question Generation”. In IEEE World Congress on Computational Intelligence,
+    Rio de Janeiro, Brazil, 2018. (pp. 76-83). IEEE.
+[93]        I. Khokhlov, L. Reznik, J. Cappos and R. Bhaskar, "Design of activity recognition
+    systems with wearable sensors," 2018 IEEE Sensors Applications Symposium (SAS), Seoul,
+    Korea (South), 2018, pp. 1-6. doi: 10.1109/SAS.2018.8336752
+[94]        I. Khokhlov and L. Reznik, "Android system security evaluation," 2018 15th IEEE
+    Annual Consumer Communications & Networking Conference (CCNC), Las Vegas, NV, USA,
+    2018, pp. 1-2.
+[95]        I. Khokhlov, L. Reznik, S. B. Jothilingam and R. Bhaskar, "What can data analysis
+    recommend on design of wearable sensors?," 2018 15th IEEE Annual Consumer
+    Communications & Networking Conference (CCNC), Las Vegas, NV, USA, 2018, pp. 1-2.
+[96]        A. Vora, L. Reznik and I. Khokhlov, "Mobile road pothole classification and reporting
+    with data quality estimates," 2018 Fourth International Conference on Mobile and Secure
+    Services (MobiSecServ), Miami Beach, FL, 2018, pp. 1-6.
+[97]        I. Khokhlov and L. Reznik, "Colluded Applications Vulnerabilities in Android
+    Devices," 2017 IEEE 15th Intl Conf on Dependable, Autonomic and Secure Computing, 15th Intl
+    Conf on Pervasive Intelligence and Computing, 3rd Intl Conf on Big Data Intelligence and
+    Computing and Cyber Science and Technology
+    Congress(DASC/PiCom/DataCom/CyberSciTech), Orlando, FL, USA, 2017, pp. 462-469. doi:
+    10.1109/DASC-PICom-DataCom-CyberSciTec.2017.89
+[98]        M. Potter, L. Reznik and S. Radziszowski, "Neural networks and the search for a
+    quadratic residue detector," 2017 International Joint Conference on Neural Networks (IJCNN),
+    Anchorage, AK, May 2017, pp. 1887-1894.
+[99]        L. Herlihy, E. Golen, L. Reznik and S. E. Lyshevski, "Secure communication and
+    signal processing in inertial navigation systems," 2017 IEEE 37th International Conference on
+    Electronics and Nanotechnology (ELNANO), Kiev, 2017, pp. 414-419.
+[100]       I. Khokhlov, L. Reznik, A. Kumar, A. Mookherjee, R. Dalvi Data Security and Quality
+    Evaluation Framework: Implementation Empirical Study on Android Devices, 2017 20th IEEE
+    Conference of Open Innovations Association and Seminar on Information Security and Protection
+    of Information Technology (FRUCT-ISPIT), St.Petersburg, April 3-7, 2017, ISSN 2305-7254 ,
+    pp. 161-168
+[101]       I. Khokhlov, L. Reznik Data Security Evaluation for Mobile Android Devices, 2017
+    20th IEEE Conference of Open Innovations Association and Seminar on Information Security
+    and Protection of Information Technology (FRUCT-ISPIT), St.Petersburg, April 3-7, 2017, ISSN
+    2305-7254, pp. 154-160
+[102]       R. Weiss, L. Reznik, Y. Zhuang, A. Hoffman, D. Pollard , A. Rafetseder, T. Li and J.
+    Cappos Trust Evaluation in Mobile Devices: An Empirical Study, The 14th IEEE International
+    Conference on Trust, Security and Privacy in Computing and Communications (IEEE TrustCom-
+    15), Helsinki, Finland, 20-22 August, 2015, vol.1, pp. 25-32
+
+                                                                                               8
+                      Leon Reznik                                       Curriculum Vitae
+
+[103]        S.E. Lyshevski, L. Reznik, Smith, T.C. ; Beisenbi, M.A. ; Jarasovna, J.Y. ;
+    Mukataev, N.S. ; Omarov, A.N. Estimates and measures of data communication and processing
+    in nanoscaled classical and quantum physical systems 2014 IEEE 14th International Conference
+    on Nanotechnology (IEEE-NANO), Toronto, 2014 , pp.1044 – 1047
+[104]        L. Reznik, S. Lyshevski Data Quality and Security Evaluation Tool for Nanoscale
+    Sensors, SECURWARE 2014, The Eighth International Conference on Emerging Security
+    Information, Systems and Technologies, Lisbon, November 16-21, 2014 in NetWare 2014, ISBN:
+    978-1-61208-047-5
+[105]        S.E.Lyshevsky and L.Reznik Information-theoretic estimates of communication and
+    processing in nanoscale and quantum optoelectronic systems, 2013 IEEE XXXIII International
+    Scientific Conference on Electronics and Nanotechnology (ELNANO), 16-19 April 2013, pp. 33-
+    37
+[106]        J.Bacaj and L.Reznik Signal Anomaly Based Attack Detection in Wireless Sensor
+    Networks, CCS '13: Proceedings of the 2013 ACM SIGSAC conference on Computer &
+    communications security, Berlin, November 2013
+[107]        L.Reznik and E.Bertino Data Quality Evaluation: Integrating Security and Accuracy,
+    CCS '13: Proceedings of the 2013 ACM SIGSAC conference on Computer & communications
+    security, Berlin, November 2013
+[108]        D. Yudanov and L. Reznik. Scalable multi-precision simulation of spiking neural
+    networks on GPU with OpenCL The 2012 International Joint Conference on Neural Networks
+    (IJCNN), 2012 , pp: 1 – 8
+[109]        V. Kreinovich, L. Reznik, K. K. Semenov, G. N. Solopchenko Metrological Self-
+    Assurance Of Data Processing Software, XX IMEKO World Congress: Metrology for Green
+    Growth, Busan, Korea; September 2012
+[110]        L. Reznik, A. Christian, A. Patel, B. Treich, and M. Alromaih The Current State of
+    Ordinary User Security, ANNUAL SYMPOSIUM ON INFORMATION ASSURANCE &
+    SECURE KNOWLEDGE MANAGEMENT, JUNE 5-6, 2012, ALBANY, NY, pp.62-67
+[111]        S.Lyshevski and L.Reznik Processing of Extremely-Large-Data and High Performance
+    Computing Proceedings of International conference on High Performance Computing 2012 Kyiv,
+    Ukraine, October 8-11, 2012, pp. 41-43, available also online at http://www.hpc-
+    ua.org/2012/proceedings
+[112]        L.Reznik Integral Instrumentation Data Quality Evaluation: the Way to Enhance Safety,
+    Security, and Environment Impact," 2012 IEEE International Instrumentation and Measurement
+    Technology Conference, Graz, Austria, May 13-16, 2012, IEEE, 2012, pp. 2138 - 2143
+[113]        L. Reznik, V.J. Buccigrossi , J. Lewis, A. Dipon, S. Milstead, N. LaFontaine,
+    K.Beck, H. Silvia Security of Computer Use Practice :The case of ordinary users survey, 6th
+    Annual Symposium on Information Assurance (ASIA ’11) ,Albany, NY, June 7-8, 2011, pp.18-
+    25
+[114]        L.Reznik and M.Becker Future of Instrumentation? Accuracy! Reliability!
+    Performance! Security? IEEE International Future of Instrumentation Workshop, November 7-8,
+    2011, Oak Ridge, TN
+[115]        G.P. Timms, P.A. de Souza, L. Reznik Automated assessment of data quality in marine
+    sensor networks, IEEE International Conference OCEANS 2010 IEEE – Sydney, Australia, 24-
+    27 May 2010, pp.1-5
+[116]        D. Yudanov, M. Shaaban, R. Melton and L. Reznik GPU-Based Simulation of Spiking
+    Neural Networks with Real-Time Performance and High Accuracy, WCCI 2010, World Congress
+    on Computational Intelligence, Barcelona, Spain, July 18 – 23, 2010
+[117]        L.Reznik and K.Nathan. A Framework for Measurement Anomaly Detection in Sensor
+    Networks, IEEE Sensors 2009 Conference, Christchurch, New Zealand, 25-29 October 2009,
+    IEEE, pp.597-600, ISBN: 978-1-4244-5335-1
+
+
+
+                                                                                                9
+                      Leon Reznik                                        Curriculum Vitae
+
+[118]        L.Reznik, B.K. Bitemirov, M.Negnevitsky. Intrusion Detection in Sensor Networks
+    Based on Measurements, IEEE Sensors 2009 Conference, Christchurch, New Zealand, 25-29
+    October 2009, IEEE, pp.1026-1029, ISBN: 978-1-4244-5335-1
+[119]        L. Reznik, R. Yampolskiy, J. Harlow, D. Novikov. When the Resource Consumption
+    Does Matter: Artificial Neural Network Structure Choice for Intrusion Detection, AISAT 2009,
+    THE THIRD INTERNATIONAL WORKSHOP ON ARTIFICIAl INTELLIGENCE IN
+    SCIENCE AND TECHNOLOGY, Proceedings/Ed.: M.Negnevitsky, 23- 24 November 2009,
+    Hobart, Tasmania, Australia
+[120]        L. Reznik, M. Adams, B. Woodard, When the Resource Consumption Does Matter:
+    Artificial Neural Network Optimization for Intrusion Detection, AISAT 2009, THE THIRD
+    INTERNATIONAL WORKSHOP ON ARTIFICIAl INTELLIGENCE IN SCIENCE AND
+    TECHNOLOGY, Proceedings/Ed.: M.Negnevitsky, 23- 24 November 2009, Hobart, Tasmania,
+    Australia
+[121]        G.N.Solopchenko, K.S.Semenov, V.Kreinovich, L.Reznik “Measurement's result and
+    its error as fuzzy variables: background and perspectives” Proceedings of ISMTII 2009, The 9 th
+    International Symposium on Measurement Technology and Intelligent Instrumentation,
+    St.Petersburg, Russia, 28th June – 2nd July, 2009, pp. 4-132 - 4-136.
+[122]        L.Reznik and G. Von Pless Neural Networks for Cognitive Sensor Networks, World
+    Congress on Computational Intelligence, Hong Kong, 1-6 June 2008, IEEE, 2008, pp.1236-1242
+[123]        L.Reznik and C.Hoffman Development of the Intelligent Sensor Network Anomaly
+    Detection System: Problems and Solutions, Proceedings of the 2008 Workshop on Building
+    Computational Intelligence and Machine Learning Virtual Organizations, October 24, 2008,
+    Fairfax, VA, pp.21 – 27
+[124]        L. Reznik, G. Von Pless, T. Al Karim Application Testing of Novel Neural Network
+    Structures, Proceedings of the 2008 Workshop on Building Computational Intelligence and
+    Machine Learning Virtual Organizations, October 24, 2008, Fairfax, VA, pp.28 - 33
+[125]        Podpora J. and L.Reznik An Environmentally Aware, Intelligently Controlled System
+    for Power Efficient Wireless Sensor Networks, The Sixth IEEE Conference on Sensors, Atlanta,
+    USA, October 28-31, 2007 , pp.147-150
+[126]        L.Reznik and K.A. Kluever Improving Measurement Accuracy in Sensor Networks by
+    an Object Model Generation and Application, The Sixth IEEE Conference on Sensors, Atlanta,
+    USA, October 28-31, 2007, pp.371-374
+[127]        Reznik L. and St. Jacques R. Fuzzy Expert System Shell Development with Computer
+    Security Assessment Application FUZZ-IEEE 2007. IEEE International Fuzzy Systems
+    Conference, 2007, London, UK, 23-26 July 2007, pp.253-258
+[128]        Nguyen H., G. W. Baxter and L. Reznik Soft Computing Techniques to Model the Top
+    Oil Temperature of Power Transformers, ISAP 2007 The 14th International Conference on
+    Intelligent System Applications to Power Systems, November 4 - 8, 2007, Kaohsiung, Taiwan,
+    pp.200-205
+[129]        Novikov D., Yampolskiy R.V. and Reznik L. Artificial Intelligence Approaches for
+    Intrusion Detection , 2006. LISAT 2006. IEEE Long Island Systems, Applications and
+    Technology Conference, 5 May 2006, pp:1 – 8, New York, 2006
+[130]        King, J.L.and Reznik, L “Topology Selection for Signal Change Detection in Sensor
+    Networks: RBF vs MLP”, IJCNN '06. International Joint Conference on Neural Networks, 16-21
+    July 2006, pp.:2529 - 2535
+[131]        Novikov, D.; Yampolskiy, R.V.; Reznik, L. “Anomaly Detection Based Intrusion
+    Detection” Third International Conference on Information Technology: New Generations, 2006,
+    ITNG 2006, 10-12 April 2006, pp: 420 - 425
+[132]        Von Pless, G.; T. Al Karim, T.; Reznik, L “Modified time-based multilayer perceptron
+    for sensor networks and image processing applications”, Proceedings of the 2005 IEEE
+    International Joint Conference on Neural Networks, 2005. IJCNN '05. Vol. 4, 31 July-4 Aug. 2005,
+    pp:2201 – 2206, vol. 4
+
+                                                                                                 10
+                      Leon Reznik                                       Curriculum Vitae
+
+[133]        L. Reznik, G. Von Pless, T. Al Karim, “Embedding Intelligent Sensor Signal Change
+    Detection into Sensor Network Protocols”, 2005 Second Annual IEEE Communications Society
+    Conference on Sensor and AdHoc Communications and Networks, Santa Clara, 26-29 September
+    2005, IEEE, pp. 207-217, ISBN 0-7803-9012-1
+[134]        L. Reznik, G. Von Pless, T. Al Karim, “Intelligent Protocols Based on Sensor Signal
+    Change Detection”, 2005 Systems Communications Conference, 14-17 August 2005, Montreal,
+    IEEE, pp 443-448, ISBN 0-7695-2422-2
+[135]        L. Reznik, G. Von Pless and T. Al Karim Signal Change Detection in Sensor Networks
+    with Artificial Neural Network Structure CIHSPS2005 - IEEE International Conference on
+    Computational Intelligence for Homeland Security and Personal Safety, Orlando, FL, USA, 31
+    March - 1 April 2005, p.44-51
+[136]        M. Negnevitsky, M.J-H. Lim, J.Hartnett, L.Reznik Email Communications Analysis:
+    How to Use Computational Intelligence Methods and Tols? CIHSPS2005 - IEEE International
+    Conference on Computational Intelligence for Homeland Security and Personal Safety, Orlando,
+    FL, USA, 31 March - 1 April 2005, p.16 - 23
+[137]        G. Von Pless, T.Karim and L.Reznik Time-Based Multi-Layer Perceptron for Novelty
+    Detection in Sensor Networks, 2004 IEEE/ACM International Conference on Machine Learning
+    and Applications (ICMLA'04), 16-18 December 2004 -Louisville, KY, USA, pp.156-163
+[138]        L.Reznik, M.Negnevitsky, C.Hoffman Contents Based Security Enhancement in Sensor
+    Networks Protocols, CIHSPS2004 - IEEE International Conference on Computational Intelligence
+    for Homeland Security and Personal Safety, Venice, Italy, 21-22 July 2004, pp.87-91
+[139]        L.Reznik, V.Kreinovich Fuzzy and Probabilistic Models of Association Information in
+    Sensor Networks, Proceedings of the FUZZ '04, The 13th IEEE International Conference on Fuzzy
+    Systems, Budapest, Hungary, July 25-30, 2004, vol. 1, pp.185 - 189
+[140]        L.Reznik, V.Kreinovich and S.A.Starks Use of fuzzy expert's information in
+    measurement and what we can gain from its application in geophysics Proceedings of the FUZZ
+    '03, The 12th IEEE International Conference on Fuzzy Systems, St.Louis, May 25- 28, 2003, IEEE,
+    vol. 2, pp. 1026- 1031
+[141]        M. Negnevitsky and L.Reznik Application of Neuro-Fuzzy Systems for Recognition and
+    Reduction of Power Disturbances, Proceedings of the Sixth IASTED International Conference on
+    Software Engineering and Applications, M. H. Hamza, ed., Cambridge, USA, November 4-6, 2002,
+    pp. 57-62
+[142]        L.Reznik Fuzzy System Implementation through its Approximation with Simplified Radial
+    Basis Networks Proceedings of the 2002 IEEE International Conference on Fuzzy Systems FUZZ-
+    IEEE’02 May 12 – 17, 2002 Hilton Hawaiian Village Hotel Honolulu, Hawaii, IEEE and NNS,
+    vol. 2, pp. 1186-1191
+[143]        H.H. Nguyen,J. Shi, and L. Reznik, A Neural Fuzzy Approach to Modeling the Top Oil
+    Temperature of Power Transformer. In: MS'02 : Proceedings of the Fourth International
+    Conference on Modelling and Simulation : 11-13 November, 2002, Melbourne, Australia. Zayegh,
+    Aladin, ed. Victoria University, Melbourne, pp. 27-31. ISBN 1862726175
+[144]        L. Reznik and M. Negnevitsky A Neuro-Fuzzy Method of Power Disturbances
+    Recognition and Reduction Proceedings of the 2002 IEEE International Conference on Fuzzy
+    Systems FUZZ-IEEE’02 May 12 – 17, 2002 Hilton Hawaiian Village Hotel Honolulu, Hawaii,
+    IEEE and NNS, vol. 2, pp. 1517-1522
+[145]        L.Reznik and B.Pham Fuzzy Models in Evaluation of Information Uncertainty in
+    Engineering and Technology Applications, The 10th IEEE International Conference on Fuzzy
+    Systems, December 2-5, 2001, Melbourne, Australia, ISBN 0-7803-7294-X
+[146]        S.Spiteri, L.Reznik, P. Vilas-Boah Embedded Fuzzy Control for Reefer Refrigeration
+    Systems, The 10th IEEE International Conference on Fuzzy Systems, December 2-5, 2001,
+    Melbourne, Australia, ISBN 0-7803-7294-X
+
+
+
+                                                                                                11
+                      Leon Reznik                                        Curriculum Vitae
+
+[147]        L.Reznik and A.Little Choice of the Radial Basis Function Approximation in Neural
+    Networks Used for Fuzzy System Implementation Joint 9th IFSA World Congress and 20th NAFIPS
+    International Conference, July 25-28, 2001, Vancouver, Canada, Proceedings IEEE, p.3032-37
+[148]        A. Little, L. Reznik Implementation of Fuzzy Controllers with Radial Basis Neural
+    Networks The Ninth IEEE International Conference on Fuzzy Systems, FUZZ IEEE 2000 San
+    Antonio, USA, 7-10 May 2000 Proceedings IEEE vol.2 p.581 - 586
+[149]        L. Reznik What Is the Right Place for Fuzzy Control in Industry? In Proceedings of
+    AISAT'2000 International Conference on Artificial Intelligence in Science and Technology,
+    Hobart, Australia, 17-20 December 2000, The University of Tasmania, Australia, 2000, pp. 157-
+    162
+[150]        H.T. Nguyen, V.Kreinovich, and L.Reznik Integrating Domain Knowledge with Data:
+    From Crisp to Probabilistic and Fuzzy Knowledge, Workshop on Fusion of Domain Knowledge
+    with Data for Decision Support, Stanford University, Stanford CA, USA, June 30, 2000
+[151]        L. Reznik, K.P. Dabke Evaluation of Uncertainty in Measurement: A Proposal for
+    Application of Intelligent Methods in H. Imai/Ed. Measurement to Improve Quality of Life in the
+    21st Century, IMEKO –XV World Congress, June 13-18, 1999, Osaka, Japan, vol. II, p.93 – 100
+[152]        L. Reznik, A. Stojcevski, V.Kreinovich Modelling of Human Measurement Functions as
+    a Way of Intelligent Sensor Design in H. Imai/Ed. Measurement to Improve Quality of Life in the
+    21st Century, IMEKO –XV World Congress, June 13-18, 1999, Osaka, Japan, vol. XI, p. 75 -82
+[153]        G. Solopchenko, V.Kreinovich, L.Reznik Development of Mathematical Structure of the
+    Modern Measurement Science in Proceedings of International Workshop on Advances of
+    Measurement Science, June 20-21, 1999, Kyoto, Japan, p.35 – 47
+[154]        L. Reznik Fuzzy + Neural + PID Combination as a Way to Design New Industrial
+    Information and Control Systems in ICEX’99 Instrumentation and Control Exhibition, Symposium,
+    Workshops, Melbourne, May 25-28, 1999
+[155]        L.Reznik Measurement Result Uncertainty Evaluation: New Soft Approaches? SCM’99
+    International Conference on Soft Computing and Measurements, St. Petersburg, Russia, May 25-
+    28, 1999
+[156]        A.Little and L.Reznik Implementation of Fuzzy Logic Controllers Using Neural networks
+    SCIRF'99 Collaborative Research Forum Proceedings, 18 November 1999, Melbourne, Victoria
+    University, p.52-57
+[157]        A.Stojcevski, L.Reznik, M.Faulkner Trends in Cellular Position Location Techniques -
+    an Overview SCIRF'99 Collaborative Research Forum Proceedings, 18 November 1999,
+    Melbourne, Victoria University, p.69 - 73
+[158]        V.Kreinovich, E. Johnson-Holubec, L.Reznik, and M. Koshelev Cooperative Learning
+    is Better: Explanation Using Dynamical Systems, Fuzzy Logic, and Geometric Symmetries ,
+    Vietnam-Japan Bilateral Symposium on Fuzzy Systems and Applications, Halong Bay, Vietnam,
+    30 September – 2 October, 1998, Proceedings/Eds. H.-P. Nguyen and O.Ario, Ha Noi, 1998, p.154
+    – 160
+[159]        L.Reznik Intelligent Sensor: An attempt to Define 1998 Second International Conference
+    on Knowledge-Based Intelligent Electronic Systems, Adelaide, South Australia, 21-23 April 1998,
+    Eds.: L.C.Jain and R.K.Jain, IEEE, p.603-608
+[160]        L. Reznik      Fuzzy Controller Design: Recommendations to the User 1998 Second
+    International Conference on Knowledge-Based Intelligent Electronic Systems, Adelaide,
+    Australia, 21-23 April 1998, Eds.: L.C.Jain and R.K.Jain, IEEE, p.609-616
+[161]        L. Reznik How to Design a New Intelligent Controller for Industrial Applications?
+    Control-97 International Conference Proceedings, October 20-22, 1997, Sydney, The Institution of
+    Engineers, p.281-286
+[162]        M.Selesnew and L.Reznik Development of a Hydraulic Dynamometer Engine Test
+    System for High Speed Inertia Simulation Control-97 International Conference Proceedings,
+    October 20-22, 1997, Sydney, The Institution of Engineers, p. 61-66
+
+
+                                                                                                 12
+                      Leon Reznik                                        Curriculum Vitae
+
+[163]        L. Reznik Evolution of Fuzzy Controller Design            Proceedings of the 6th IEEE
+    International Conference on Fuzzy Systems, July 1-5, 1997, Barcelona, Spain, IEEE Neural
+    Networks Council, vol. 1, pp.503 - 508
+[164]        O. Gnanayem and L.Reznik Excitation Control of a Synchronous Generator Using an
+    On-Line Adaptive Fuzzy Logic Controller Structure Proceedings of the 6th IEEE International
+    Conference on Fuzzy Systems, July 1-5, 1997, Barcelona, Spain, IEEE Neural Networks Council,
+    vol. 3, pp.1493 - 1498
+[165]        L.Reznik Fuzzy Controller Design: Methods Classification and Parameters Choice, 7th
+    International Fuzzy Systems Association World Congress, June 25-29, 1997, Prague, Czech
+    Republic, Proceedings, vol. 3, pp. 398 - 403, Academia, Prague, 1997
+[166]        O. Gnanayem and L.Reznik A Fuzzy Logic Structure for On-Line Parameter Tuning
+    with the Application to Power System Excitation Control, 7th International Fuzzy Systems
+    Association World Congress, June 25-29, 1997, Prague, Czech Republic, Proceedings, vol. 3, pp.
+    488 - 493, Academia, Prague, 1997
+[167]        O. Gnanayem and L.Reznik A Universal Adaptation Procedure for Fuzzy Controller
+    Design with the Application to Power System Stability Control, 35th IEEE Conference on Decision
+    and Control, pp.1141 - 1146, Kobe, Japan, December 11- 13, 1996
+[168]        A. Little and L. Reznik A Speech Detection Method Analysis and Intelligent Structure
+    Development, 1996 Australian and New Zealand Conference on Intelligent Information Systems,
+    pp. 203 - 206, Adelaide, November 18 - 20, IEEE, 1996
+[169]        O. Gnanayem and L.Reznik             A Novel Excitation Control Scheme: Design and
+    Implementation, 1996 Australian and New Zealand Conference on Intelligent Information Systems,
+    pp. 212 - 215 , Adelaide, November 18 - 20, IEEE, 1996
+[170]        L.Reznik          Intelligent Measurement: How To Achieve? The 2nd International
+    Conference on Problems of Physical Metrology (FISMET’96) June 17-23, 1996, St.Petersburg,
+    Russia, p.80-81
+[171]        L.Reznik          How To Teach Fuzzy Technology? Proceedings of the First International
+    Discourse on Fuzzy Logic and the Management of Complexity, January 15-18, 1996, Sydney,
+    Australia, vol.1, p. 87 - 91
+[172]        L.Reznik          Fuzzy Controller Design: Some Experience Proceedings of the First
+    International Discourse on Fuzzy Logic and the Management of Complexity, January 15-18, 1996,
+    Sydney, Australia, vol.2, p. 109 - 114
+[173]        M.Selesnew and L.Reznik Fuzzy Modelling and Control for an Engine Test System
+    Proceedings for the First International Discourse on Fuzzy Logic and the Management of
+    Complexity, January 15-18, 1996, Sydney, Australia, vol.2, p. 140 - 144
+[174]        A.Bourmistrov and L.Reznik Hybrid Guidance Control for a Self-Piloted Aircraft
+    Proceedings for the First International Discourse on Fuzzy Logic and the Management of
+    Complexity, January 15-18, 1996, Sydney, Australia, vol.2, p. 155-159
+[175]        V.Kreinovich and L.Reznik Fuzzy Information Improves Measurement (If This
+    Information Is Correct) Proceedings for the First International Discourse on Fuzzy Logic and the
+    Management of Complexity, January 15-18, 1996, Sydney, Australia, vol.2, p. 206 - 210
+[176]        O. Ghanayem and L. Reznik A Hybrid AVR-PSS Controller Based on Fuzzy Logic
+    Technique, presented to the International Conference “Control-95”, Melbourne, 20 -24 October
+    1995 and published in the Conference Proceedings, The Institution of Engineers, Australia, 1995,
+    vol. 2, pp. 347 - 351
+[177]        M.Selesnew and L. Reznik Intelligent Control for Engines Testing: Which Model To
+    Apply?, presented to the International Conference “Control-95”, Melbourne, 20 -24 October 1995
+    and published in the Conference Proceedings, The Institution of Engineers, Australia, 1995, vol.
+    2, pp.539 - 543
+[178]        O. Ghanayem and L. Reznik A New Reasoning Approach and its Application in Power
+    System Stability, Proceedings of the Third European Congress on Intelligent Techniques and Soft
+    Computing (EUFIT’95), August 29-September 1, 1995, Aachen, Germany, vol.3, pp.1527 - 1532
+
+                                                                                                 13
+                         Leon Reznik                                         Curriculum Vitae
+
+   [179]       A.Stoica, L.Herron, M.Wingate, L.Reznik, O. Ghanayem Fuzzy Neural Networks as
+       Distributed Fuzzy reasoning Systems Proceedings of the Third European Congress on Intelligent
+       Techniques and Soft Computing (EUFIT’95), August 29-September 1, 1995, Aachen, Germany,
+       vol.1, pp.86 - 90
+   [180]       L. Reznik      Fuzzy Technology Teaching: Some Experience, presented to the Pacific
+       Region Conference on Electrical Engineering Education, February 23 - 24, 1995, Marysville and
+       published in the Conference Proceedings “Advancing Electrical Engineering Curricula To Reflect
+       Current And Future Technologies” pp. 119 - 122
+   [181]       L. Reznik, G. Solopchenko, W. Carroll-Johnson Fuzzy Intervals as a Basis for
+       Measurement Theory, First international Joint Conference of the North American Fuzzy
+       Information Processing Society Biannual Conference, the Industrial Fuzzy Control and Intelligent
+       Systems Conference, and the NASA Joint Technology Workshop on Neural Networks and Fuzzy
+       Logic, pp. 405 - 406, San Antonio, USA, December 18-21, NASA, 1994
+   [182] L. Reznik and O. Ghanayem Hierarchical Versus Adaptive Fuzzy Logic Controllers: Design
+       and Performance, 2nd Australian and New Zealand Conference on Intelligent Information
+       Systems, pp. 224 - 228 , Brisbane, November 29 - December 2, IEEE, 1994
+   [183]       A.Stoica and L. Reznik Mapping Alpha-Cut Borders: Classification and PID Realization,
+       3rd IEEE International Conference on Fuzzy Systems, vol.3, pp.1604 - 1607, IEEE, Orlando,
+       USA, June 26-29, 1994 - 40%
+   [184]       L. Reznik and J. Shi Simulation Study of the Choice of Membership Function Model
+       for Control Applications, Proceedings of Second International Conference on Modelling and
+       Simulation, Melbourne, July, 1993, vol.1, p.209-217
+   [185]       L. Reznik and A. Stoica Some Tricks in Fuzzy Controller Design, Australia and New
+       Zealand conference on Intelligent Information Systems, (ANZIIS – 93) IEEE, Perth, Western
+       Australia, November,1993, p. 60 - 64
+   [186]       V. Kreinovich, L. Reznik, et.al.         What Non-Linearity to Choose? Mathematical
+       Foundations of Fuzzy Control, 1992 INTERNATIONAL FUZZY SYSTEMS AND
+       INTELLIGENT CONTROL CONFERENCE, Louisville, KY, USA, 1992, p.349-412
+   [187]       V. Kreinovich , Quintana C., L. Reznik       Gaussian Membership Functions Are Most
+       Adequate in Representing Uncertainty in Measurements, North American Fuzzy Information
+       Processing Society (NAFIPS'92) Conference in Puerto Vallarta, Mexico, Dec. 1992 and published
+       in NASA Conference Publication 10112, vol. 11, p.618-624
+   [188]       V. Kreinovich, L. Reznik, et.al.            Inverse Problems: Fuzzy Representation of
+       Uncertainty Generates a Regularization, North American Fuzzy Information Processing Society
+       (NAFIPS'92) Conference in Puerto Vallarta, Mexico, Dec. 1992 and published in NASA
+       Conference Publication 10112, vol. 11, p. 418-426
+   [189]       L. Reznik        Problems of Expert Systems Using in Intelligent Measuring Instruments,
+       presented to MEASURE-90 International Conference, Moscow and published in the Conference
+       Proceedings, Moscow, 1990, p.157-165
+   [190]       V. Kreinovich, L. Reznik      Prospects for Using Expert Systems as a Part of Intelligent
+       Measuring Instruments, presented to INTERNATIONAL SCHOOL ON THE PROBLEMS OF
+       INTELLIGENT MEASURING INSTRUMENTS, Dagomys, 1990 and published in the
+       Proceedings Moscow, 1990, part 2, p.97-110
+
+Non-Refereed Papers
+
+   [191]       H. P. Fernando, L.W. Turner and L.Reznik Forecasting Tourism to Japan: A
+       Comparison of Neural Networks and Time Series Models, The 20th International Symposium on
+       Forecasting, Lisbon, Portugal, June 21-24, 2000
+   [192]       L.Reznik Towards Fuzzy Logic Application in Measurement Theory 1st International
+       Conference “Soft Computing and Measurement” (SCM’98), St.Petersburg, Russia, June 22-26,
+       1998
+
+                                                                                                     14
+                          Leon Reznik                                           Curriculum Vitae
+
+   [193]       L. Reznik How to Design an Intelligent Sensor: A Few Ideas Third international
+       Conference on problems of Physical Metrology (FIZMET’98) Abstracts, June 15-19, 1998,
+       St.Petersburg, Russia, p. 16-18
+   [194]       L. Reznik Intelligent Measurement: Some Trends and Problems, presented to Symposium
+       on Measurement and Quality Assessment, RMIT, Melbourne, Australia, 31 March 1994 and
+       published in the Symposium abstracts, p.22
+
+Multimedia presentations and publications available in non-registered publications or on-line only:
+
+   [195]        Chuprov, S., & Reznik, L. (2023). “FLAME: Federated Learning against Malicious
+       Engineering. Employing Trust and Reputation to Enhance Learning Security and Privacy” at
+       Rochester Security Summit (RSS:2023), 25-26 October 2023, Rochester, NY, USA.
+   [196]        Chuprov, S., Reznik, L., & Zatsarenko, R. (2023). “MLIN or How to Make Networks
+       and ML Applications Work Together in Real Conditions?” at First IEEE Upstate New York
+       Workshop on Secure and Sustainable Communications Networks (SSCN), 10 October 2023,
+       Rochester Institute of Technology, Rochester, NY, USA.
+   [197]        Chuprov, S., Reznik, L., & Zatsarenko, R. (2023). “FLAME: Federated Learning against
+       Malicious Engineering. Employing Trust and Reputation to Enhance Learning Security and
+       Privacy” at Eastern Great Lakes (EaGL) Theory Computation Workshop 2023, 30 September – 1
+       October 2023, University of Rochester, Rochester, NY, USA.
+   [198]        Chuprov, S., Reznik, L., & Memon, M. (2023). “Enhancing Federated Learning Security
+       with Reputation and Trust-Based Indicators” at UPSTAT 2023, 21–22 April 2023, , Rochester,
+       NY, USA – Gold medal best paper award
+   [199]        Chuprov, S., Reznik, L., Bhatt, K.M., & Memon, M. (2023). “Discovering and
+       Addressing Privacy and Robustness Flaws in Federated Learning” at the Great Lakes Security Day
+       (GLSD) 2023, 21 April 2023, Rochester, NY, USA.
+   [200]        L.Reznik What is hot in computer science (hints: Cybersecurity, AI and ML, Big Data)
+       and what we can do therein (hints: Data quality and security, Intelligent security systems) – Invited
+       Key Speech at Colgate University, New York on April 2, 2022 - see recordings at
+       https://www.youtube.com/watch?v=GWK3Y2Ziqio)              to the Colgate University Technology
+       Immersion week 2022- see https://colgatecoders.github.io/cccPage/ for more information.
+   [201]        Chuprov, S., & Reznik, L. (2021). “Reputation and Trust Models with Data Quality
+       Metrics for Improving Autonomous Vehicles Traffic Security and Safety” at Great Lakes Security
+       Day (GLSD) 2021 Online, 12 November 2021, Rochester, NY, USA. – Poster session.
+   [202]        L.Reznik and I.Khokhlov recordings of the webinar organized by TrustCI Center under
+       auspices of NSF, on March 26, 2018 , Data Quality & Security Evaluation Framework
+       Development with Leon Reznik & Igor Khokhlov available on the YouTube channel
+       https://youtu.be/nkp0kvJvTWw. Also, you can download the corresponding slides are available at
+       https://www.ideals.illinois.edu/handle/2142/99558
+   [203]        I.Khokhlov and L.Reznik What is the Android Colluded Applications Attack and How
+       to       Detect      It      at    the      2018       Rochester        Security       Summit       -
+       https://www.rochestersecurity.org/schedule/owasp-track/#o1, Oct. 10, 2018
+   [204]        L.Reznik Panel Discussion: Identifying and Supporting Science Drivers in the Campus
+       Environment at the 2018 NSF Campus Cyberinfrastructure and Cybersecurity Innovation for
+       Cyberinfrastructure PI Workshop, Sep. 29, 2018 Available at https://www.thequilt.net/wp-
+       content/uploads/LReznik_RIT_DataQuality.pdf
+   [205]        L.Reznik “From Big Data to Quality Data: What is the emerging and network technology
+       is going to deliver next” - Keynote presentation to NetWare 2014, an umbrella event incorporating
+       a few international conferences on November 20, 2014 in Lisbon, Portugal available online at
+       http://www.iaria.org/conferences2014/filesSENSORCOMM14/LeonReznik_Keynote.pdf
+
+
+
+                                                                                                         15
+                         Leon Reznik                                       Curriculum Vitae
+
+   [206]        L.Reznik Panel on November 19 on the topic Information Privacy: Does it really matter?
+       which                             is                           available                     at
+       http://www.iaria.org/conferences2014/filesAFIN14/AFIN2014_EXPERT_PANEL.pdf
+   [207]        D.Yudanov and L.Reznik Heterogeneous Implementation of Neural Network
+       Algorithms, presentation to the AMD Developer Summit, San Jose, November 11-13, 2013
+       available at the Summit website at http://www.slideshare.net/DevCentralAMD/hc4016-
+       heterogeneous-implementation-of-neural-network-algorithms-by-dmitri-yudanov-and-leon-reznik
+   [208]        L.Reznik Use of Fuzzy Association Information for Uncertainty Evaluation in
+       Heterogeneous Sensor Networks, 2nd IEEE Upstate New York Workshop on Sensor Networks,
+       University Sheraton Hotel, Syracuse, NY, October 10, 2003 ( available at
+       http://comlab.ecs.syr.edu/workshop/)
+   [209]        R.Yampolskiy, L.Reznik Feature mixing for reduction of computational requirements,
+       2004 IEEE Western New York Image Processing Workshop, RIT, Rochester, NY, September 24,
+       2004 (available at https://dspace.lib.rochester.edu/retrieve/2216/wnyipw2004Proceedings.pdf)
+   [210]        Gregory Von Pless, Tayeb Al Karim and Leon Reznik Security and Reliability
+       Enhancement in Sensor Networks Based on Change Detection, 3rd IEEE Upstate New York
+       Workshop on Sensor Networks, University Sheraton Hotel, Syracuse, NY, October 15, 2004
+       (program is given at http://www.ece.rochester.edu/~wheinzel/sn04/)
+   [211]        W Carithers, L Reznik, A Samant Using System Call Analysis to Stop Evasion Attacks
+       1st IEEE Upstate NY Workshop on Communications and Networking Proceedings, p.1-5,
+       Rochester,      NY,         November        12,       2004      (program    is     given     at
+       http://www.ewh.ieee.org/r1/rochester/comm_aero/oral.html)
+   [212]        Gregory Von Pless, Tayeb Al Karim and Leon Reznik Intelligent Novelty Detection in
+       Sensor Networks with Time Based Multilayer Perceptron Neural Network, Computer Science
+       Colloquium presentation, December 2, 2004, RIT
+
+Webinars and external presentations recorded:
+  [213]       L.Reznik What is hot in computer science (hints: Cybersecurity, AI and ML, Big
+       Data) and what we can do therein (hints: Data quality and security, Intelligent security
+       systems), Colgate University Technology Immersion Week 2022 Invited lecture available
+       at https://www.youtube.com/watch?v=GWK3Y2Ziqio
+   [214]        L. Reznik and I. Khokhlov Data Quality & Security Evaluation Framework
+       Development presented at the National Center for Supercomputing Applications at University of
+       Illinois at Urbana-Champaign under auspices of NSF, on March 26, 2018 , recordings available
+       on the YouTube channel https://www.youtube.com/watch?v=nkp0kvJvTWw&feature=youtu.be.
+       Also,       you    can      download     the    corresponding slides are     available     at
+       https://www.ideals.illinois.edu/handle/2142/99558
+   [215]        L.Reznik Panel presentation “Identifying and Supporting Science Drivers in the
+       Campus Environment” at 2018 NSF Campus Cyberinfrastructure and Cybersecurity
+       Innovations for Cyberinfrastructure PI Workshop – available at https://www.thequilt.net/wp-
+       content/uploads/LReznik_RIT_DataQuality.pdf
+
+Reviews of my work
+
+   [1] B. Bona Fuzzy Controllers by L.Reznik AUTOMATICA, vol. 37, 2001, no.2 , p.319-320
+   [2] Linkens D. A. Fuzzy Controllers. How to design them, How they work Proc. of the Institute of
+       Mechanical Engineers, vol. 212, 1998, part 1, p. 325
+
+
+
+
+                                                                                                   16
+

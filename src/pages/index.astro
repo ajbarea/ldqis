@@ -204,12 +204,13 @@ const pastCohort = peopleEntries
             [
               { num: "4", label: "Active OSS projects" },
               { num: "25+", label: "Researchers trained" },
-              // research(2026-05): RIT-era refereed papers from L. Reznik's CV
-              // "List of Products": 148 refereed total (23 journal + 125
-              // conference) minus ~51 pre-RIT (1992-2001, Victoria U.) is ~95
-              // since he joined RIT ~2003; "90+" rounds down. Scoped to the RIT
-              // lab to match "years of research"; the list below is a subset.
-              { num: "90+", label: "Peer-reviewed publications" },
+              // research(2026-06): the live count of the imported publication
+              // record (`allPubs.length` from src/data/publications-all.json) —
+              // Dr. Reznik's complete OpenAlex-indexed body of work, the same
+              // figure the /publications page shows. Dynamic so it never drifts;
+              // the trailing "+" hedges OpenAlex coverage gaps. Replaces a
+              // hand-scoped "90+" RIT-era CV estimate that undercounted the record.
+              { num: `${allPubs.length}+`, label: "Peer-reviewed publications" },
               // research(2026-05): RIT lab era. L. Reznik joined RIT ~2003
               // (Victoria U. 1996-2001, UT El Paso ~2002), so ~22 years;
               // "20+" rounds down. Pre-RIT career work is excluded here.

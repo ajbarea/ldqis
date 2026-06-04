@@ -72,6 +72,16 @@
   {
     "year": 2024,
     "type": "conference",
+    "title": "Federated Learning for Robust Computer Vision in Intelligent Transportation Systems",
+    "authors": "S. Chuprov, K. Bhatt, L. Reznik",
+    "venue": null,
+    "doi": "10.1109/cai54212.2023.00019",
+    "link": "https://doi.org/10.1109/cai54212.2023.00019",
+    "citation": null
+  },
+  {
+    "year": 2024,
+    "type": "conference",
     "title": "Federated Learning Robustness on Real World Data in Intelligent Transportation Systems",
     "authors": null,
     "venue": null,
@@ -101,12 +111,12 @@
   },
   {
     "year": 2024,
-    "type": "conference",
-    "title": "Robust Training on the Edge: Federated vs. Transfer Learning for Computer Vision in Intelligent Transportation Systems",
-    "authors": "S. Chuprov, R. Zatsarenko, D. Korobeinikov, L. Reznik",
-    "venue": null,
-    "doi": "10.1109/aiiot61789.2024.10578970",
-    "link": "https://doi.org/10.1109/aiiot61789.2024.10578970",
+    "type": "chapter",
+    "title": "Robust Autonomous Vehicle Computer-Vision-Based Localization in Challenging Environmental Conditions",
+    "authors": "S. Chuprov, P. Belyaev, R. Gataullin, L. Reznik, E. Neverov, I. I. Viksnin",
+    "venue": "Applied Sciences",
+    "doi": "10.3390/app13095735",
+    "link": "https://doi.org/10.3390/app13095735",
     "citation": null
   },
   {
@@ -152,16 +162,6 @@
   {
     "year": 2023,
     "type": "conference",
-    "title": "Federated Learning for Robust Computer Vision in Intelligent Transportation Systems",
-    "authors": "S. Chuprov, K. Bhatt, L. Reznik",
-    "venue": null,
-    "doi": "10.1109/cai54212.2023.00019",
-    "link": "https://doi.org/10.1109/cai54212.2023.00019",
-    "citation": null
-  },
-  {
-    "year": 2023,
-    "type": "conference",
     "title": "Federated Learning with Trust Evaluation for Industrial Applications",
     "authors": "S. Chuprov, M. Memon, L. Reznik",
     "venue": null,
@@ -171,12 +171,12 @@
   },
   {
     "year": 2023,
-    "type": "chapter",
-    "title": "Robust Autonomous Vehicle Computer-Vision-Based Localization in Challenging Environmental Conditions",
-    "authors": "S. Chuprov, P. Belyaev, R. Gataullin, L. Reznik, E. Neverov, I. I. Viksnin",
-    "venue": "Applied Sciences",
-    "doi": "10.3390/app13095735",
-    "link": "https://doi.org/10.3390/app13095735",
+    "type": "conference",
+    "title": "Robust Training on the Edge: Federated vs. Transfer Learning for Computer Vision in Intelligent Transportation Systems",
+    "authors": "S. Chuprov, R. Zatsarenko, D. Korobeinikov, L. Reznik",
+    "venue": null,
+    "doi": "10.1109/aiiot61789.2024.10578970",
+    "link": "https://doi.org/10.1109/aiiot61789.2024.10578970",
     "citation": null
   },
   {
@@ -191,12 +191,62 @@
   },
   {
     "year": 2022,
+    "type": "chapter",
+    "title": "Adversarial Machine Learning",
+    "authors": "",
+    "venue": "Intelligent Security Systems",
+    "doi": "10.1002/9781119771579.ch6",
+    "link": "https://doi.org/10.1002/9781119771579.ch6",
+    "citation": null
+  },
+  {
+    "year": 2022,
     "type": "conference",
     "title": "Are ML Image Classifiers Robust to Medical Image Quality Degradation?",
     "authors": "S. Chuprov, A. N. Satam, L. Reznik",
     "venue": null,
     "doi": "10.1109/wnyispw57858.2022.9983488",
     "link": "https://doi.org/10.1109/wnyispw57858.2022.9983488",
+    "citation": null
+  },
+  {
+    "year": 2022,
+    "type": "chapter",
+    "title": "Computer Security with Artificial Intelligence, Machine Learning, and Data Science Combination",
+    "authors": "L. Reznik",
+    "venue": null,
+    "doi": "10.1002/9781119771579.ch1",
+    "link": "https://doi.org/10.1002/9781119771579.ch1",
+    "citation": null
+  },
+  {
+    "year": 2022,
+    "type": "chapter",
+    "title": "Firewall Design and Implementation",
+    "authors": "",
+    "venue": "Intelligent Security Systems",
+    "doi": "10.1002/9781119771579.ch2",
+    "link": "https://doi.org/10.1002/9781119771579.ch2",
+    "citation": null
+  },
+  {
+    "year": 2022,
+    "type": "chapter",
+    "title": "Front Matter",
+    "authors": "",
+    "venue": "Intelligent Security Systems",
+    "doi": "10.1002/9781119771579.fmatter",
+    "link": "https://doi.org/10.1002/9781119771579.fmatter",
+    "citation": null
+  },
+  {
+    "year": 2022,
+    "type": "chapter",
+    "title": "Hackers versus Normal Users",
+    "authors": "L. Reznik",
+    "venue": null,
+    "doi": "10.1002/9781119771579.ch5",
+    "link": "https://doi.org/10.1002/9781119771579.ch5",
     "citation": null
   },
   {
@@ -231,6 +281,36 @@
   },
   {
     "year": 2022,
+    "type": "book",
+    "title": "Intelligent Security Systems",
+    "authors": "L. Reznik",
+    "venue": null,
+    "doi": "10.1002/9781119771579",
+    "link": "https://doi.org/10.1002/9781119771579",
+    "citation": null
+  },
+  {
+    "year": 2022,
+    "type": "chapter",
+    "title": "Intrusion Detection Systems",
+    "authors": "",
+    "venue": "Intelligent Security Systems",
+    "doi": "10.1002/9781119771579.ch3",
+    "link": "https://doi.org/10.1002/9781119771579.ch3",
+    "citation": null
+  },
+  {
+    "year": 2022,
+    "type": "chapter",
+    "title": "Malware and Vulnerabilities Detection and Protection",
+    "authors": "L. Reznik",
+    "venue": null,
+    "doi": "10.1002/9781119771579.ch4",
+    "link": "https://doi.org/10.1002/9781119771579.ch4",
+    "citation": null
+  },
+  {
+    "year": 2022,
     "type": "conference",
     "title": "Multi-Modal Sensor Selection with Genetic Algorithms",
     "authors": "S. Chuprov, L. Reznik, I. Khokhlov, K. Manghi",
@@ -241,52 +321,12 @@
   },
   {
     "year": 2021,
-    "type": "chapter",
-    "title": "Adversarial Machine Learning",
-    "authors": "",
-    "venue": "Intelligent Security Systems",
-    "doi": "10.1002/9781119771579.ch6",
-    "link": "https://doi.org/10.1002/9781119771579.ch6",
-    "citation": null
-  },
-  {
-    "year": 2021,
-    "type": "chapter",
-    "title": "Computer Security with Artificial Intelligence, Machine Learning, and Data Science Combination",
-    "authors": "L. Reznik",
-    "venue": null,
-    "doi": "10.1002/9781119771579.ch1",
-    "link": "https://doi.org/10.1002/9781119771579.ch1",
-    "citation": null
-  },
-  {
-    "year": 2021,
-    "type": "chapter",
-    "title": "Firewall Design and Implementation",
-    "authors": "",
-    "venue": "Intelligent Security Systems",
-    "doi": "10.1002/9781119771579.ch2",
-    "link": "https://doi.org/10.1002/9781119771579.ch2",
-    "citation": null
-  },
-  {
-    "year": 2021,
-    "type": "chapter",
-    "title": "Front Matter",
-    "authors": "",
-    "venue": "Intelligent Security Systems",
-    "doi": "10.1002/9781119771579.fmatter",
-    "link": "https://doi.org/10.1002/9781119771579.fmatter",
-    "citation": null
-  },
-  {
-    "year": 2021,
-    "type": "chapter",
-    "title": "Hackers versus Normal Users",
-    "authors": "L. Reznik",
-    "venue": null,
-    "doi": "10.1002/9781119771579.ch5",
-    "link": "https://doi.org/10.1002/9781119771579.ch5",
+    "type": "journal",
+    "title": "Framework for Integral Data Quality and Security Evaluation in Smartphones",
+    "authors": "I. Khokhlov, L. Reznik, S. Chuprov",
+    "venue": "IEEE Systems Journal",
+    "doi": "10.1109/jsyst.2020.2985343",
+    "link": "https://doi.org/10.1109/jsyst.2020.2985343",
     "citation": null
   },
   {
@@ -301,43 +341,13 @@
   },
   {
     "year": 2021,
-    "type": "book",
-    "title": "Intelligent Security Systems",
-    "authors": "L. Reznik",
-    "venue": null,
-    "doi": "10.1002/9781119771579",
-    "link": "https://doi.org/10.1002/9781119771579",
-    "citation": null
-  },
-  {
-    "year": 2021,
-    "type": "chapter",
-    "title": "Intrusion Detection Systems",
-    "authors": "",
-    "venue": "Intelligent Security Systems",
-    "doi": "10.1002/9781119771579.ch3",
-    "link": "https://doi.org/10.1002/9781119771579.ch3",
-    "citation": null
-  },
-  {
-    "year": 2021,
-    "type": "chapter",
-    "title": "Malware and Vulnerabilities Detection and Protection",
-    "authors": "L. Reznik",
-    "venue": null,
-    "doi": "10.1002/9781119771579.ch4",
-    "link": "https://doi.org/10.1002/9781119771579.ch4",
-    "citation": null
-  },
-  {
-    "year": 2021,
     "type": "conference",
-    "title": "Workshop on Overcoming Measurement Barriers to Internet Research (WOMBIR 2021) final report",
-    "authors": "K. Claffy, D. Clark, J. Heidemann, F. Bustamante, M. Jonker, A. Schulman, E. Zegura",
-    "venue": "ACM SIGCOMM Computer Communication Review",
-    "doi": "10.1145/3477482.3477489",
-    "link": "https://doi.org/10.1145/3477482.3477489",
-    "citation": null
+    "title": null,
+    "authors": null,
+    "venue": null,
+    "doi": null,
+    "link": null,
+    "citation": "L. Reznik, I. Khokhlov From Extensive Data Collection to Intensive Quality Knowledge Production , NSF Workshop on Overcoming Measurement Barriers to Internet Research (WOMBIR 2021), Jan. 11-12, 2021, accessed at https://www.caida.org/workshops/wombir/slides/wombir2021-paper12.pdf on Jan. 11, 2021"
   },
   {
     "year": 2020,
@@ -347,26 +357,6 @@
     "venue": null,
     "doi": "10.1109/elnano50318.2020.9088859",
     "link": "https://doi.org/10.1109/elnano50318.2020.9088859",
-    "citation": null
-  },
-  {
-    "year": 2020,
-    "type": "journal",
-    "title": "Framework for Integral Data Quality and Security Evaluation in Smartphones",
-    "authors": "I. Khokhlov, L. Reznik, S. Chuprov",
-    "venue": "IEEE Systems Journal",
-    "doi": "10.1109/jsyst.2020.2985343",
-    "link": "https://doi.org/10.1109/jsyst.2020.2985343",
-    "citation": null
-  },
-  {
-    "year": 2020,
-    "type": "conference",
-    "title": "From Data Communication to Delivery of Quality Data (Presentation)",
-    "authors": "L. Reznik, I. Khokhlov",
-    "venue": "TigerPrints (Clemson University)",
-    "doi": null,
-    "link": "https://tigerprints.clemson.edu/hugedata/data_movement/presentations/13",
     "citation": null
   },
   {
@@ -388,6 +378,16 @@
     "doi": "10.1109/wf-iot48130.2020.9221091",
     "link": "https://doi.org/10.1109/wf-iot48130.2020.9221091",
     "citation": null
+  },
+  {
+    "year": 2020,
+    "type": "conference",
+    "title": null,
+    "authors": null,
+    "venue": null,
+    "doi": null,
+    "link": null,
+    "citation": "L.Reznik and I.Khokhlov. From Data Communication to Delivery of Quality Data, Large Scale Networking (LSN) Workshop on Huge Data: A Computing, Networking and Distributed Systems Perspective, Sponsored by the National Science Foundation (NSF), Chicago, IL, April 13 -- 14, 2020 available online at https://drive.google.com/drive/folders/1_rzzcVMv0jBGtZ8kvaelrXSZhOk4xgIz accessed on Dec. 11, 2020"
   },
   {
     "year": 2020,
@@ -442,6 +442,16 @@
   {
     "year": 2019,
     "type": "conference",
+    "title": null,
+    "authors": null,
+    "venue": null,
+    "doi": null,
+    "link": null,
+    "citation": "I.Khokhlov, Q. Li, L.Reznik D.I.F.E.N.S.E.: Distributed Intelligent Framework for Expendable Android Security Evaluation In the Proceedings of ASIA '19: 14th Annual Symposium on Information Assurance (ASIA '19), June 4-6, 2019, Empire State Plaza, Albany, NY."
+  },
+  {
+    "year": 2019,
+    "type": "conference",
     "title": "Machine Learning in Anomaly Detection: Example of Colluded Applications Attack in Android Devices",
     "authors": "I. Khokhlov, M. A. Perez, L. Reznik",
     "venue": null,
@@ -484,7 +494,7 @@
     "type": "conference",
     "title": "Android system security evaluation",
     "authors": "I. Khokhlov, L. Reznik",
-    "venue": "2018 15th IEEE Annual Consumer Communications & Networking Conference (CCNC)",
+    "venue": null,
     "doi": "10.1109/ccnc.2018.8319325",
     "link": "https://doi.org/10.1109/ccnc.2018.8319325",
     "citation": null
@@ -662,22 +672,22 @@
   {
     "year": 2013,
     "type": "conference",
-    "title": "POSTER: Data quality evaluation",
-    "authors": "L. Reznik, E. Bertino",
+    "title": null,
+    "authors": null,
     "venue": null,
-    "doi": "10.1145/2508859.2512502",
-    "link": "https://doi.org/10.1145/2508859.2512502",
-    "citation": null
+    "doi": null,
+    "link": null,
+    "citation": "J.Bacaj and L.Reznik Signal Anomaly Based Attack Detection in Wireless Sensor Networks, CCS '13: Proceedings of the 2013 ACM SIGSAC conference on Computer & communications security, Berlin, November 2013"
   },
   {
     "year": 2013,
     "type": "conference",
-    "title": "POSTER: Signal anomaly based attack detection in wireless sensor networks",
-    "authors": "J. Bacaj, L. Reznik",
+    "title": null,
+    "authors": null,
     "venue": null,
-    "doi": "10.1145/2508859.2512508",
-    "link": "https://doi.org/10.1145/2508859.2512508",
-    "citation": null
+    "doi": null,
+    "link": null,
+    "citation": "L.Reznik and E.Bertino Data Quality Evaluation: Integrating Security and Accuracy, CCS '13: Proceedings of the 2013 ACM SIGSAC conference on Computer & communications security, Berlin, November 2013"
   },
   {
     "year": 2012,
@@ -741,12 +751,12 @@
   },
   {
     "year": 2011,
-    "type": "chapter",
-    "title": "Encyclopedia of Life Support Systems (EOLSS)",
-    "authors": "I. Cock",
-    "venue": "Pharmacognosy Communications",
-    "doi": "10.5530/pc.2011.2.10",
-    "link": "https://doi.org/10.5530/pc.2011.2.10",
+    "type": "journal",
+    "title": "Distributed Neural Networks for Signal Change Detection: On the Way to Cognition in Sensor Networks",
+    "authors": "L. Reznik, G. V. Pless, T. A. Karim",
+    "venue": "IEEE Sensors Journal",
+    "doi": "10.1109/jsen.2010.2070837",
+    "link": "https://doi.org/10.1109/jsen.2010.2070837",
     "citation": null
   },
   {
@@ -777,16 +787,6 @@
     "venue": "OCEANS'10 IEEE SYDNEY",
     "doi": "10.1109/oceanssyd.2010.5603827",
     "link": "https://doi.org/10.1109/oceanssyd.2010.5603827",
-    "citation": null
-  },
-  {
-    "year": 2010,
-    "type": "journal",
-    "title": "Distributed Neural Networks for Signal Change Detection: On the Way to Cognition in Sensor Networks",
-    "authors": "L. Reznik, G. V. Pless, T. A. Karim",
-    "venue": "IEEE Sensors Journal",
-    "doi": "10.1109/jsen.2010.2070837",
-    "link": "https://doi.org/10.1109/jsen.2010.2070837",
     "citation": null
   },
   {
@@ -842,12 +842,22 @@
   {
     "year": 2009,
     "type": "conference",
-    "title": "Optimization of Neural Networks for Network Intrusion Detection",
-    "authors": "H. Wang, R. Ma",
-    "venue": "2009 First International Workshop on Education Technology and Computer Science",
-    "doi": "10.1109/etcs.2009.102",
-    "link": "https://doi.org/10.1109/etcs.2009.102",
-    "citation": null
+    "title": null,
+    "authors": null,
+    "venue": null,
+    "doi": null,
+    "link": null,
+    "citation": "L. Reznik, M. Adams, B. Woodard, When the Resource Consumption Does Matter: Artificial Neural Network Optimization for Intrusion Detection, AISAT 2009, THE THIRD INTERNATIONAL WORKSHOP ON ARTIFICIAl INTELLIGENCE IN SCIENCE AND TECHNOLOGY, Proceedings/Ed.: M.Negnevitsky, 23- 24 November 2009, Hobart, Tasmania, Australia"
+  },
+  {
+    "year": 2009,
+    "type": "conference",
+    "title": null,
+    "authors": null,
+    "venue": null,
+    "doi": null,
+    "link": null,
+    "citation": "L. Reznik, R. Yampolskiy, J. Harlow, D. Novikov. When the Resource Consumption Does Matter: Artificial Neural Network Structure Choice for Intrusion Detection, AISAT 2009, THE THIRD INTERNATIONAL WORKSHOP ON ARTIFICIAl INTELLIGENCE IN SCIENCE AND TECHNOLOGY, Proceedings/Ed.: M.Negnevitsky, 23- 24 November 2009, Hobart, Tasmania, Australia"
   },
   {
     "year": 2008,
@@ -858,16 +868,6 @@
     "doi": null,
     "link": null,
     "citation": "D. Novikov, R. V. Yampolskiy, L. Reznik. Traffic Analysis Based Identification of Attacks. International Journal of Computer Science & Applications (IJCSA), vol. 5, Issue 2, 2008, pp.69-88 Leon Reznik Curriculum Vitae"
-  },
-  {
-    "year": 2008,
-    "type": "journal",
-    "title": "Fuzzy Prediction Models in Measurement",
-    "authors": "L. Reznik, В. Крейнович",
-    "venue": "IEEE Transactions on Fuzzy Systems",
-    "doi": "10.1109/tfuzz.2008.924323",
-    "link": "https://doi.org/10.1109/tfuzz.2008.924323",
-    "citation": null
   },
   {
     "year": 2008,
@@ -911,6 +911,16 @@
   },
   {
     "year": 2008,
+    "type": "journal",
+    "title": null,
+    "authors": null,
+    "venue": null,
+    "doi": null,
+    "link": null,
+    "citation": "L.Reznik and V.Kreinovich Fuzzy Models in Measurement, IEEE Transactions on Fuzzy Systems, vol. 16, No.4, August 2008, pp. 851-862"
+  },
+  {
+    "year": 2008,
     "type": "chapter",
     "title": "Measurement Theory and Uncertainty in Measurements: Application of Interval Analysis and Fuzzy Sets Methods",
     "authors": "L. Reznik",
@@ -927,16 +937,6 @@
     "venue": null,
     "doi": "10.1109/ijcnn.2008.4633957",
     "link": "https://doi.org/10.1109/ijcnn.2008.4633957",
-    "citation": null
-  },
-  {
-    "year": 2008,
-    "type": "journal",
-    "title": "Optimal discrete-pulse control of linear systems",
-    "authors": "R. Gabasov, F. Kirillova, N. Pavlenok",
-    "venue": "Automation and Remote Control",
-    "doi": "10.1134/s0005117908030107",
-    "link": "https://doi.org/10.1134/s0005117908030107",
     "citation": null
   },
   {
@@ -993,20 +993,10 @@
     "year": 2006,
     "type": "conference",
     "title": "ARTIFICIAL INTELLIGENCE APPROACHES FOR INTRUSION DETECTION",
-    "authors": "D. Novikov, R. Yampolskiy, L. Reznik",
-    "venue": "2006 IEEE Long Island Systems, Applications and Technology Conference",
+    "authors": "D. Novikov, R. V. Yampolskiy, L. Reznik",
+    "venue": null,
     "doi": "10.1109/lisat.2006.4302651",
     "link": "https://doi.org/10.1109/lisat.2006.4302651",
-    "citation": null
-  },
-  {
-    "year": 2006,
-    "type": "chapter",
-    "title": "Modified time-based multilayer perceptron for sensor networks and image processing applications",
-    "authors": "G. V. Pless, T. Karim, L. Reznik",
-    "venue": "Proceedings. 2005 IEEE International Joint Conference on Neural Networks, 2005.",
-    "doi": "10.1109/ijcnn.2005.1556242",
-    "link": "https://doi.org/10.1109/ijcnn.2005.1556242",
     "citation": null
   },
   {
@@ -1042,26 +1032,6 @@
   {
     "year": 2005,
     "type": "conference",
-    "title": "Fuzzy and probabilistic models of association information in sensor networks",
-    "authors": "L. Reznik, В. Крейнович",
-    "venue": null,
-    "doi": "10.1109/fuzzy.2004.1375714",
-    "link": "https://doi.org/10.1109/fuzzy.2004.1375714",
-    "citation": null
-  },
-  {
-    "year": 2005,
-    "type": "conference",
-    "title": "Fuzzy models in evaluation of information uncertainty in engineering and technology applications",
-    "authors": "L. Reznik, B. Pham",
-    "venue": null,
-    "doi": "10.1109/fuzz.2001.1009120",
-    "link": "https://doi.org/10.1109/fuzz.2001.1009120",
-    "citation": null
-  },
-  {
-    "year": 2005,
-    "type": "conference",
     "title": "Intelligent Protocols Based on Sensor Signal Change Detection",
     "authors": "L. Reznik, G. V. Pless, T. A. Karim",
     "venue": null,
@@ -1082,6 +1052,16 @@
   {
     "year": 2005,
     "type": "chapter",
+    "title": "Modified time-based multilayer perceptron for sensor networks and image processing applications",
+    "authors": "G. V. Pless, T. Karim, L. Reznik",
+    "venue": "Proceedings. 2005 IEEE International Joint Conference on Neural Networks, 2005.",
+    "doi": "10.1109/ijcnn.2005.1556242",
+    "link": "https://doi.org/10.1109/ijcnn.2005.1556242",
+    "citation": null
+  },
+  {
+    "year": 2005,
+    "type": "chapter",
     "title": null,
     "authors": null,
     "venue": null,
@@ -1097,16 +1077,6 @@
     "venue": null,
     "doi": "10.1109/cihsps.2005.1500609",
     "link": "https://doi.org/10.1109/cihsps.2005.1500609",
-    "citation": null
-  },
-  {
-    "year": 2005,
-    "type": "conference",
-    "title": "Time-based multi-layer perceptron for novelty detection in sensor networks",
-    "authors": "G. V. Pless, T. A. Karim, L. Reznik",
-    "venue": null,
-    "doi": "10.1109/icmla.2004.1383508",
-    "link": "https://doi.org/10.1109/icmla.2004.1383508",
     "citation": null
   },
   {
@@ -1132,35 +1102,15 @@
   {
     "year": 2004,
     "type": "conference",
-    "title": "Use of fuzzy expert's information in measurement and what we can gain from its application in geophysics",
-    "authors": "L. Reznik, В. Крейнович, S. A. Starks",
+    "title": "Fuzzy and probabilistic models of association information in sensor networks",
+    "authors": "L. Reznik, В. Крейнович",
     "venue": null,
-    "doi": "10.1109/fuzz.2003.1206572",
-    "link": "https://doi.org/10.1109/fuzz.2003.1206572",
+    "doi": "10.1109/fuzzy.2004.1375714",
+    "link": "https://doi.org/10.1109/fuzzy.2004.1375714",
     "citation": null
   },
   {
-    "year": 2003,
-    "type": "conference",
-    "title": "A neuro-fuzzy method of power disturbances recognition and reduction",
-    "authors": "L. Reznik, M. Negnevitsky",
-    "venue": null,
-    "doi": "10.1109/fuzz.2002.1006731",
-    "link": "https://doi.org/10.1109/fuzz.2002.1006731",
-    "citation": null
-  },
-  {
-    "year": 2003,
-    "type": "conference",
-    "title": "Fuzzy system implementation through its approximation with simplified radial basis networks",
-    "authors": "L. Reznik",
-    "venue": null,
-    "doi": "10.1109/fuzz.2002.1006672",
-    "link": "https://doi.org/10.1109/fuzz.2002.1006672",
-    "citation": null
-  },
-  {
-    "year": 2003,
+    "year": 2004,
     "type": "journal",
     "title": "Measurement models: application of intelligent methods",
     "authors": "L. Reznik, K. Dabke",
@@ -1168,6 +1118,26 @@
     "doi": "10.1016/j.measurement.2003.08.020",
     "link": "https://doi.org/10.1016/j.measurement.2003.08.020",
     "citation": null
+  },
+  {
+    "year": 2004,
+    "type": "conference",
+    "title": "Time-based multi-layer perceptron for novelty detection in sensor networks",
+    "authors": "G. V. Pless, T. A. Karim, L. Reznik",
+    "venue": null,
+    "doi": "10.1109/icmla.2004.1383508",
+    "link": "https://doi.org/10.1109/icmla.2004.1383508",
+    "citation": null
+  },
+  {
+    "year": 2003,
+    "type": "chapter",
+    "title": null,
+    "authors": null,
+    "venue": null,
+    "doi": null,
+    "link": null,
+    "citation": "L.Reznik General Principles and Purposes of Computational Intelligence in Systems Science and Cybernetics, [Ed. F. Parra-Luna], In: Encyclopedia of Life Support Systems, Developed under the Auspices of the UNESCO, EOLSS Publishers, Oxford, UK, 2003 (available on-line at http://www.eolss.net/)"
   },
   {
     "year": 2003,
@@ -1190,6 +1160,16 @@
     "citation": null
   },
   {
+    "year": 2003,
+    "type": "conference",
+    "title": "Use of fuzzy expert's information in measurement and what we can gain from its application in geophysics",
+    "authors": "L. Reznik, В. Крейнович, S. A. Starks",
+    "venue": null,
+    "doi": "10.1109/fuzz.2003.1206572",
+    "link": "https://doi.org/10.1109/fuzz.2003.1206572",
+    "citation": null
+  },
+  {
     "year": 2002,
     "type": "conference",
     "title": "A Neural Fuzzy Approach to Modeling the Top Oil Temperature of Power Transformer",
@@ -1202,21 +1182,11 @@
   {
     "year": 2002,
     "type": "conference",
-    "title": "A novel excitation control scheme: design and implementation",
-    "authors": "O. Ghanayem, L. Reznik",
+    "title": "A neuro-fuzzy method of power disturbances recognition and reduction",
+    "authors": "L. Reznik, M. Negnevitsky",
     "venue": null,
-    "doi": "10.1109/anziis.1996.573937",
-    "link": "https://doi.org/10.1109/anziis.1996.573937",
-    "citation": null
-  },
-  {
-    "year": 2002,
-    "type": "conference",
-    "title": "A universal adaptation procedure for fuzzy controller design with the application to power system stability control",
-    "authors": "O. Ghanayem, L. Reznik",
-    "venue": null,
-    "doi": "10.1109/cdc.1996.572621",
-    "link": "https://doi.org/10.1109/cdc.1996.572621",
+    "doi": "10.1109/fuzz.2002.1006731",
+    "link": "https://doi.org/10.1109/fuzz.2002.1006731",
     "citation": null
   },
   {
@@ -1232,81 +1202,11 @@
   {
     "year": 2002,
     "type": "conference",
-    "title": "Choice of the radial basis function approximation in neural networks used for fuzzy system implementation",
-    "authors": "L. Reznik, A. Little",
-    "venue": null,
-    "doi": "10.1109/nafips.2001.943711",
-    "link": "https://doi.org/10.1109/nafips.2001.943711",
-    "citation": null
-  },
-  {
-    "year": 2002,
-    "type": "chapter",
-    "title": "Evolution of fuzzy controller design",
-    "authors": "L. Reznik",
-    "venue": "Proceedings of 6th International Fuzzy Systems Conference",
-    "doi": "10.1109/fuzzy.1997.616418",
-    "link": "https://doi.org/10.1109/fuzzy.1997.616418",
-    "citation": null
-  },
-  {
-    "year": 2002,
-    "type": "conference",
-    "title": "Excitation control of a synchronous generator using an online adaptive fuzzy logic controller structure",
-    "authors": "O. Ghanayem, L. Reznik",
-    "venue": "Proceedings of 6th International Fuzzy Systems Conference",
-    "doi": "10.1109/fuzzy.1997.619764",
-    "link": "https://doi.org/10.1109/fuzzy.1997.619764",
-    "citation": null
-  },
-  {
-    "year": 2002,
-    "type": "conference",
-    "title": "Fuzzy controller design: recommendations to the user",
+    "title": "Fuzzy system implementation through its approximation with simplified radial basis networks",
     "authors": "L. Reznik",
     "venue": null,
-    "doi": "10.1109/kes.1998.726030",
-    "link": "https://doi.org/10.1109/kes.1998.726030",
-    "citation": null
-  },
-  {
-    "year": 2002,
-    "type": "conference",
-    "title": "Fuzzy intervals as a basis for measurement theory",
-    "authors": "G. N. Solopchenko, L. Reznik, W. Johnson",
-    "venue": null,
-    "doi": "10.1109/ijcf.1994.375079",
-    "link": "https://doi.org/10.1109/ijcf.1994.375079",
-    "citation": null
-  },
-  {
-    "year": 2002,
-    "type": "conference",
-    "title": "Hierarchical versus adaptive fuzzy logic controllers: design and performance",
-    "authors": "O. Ghanayem, L. Reznik",
-    "venue": null,
-    "doi": "10.1109/anziis.1994.396916",
-    "link": "https://doi.org/10.1109/anziis.1994.396916",
-    "citation": null
-  },
-  {
-    "year": 2002,
-    "type": "conference",
-    "title": "Implementation of fuzzy controllers with radial basis neural networks",
-    "authors": "A. Little, L. Reznik",
-    "venue": null,
-    "doi": "10.1109/fuzzy.2000.839058",
-    "link": "https://doi.org/10.1109/fuzzy.2000.839058",
-    "citation": null
-  },
-  {
-    "year": 2002,
-    "type": "conference",
-    "title": "Intelligent sensor: an attempt to define",
-    "authors": "L. Reznik",
-    "venue": null,
-    "doi": "10.1109/kes.1998.726029",
-    "link": "https://doi.org/10.1109/kes.1998.726029",
+    "doi": "10.1109/fuzz.2002.1006672",
+    "link": "https://doi.org/10.1109/fuzz.2002.1006672",
     "citation": null
   },
   {
@@ -1320,13 +1220,13 @@
     "citation": null
   },
   {
-    "year": 2002,
+    "year": 2001,
     "type": "conference",
-    "title": "Speech detection method analysis and intelligent structure development",
-    "authors": "A. C. Little, L. Reznik",
+    "title": "Choice of the radial basis function approximation in neural networks used for fuzzy system implementation",
+    "authors": "L. Reznik, A. Little",
     "venue": null,
-    "doi": "10.1109/anziis.1996.573934",
-    "link": "https://doi.org/10.1109/anziis.1996.573934",
+    "doi": "10.1109/nafips.2001.943711",
+    "link": "https://doi.org/10.1109/nafips.2001.943711",
     "citation": null
   },
   {
@@ -1350,6 +1250,16 @@
     "citation": null
   },
   {
+    "year": 2001,
+    "type": "conference",
+    "title": "Fuzzy models in evaluation of information uncertainty in engineering and technology applications",
+    "authors": "L. Reznik, B. Pham",
+    "venue": "10th IEEE International Conference on Fuzzy Systems. (Cat. No.01CH37297)",
+    "doi": "10.1109/fuzz.2001.1009120",
+    "link": "https://doi.org/10.1109/fuzz.2001.1009120",
+    "citation": null
+  },
+  {
     "year": 2000,
     "type": "chapter",
     "title": null,
@@ -1358,6 +1268,16 @@
     "doi": null,
     "link": null,
     "citation": "G. Solopchenko, V.Kreinovich, L.Reznik Development of Mathematical Structure of the Modern Measurement Science In: Measurement Science - a Discussion, K.Kariya and L. Finkelstein /Eds. Ohmsha Ltd. and IOS Press, Amsterdam, Oxford, Tokyo, Washington, 2000, ISBN 4-274-90398-2 and 1-58603-088-4, p.23-36"
+  },
+  {
+    "year": 2000,
+    "type": "conference",
+    "title": "Implementation of fuzzy controllers with radial basis neural networks",
+    "authors": "A. Little, L. Reznik",
+    "venue": null,
+    "doi": "10.1109/fuzzy.2000.839058",
+    "link": "https://doi.org/10.1109/fuzzy.2000.839058",
+    "citation": null
   },
   {
     "year": 2000,
@@ -1407,6 +1327,16 @@
     "venue": null,
     "doi": null,
     "link": null,
+    "citation": "A.Little and L.Reznik Implementation of Fuzzy Logic Controllers Using Neural networks SCIRF'99 Collaborative Research Forum Proceedings, 18 November 1999, Melbourne, Victoria University, p.52-57"
+  },
+  {
+    "year": 1999,
+    "type": "conference",
+    "title": null,
+    "authors": null,
+    "venue": null,
+    "doi": null,
+    "link": null,
     "citation": "A.Stojcevski, L.Reznik, M.Faulkner Trends in Cellular Position Location Techniques - an Overview SCIRF'99 Collaborative Research Forum Proceedings, 18 November 1999, Melbourne, Victoria University, p.69 - 73"
   },
   {
@@ -1438,6 +1368,16 @@
     "doi": null,
     "link": null,
     "citation": "L. Reznik, A. Stojcevski, V.Kreinovich Modelling of Human Measurement Functions as a Way of Intelligent Sensor Design in H. Imai/Ed. Measurement to Improve Quality of Life in the 21st Century, IMEKO –XV World Congress, June 13-18, 1999, Osaka, Japan, vol. XI, p. 75 -82"
+  },
+  {
+    "year": 1999,
+    "type": "conference",
+    "title": null,
+    "authors": null,
+    "venue": null,
+    "doi": null,
+    "link": null,
+    "citation": "L. Reznik, K.P. Dabke Evaluation of Uncertainty in Measurement: A Proposal for Application of Intelligent Methods in H. Imai/Ed. Measurement to Improve Quality of Life in the 21st Century, IMEKO –XV World Congress, June 13-18, 1999, Osaka, Japan, vol. II, p.93 – 100"
   },
   {
     "year": 1999,
@@ -1491,43 +1431,73 @@
   },
   {
     "year": 1998,
+    "type": "chapter",
+    "title": "Fuzzy Controller Design for Different Applications: Evolution, Methods, and Practical Recommendations",
+    "authors": "L. Reznik",
+    "venue": "Studies in Fuzziness and Soft Computing",
+    "doi": "10.1007/978-3-7908-1885-7_12",
+    "link": "https://doi.org/10.1007/978-3-7908-1885-7_12",
+    "citation": null
+  },
+  {
+    "year": 1998,
+    "type": "conference",
+    "title": "Fuzzy controller design: recommendations to the user",
+    "authors": "L. Reznik",
+    "venue": "1998 Second International Conference. Knowledge-Based Intelligent Electronic Systems. Proceedings KES'98 (Cat. No.98EX111)",
+    "doi": "10.1109/kes.1998.726030",
+    "link": "https://doi.org/10.1109/kes.1998.726030",
+    "citation": null
+  },
+  {
+    "year": 1998,
+    "type": "conference",
+    "title": "Intelligent sensor: an attempt to define",
+    "authors": "L. Reznik",
+    "venue": "1998 Second International Conference. Knowledge-Based Intelligent Electronic Systems. Proceedings KES'98 (Cat. No.98EX111)",
+    "doi": "10.1109/kes.1998.726029",
+    "link": "https://doi.org/10.1109/kes.1998.726029",
+    "citation": null
+  },
+  {
+    "year": 1998,
     "type": "book",
-    "title": "Fuzzy Systems Design: Social and Engineering Applications",
-    "authors": "L. Reznik, J. Kacprzyk, V. Dimitrov",
+    "title": null,
+    "authors": null,
     "venue": null,
-    "doi": "10.1007/978-3-7908-1885-7",
-    "link": "https://doi.org/10.1007/978-3-7908-1885-7",
-    "citation": null
+    "doi": null,
+    "link": null,
+    "citation": "L.Reznik, V.Dimitrov, J.Kacprzyk/Eds. Fuzzy System Design: Social and Engineering Applications, Physica Verlag, Heidelberg-New York, 1998, ISBN 3-7908-1118-1, 334 pp."
   },
   {
     "year": 1997,
     "type": "conference",
-    "title": "Fuzzy Controller Parameter Choice",
+    "title": "Evolution of fuzzy controller design",
     "authors": "L. Reznik",
-    "venue": "Elsevier eBooks",
-    "doi": "10.1016/b978-075063429-8/50009-9",
-    "link": "https://doi.org/10.1016/b978-075063429-8/50009-9",
+    "venue": "Proceedings of 6th International Fuzzy Systems Conference",
+    "doi": "10.1109/fuzzy.1997.616418",
+    "link": "https://doi.org/10.1109/fuzzy.1997.616418",
     "citation": null
   },
   {
     "year": 1997,
     "type": "conference",
-    "title": "Fuzzy Sets, Logic and Control",
-    "authors": "L. Reznik",
-    "venue": "Elsevier eBooks",
-    "doi": "10.1016/b978-075063429-8/50006-3",
-    "link": "https://doi.org/10.1016/b978-075063429-8/50006-3",
+    "title": "Excitation control of a synchronous generator using an online adaptive fuzzy logic controller structure",
+    "authors": "O. Ghanayem, L. Reznik",
+    "venue": "Proceedings of 6th International Fuzzy Systems Conference",
+    "doi": "10.1109/fuzzy.1997.619764",
+    "link": "https://doi.org/10.1109/fuzzy.1997.619764",
     "citation": null
   },
   {
     "year": 1997,
     "type": "conference",
-    "title": "IEE Colloquium on Industrial Applications of Intelligent Control (Digest No.97/144)",
-    "authors": "",
+    "title": null,
+    "authors": null,
     "venue": null,
-    "doi": "10.1049/conferences-1997_144",
-    "link": "https://doi.org/10.1049/conferences-1997_144",
-    "citation": null
+    "doi": null,
+    "link": null,
+    "citation": "L. Reznik How to Design a New Intelligent Controller for Industrial Applications? Control-97 International Conference Proceedings, October 20-22, 1997, Sydney, The Institution of Engineers, p.281-286"
   },
   {
     "year": 1997,
@@ -1548,6 +1518,36 @@
     "doi": null,
     "link": null,
     "citation": "M.Selesnew and L.Reznik Development of a Hydraulic Dynamometer Engine Test System for High Speed Inertia Simulation Control-97 International Conference Proceedings, October 20-22, 1997, Sydney, The Institution of Engineers, p. 61-66 Leon Reznik Curriculum Vitae"
+  },
+  {
+    "year": 1997,
+    "type": "conference",
+    "title": "Seventh International Fuzzy Systems Association World Congress, Prague, Czech Republic, June 25–29, 1997",
+    "authors": "",
+    "venue": "Journal of Applied Non-Classical Logics",
+    "doi": "10.1080/11663081.1996.10510879",
+    "link": "https://doi.org/10.1080/11663081.1996.10510879",
+    "citation": null
+  },
+  {
+    "year": 1996,
+    "type": "conference",
+    "title": "A novel excitation control scheme: design and implementation",
+    "authors": "O. Ghanayem, L. Reznik",
+    "venue": "1996 Australian New Zealand Conference on Intelligent Information Systems. Proceedings. ANZIIS 96",
+    "doi": "10.1109/anziis.1996.573937",
+    "link": "https://doi.org/10.1109/anziis.1996.573937",
+    "citation": null
+  },
+  {
+    "year": 1996,
+    "type": "conference",
+    "title": "A universal adaptation procedure for fuzzy controller design with the application to power system stability control",
+    "authors": "O. Ghanayem, L. Reznik",
+    "venue": "Proceedings of 35th IEEE Conference on Decision and Control",
+    "doi": "10.1109/cdc.1996.572621",
+    "link": "https://doi.org/10.1109/cdc.1996.572621",
+    "citation": null
   },
   {
     "year": 1996,
@@ -1582,21 +1582,21 @@
   {
     "year": 1996,
     "type": "conference",
+    "title": "Speech detection method analysis and intelligent structure development",
+    "authors": "A. Little, L. Reznik",
+    "venue": "1996 Australian New Zealand Conference on Intelligent Information Systems. Proceedings. ANZIIS 96",
+    "doi": "10.1109/anziis.1996.573934",
+    "link": "https://doi.org/10.1109/anziis.1996.573934",
+    "citation": null
+  },
+  {
+    "year": 1996,
+    "type": "conference",
     "title": "The first international discourse on fuzzy logic and the management of complexity, FLAMOC'96",
     "authors": "D. Lakov",
     "venue": "Fuzzy Sets and Systems",
     "doi": "10.1016/0165-0114(96)82408-0",
     "link": "https://doi.org/10.1016/0165-0114(96)82408-0",
-    "citation": null
-  },
-  {
-    "year": 1995,
-    "type": "conference",
-    "title": "A Hybrid AVR-PSS Controller Based on Fuzzy Logic Technique",
-    "authors": "O. Ghanayem, L. Reznik",
-    "venue": "Control 95: Meeting the Challenge of Asia Pacific Growth; Preprints",
-    "doi": null,
-    "link": "http://search.informit.com.au/fullText;dn=363435511604356;res=IELENG",
     "citation": null
   },
   {
@@ -1627,7 +1627,7 @@
     "venue": null,
     "doi": null,
     "link": null,
-    "citation": "M.Selesnew and L. Reznik Intelligent Control for Engines Testing: Which Model To Apply?, presented to the International Conference “Control-95”, Melbourne, 20 -24 October 1995 and published in the Conference Proceedings, The Institution of Engineers, Australia, 1995, vol. 2, pp.539 - 543"
+    "citation": "O. Ghanayem and L. Reznik A Hybrid AVR-PSS Controller Based on Fuzzy Logic Technique, presented to the International Conference “Control-95”, Melbourne, 20 -24 October 1995 and published in the Conference Proceedings, The Institution of Engineers, Australia, 1995, vol. 2, pp. 347 - 351"
   },
   {
     "year": 1995,
@@ -1658,6 +1658,26 @@
     "doi": null,
     "link": null,
     "citation": "O. Ghanayem and L. Reznik A New Reasoning Approach and its Application in Power System Stability, Proceedings of the Third European Congress on Intelligent Techniques and Soft Computing (EUFIT’95), August 29-September 1, 1995, Aachen, Germany, vol.3, pp.1527 - 1532 Leon Reznik Curriculum Vitae"
+  },
+  {
+    "year": 1994,
+    "type": "conference",
+    "title": "Fuzzy intervals as a basis for measurement theory",
+    "authors": "G. Solopchenko, L. Reznik, W. Johnson",
+    "venue": "NAFIPS/IFIS/NASA '94. Proceedings of the First International Joint Conference of The North American Fuzzy Information Processing Society Biannual Conference. The Industrial Fuzzy Control and Intelligent Systems Conference, and the NASA Joint Technology Wo",
+    "doi": "10.1109/ijcf.1994.375079",
+    "link": "https://doi.org/10.1109/ijcf.1994.375079",
+    "citation": null
+  },
+  {
+    "year": 1994,
+    "type": "conference",
+    "title": "Hierarchical versus adaptive fuzzy logic controllers: design and performance",
+    "authors": "O. Ghanayem, L. Reznik",
+    "venue": "Proceedings of ANZIIS '94 - Australian New Zealnd Intelligent Information Systems Conference",
+    "doi": "10.1109/anziis.1994.396916",
+    "link": "https://doi.org/10.1109/anziis.1994.396916",
+    "citation": null
   },
   {
     "year": 1994,
@@ -1770,7 +1790,7 @@
     "citation": "L. Reznik, G. Solopchenko The USSR Patent: Method of Complexing of Measurements, BULLETIN OF PATENTS, 1986, No. 47"
   },
   {
-    "year": 1985,
+    "year": 1986,
     "type": "journal",
     "title": "Use of priori information on functional relations between measured quantities for improving accuracy of measurement",
     "authors": "L. Reznik, G. N. Solopchenko",
@@ -1778,5 +1798,15 @@
     "doi": "10.1016/0263-2241(85)90013-2",
     "link": "https://doi.org/10.1016/0263-2241(85)90013-2",
     "citation": null
+  },
+  {
+    "year": 1981,
+    "type": "journal",
+    "title": null,
+    "authors": null,
+    "venue": null,
+    "doi": null,
+    "link": null,
+    "citation": "G.Britov and L. Reznik Optimal Control on the Linear Fuzzy Systems. AUTOMATION AND REMOTE CONTROL, 1981, v.42, 4, p. 462-465"
   }
 ]

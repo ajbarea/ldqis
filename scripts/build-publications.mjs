@@ -103,7 +103,11 @@ const entries = sections
       .map((entryRaw) => {
         const body = entryRaw.replace(/^\[\d+\]\s*/, "");
         const doiM = body.match(/10\.\d{4,}\/[^\s,)"”'’]+/);
-        const years = [...body.matchAll(/\b(?:19|20)\d{2}\b/g)].map((m) => +m[0]);
+        // Plausible-range filter: page ranges like "pp. 2058-2065" otherwise
+        // get read as the year 2065.
+        const years = [...body.matchAll(/\b(?:19|20)\d{2}\b/g)]
+          .map((m) => +m[0])
+          .filter((y) => y >= 1978 && y <= 2027);
         return {
           type: s.type,
           year: years.length ? Math.max(...years) : null,
@@ -196,16 +200,43 @@ for (const c of cand) {
   usedOa.add(c.oi);
 }
 
+// Accept an API record only if it actually agrees with the CV entry: year within
+// a few years, and (when his CV quoted a title) the titles share enough tokens.
+// Rejects false matches where token-overlap against the full citation grabbed a
+// wrong/garbled paper; rejected entries fall back to his exact CV citation.
+const VENUEISH =
+  /^\s*(poster|proceedings|workshop|colloquium|symposium|digest|special issue)\b|proceedings of|colloquium on|workshop on|digest no|final report/i;
+const validMatch = (rec, e) => {
+  if (!rec || !rec.title) return false;
+  if (VENUEISH.test(rec.title)) return false; // API "title" is a venue/proceedings/poster, not a paper
+  if (e.year && rec.year && Math.abs(rec.year - e.year) > 3) return false;
+  if (e.title) {
+    const a = toks(rec.title);
+    const b = toks(e.title);
+    if (Math.max(overlap(a, b), overlap(b, a)) < 0.5) return false;
+  } else if (overlap(toks(rec.title), toks(e.raw)) < 0.85) {
+    return false; // no quoted CV title to validate against — require strong support
+  }
+  return true;
+};
+
 const results = [];
 for (let ci = 0; ci < entries.length; ci++) {
   const e = entries[ci];
   let rec = cvToOa.get(ci) || null;
-  if (!rec && e.doi) rec = await crossrefByDoi(e.doi);
-  if (!rec) rec = await crossrefBiblio(e.raw, cvTok[ci]);
+  if (!validMatch(rec, e)) rec = null;
+  if (!rec && e.doi) {
+    const r = await crossrefByDoi(e.doi);
+    if (validMatch(r, e)) rec = r;
+  }
+  if (!rec) {
+    const r = await crossrefBiblio(e.raw, cvTok[ci]);
+    if (validMatch(r, e)) rec = r;
+  }
   results.push(
     rec
       ? {
-          year: rec.year || e.year,
+          year: e.year ?? rec.year, // his CV year is authoritative for his record
           type: e.type,
           title: rec.title,
           authors: fmtAuthors(rec.authors),

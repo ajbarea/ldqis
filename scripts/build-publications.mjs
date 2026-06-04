@@ -63,7 +63,9 @@ const cleaned = readFileSync(join(__dir, "reznik-cv.txt"), "utf8")
   .split("\n")
   .filter((l) => {
     const t = l.trim();
-    return !(/^Leon\s+Reznik$/i.test(t) || /^Curriculum Vitae$/i.test(t) || /^\d{1,2}$/.test(t));
+    // The running header is "Leon Reznik <spaces> Curriculum Vitae" on one line,
+    // so match "Curriculum Vitae" anywhere (it never appears in a real citation).
+    return !(/^Leon\s+Reznik$/i.test(t) || /Curriculum Vitae/i.test(t) || /^\d{1,2}$/.test(t));
   })
   .join("\n");
 const pubIdx = cleaned.search(/\n\s*Publications\s*:\s*\n/);

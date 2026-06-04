@@ -5,6 +5,7 @@ import ContactLinks from "../components/ContactLinks.astro";
 import Avatar from "../components/Avatar.astro";
 import Nav from "../components/Nav.astro";
 import { byRecency } from "../lib/publications";
+import allPubs from "../data/publications-all.json";
 
 // research(2026-05): projects / publications / people live in Astro content
 // collections. The remaining inline `researchAreas` array stays
@@ -342,8 +343,8 @@ const pastCohort = peopleEntries
           Selected publications.
         </h2>
         <p class="mb-14 max-w-[64ch] text-lg text-text-dim">
-          A selection of the lab's work, from foundational to recent. For the complete record, see
-          Dr. Reznik's
+          A handful of highlights from the lab's work. See the full publication record below, or Dr.
+          Reznik's
           <a
             href="https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en"
             target="_blank"
@@ -351,7 +352,7 @@ const pastCohort = peopleEntries
             class="border-b"
             style="color: var(--color-rit-orange-text); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
             >Google Scholar profile</a
-          >.
+          > for citation metrics.
         </p>
         <div class="flex flex-col gap-4">
           {
@@ -396,6 +397,14 @@ const pastCohort = peopleEntries
               </article>
             ))
           }
+        </div>
+        <div class="mt-12">
+          <a
+            href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/publications/`}
+            class="inline-flex items-center gap-2 rounded-full border border-line px-[22px] py-[14px] text-sm font-medium text-text hover:border-rit-orange hover:text-rit-orange-text"
+          >
+            See all {allPubs.length} publications →
+          </a>
         </div>
       </div>
     </section>

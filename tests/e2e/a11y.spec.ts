@@ -21,6 +21,7 @@ const ROUTES_TO_SCAN: ReadonlyArray<{ name: string; path: string }> = [
   { name: "home", path: "" },
   { name: "project detail (intefl)", path: "projects/intefl/" },
   { name: "publication detail (intefl-mis-2026)", path: "publications/intefl-mis-2026/" },
+  { name: "publications index (full list)", path: "publications/" },
   { name: "person detail (leon-reznik, lead)", path: "people/leon-reznik/" },
   { name: "person detail (aj-barea, no-lead)", path: "people/aj-barea/" },
   { name: "person detail (igor-khokhlov, past cohort, no email)", path: "people/igor-khokhlov/" },

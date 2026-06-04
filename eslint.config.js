@@ -38,11 +38,17 @@ export default defineConfig([
   },
   {
     // Node globals for config files + build-time scripts that run under Node.
-    files: ["*.config.{js,ts,mjs,cjs}", "vitest.config.ts", "playwright.config.ts"],
+    files: [
+      "*.config.{js,ts,mjs,cjs}",
+      "vitest.config.ts",
+      "playwright.config.ts",
+      "scripts/**/*.{js,mjs,cjs}",
+    ],
     languageOptions: {
       globals: {
         process: "readonly",
         console: "readonly",
+        fetch: "readonly",
         __dirname: "readonly",
         __filename: "readonly",
       },

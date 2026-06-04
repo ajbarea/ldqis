@@ -56,11 +56,6 @@ apex domain, so the flip is one change once DNS resolves.
   and lab-website guidance lead with research _by theme_ over a flat paper list, so a
   visitor grasps what the lab works on before the formal publications. Source:
   theacademicdesigner.com, OpenScholar lab-site structure.
-- **Artifact links on publications** — optional code-repo and dataset-DOI fields per paper,
-  with room for an "Available / Reproducible" badge. research(2026-06): 2026 CS/security
-  venues award IEEE artifact badges for code+data deposited on Zenodo with a DOI, so
-  surfacing the artifact is now expected for a data-quality/security lab, not a nicety.
-  Source: sysartifacts.github.io, IEEE Access reproducibility pilot.
 - **Join the lab** — a static "open positions / prospective students" page (what the lab
   looks for, how to apply via the existing intake form / contact), refreshed before
   recruiting season. research(2026-06): all three peer sites surface a recruiting CTA, and
@@ -105,6 +100,11 @@ ideas. These were weighed and declined, recorded so they aren't re-proposed:
 
 Highlights below; full history in git.
 
+- **Publication code links.** A publication can reference the lab project that implements it
+  (a `project` field); the paper then surfaces a "Code" cross-link to that project on its
+  detail page and in the homepage list (the InteFL paper links the `fl-execution-framework`
+  repo). No artifact badge — none of the lab's papers went through formal artifact
+  evaluation, so the schema stays ready for a real badge rather than faking one.
 - **Teaching.** A homepage section lists the courses lab members teach — Dr. Reznik's
   undergraduate CSCI-331/531/532 and graduate CSCI-630/734/735/736/788 — as a thin inline
   list that links out to his maintained course pages rather than duplicating syllabi, with

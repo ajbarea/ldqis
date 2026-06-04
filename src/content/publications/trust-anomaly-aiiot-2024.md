@@ -3,9 +3,12 @@ year: "2024"
 venue: "IEEE AIIoT 2024"
 venue_type: conference
 title: "Trust-Based Anomaly Detection in Federated Edge Learning"
-authors: "D. Korobeinikov, et al."
+authors: "R. Zatsarenko, S. Chuprov, D. Korobeinikov, L. Reznik"
 author_ids:
+  - raman-zatsarenko
+  - sergei-chuprov
   - dmitrii-korobeinikov
+  - leon-reznik
 link: { label: "IEEE Xplore ↗", href: "https://ieeexplore.ieee.org/document/10578967/" }
 ---
 

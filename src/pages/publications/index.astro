@@ -3,12 +3,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import allPubs from "../../data/publications-all.json";
 
-// The complete machine-imported record (OpenAlex by ORCID + Crossref venue
-// backfill; see scripts/import-publications.mjs). Distinct from the curated
-// `publications` content collection, which carries the rich detail pages and the
-// homepage "Selected" highlights. This page is a thin full list, newest-first.
+// The lab's full publication record, built from Dr. Reznik's CV (the authoritative
+// list of which papers are his) with clean fields from OpenAlex/Crossref; the
+// oldest pre-DOI work that no index carries keeps his exact CV citation. See
+// scripts/build-publications.mjs.
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 const scholarUrl = "https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en";
+const linkStyle =
+  "color: var(--color-rit-orange-text); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);";
 
 const byYear = new Map<number, typeof allPubs>();
 for (const p of allPubs) {
@@ -17,51 +19,49 @@ for (const p of allPubs) {
 }
 const years = [...byYear.keys()].sort((a, b) => b - a);
 const total = allPubs.length;
+const typeLabel: Record<string, string> = {
+  book: "Book",
+  chapter: "Chapter",
+  journal: "Journal",
+  conference: "Conf.",
+};
 ---
 
 <BaseLayout
   title="Publications · LDQIS"
-  description={`The complete publication record of Dr. Leon Reznik — ${total} peer-reviewed works, newest first — from the Laboratory of Data Quality and Intelligent Security at RIT.`}
+  description={`The full publication record of Dr. Leon Reznik — ${total} peer-reviewed works, newest first — at the Laboratory of Data Quality and Intelligent Security, RIT.`}
 >
   <Nav back={{ href: `${baseUrl}/#publications`, label: "← Home" }} />
 
   <main id="main" class="relative z-[1] pt-16 pb-32">
-    <div class="mx-auto max-w-[900px] px-6">
+    <div class="mx-auto max-w-[920px] px-6">
       <div class="mb-4 text-xs tracking-[1.5px] text-rit-orange-text uppercase">Publications</div>
       <h1
         class="mb-6"
         style="font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1px;"
       >
-        The complete record.
+        The full published record.
       </h1>
-      <p class="mb-4 max-w-[68ch] text-lg text-text-dim">
-        Every peer-reviewed publication by the lab's director, Dr. Leon Reznik — {total} works, newest
-        first. Compiled from open scholarly metadata (OpenAlex, by ORCID) rather than typed by hand, so
-        it stays complete.
+      <p class="mb-4 max-w-[64ch] text-lg text-text-dim">
+        Dr. Reznik's peer-reviewed books, journal articles, and conference papers, newest first.
       </p>
       <p class="mb-14 text-sm text-text-dim">
-        For citation counts and metrics, see his <a
+        {total} publications. See his <a
           href={scholarUrl}
           target="_blank"
           rel="noopener"
           class="border-b"
-          style="color: var(--color-rit-orange-text); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
-          >Google Scholar profile</a
-        >. Highlighted work, with abstracts, lives on the <a
-          href={`${baseUrl}/#publications`}
-          class="border-b"
-          style="color: var(--color-rit-orange-text); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
-          >home page</a
-        >.
+          style={linkStyle}>Google Scholar profile</a
+        > for citation metrics.
       </p>
 
       {
         years.map((year) => (
-          <section class="mb-12">
+          <section class="mb-11">
             <div class="mb-5 flex items-baseline gap-3 border-b border-line pb-2">
               <h2
                 class="font-normal"
-                style="font-family: var(--font-display); font-size: 32px; letter-spacing: -0.5px; color: var(--color-rit-orange-text);"
+                style="font-family: var(--font-display); font-size: 30px; letter-spacing: -0.5px; color: var(--color-rit-orange-text);"
               >
                 {year}
               </h2>
@@ -71,24 +71,47 @@ const total = allPubs.length;
             </div>
             <ul class="flex flex-col gap-5">
               {byYear.get(year)!.map((p) => (
-                <li class="grid grid-cols-[auto_1fr] gap-x-4">
-                  <span
-                    class="mt-[3px] font-mono text-[11px] text-text-faint uppercase"
-                    aria-hidden="true"
-                  >
-                    {p.type === "book" ? "Book" : p.type === "book-chapter" ? "Chap" : "Art"}
+                <li class="grid grid-cols-[64px_1fr] gap-x-4">
+                  <span class="mt-[2px] text-[11px] tracking-[0.5px] text-text-faint uppercase">
+                    {typeLabel[p.type] ?? p.type}
                   </span>
                   <div class="min-w-0">
-                    <a
-                      href={p.link}
-                      target="_blank"
-                      rel="noopener"
-                      class="text-[16px] leading-[1.35] font-medium hover:text-rit-orange-text"
-                    >
-                      {p.title}
-                    </a>
-                    <div class="mt-[2px] text-[13px] text-text-dim">{p.authors}</div>
-                    {p.venue && <div class="text-[12px] text-text-faint italic">{p.venue}</div>}
+                    {p.citation ? (
+                      <p class="text-[15px] leading-[1.45] text-text-dim">
+                        {p.citation}
+                        {p.link && (
+                          <a
+                            href={p.link}
+                            target="_blank"
+                            rel="noopener"
+                            class="ml-1 whitespace-nowrap hover:underline"
+                            style="color: var(--color-rit-orange-text);"
+                            aria-label="DOI"
+                          >
+                            ↗
+                          </a>
+                        )}
+                      </p>
+                    ) : (
+                      <>
+                        {p.link ? (
+                          <a
+                            href={p.link}
+                            target="_blank"
+                            rel="noopener"
+                            class="text-[16px] leading-[1.35] font-medium hover:text-rit-orange-text"
+                          >
+                            {p.title}
+                          </a>
+                        ) : (
+                          <span class="text-[16px] leading-[1.35] font-medium">{p.title}</span>
+                        )}
+                        {p.authors && (
+                          <div class="mt-[2px] text-[13px] text-text-dim">{p.authors}</div>
+                        )}
+                        {p.venue && <div class="text-[12px] text-text-faint italic">{p.venue}</div>}
+                      </>
+                    )}
                   </div>
                 </li>
               ))}

@@ -1,5 +1,6 @@
 # Dependabot version updates: npm + GitHub Actions, weekly, minor/patch
-# grouped one PR per ecosystem.
+# grouped one PR per ecosystem. Patch-only batches auto-merge once CI is green
+# (.github/workflows/dependabot-auto-merge.yml); minor/major wait for review.
 version: 2
 
 updates:

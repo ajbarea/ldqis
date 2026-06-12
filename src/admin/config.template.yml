@@ -50,6 +50,13 @@ site_url: __SITE_URL__
 media_folder: public/media
 public_folder: /media
 
+# Uploaded filenames are kept as-is by default; slugify them (lowercase,
+# hyphenated) so site URLs stay clean. This cannot rename a generic-but-clean
+# filename like self.jpg — the Photo field hint carries that convention.
+media_libraries:
+  all:
+    slugify_filename: true
+
 collections:
   - name: people
     label: People
@@ -83,7 +90,13 @@ collections:
           default: 100,
           hint: "lower shows first",
         }
-      - { label: Photo, name: avatar, widget: image, required: false }
+      - {
+          label: Photo,
+          name: avatar,
+          widget: image,
+          required: false,
+          hint: "name the file after the person before uploading (jane-doe.jpg) — all avatars share one folder, so a reused generic name like self.jpg replaces the previous person's photo",
+        }
       - { label: Email, name: email, widget: string, required: false }
       - { label: Website, name: website, widget: string, required: false }
       - {

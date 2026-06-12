@@ -4,7 +4,7 @@ name: Dr. Sergei Chuprov
 role: Faculty Collaborator · Assistant Professor · UTRGV
 cohort: current
 order: 2
-avatar: ./avatars/self.jpg
+avatar: ./avatars/sergei-chuprov.jpg
 email: sergei.chuprov@utrgv.edu
 website: https://faculty.utrgv.edu/sergei.chuprov/
 github: ''

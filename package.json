@@ -33,7 +33,7 @@
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.2.10",
+    "astro": "^7.3.1",
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
@@ -41,19 +41,19 @@
     "@axe-core/playwright": "^4.13.0",
     "@eslint/js": "^10.0.1",
     "@lhci/cli": "^0.15.1",
-    "@playwright/test": "^1.62.1",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/typography": "^0.5.20",
     "@vitest/coverage-v8": "^4.1.11",
-    "eslint": "^10.9.1",
+    "eslint": "^10.10.0",
     "eslint-plugin-astro": "^3.1.0",
-    "happy-dom": "^20.13.2",
+    "happy-dom": "^20.14.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.4.1",
+    "lint-staged": "^17.5.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.69.0",
+    "typescript-eslint": "^8.70.0",
     "vitest": "^4.1.7"
   },
   "overrides": {

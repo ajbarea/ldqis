@@ -61,20 +61,18 @@ const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
         <Content />
       </div>
 
-      {
-        tags.length > 0 && (
-          <ul class="mt-12 flex flex-wrap gap-2 border-t border-line pt-8">
-            {tags.map((t) => (
-              <li
-                class="rounded-full border px-[10px] py-[3px] text-[11px] tracking-[1px] uppercase"
-                style="color: var(--color-rit-orange-text); background: color-mix(in oklab, var(--color-rit-orange) 8%, transparent); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
-              >
-                {t}
-              </li>
-            ))}
-          </ul>
-        )
-      }
+      {tags.length > 0 && (
+        <ul class="mt-12 flex flex-wrap gap-2 border-t border-line pt-8">
+          {tags.map((t) => (
+            <li
+              class="rounded-full border px-[10px] py-[3px] text-[11px] tracking-[1px] uppercase"
+              style="color: var(--color-rit-orange-text); background: color-mix(in oklab, var(--color-rit-orange) 8%, transparent); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
+            >
+              {t}
+            </li>
+          ))}
+        </ul>
+      )}
     </article>
   </main>
 </BaseLayout>

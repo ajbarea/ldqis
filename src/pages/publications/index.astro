@@ -46,79 +46,75 @@ const typeLabel: Record<string, string> = {
         Dr. Reznik's peer-reviewed books, journal articles, and conference papers, newest first.
       </p>
       <p class="mb-14 text-sm text-text-dim">
-        {total} publications. See his <a
-          href={scholarUrl}
-          target="_blank"
-          rel="noopener"
-          class="border-b"
-          style={linkStyle}>Google Scholar profile</a
-        > for citation metrics.
+        {total} publications. See his{" "}
+        <a href={scholarUrl} target="_blank" rel="noopener" class="border-b" style={linkStyle}>
+          Google Scholar profile
+        </a>{" "}
+        for citation metrics.
       </p>
 
-      {
-        years.map((year) => (
-          <section class="mb-11">
-            <div class="mb-5 flex items-baseline gap-3 border-b border-line pb-2">
-              <h2
-                class="font-normal"
-                style="font-family: var(--font-display); font-size: 30px; letter-spacing: -0.5px; color: var(--color-rit-orange-text);"
-              >
-                {year}
-              </h2>
-              <span class="text-[12px] tracking-[1px] text-text-faint uppercase">
-                {byYear.get(year)!.length} {byYear.get(year)!.length === 1 ? "paper" : "papers"}
-              </span>
-            </div>
-            <ul class="flex flex-col gap-5">
-              {byYear.get(year)!.map((p) => (
-                <li class="grid grid-cols-[64px_1fr] gap-x-4">
-                  <span class="mt-[2px] text-[11px] tracking-[0.5px] text-text-faint uppercase">
-                    {typeLabel[p.type] ?? p.type}
-                  </span>
-                  <div class="min-w-0">
-                    {p.citation ? (
-                      <p class="text-[15px] leading-[1.45] text-text-dim">
-                        {p.citation}
-                        {p.link && (
-                          <a
-                            href={p.link}
-                            target="_blank"
-                            rel="noopener"
-                            class="ml-1 whitespace-nowrap hover:underline"
-                            style="color: var(--color-rit-orange-text);"
-                            aria-label="DOI"
-                          >
-                            ↗
-                          </a>
-                        )}
-                      </p>
-                    ) : (
-                      <>
-                        {p.link ? (
-                          <a
-                            href={p.link}
-                            target="_blank"
-                            rel="noopener"
-                            class="text-[16px] leading-[1.35] font-medium hover:text-rit-orange-text"
-                          >
-                            {p.title}
-                          </a>
-                        ) : (
-                          <span class="text-[16px] leading-[1.35] font-medium">{p.title}</span>
-                        )}
-                        {p.authors && (
-                          <div class="mt-[2px] text-[13px] text-text-dim">{p.authors}</div>
-                        )}
-                        {p.venue && <div class="text-[12px] text-text-faint italic">{p.venue}</div>}
-                      </>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))
-      }
+      {years.map((year) => (
+        <section class="mb-11">
+          <div class="mb-5 flex items-baseline gap-3 border-b border-line pb-2">
+            <h2
+              class="font-normal"
+              style="font-family: var(--font-display); font-size: 30px; letter-spacing: -0.5px; color: var(--color-rit-orange-text);"
+            >
+              {year}
+            </h2>
+            <span class="text-[12px] tracking-[1px] text-text-faint uppercase">
+              {byYear.get(year)!.length} {byYear.get(year)!.length === 1 ? "paper" : "papers"}
+            </span>
+          </div>
+          <ul class="flex flex-col gap-5">
+            {byYear.get(year)!.map((p) => (
+              <li class="grid grid-cols-[64px_1fr] gap-x-4">
+                <span class="mt-[2px] text-[11px] tracking-[0.5px] text-text-faint uppercase">
+                  {typeLabel[p.type] ?? p.type}
+                </span>
+                <div class="min-w-0">
+                  {p.citation ? (
+                    <p class="text-[15px] leading-[1.45] text-text-dim">
+                      {p.citation}
+                      {p.link && (
+                        <a
+                          href={p.link}
+                          target="_blank"
+                          rel="noopener"
+                          class="ml-1 whitespace-nowrap hover:underline"
+                          style="color: var(--color-rit-orange-text);"
+                          aria-label="DOI"
+                        >
+                          ↗
+                        </a>
+                      )}
+                    </p>
+                  ) : (
+                    <>
+                      {p.link ? (
+                        <a
+                          href={p.link}
+                          target="_blank"
+                          rel="noopener"
+                          class="text-[16px] leading-[1.35] font-medium hover:text-rit-orange-text"
+                        >
+                          {p.title}
+                        </a>
+                      ) : (
+                        <span class="text-[16px] leading-[1.35] font-medium">{p.title}</span>
+                      )}
+                      {p.authors && (
+                        <div class="mt-[2px] text-[13px] text-text-dim">{p.authors}</div>
+                      )}
+                      {p.venue && <div class="text-[12px] text-text-faint italic">{p.venue}</div>}
+                    </>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
     </div>
   </main>
 </BaseLayout>

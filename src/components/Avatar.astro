@@ -31,32 +31,30 @@ const ghSrc = github ? `https://github.com/${github}.png?size=${Math.min(size * 
 ---
 
 <span class={`inline-flex shrink-0 overflow-hidden rounded-full ${extra}`} style={boxStyle}>
-  {
-    avatar ? (
-      <Image
-        src={avatar}
-        alt={name}
-        width={Math.max(size * 2, 96)}
-        class="h-full w-full object-cover"
-      />
-    ) : ghSrc ? (
-      <img
-        src={ghSrc}
-        alt={name}
-        width={size}
-        height={size}
-        loading="lazy"
-        decoding="async"
-        class="h-full w-full object-cover"
-      />
-    ) : (
-      <span
-        class="flex h-full w-full items-center justify-center font-semibold"
-        style={`font-size:${Math.round(size * 0.4)}px; background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;`}
-        aria-hidden="true"
-      >
-        {initials}
-      </span>
-    )
-  }
+  {avatar ? (
+    <Image
+      src={avatar}
+      alt={name}
+      width={Math.max(size * 2, 96)}
+      class="h-full w-full object-cover"
+    />
+  ) : ghSrc ? (
+    <img
+      src={ghSrc}
+      alt={name}
+      width={size}
+      height={size}
+      loading="lazy"
+      decoding="async"
+      class="h-full w-full object-cover"
+    />
+  ) : (
+    <span
+      class="flex h-full w-full items-center justify-center font-semibold"
+      style={`font-size:${Math.round(size * 0.4)}px; background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;`}
+      aria-hidden="true"
+    >
+      {initials}
+    </span>
+  )}
 </span>

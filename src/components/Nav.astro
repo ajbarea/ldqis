@@ -42,20 +42,16 @@ const links = [
 
     <div class="flex items-center gap-5 md:gap-7">
       <div class="hidden items-center gap-7 text-sm text-text-dim md:flex">
-        {
-          links.map((l) => (
-            <a href={l.href} class="hover:text-text">
-              {l.label}
-            </a>
-          ))
-        }
-        {
-          back && (
-            <a href={back.href} class="whitespace-nowrap hover:text-rit-orange-text">
-              {back.label}
-            </a>
-          )
-        }
+        {links.map((l) => (
+          <a href={l.href} class="hover:text-text">
+            {l.label}
+          </a>
+        ))}
+        {back && (
+          <a href={back.href} class="whitespace-nowrap hover:text-rit-orange-text">
+            {back.label}
+          </a>
+        )}
       </div>
 
       <button
@@ -87,9 +83,7 @@ const links = [
           aria-hidden="true"
         >
           <circle cx="12" cy="12" r="4"></circle>
-          <path
-            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
-          ></path>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
         </svg>
       </button>
 
@@ -119,20 +113,16 @@ const links = [
 
   <div id="mobile-menu" class="hidden border-t border-line md:hidden">
     <div class="mx-auto flex max-w-[1200px] flex-col px-6 py-2 text-sm text-text-dim">
-      {
-        links.map((l) => (
-          <a href={l.href} class="py-2 hover:text-text">
-            {l.label}
-          </a>
-        ))
-      }
-      {
-        back && (
-          <a href={back.href} class="py-2 hover:text-rit-orange-text">
-            {back.label}
-          </a>
-        )
-      }
+      {links.map((l) => (
+        <a href={l.href} class="py-2 hover:text-text">
+          {l.label}
+        </a>
+      ))}
+      {back && (
+        <a href={back.href} class="py-2 hover:text-rit-orange-text">
+          {back.label}
+        </a>
+      )}
     </div>
   </div>
 </nav>

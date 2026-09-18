@@ -158,21 +158,23 @@ const pastCohort = peopleEntries
     {/* HERO */}
     <header class="relative pt-[120px] pb-[100px]">
       <div class="mx-auto max-w-[1200px] px-6">
-        <div
-          class="mb-8 inline-flex items-center gap-2 rounded-full border border-line bg-bg-soft px-3 py-[6px] text-xs text-text-dim"
-        >
+        <div class="mb-8 inline-flex items-center gap-2 rounded-full border border-line bg-bg-soft px-3 py-[6px] text-xs text-text-dim">
           <span
             class="h-[6px] w-[6px] rounded-full bg-rit-orange"
-            style="box-shadow: 0 0 12px var(--color-rit-orange);"></span>
+            style="box-shadow: 0 0 12px var(--color-rit-orange);"
+          ></span>
           Rochester Institute of Technology · Department of Computer Science
         </div>
         <h1
           class="mb-7 max-w-[14ch]"
           style="font-family: var(--font-display); font-size: clamp(48px, 8vw, 96px); font-weight: 400; line-height: 1.02; letter-spacing: -2px;"
         >
-          Trustworthy data.<br /><em class="italic" style="color: var(--color-rit-orange);"
-            >Intelligent</em
-          > security.
+          Trustworthy data.
+          <br />
+          <em class="italic" style="color: var(--color-rit-orange);">
+            Intelligent
+          </em>{" "}
+          security.
         </h1>
         <p class="mb-10 max-w-[56ch] text-lg text-text-dim">
           The Laboratory of Data Quality and Intelligent Security at RIT builds the methods, models,
@@ -200,32 +202,30 @@ const pastCohort = peopleEntries
           class="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-[14px] border border-line md:grid-cols-4"
           style="background: var(--color-line);"
         >
-          {
-            [
-              { num: "4", label: "Active OSS projects" },
-              { num: "25+", label: "Researchers trained" },
-              // research(2026-06): the live count of the imported publication
-              // record (`allPubs.length` from src/data/publications-all.json) —
-              // Dr. Reznik's complete OpenAlex-indexed body of work, the same
-              // figure the /publications page shows. Dynamic so it never drifts;
-              // the trailing "+" hedges OpenAlex coverage gaps. Replaces a
-              // hand-scoped "90+" RIT-era CV estimate that undercounted the record.
-              { num: `${allPubs.length}+`, label: "Peer-reviewed publications" },
-              // research(2026-05): RIT lab era. L. Reznik joined RIT ~2003
-              // (Victoria U. 1996-2001, UT El Paso ~2002), so ~22 years;
-              // "20+" rounds down. Pre-RIT career work is excluded here.
-              { num: "20+", label: "Years of research" },
-            ].map(({ num, label }) => (
-              <div class="bg-bg px-6 py-7">
-                <div style="font-family: var(--font-display); font-size: 44px; line-height: 1; color: var(--color-rit-orange);">
-                  {num}
-                </div>
-                <div class="mt-[6px] text-[13px] tracking-[0.5px] text-text-dim uppercase">
-                  {label}
-                </div>
+          {[
+            { num: "4", label: "Active OSS projects" },
+            { num: "25+", label: "Researchers trained" },
+            // research(2026-06): the live count of the imported publication
+            // record (`allPubs.length` from src/data/publications-all.json) —
+            // Dr. Reznik's complete OpenAlex-indexed body of work, the same
+            // figure the /publications page shows. Dynamic so it never drifts;
+            // the trailing "+" hedges OpenAlex coverage gaps. Replaces a
+            // hand-scoped "90+" RIT-era CV estimate that undercounted the record.
+            { num: `${allPubs.length}+`, label: "Peer-reviewed publications" },
+            // research(2026-05): RIT lab era. L. Reznik joined RIT ~2003
+            // (Victoria U. 1996-2001, UT El Paso ~2002), so ~22 years;
+            // "20+" rounds down. Pre-RIT career work is excluded here.
+            { num: "20+", label: "Years of research" },
+          ].map(({ num, label }) => (
+            <div class="bg-bg px-6 py-7">
+              <div style="font-family: var(--font-display); font-size: 44px; line-height: 1; color: var(--color-rit-orange);">
+                {num}
               </div>
-            ))
-          }
+              <div class="mt-[6px] text-[13px] tracking-[0.5px] text-text-dim uppercase">
+                {label}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </header>
@@ -247,20 +247,18 @@ const pastCohort = peopleEntries
           with a hard focus on what's deployable, measurable, and trustworthy.
         </p>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {
-            researchAreas.map((area) => (
-              <article class="rounded-[14px] border border-line bg-bg-elev p-8 transition-all hover:-translate-y-[2px] hover:border-rit-orange">
-                <span
-                  class="mb-6 block text-sm italic"
-                  style="font-family: var(--font-display); color: var(--color-rit-orange-text);"
-                >
-                  — {area.n}
-                </span>
-                <div class="mb-3 text-[22px] leading-[1.2] font-medium">{area.title}</div>
-                <p class="text-[15px] text-text-dim">{area.desc}</p>
-              </article>
-            ))
-          }
+          {researchAreas.map((area) => (
+            <article class="rounded-[14px] border border-line bg-bg-elev p-8 transition-all hover:-translate-y-[2px] hover:border-rit-orange">
+              <span
+                class="mb-6 block text-sm italic"
+                style="font-family: var(--font-display); color: var(--color-rit-orange-text);"
+              >
+                — {area.n}
+              </span>
+              <div class="mb-3 text-[22px] leading-[1.2] font-medium">{area.title}</div>
+              <p class="text-[15px] text-text-dim">{area.desc}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -282,53 +280,51 @@ const pastCohort = peopleEntries
           current cohort and used by researchers beyond LDQIS.
         </p>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {
-            projects.map((p) => (
-              <article class="flex flex-col rounded-[14px] border border-line bg-bg-elev p-8 transition-all hover:-translate-y-[2px] hover:border-rit-orange">
-                <div class="mb-2 flex flex-wrap items-center gap-3">
-                  {p.tags.map((t) => (
-                    <span
-                      class="rounded-full border px-[10px] py-[3px] text-[11px] tracking-[1px] uppercase"
-                      style="color: var(--color-rit-orange-text); background: color-mix(in oklab, var(--color-rit-orange) 8%, transparent); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <div class="mb-[18px] font-mono text-[11px] text-text-faint">
-                  {p.stack.join(" · ")}
-                </div>
-                <div
-                  class="mb-[6px] leading-[1.1]"
-                  style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;"
-                >
-                  {p.name}
-                </div>
-                <div class="mb-4 text-sm text-text-dim italic">{p.tagline}</div>
-                <p class="mb-6 flex-grow text-[15px] text-text-dim" set:html={p.desc} />
-                <div class="flex flex-wrap gap-[14px] border-t border-line pt-[18px] text-[13px]">
-                  {p.links.map((l) => (
-                    <a
-                      href={l.href}
-                      target="_blank"
-                      rel="noopener"
-                      class="inline-flex items-center gap-1 hover:underline"
-                      style="color: var(--color-rit-orange-text);"
-                    >
-                      {l.label}
-                    </a>
-                  ))}
-                  <a
-                    href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/projects/${p.id}/`}
-                    class="ml-auto inline-flex items-center gap-1 text-text-dim hover:text-rit-orange-text"
-                    aria-label={`Project page for ${p.name}`}
+          {projects.map((p) => (
+            <article class="flex flex-col rounded-[14px] border border-line bg-bg-elev p-8 transition-all hover:-translate-y-[2px] hover:border-rit-orange">
+              <div class="mb-2 flex flex-wrap items-center gap-3">
+                {p.tags.map((t) => (
+                  <span
+                    class="rounded-full border px-[10px] py-[3px] text-[11px] tracking-[1px] uppercase"
+                    style="color: var(--color-rit-orange-text); background: color-mix(in oklab, var(--color-rit-orange) 8%, transparent); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
                   >
-                    Project page →
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <div class="mb-[18px] font-mono text-[11px] text-text-faint">
+                {p.stack.join(" · ")}
+              </div>
+              <div
+                class="mb-[6px] leading-[1.1]"
+                style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;"
+              >
+                {p.name}
+              </div>
+              <div class="mb-4 text-sm text-text-dim italic">{p.tagline}</div>
+              <p class="mb-6 flex-grow text-[15px] text-text-dim" set:html={p.desc} />
+              <div class="flex flex-wrap gap-[14px] border-t border-line pt-[18px] text-[13px]">
+                {p.links.map((l) => (
+                  <a
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener"
+                    class="inline-flex items-center gap-1 hover:underline"
+                    style="color: var(--color-rit-orange-text);"
+                  >
+                    {l.label}
                   </a>
-                </div>
-              </article>
-            ))
-          }
+                ))}
+                <a
+                  href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/projects/${p.id}/`}
+                  class="ml-auto inline-flex items-center gap-1 text-text-dim hover:text-rit-orange-text"
+                  aria-label={`Project page for ${p.name}`}
+                >
+                  Project page →
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -352,52 +348,52 @@ const pastCohort = peopleEntries
             rel="noopener"
             class="border-b"
             style="color: var(--color-rit-orange-text); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
-            >Google Scholar profile</a
-          > for citation metrics.
+          >
+            Google Scholar profile
+          </a>{" "}
+          for citation metrics.
         </p>
         <div class="flex flex-col gap-4">
-          {
-            publications.map((pub) => (
-              <article class="grid grid-cols-1 items-center gap-6 rounded-[14px] border border-line bg-bg-elev p-6 hover:border-rit-orange md:grid-cols-[auto_1fr_auto] md:px-7">
-                <div
-                  class="text-4xl leading-none"
-                  style="font-family: var(--font-display); color: var(--color-rit-orange-text); letter-spacing: -1px;"
-                >
-                  {pub.year}
-                </div>
-                <div class="min-w-0">
-                  <div class="mb-[6px] text-[11px] tracking-[1.5px] text-text-faint uppercase">
-                    {pub.venue}
-                  </div>
-                  <a
-                    href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/publications/${pub.id}/`}
-                    class="mb-1 inline-block text-[17px] leading-[1.35] font-medium hover:text-rit-orange-text"
-                  >
-                    {pub.title}
-                  </a>
-                  <div class="text-[13px] text-text-dim">{pub.authors}</div>
-                  {pub.project && (
-                    <a
-                      href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/projects/${pub.project.id}/`}
-                      class="mt-[6px] inline-flex items-center gap-1 text-[12px] hover:underline"
-                      style="color: var(--color-rit-orange-text);"
-                    >
-                      <span aria-hidden="true">⟨/⟩</span> Code ·{" "}
-                      {projectNamesById.get(pub.project.id)} →
-                    </a>
-                  )}
+          {publications.map((pub) => (
+            <article class="grid grid-cols-1 items-center gap-6 rounded-[14px] border border-line bg-bg-elev p-6 hover:border-rit-orange md:grid-cols-[auto_1fr_auto] md:px-7">
+              <div
+                class="text-4xl leading-none"
+                style="font-family: var(--font-display); color: var(--color-rit-orange-text); letter-spacing: -1px;"
+              >
+                {pub.year}
+              </div>
+              <div class="min-w-0">
+                <div class="mb-[6px] text-[11px] tracking-[1.5px] text-text-faint uppercase">
+                  {pub.venue}
                 </div>
                 <a
-                  href={pub.link.href}
-                  target="_blank"
-                  rel="noopener"
-                  class="inline-flex items-center gap-[6px] justify-self-start rounded-full border border-line px-[14px] py-2 text-[13px] whitespace-nowrap text-text-dim hover:border-rit-orange hover:text-rit-orange-text md:justify-self-auto"
+                  href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/publications/${pub.id}/`}
+                  class="mb-1 inline-block text-[17px] leading-[1.35] font-medium hover:text-rit-orange-text"
                 >
-                  {pub.link.label}
+                  {pub.title}
                 </a>
-              </article>
-            ))
-          }
+                <div class="text-[13px] text-text-dim">{pub.authors}</div>
+                {pub.project && (
+                  <a
+                    href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/projects/${pub.project.id}/`}
+                    class="mt-[6px] inline-flex items-center gap-1 text-[12px] hover:underline"
+                    style="color: var(--color-rit-orange-text);"
+                  >
+                    <span aria-hidden="true">⟨/⟩</span> Code ·{" "}
+                    {projectNamesById.get(pub.project.id)} →
+                  </a>
+                )}
+              </div>
+              <a
+                href={pub.link.href}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-[6px] justify-self-start rounded-full border border-line px-[14px] py-2 text-[13px] whitespace-nowrap text-text-dim hover:border-rit-orange hover:text-rit-orange-text md:justify-self-auto"
+              >
+                {pub.link.label}
+              </a>
+            </article>
+          ))}
         </div>
         <div class="mt-12">
           <a
@@ -434,8 +430,10 @@ const pastCohort = peopleEntries
         <div class="mb-6 flex items-baseline gap-4">
           <span
             class="text-[11px] tracking-[1.5px] uppercase"
-            style="color: var(--color-rit-orange-text);">Now</span
+            style="color: var(--color-rit-orange-text);"
           >
+            Now
+          </span>
           <h3
             class="font-normal"
             style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;"
@@ -446,64 +444,64 @@ const pastCohort = peopleEntries
         </div>
 
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">
-          {
-            currentTeam.map((p) => (
-              <div
-                class={`rounded-[14px] border border-line bg-bg-elev p-6 transition-colors hover:border-rit-orange ${p.lead ? "sm:col-span-2 md:col-span-2" : ""}`}
-                style={
-                  p.lead
-                    ? "background: linear-gradient(135deg, var(--color-bg-elev), var(--color-bg-soft));"
-                    : undefined
-                }
-              >
-                <div class="mb-4 flex items-center gap-3">
-                  <Avatar
-                    avatar={p.avatar}
-                    github={p.github}
-                    initials={p.initials}
-                    name={p.name}
-                    transitionName={`avatar-${p.id}`}
-                  />
-                  <a
-                    href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
-                    class="inline-block text-base font-medium hover:text-rit-orange-text"
-                  >
-                    {p.name}
-                  </a>
-                </div>
-                <div class="text-[13px] text-text-dim">{p.role}</div>
-                {p.years && <div class="mt-1 text-xs text-text-dim">{p.years}</div>}
-                <ContactLinks
-                  email={p.email}
-                  scholar={p.scholar}
-                  ieee={p.ieee}
-                  website={p.website}
+          {currentTeam.map((p) => (
+            <div
+              class={`rounded-[14px] border border-line bg-bg-elev p-6 transition-colors hover:border-rit-orange ${p.lead ? "sm:col-span-2 md:col-span-2" : ""}`}
+              style={
+                p.lead
+                  ? "background: linear-gradient(135deg, var(--color-bg-elev), var(--color-bg-soft));"
+                  : undefined
+              }
+            >
+              <div class="mb-4 flex items-center gap-3">
+                <Avatar
+                  avatar={p.avatar}
                   github={p.github}
-                  linkedin={p.linkedin}
-                  youtube={p.youtube}
-                  orcid={p.orcid}
+                  initials={p.initials}
                   name={p.name}
+                  transitionName={`avatar-${p.id}`}
                 />
+                <a
+                  href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
+                  class="inline-block text-base font-medium hover:text-rit-orange-text"
+                >
+                  {p.name}
+                </a>
               </div>
-            ))
-          }
+              <div class="text-[13px] text-text-dim">{p.role}</div>
+              {p.years && <div class="mt-1 text-xs text-text-dim">{p.years}</div>}
+              <ContactLinks
+                email={p.email}
+                scholar={p.scholar}
+                ieee={p.ieee}
+                website={p.website}
+                github={p.github}
+                linkedin={p.linkedin}
+                youtube={p.youtube}
+                orcid={p.orcid}
+                name={p.name}
+              />
+            </div>
+          ))}
         </div>
 
         <div class="mt-14 mb-6 flex items-baseline gap-4 border-t border-line pt-4">
           <span
             class="text-[11px] tracking-[1.5px] uppercase"
-            style="color: var(--color-rit-orange-text);">Then</span
+            style="color: var(--color-rit-orange-text);"
           >
+            Then
+          </span>
           <h3
             class="font-normal"
             style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;"
           >
             Past Research Cohort
           </h3>
-          <span class="text-[13px] text-text-dim"
-            >Mobile security · Android attacks · Wearable sensors · Data quality · Computational
-            intelligence</span
-          >
+          <span class="text-[13px] text-text-dim">
+            Mobile security · Android attacks · Wearable sensors · Data quality · Computational
+            intelligence
+          </span>
         </div>
 
         <p class="mb-8 max-w-[64ch] text-sm text-text-dim">
@@ -514,40 +512,38 @@ const pastCohort = peopleEntries
         </p>
 
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">
-          {
-            pastCohort.map((p) => (
-              <div class="rounded-[14px] border border-line bg-bg-elev p-6 transition-colors hover:border-rit-orange">
-                <div class="mb-4 flex items-center gap-3">
-                  <Avatar
-                    avatar={p.avatar}
-                    github={p.github}
-                    initials={p.initials}
-                    name={p.name}
-                    transitionName={`avatar-${p.id}`}
-                  />
-                  <a
-                    href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
-                    class="inline-block text-base font-medium hover:text-rit-orange-text"
-                  >
-                    {p.name}
-                  </a>
-                </div>
-                <div class="text-[13px] text-text-dim">{p.role}</div>
-                {p.years && <div class="mt-1 text-xs text-text-dim">{p.years}</div>}
-                <ContactLinks
-                  email={p.email}
-                  scholar={p.scholar}
-                  ieee={p.ieee}
-                  website={p.website}
+          {pastCohort.map((p) => (
+            <div class="rounded-[14px] border border-line bg-bg-elev p-6 transition-colors hover:border-rit-orange">
+              <div class="mb-4 flex items-center gap-3">
+                <Avatar
+                  avatar={p.avatar}
                   github={p.github}
-                  linkedin={p.linkedin}
-                  youtube={p.youtube}
-                  orcid={p.orcid}
+                  initials={p.initials}
                   name={p.name}
+                  transitionName={`avatar-${p.id}`}
                 />
+                <a
+                  href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/people/${p.id}/`}
+                  class="inline-block text-base font-medium hover:text-rit-orange-text"
+                >
+                  {p.name}
+                </a>
               </div>
-            ))
-          }
+              <div class="text-[13px] text-text-dim">{p.role}</div>
+              {p.years && <div class="mt-1 text-xs text-text-dim">{p.years}</div>}
+              <ContactLinks
+                email={p.email}
+                scholar={p.scholar}
+                ieee={p.ieee}
+                website={p.website}
+                github={p.github}
+                linkedin={p.linkedin}
+                youtube={p.youtube}
+                orcid={p.orcid}
+                name={p.name}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -573,40 +569,40 @@ const pastCohort = peopleEntries
             rel="noopener"
             class="border-b"
             style="color: var(--color-rit-orange-text); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
-            >course pages</a
-          >.
+          >
+            course pages
+          </a>
+          .
         </p>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {
-            ["Undergraduate", "Graduate"].map((level) => {
-              const items = courses.filter((c) => c.level === level);
-              return (
-                <article class="rounded-[14px] border border-line bg-bg-elev p-8">
-                  <div class="mb-6 flex items-baseline justify-between gap-3">
-                    <h3
-                      class="font-normal"
-                      style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.5px;"
-                    >
-                      {level}
-                    </h3>
-                    <span class="text-[12px] tracking-[1px] text-text-faint uppercase">
-                      {items.length} courses
-                    </span>
-                  </div>
-                  <ul class="flex flex-col">
-                    {items.map((c) => (
-                      <li class="flex flex-col gap-1 border-t border-line py-4 first:border-t-0 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:gap-4">
-                        <span class="font-mono text-[12px] tracking-[0.5px] text-text-faint sm:w-[84px] sm:shrink-0">
-                          {c.code}
-                        </span>
-                        <span class="text-[16px] leading-[1.3]">{c.title}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              );
-            })
-          }
+          {["Undergraduate", "Graduate"].map((level) => {
+            const items = courses.filter((c) => c.level === level);
+            return (
+              <article class="rounded-[14px] border border-line bg-bg-elev p-8">
+                <div class="mb-6 flex items-baseline justify-between gap-3">
+                  <h3
+                    class="font-normal"
+                    style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.5px;"
+                  >
+                    {level}
+                  </h3>
+                  <span class="text-[12px] tracking-[1px] text-text-faint uppercase">
+                    {items.length} courses
+                  </span>
+                </div>
+                <ul class="flex flex-col">
+                  {items.map((c) => (
+                    <li class="flex flex-col gap-1 border-t border-line py-4 first:border-t-0 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:gap-4">
+                      <span class="font-mono text-[12px] tracking-[0.5px] text-text-faint sm:w-[84px] sm:shrink-0">
+                        {c.code}
+                      </span>
+                      <span class="text-[16px] leading-[1.3]">{c.title}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -626,36 +622,34 @@ const pastCohort = peopleEntries
           of Defense, and CRDF Global with the U.S. Department of State.
         </p>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {
-            funders.map((f) => (
-              <article class="flex flex-col rounded-[14px] border border-line bg-bg-elev p-8 transition-all hover:-translate-y-[2px] hover:border-rit-orange">
-                <div
-                  class="mb-3 text-[11px] tracking-[1.5px] uppercase"
-                  style="color: var(--color-rit-orange-text);"
-                >
-                  {f.agency}
-                </div>
-                <div class="mb-4 text-[19px] leading-[1.3] font-medium">{f.program}</div>
-                <div class="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-line pt-[18px] text-[13px] text-text-dim">
-                  <span class="font-mono text-text-faint">{f.award}</span>
-                  <span aria-hidden="true">·</span>
-                  <span>{f.years}</span>
-                  {f.url && (
-                    <a
-                      href={f.url}
-                      target="_blank"
-                      rel="noopener"
-                      class="ml-auto inline-flex items-center gap-1 hover:text-rit-orange-text"
-                      style="color: var(--color-rit-orange-text);"
-                      aria-label={`NSF award ${f.award} on nsf.gov`}
-                    >
-                      View award →
-                    </a>
-                  )}
-                </div>
-              </article>
-            ))
-          }
+          {funders.map((f) => (
+            <article class="flex flex-col rounded-[14px] border border-line bg-bg-elev p-8 transition-all hover:-translate-y-[2px] hover:border-rit-orange">
+              <div
+                class="mb-3 text-[11px] tracking-[1.5px] uppercase"
+                style="color: var(--color-rit-orange-text);"
+              >
+                {f.agency}
+              </div>
+              <div class="mb-4 text-[19px] leading-[1.3] font-medium">{f.program}</div>
+              <div class="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-line pt-[18px] text-[13px] text-text-dim">
+                <span class="font-mono text-text-faint">{f.award}</span>
+                <span aria-hidden="true">·</span>
+                <span>{f.years}</span>
+                {f.url && (
+                  <a
+                    href={f.url}
+                    target="_blank"
+                    rel="noopener"
+                    class="ml-auto inline-flex items-center gap-1 hover:text-rit-orange-text"
+                    style="color: var(--color-rit-orange-text);"
+                    aria-label={`NSF award ${f.award} on nsf.gov`}
+                  >
+                    View award →
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
         </div>
         <p class="mt-10 max-w-[80ch] text-xs leading-[1.7] text-text-faint">
           Any opinions, findings, and conclusions or recommendations expressed on this site are
@@ -675,8 +669,7 @@ const pastCohort = peopleEntries
           <div
             class="pointer-events-none absolute"
             style="top: -50%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, color-mix(in oklab, var(--color-rit-orange) 8%, transparent), transparent 70%);"
-          >
-          </div>
+          ></div>
           <div class="relative">
             <div
               class="mb-4 text-xs tracking-[1.5px] uppercase"
@@ -744,10 +737,26 @@ const pastCohort = peopleEntries
             Research
           </h4>
           <ul class="space-y-2 text-sm text-text-dim">
-            <li><a href="#research" class="hover:text-rit-orange-text">Areas</a></li>
-            <li><a href="#publications" class="hover:text-rit-orange-text">Publications</a></li>
-            <li><a href="#projects" class="hover:text-rit-orange-text">Open-source</a></li>
-            <li><a href="#funding" class="hover:text-rit-orange-text">Funded by</a></li>
+            <li>
+              <a href="#research" class="hover:text-rit-orange-text">
+                Areas
+              </a>
+            </li>
+            <li>
+              <a href="#publications" class="hover:text-rit-orange-text">
+                Publications
+              </a>
+            </li>
+            <li>
+              <a href="#projects" class="hover:text-rit-orange-text">
+                Open-source
+              </a>
+            </li>
+            <li>
+              <a href="#funding" class="hover:text-rit-orange-text">
+                Funded by
+              </a>
+            </li>
           </ul>
         </div>
         <div>
@@ -755,14 +764,28 @@ const pastCohort = peopleEntries
             Lab
           </h4>
           <ul class="space-y-2 text-sm text-text-dim">
-            <li><a href="#people" class="hover:text-rit-orange-text">Current team</a></li>
-            <li><a href="#people" class="hover:text-rit-orange-text">Alumni</a></li>
-            <li><a href="#teaching" class="hover:text-rit-orange-text">Teaching</a></li>
+            <li>
+              <a href="#people" class="hover:text-rit-orange-text">
+                Current team
+              </a>
+            </li>
+            <li>
+              <a href="#people" class="hover:text-rit-orange-text">
+                Alumni
+              </a>
+            </li>
+            <li>
+              <a href="#teaching" class="hover:text-rit-orange-text">
+                Teaching
+              </a>
+            </li>
             <li>
               <a
                 href="mailto:lrvcs@rit.edu?subject=Joining%20LDQIS"
-                class="hover:text-rit-orange-text">Join us</a
+                class="hover:text-rit-orange-text"
               >
+                Join us
+              </a>
             </li>
           </ul>
         </div>
@@ -776,27 +799,31 @@ const pastCohort = peopleEntries
                 href="https://www.rit.edu/computing/"
                 target="_blank"
                 rel="noopener"
-                class="hover:text-rit-orange-text">RIT GCCIS</a
+                class="hover:text-rit-orange-text"
               >
+                RIT GCCIS
+              </a>
             </li>
             <li>
-              <a href="mailto:lrvcs@rit.edu" class="hover:text-rit-orange-text">Get in touch</a>
+              <a href="mailto:lrvcs@rit.edu" class="hover:text-rit-orange-text">
+                Get in touch
+              </a>
             </li>
             <li>
               <a
                 href="https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en"
                 target="_blank"
                 rel="noopener"
-                class="hover:text-rit-orange-text">Google Scholar</a
+                class="hover:text-rit-orange-text"
               >
+                Google Scholar
+              </a>
             </li>
           </ul>
         </div>
       </div>
 
-      <div
-        class="mt-12 flex flex-wrap justify-between gap-3 border-t border-line pt-6 text-xs text-text-faint"
-      >
+      <div class="mt-12 flex flex-wrap justify-between gap-3 border-t border-line pt-6 text-xs text-text-faint">
         <div class="flex flex-wrap items-center gap-[14px]">
           <a
             href="https://www.rit.edu"

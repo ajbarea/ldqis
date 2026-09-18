@@ -112,10 +112,10 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Run unit tests with coverage + junit
-        # research(2026-05): Vitest 4 multi-reporter dot-notation lets us emit
+        # research(2026-05): Vitest multi-reporter dot-notation lets us emit
         # both the dev-friendly default reporter and a junit.xml file in one
         # run. The lcov report goes to ./coverage/lcov.info (configured in
-        # vitest.config.ts). vitest 4.1.7 + v8 provider — the .vue-specific
+        # vitest.config.ts). v8 provider — the .vue-specific
         # NaN BRDA bug from #9725 doesn't apply to .astro/.ts sources.
         run: npx vitest run --coverage --reporter=default --reporter=junit --outputFile.junit=./test-results/junit.xml
 

@@ -62,10 +62,8 @@ const ogImageUrl =
       rel="stylesheet"
     />
 
-    {
-      /* FOUC prevention — set the theme before first paint: an explicit stored
-        choice wins, otherwise follow the OS via prefers-color-scheme, else light. */
-    }
+    {/* FOUC prevention — set the theme before first paint: an explicit stored
+        choice wins, otherwise follow the OS via prefers-color-scheme, else light. */}
     <script is:inline>
       (function () {
         try {
@@ -80,7 +78,6 @@ const ogImageUrl =
         }
       })();
     </script>
-
     {/* Per-page head extras — e.g. citation_* meta + JSON-LD on publications */}
     <slot name="head" />
   </head>
@@ -88,7 +85,9 @@ const ogImageUrl =
     class="overflow-x-hidden bg-bg font-sans text-text antialiased transition-colors duration-200"
     style="font-family: var(--font-sans);"
   >
-    <a href="#main" class="skip-link">Skip to main content</a>
+    <a href="#main" class="skip-link">
+      Skip to main content
+    </a>
     <slot />
   </body>
 </html>

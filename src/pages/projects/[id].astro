@@ -35,16 +35,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
   <main id="main" class="relative z-[1] pt-16 pb-32">
     <article class="mx-auto max-w-[800px] px-6">
       <div class="mb-6 flex flex-wrap items-center gap-3">
-        {
-          tags.map((t) => (
-            <span
-              class="rounded-full border px-[10px] py-[3px] text-[11px] tracking-[1px] uppercase"
-              style="color: var(--color-rit-orange-text); background: color-mix(in oklab, var(--color-rit-orange) 8%, transparent); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
-            >
-              {t}
-            </span>
-          ))
-        }
+        {tags.map((t) => (
+          <span
+            class="rounded-full border px-[10px] py-[3px] text-[11px] tracking-[1px] uppercase"
+            style="color: var(--color-rit-orange-text); background: color-mix(in oklab, var(--color-rit-orange) 8%, transparent); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);"
+          >
+            {t}
+          </span>
+        ))}
       </div>
 
       <h1
@@ -61,51 +59,47 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       <div class="prose prose-lg mb-12 max-w-none" set:html={desc} />
 
       <div class="flex flex-wrap gap-[14px] border-t border-line pt-8">
-        {
-          links.map((l) => (
-            <a
-              href={l.href}
-              target="_blank"
-              rel="noopener"
-              class="inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] text-sm hover:border-rit-orange hover:text-rit-orange-text"
-            >
-              {l.label}
-            </a>
-          ))
-        }
+        {links.map((l) => (
+          <a
+            href={l.href}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-full border border-line px-[18px] py-[10px] text-sm hover:border-rit-orange hover:text-rit-orange-text"
+          >
+            {l.label}
+          </a>
+        ))}
       </div>
 
-      {
-        contributorEntries.length > 0 && (
-          <section class="mt-12 border-t border-line pt-8" aria-labelledby="contributors-heading">
-            <h2
-              id="contributors-heading"
-              class="mb-4 text-xs tracking-[1.5px] text-text-faint uppercase"
-            >
-              Contributors
-            </h2>
-            <ul class="flex flex-wrap gap-3" role="list">
-              {contributorEntries.map((person) => (
-                <li>
-                  <a
-                    href={`${baseUrl}/people/${person.id}/`}
-                    class="inline-flex items-center gap-2 rounded-full border border-line px-[14px] py-[8px] text-sm hover:border-rit-orange hover:text-rit-orange-text"
+      {contributorEntries.length > 0 && (
+        <section class="mt-12 border-t border-line pt-8" aria-labelledby="contributors-heading">
+          <h2
+            id="contributors-heading"
+            class="mb-4 text-xs tracking-[1.5px] text-text-faint uppercase"
+          >
+            Contributors
+          </h2>
+          <ul class="flex flex-wrap gap-3" role="list">
+            {contributorEntries.map((person) => (
+              <li>
+                <a
+                  href={`${baseUrl}/people/${person.id}/`}
+                  class="inline-flex items-center gap-2 rounded-full border border-line px-[14px] py-[8px] text-sm hover:border-rit-orange hover:text-rit-orange-text"
+                >
+                  <span
+                    class="flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold"
+                    style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
+                    aria-hidden="true"
                   >
-                    <span
-                      class="flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold"
-                      style="background: linear-gradient(135deg, var(--color-rit-orange), var(--color-rit-yellow)); color: #0a0e13;"
-                      aria-hidden="true"
-                    >
-                      {person.data.initials}
-                    </span>
-                    {person.data.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )
-      }
+                    {person.data.initials}
+                  </span>
+                  {person.data.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </article>
   </main>
 </BaseLayout>

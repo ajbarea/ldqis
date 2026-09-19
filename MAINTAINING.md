@@ -6,13 +6,13 @@ maintainer.
 
 ## What the site depends on
 
-| Piece                           | Where it lives                                                                                    | Who can change it               |
-| ------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------- |
-| Source, CI, GitHub Pages        | `ajbarea/ldqis` (moving to `ldqis/ldqis`)                                                         | Repo admins                     |
-| CMS sign-in (Cloudflare Worker) | `ldqis-cms-auth`, source in `ajbarea/ldqis-cms-auth`; Cloudflare deploys every push to its `main` | Cloudflare account members      |
-| GitHub OAuth App                | Client ID in the Worker's `wrangler.toml`; client secret stored as a Worker secret                | The app's owner                 |
-| CMS publisher GitHub App        | Repo variable `CMS_APP_ID`, repo secret `CMS_APP_PRIVATE_KEY`                                     | The app's owner                 |
-| `dataqualitylabs.com`           | GoDaddy (registration and DNS); renews every February 12                                          | Whoever holds the GoDaddy login |
+| Piece                           | Where it lives                                                                                  | Who can change it               |
+| ------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------- |
+| Source, CI, GitHub Pages        | `ldqis/ldqis`                                                                                   | Repo admins                     |
+| CMS sign-in (Cloudflare Worker) | `ldqis-cms-auth`, source in `ldqis/ldqis-cms-auth`; Cloudflare deploys every push to its `main` | Cloudflare account members      |
+| GitHub OAuth App                | Client ID in the Worker's `wrangler.toml`; client secret stored as a Worker secret              | The app's owner                 |
+| CMS publisher GitHub App        | Repo variable `CMS_APP_ID`, repo secret `CMS_APP_PRIVATE_KEY`                                   | The app's owner                 |
+| `dataqualitylabs.com`           | GoDaddy (registration and DNS); renews every February 12                                        | Whoever holds the GoDaddy login |
 
 ## Moving into the `ldqis` organization
 

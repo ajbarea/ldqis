@@ -5,28 +5,24 @@ longer-term plan lives in [ROADMAP.md](./ROADMAP.md); git history has the full r
 
 ## In progress
 
-Nothing actively mid-flight. The CMS publish pipeline — the prior in-progress item — is now
-live: Sveltia commits to the unprotected `cms` branch; `cms-publish.yml` opens an
-App-authored PR to `main` (so `ci.yml` runs) and auto-merges on green; `cms-sync.yml` folds
-`main` back into `cms`, so `main`'s protection is never bypassed. The GitHub App
-(`CMS_APP_ID` + `CMS_APP_PRIVATE_KEY`), the `cms` branch, and `backend.branch: cms` are all
-in place, so non-owner `/admin` saves route through the App PR instead of being rejected.
+**Moving into the `ldqis` organization.** The org exists, with Dr. Reznik (`leonr07`) invited
+as an owner and a `lab-members` team. The CMS Worker already allows `ldqis.github.io` and
+`dataqualitylabs.com`, and Dependabot auto-merge no longer depends on the repo's owner. The
+draft PR that points the site and CMS at `ldqis/ldqis` merges right after the repo transfer.
+Steps: [MAINTAINING.md](./MAINTAINING.md).
 
 ## Known issues
 
-Only dev/CI-only npm advisories remain (`npm audit`: 10 total, none reach the deployed
-static site). Both are accepted because the only fix npm offers is a breaking downgrade of
-the tool itself:
-
-- **`@lhci/cli` → tmp (High), uuid, inquirer** — Lighthouse-CI tooling; the fix downgrades
-  `@lhci/cli` to `0.1.0` and breaks the pipeline.
-- **`@astrojs/check` → yaml-language-server → `yaml`** (moderate) — the type-checker's
-  dependency chain; the fix is a breaking `@astrojs/check` downgrade.
+- `npm audit` is clean. `@lhci/cli` 0.15.1 is its latest release and no longer updated, so
+  its vulnerable transitive dependencies are pinned forward in `package.json` `overrides`
+  (`@puppeteer/browsers`, `tmp`, `uuid`). Re-check them when Lighthouse CI changes.
+- `ldqis-cms-auth` has no Dependabot and pins an old wrangler; its `pnpm audit` findings are
+  all in build and lint tooling, not the deployed Worker.
 
 ## Next up
 
-1. **Backfill team cross-links.** Projects and publications link to their lab-member
-   authors and contributors through the `people` collection. The schema and the first
-   entries are in place; add the remaining lists as authorship is confirmed.
-2. **Custom domain.** Move the site to `dataqualitylabs.com` once DNS is ready (steps in
-   ROADMAP).
+1. **Finish the organization move** (transfer, apps, Cloudflare reconnect; MAINTAINING.md).
+2. **Custom domain,** once the GoDaddy login and RIT's web@rit.edu exception are settled.
+3. **Backfill team cross-links.** Projects and publications link to their lab-member
+   authors and contributors through the `people` collection; add the remaining lists as
+   authorship is confirmed.

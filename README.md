@@ -64,6 +64,8 @@ If you're in the lab, there are two no-code ways onto the site, plus git if you 
 
 Prefer git? Open a pull request directly; news posts are a Markdown file under `src/content/news/`.
 
+Looking after the site itself (hosting, the domain, handing it to the next maintainer)? See [MAINTAINING.md](./MAINTAINING.md).
+
 ## Status
 
 Live at <https://ajbarea.github.io/ldqis/>; a move to `dataqualitylabs.com` is planned. MIT licensed.

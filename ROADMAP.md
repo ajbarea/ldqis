@@ -33,20 +33,13 @@ These hold across redesigns; changing any is a deliberate decision, not drift.
 
 ## Planned
 
-### Custom domain — `dataqualitylabs.com`
+### Lab organization, then `dataqualitylabs.com`
 
-The lab owns the domain; moving the site onto it (gated on DNS access):
-
-1. Verify the domain through
-   [GitHub's domain-verification flow](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages)
-   (prevents subdomain takeover).
-2. Add a `CNAME` file with `dataqualitylabs.com`.
-3. Point DNS (`dataqualitylabs.com` and `www`) at GitHub Pages.
-4. Let the HTTPS certificate auto-provision, then enable "Enforce HTTPS".
-5. Confirm the old site is fully offline (old URLs return 404, not stale data).
-
-A single build flag (`CUSTOM_DOMAIN`) already switches between the GitHub Pages path and the
-apex domain, so the flip is one change once DNS resolves.
+The site moves into the lab-owned `ldqis` GitHub organization, then onto the lab's domain,
+so it outlives any one maintainer. Step-by-step for both, plus the handoff checklist, is in
+[MAINTAINING.md](./MAINTAINING.md). A build flag (`CUSTOM_DOMAIN`) already switches between
+the GitHub Pages path and the apex domain. After the cutover, confirm the old site is fully
+offline (old URLs return 404, not stale data).
 
 ### Backlog (unprioritized)
 

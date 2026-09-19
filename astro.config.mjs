@@ -20,7 +20,7 @@ import { URL, fileURLToPath } from "node:url";
 // vite 7 + Rollup, not rolldown.)
 
 // Until the DNS handoff lands `dataqualitylabs.com` on GitHub Pages,
-// the site is deployed as a project page at `ajbarea.github.io/ldqis/`.
+// the site is deployed as a project page at `ldqis.github.io/ldqis/`.
 // Astro generates asset URLs against `site + base`, so without `base`
 // set, the CSS link in the rendered HTML resolves to `/_astro/...`
 // (which 404s under the project subpath). Flip `CUSTOM_DOMAIN=true` in
@@ -132,7 +132,7 @@ const pagefindDev = () => {
 const isCustomDomain = process.env.CUSTOM_DOMAIN === "true";
 
 export default defineConfig({
-  site: isCustomDomain ? "https://dataqualitylabs.com" : "https://ajbarea.github.io",
+  site: isCustomDomain ? "https://dataqualitylabs.com" : "https://ldqis.github.io",
   base: isCustomDomain ? "/" : "/ldqis",
   // research(2026-05): @astrojs/sitemap auto-generates
   // sitemap-index.xml from `site` + `base`, surfacing the publication /

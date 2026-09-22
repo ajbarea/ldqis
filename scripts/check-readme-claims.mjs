@@ -50,7 +50,7 @@ if (!quickStartBlock) {
 }
 
 // ─── GitHub Pages preview URL claim ────────────────────────────────────────
-// Status section claims `https://ajbarea.github.io/ldqis/`. The site URL
+// Status section claims `https://ldqis.github.io/ldqis/`. The site URL
 // is composed from astro.config's `site` + `base`; until the custom-domain
 // cutover lands the apex domain, the preview path must remain in sync.
 const claimedPreviewUrl = readme.match(/https:\/\/([\w.-]+)\.github\.io\/([\w-]+)\//);

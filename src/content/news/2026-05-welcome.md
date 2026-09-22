@@ -25,10 +25,10 @@ What is here now is an [Astro](https://astro.build/) project that compiles to st
 
 This is the lab's site, and it's meant to be easy to keep current. You don't need to be a web developer.
 
-- **Edit anything.** With write access to the repo, sign in at [the editor](https://ajbarea.github.io/ldqis/admin/) with GitHub and update your profile, a project, a publication, or a news post in a simple form. It saves and redeploys for you. (Ask me for access.)
-- **No account? Use a form.** The [**Add or update your profile**](https://github.com/ajbarea/ldqis/issues/new/choose), [**Add a project**](https://github.com/ajbarea/ldqis/issues/new/choose), and [**Add a publication**](https://github.com/ajbarea/ldqis/issues/new/choose) forms turn a submission into a pull request for review. No Markdown, no git, and your GitHub photo is used automatically if you add your username.
+- **Edit anything.** With write access to the repo, sign in at [the editor](https://ldqis.github.io/ldqis/admin/) with GitHub and update your profile, a project, a publication, or a news post in a simple form. It saves and redeploys for you. (Ask me for access.)
+- **No account? Use a form.** The [**Add or update your profile**](https://github.com/ldqis/ldqis/issues/new/choose), [**Add a project**](https://github.com/ldqis/ldqis/issues/new/choose), and [**Add a publication**](https://github.com/ldqis/ldqis/issues/new/choose) forms turn a submission into a pull request for review. No Markdown, no git, and your GitHub photo is used automatically if you add your username.
 - **Prefer git?** Open a pull request directly, or send a news post my way and I'll wire it in.
 
 ## What's next
 
-A move to a custom domain at `dataqualitylabs.com` is coming. The repo is public at [github.com/ajbarea/ldqis](https://github.com/ajbarea/ldqis), and contributions from the lab are welcome.
+A move to a custom domain at `dataqualitylabs.com` is coming. The repo is public at [github.com/ldqis/ldqis](https://github.com/ldqis/ldqis), and contributions from the lab are welcome.

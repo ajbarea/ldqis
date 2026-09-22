@@ -1,6 +1,12 @@
 dist/
 .astro/
 node_modules/
+# Per-session git worktrees live here. They hold a second copy of the whole
+# tree, so prettier reads every ignored path again under a prefix that no
+# other rule below matches -- `src/content/` does not cover
+# `.claude/worktrees/<name>/src/content/`. Absent in CI, so this only ever
+# reddened `format:check` for someone running the worktree workflow locally.
+.claude/worktrees/
 coverage/
 playwright-report/
 test-results/

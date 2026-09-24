@@ -73,7 +73,7 @@ Referenced configs a CI failure can trace to:
 - `.lighthouserc.json` (URL list + per-category score assertions + chrome flags)
 - `.github/workflows/ci.yml` (lint / type / unit / e2e / lighthouse jobs)
 - `.github/workflows/deploy.yml` (Pages deploy on push to main)
-- `.nvmrc` (Node version pin: 22)
+- `.nvmrc` (Node version pin: 24)
 
 Tool error markers (extend the default grep set):
 

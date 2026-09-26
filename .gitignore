@@ -49,3 +49,6 @@ __pycache__/
 # source PDFs + Windows download tags
 *.pdf
 *:Zone.Identifier
+
+# per-session git worktrees
+.claude/worktrees/

@@ -17,7 +17,7 @@ export const GET: APIRoute = ({ site }) => {
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
   // `site` is always set in astro.config.mjs; guard keeps the types honest.
-  const origin = site ?? new URL("https://ajbarea.github.io");
+  const origin = site ?? new URL("https://ldqis.github.io");
   // Full site root → "open production site" link (Sveltia keeps this path).
   const siteURL = new URL(base, origin).href;
   // Base path Sveltia drops from site_url, re-attached to each preview_path.

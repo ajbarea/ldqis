@@ -1,11 +1,14 @@
 ---
 import "../styles/global.css";
+import RitFooter from "../components/RitFooter.astro";
 
 interface Props {
   title?: string;
   description?: string;
   canonical?: string;
   ogImage?: string;
+  /** false keeps the page out of the Pagefind index. */
+  indexed?: boolean;
 }
 
 const {
@@ -13,7 +16,10 @@ const {
   description = "Research at the frontier of federated learning, agentic AI, and intelligent security. A research laboratory at the Rochester Institute of Technology.",
   canonical = Astro.url.href,
   ogImage,
+  indexed = true,
 } = Astro.props;
+// Result title: the page name without the site suffix.
+const pageTitle = title.replace(/\s+[·—]\s+LDQIS\b.*$/, "") || title;
 // Default the share image to /og-image.png at the current origin — works on the
 // GitHub Pages base path now and on the apex domain after the DNS flip.
 const ogImageUrl =
@@ -74,12 +80,17 @@ const ogImageUrl =
     <slot name="head" />
   </head>
   <body
+    data-pagefind-body={indexed ? "" : undefined}
     class="overflow-x-hidden bg-bg font-sans text-text antialiased transition-colors duration-200"
     style="font-family: var(--font-sans);"
   >
-    <a href="#main" class="skip-link">
+    <a href="#main" class="skip-link" data-pagefind-ignore>
       Skip to main content
     </a>
+    <span hidden data-pagefind-ignore data-pagefind-meta="title">
+      {pageTitle}
+    </span>
     <slot />
+    <RitFooter />
   </body>
 </html>

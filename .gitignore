@@ -52,3 +52,7 @@ __pycache__/
 
 # per-session git worktrees
 .claude/worktrees/
+
+# WSL Lighthouse profile dirs (literal Windows paths)
+/C:*
+lighthouse.*/

@@ -191,42 +191,62 @@ const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
   );
   searchBtn.setAttribute("aria-keyshortcuts", mac ? "Meta+K" : "Control+K");
 
-  const asset = (el: HTMLScriptElement | HTMLLinkElement) =>
-    new Promise<void>((resolve, reject) => {
-      el.onload = () => resolve();
-      el.onerror = () => {
-        el.remove();
-        reject(new Error("search bundle unavailable"));
-      };
-      document.head.append(el);
-    });
-
-  // A failed module fetch stays cached for the page, so each retry uses a fresh URL.
-  let failures = 0;
-  let loaded: Promise<void> | undefined;
-  const load = () => {
-    if (modal?.dialogEl) return Promise.resolve();
-    if (loaded) return loaded;
-    const css = Object.assign(document.createElement("link"), {
-      rel: "stylesheet",
-      href: jsSrc.replace(/\.js$/, ".css"),
-    });
-    const js = Object.assign(document.createElement("script"), {
-      type: "module",
-      src: failures ? `${jsSrc}?retry=${failures}` : jsSrc,
-    });
-    // Defining the element upgrades <pagefind-modal> in place and builds its dialog.
-    loaded = Promise.all([asset(css), asset(js)])
-      .then(() => customElements.whenDefined("pagefind-modal"))
-      .then(() => undefined)
-      .catch((err) => {
-        failures++;
-        loaded = undefined;
-        css.remove();
-        throw err;
-      });
-    return loaded;
+  // The CSS and JS are tracked apart: a retry re-adds only the one that failed, and search
+  // is ready once both have loaded. A failed module fetch stays cached for the page, so a
+  // retried script gets a fresh ?retry=N URL.
+  type Asset = {
+    ok: boolean;
+    tries: number;
+    pending?: Promise<void>;
+    make: (n: number) => Element;
   };
+  const css: Asset = {
+    ok: false,
+    tries: 0,
+    make: () =>
+      Object.assign(document.createElement("link"), {
+        rel: "stylesheet",
+        href: jsSrc.replace(/\.js$/, ".css"),
+      }),
+  };
+  const js: Asset = {
+    ok: false,
+    tries: 0,
+    make: (n) =>
+      Object.assign(document.createElement("script"), {
+        type: "module",
+        src: n ? `${jsSrc}?retry=${n}` : jsSrc,
+      }),
+  };
+  const readyWaiters: (() => void)[] = [];
+  const ready = () => css.ok && js.ok && !!modal?.dialogEl;
+  const add = (a: Asset) =>
+    a.ok
+      ? Promise.resolve()
+      : (a.pending ??= new Promise<void>((resolve, reject) => {
+          const el = a.make(a.tries++) as HTMLScriptElement & HTMLLinkElement;
+          el.onload = () => {
+            a.ok = true;
+            a.pending = undefined;
+            resolve();
+            // Defining the element upgrades <pagefind-modal> in place and builds its dialog.
+            if (ready()) readyWaiters.splice(0).forEach((r) => r());
+          };
+          el.onerror = () => {
+            el.remove();
+            a.pending = undefined;
+            reject(new Error("search bundle unavailable"));
+          };
+          document.head.append(el);
+        }));
+  const load = () => Promise.all([add(css), add(js)]);
+  // Resolves when any attempt completes, so an abandoned attempt that finishes still wins.
+  const whenReady = () => new Promise<void>((r) => (ready() ? r() : readyWaiters.push(r)));
+
+  // Any click, key or focus change after a request means the user moved on.
+  let epoch = 0;
+  for (const ev of ["click", "keydown", "focusin"])
+    document.addEventListener(ev, () => void epoch++, true);
 
   let statusTimer: number | undefined;
   const say = (text: string, clearAfter = 0) => {
@@ -235,15 +255,24 @@ const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
     if (clearAfter) statusTimer = window.setTimeout(() => (status.textContent = ""), clearAfter);
   };
   const openSearch = async () => {
-    const pending = load();
-    if (!modal?.dialogEl) say("Loading search…");
+    const mine = epoch;
+    if (!ready()) say("Loading search…");
+    // Past the deadline the old attempts keep running, but the next request starts fresh ones.
+    const deadline = setTimeout(() => {
+      css.pending = undefined;
+      js.pending = undefined;
+      say("Search is taking longer than usual. Select it again to retry.");
+    }, 10_000);
     try {
-      await pending;
+      await Promise.race([load(), whenReady()]);
     } catch {
       say("Search is unavailable. Try again.", 5000);
       return;
+    } finally {
+      clearTimeout(deadline);
     }
     say("");
+    if (epoch !== mine) return;
     modal?.open();
     searchBtn.setAttribute("aria-expanded", "true");
   };

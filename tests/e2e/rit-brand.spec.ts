@@ -84,25 +84,44 @@ test.describe("site search", () => {
     await expect(page).toHaveURL(/\/ldqis\/people\/leon-reznik\/?$/);
   });
 
-  // The modifier the page itself picks: Cmd on macOS, Ctrl elsewhere.
-  const MOD = process.platform === "darwin" ? "Meta" : "Control";
-  test("the platform shortcut opens it from the page, not from inside a text field", async ({
-    page,
-  }) => {
+  // The modifier is what the page advertises and binds: Cmd on macOS, Ctrl elsewhere.
+  async function shortcut(page: Page) {
+    const keys = await page.locator("#search-btn").getAttribute("aria-keyshortcuts");
+    expect(keys).toMatch(/^(Meta|Control)\+K$/);
+    return `${keys!.split("+")[0]}+k`;
+  }
+
+  test("the shortcut opens it from the page", async ({ page }) => {
     await page.goto("");
+    const key = await shortcut(page);
+    await page.keyboard.press(key);
+    await expect(dialogOf(page)).toBeVisible();
+    await expect(dialogOf(page).locator("input").first()).toBeFocused();
+  });
+
+  test("the shortcut is left alone inside a text field", async ({ page }) => {
+    await page.goto("");
+    const key = await shortcut(page);
     await page.evaluate(() => {
       const input = document.createElement("input");
       input.id = "scratch";
       input.setAttribute("aria-label", "scratch");
       document.querySelector("main")!.append(input);
+      (window as unknown as { prevented: boolean[] }).prevented = [];
+      document.addEventListener("keydown", (e) =>
+        (window as unknown as { prevented: boolean[] }).prevented.push(e.defaultPrevented),
+      );
     });
+    // Load the bundle first, so a wrongly opened dialog would be visible at once.
+    await page.getByRole("button", { name: "Search" }).focus();
+    await page.waitForFunction(() => !!customElements.get("pagefind-modal"));
     await page.locator("#scratch").focus();
-    await page.keyboard.press(`${MOD}+k`);
+    await page.keyboard.press(key);
+    const prevented = await page.evaluate(
+      () => (window as unknown as { prevented: boolean[] }).prevented,
+    );
+    expect(prevented.at(-1)).toBe(false);
     await expect(dialogOf(page)).toBeHidden();
-    await page.locator("#scratch").blur();
-    await page.keyboard.press(`${MOD}+k`);
-    await expect(dialogOf(page)).toBeVisible();
-    await expect(dialogOf(page).locator("input").first()).toBeFocused();
   });
 
   test("the Pagefind bundle loads on first use, not on page load", async ({ page }) => {
@@ -140,6 +159,69 @@ test.describe("site search", () => {
     await expect(page.locator("#search-status")).toHaveText("Loading search…");
     await expect(dialogOf(page)).toBeVisible({ timeout: 20_000 });
     await expect(page.locator("#search-status")).toHaveText("");
+  });
+
+  test("a failed stylesheet is retried even though the script loaded", async ({ page }) => {
+    await page.route("**/pagefind/pagefind-component-ui.css", (r) => r.abort());
+    await page.goto("");
+    const trigger = page.getByRole("button", { name: "Search" });
+    await trigger.click();
+    await expect(page.locator("#search-status")).toHaveText(/unavailable/);
+    await page.unroute("**/pagefind/pagefind-component-ui.css");
+    await trigger.click();
+    await expect(dialogOf(page)).toBeVisible();
+    const radius = await dialogOf(page).evaluate((d) => getComputedStyle(d).borderRadius);
+    expect(radius).toBe("12px");
+  });
+
+  test("past the deadline the next click starts a fresh attempt", async ({ page }) => {
+    test.setTimeout(60_000);
+    let calls = 0;
+    await page.route("**/pagefind/pagefind-component-ui.js*", async (r) => {
+      if (calls++ === 0) await new Promise((done) => setTimeout(done, 25_000));
+      await r.continue();
+    });
+    await page.goto("");
+    const trigger = page.getByRole("button", { name: "Search" });
+    await trigger.click();
+    await expect(page.locator("#search-status")).toHaveText(/taking longer/, { timeout: 15_000 });
+    await trigger.click();
+    await expect(dialogOf(page)).toBeVisible({ timeout: 5000 });
+    expect(calls).toBe(2);
+  });
+
+  test("a load that finishes after the user moved on does not open or steal focus", async ({
+    page,
+  }) => {
+    await page.route("**/pagefind/pagefind-component-ui.js", async (r) => {
+      await new Promise((done) => setTimeout(done, 2000));
+      await r.continue();
+    });
+    await page.goto("");
+    const trigger = page.getByRole("button", { name: "Search" });
+    await trigger.click();
+    await expect(page.locator("#search-status")).toHaveText("Loading search…");
+    await page.locator("h1").first().click();
+    await expect(page.locator("#search-status")).toHaveText("", { timeout: 10_000 });
+    await expect(dialogOf(page)).toBeHidden();
+    await trigger.click();
+    await expect(dialogOf(page)).toBeVisible();
+  });
+
+  test("the hidden title is not indexed as page content", async ({ page }) => {
+    await page.goto("");
+    const { title, content } = await page.evaluate(async () => {
+      const pf = await import(`${document.baseURI}pagefind/pagefind.js`);
+      const hit = await pf.search("Reznik");
+      for (const r of hit.results) {
+        const d = await r.data();
+        if (d.url.includes("people/leon-reznik"))
+          return { title: d.meta.title, content: d.content };
+      }
+      throw new Error("leon-reznik not indexed");
+    });
+    expect(title).toBe("Dr. Leon Reznik");
+    expect(content.startsWith(title)).toBe(false);
   });
 
   test("results are titled by page and homepage listings do not match", async ({ page }) => {

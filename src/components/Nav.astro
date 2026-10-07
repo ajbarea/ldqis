@@ -3,18 +3,15 @@
 // optional contextual back-link. Below the md breakpoint the section links
 // collapse into a hamburger dropdown so mobile keeps full navigation (the
 // theme-toggle script lived only in index.astro before this component).
+import { primaryLinks } from "../lib/site-links";
+
 interface Props {
   back?: { href: string; label: string };
 }
 const { back } = Astro.props;
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const links = [
-  { href: `${base}/#research`, label: "Research" },
-  { href: `${base}/#projects`, label: "Projects" },
-  { href: `${base}/#publications`, label: "Publications" },
-  { href: `${base}/#people`, label: "People" },
-  { href: `${base}/news/`, label: "News" },
-];
+const links = primaryLinks(import.meta.env.BASE_URL);
+// Pagefind writes its bundle to dist/pagefind/ at build time (`npm run build`).
+const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
 ---
 
 <nav
@@ -53,6 +50,8 @@ const links = [
           </a>
         )}
       </div>
+
+      <pagefind-modal-trigger compact hide-shortcut placeholder="Search"></pagefind-modal-trigger>
 
       <button
         type="button"
@@ -126,6 +125,11 @@ const links = [
     </div>
   </div>
 </nav>
+
+<link rel="stylesheet" href={`${pagefind}/pagefind-component-ui.css`} />
+<pagefind-config bundle-path={`${pagefind}/`} base-url={import.meta.env.BASE_URL}></pagefind-config>
+<pagefind-modal reset-on-close></pagefind-modal>
+<script is:inline type="module" src={`${pagefind}/pagefind-component-ui.js`}></script>
 
 <script>
   const root = document.documentElement;

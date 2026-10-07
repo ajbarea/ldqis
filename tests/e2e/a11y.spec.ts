@@ -38,3 +38,28 @@ for (const theme of THEMES) {
     }
   });
 }
+
+// The search dialog in its open state, with a result list showing.
+for (const theme of THEMES) {
+  test.describe(`a11y, search open (${theme})`, () => {
+    test.use({ colorScheme: theme });
+
+    for (const path of ["", "news/"]) {
+      test(`${path || "home"}`, async ({ page }) => {
+        await page.addInitScript((t) => localStorage.setItem("ldqis-theme", t), theme);
+        await page.goto(path);
+        await page.getByRole("button", { name: "Search" }).click();
+        const dialog = page.getByRole("dialog");
+        await dialog.locator("input").first().fill("Reznik");
+        await expect(dialog.locator('a[href*="people/leon-reznik"]').first()).toBeVisible();
+        const results = await new AxeBuilder({ page })
+          .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+          .analyze();
+        expect(
+          results.violations,
+          `axe-core found WCAG violations with search open on ${path} (${theme}):\n${JSON.stringify(results.violations, null, 2)}`,
+        ).toEqual([]);
+      });
+    }
+  });
+}

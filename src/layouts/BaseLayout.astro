@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import RitFooter from "../components/RitFooter.astro";
 
 interface Props {
   title?: string;
@@ -81,5 +82,6 @@ const ogImageUrl =
       Skip to main content
     </a>
     <slot />
+    <RitFooter />
   </body>
 </html>

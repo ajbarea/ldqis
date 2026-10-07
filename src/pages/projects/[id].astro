@@ -32,7 +32,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 >
   <Nav back={{ href: `${baseUrl}/#projects`, label: "← All projects" }} />
 
-  <main id="main" class="relative z-[1] pt-16 pb-32">
+  <main id="main" data-pagefind-body class="relative z-[1] pt-16 pb-32">
     <article class="mx-auto max-w-[800px] px-6">
       <div class="mb-6 flex flex-wrap items-center gap-3">
         {tags.map((t) => (

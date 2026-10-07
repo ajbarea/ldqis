@@ -44,6 +44,11 @@ so it outlives any one maintainer. Step-by-step for both, plus the handoff check
 the GitHub Pages path and the apex domain. After the cutover, confirm the old site is fully
 offline (old URLs return 404, not stale data).
 
+### Follow-ups
+
+- The M&C-issued lab lockup replaces the lab mark in the header once RIT Marketing &
+  Communications issues it (request: rit.edu/brandportal/request-lockup).
+
 ### Backlog (unprioritized)
 
 - **Research areas / themes** — group the lab's work by problem area (data quality,
@@ -67,8 +72,6 @@ offline (old URLs return 404, not stale data).
   ("Collaborators") and Stanford ("Affiliates") surface partnerships as a credibility
   signal, and the data already lives on the PI's page and in grant records, so it's ready to
   build rather than "someday".
-- **Search** — Pagefind or Astro's built-in, once the publication list grows enough to
-  warrant it.
 - **Per-project demo embeds** — interactive project demos as embedded islands, if and when
   the demos have hosted surfaces.
 - **Multi-author news bylines** — when a post has more than one author.
@@ -95,6 +98,16 @@ ideas. These were weighed and declined, recorded so they aren't re-proposed:
 ## Shipped
 
 Highlights below; full history in git.
+
+- **RIT footer and site search.** Every page ends in the black RIT footer (RIT logo, contact,
+  primary links, and RIT's land acknowledgment, disclaimer, copyright, privacy,
+  nondiscrimination, emergency and accessibility pages); the lab's own footer stays above it
+  on the homepage. A header search button opens Pagefind's modal over an index built from each
+  page's `<main>`. research(2026-10): Pagefind 1.5 component UI (`pagefind-modal`) uses a
+  native `<dialog>` for focus trapping, Escape, a labelled input and result announcements,
+  and `pagefind --site dist` runs after `astro build`, so CI and deploy produce the index;
+  it resolves its bundle and result URLs from where it is served, so the `/ldqis/` base and
+  the custom domain both work. Source: pagefind.app/docs/components/modal.
 
 - **Publication code links.** A publication can reference the lab project that implements it
   (a `project` field); the paper then surfaces a "Code" cross-link to that project on its

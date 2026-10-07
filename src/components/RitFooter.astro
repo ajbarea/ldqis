@@ -1,0 +1,78 @@
+---
+import { RIT_LEGAL_LINKS, primaryLinks } from "../lib/site-links";
+
+const links = primaryLinks(import.meta.env.BASE_URL);
+const linkClass = "inline-block py-1 text-white underline-offset-4 hover:underline";
+---
+
+<footer id="rit-footer" class="relative z-[1] bg-black text-white" aria-label="RIT">
+  <div class="mx-auto max-w-[1200px] px-6 py-14">
+    <div class="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
+      <div>
+        <a
+          href="https://www.rit.edu"
+          aria-label="Rochester Institute of Technology"
+          class="inline-block p-3 -m-3"
+        >
+          <img
+            src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/rit-logo-orange-white.svg`}
+            alt="Rochester Institute of Technology"
+            width="510"
+            height="49"
+            loading="lazy"
+            class="h-auto w-full max-w-[420px]"
+          />
+        </a>
+        <address class="mt-6 text-sm leading-relaxed text-neutral-300 not-italic">
+          <p>
+            Laboratory of Data Quality and Intelligent Security
+            <br />
+            Rochester Institute of Technology
+            <br />
+            1 Lomb Memorial Drive
+            <br />
+            Rochester, NY 14623
+          </p>
+          <p class="mt-2 flex flex-col items-start">
+            <a href="tel:+15854752411" class={linkClass}>
+              585-475-2411
+            </a>
+            <a href="mailto:cs-dql@rit.edu" class={linkClass}>
+              cs-dql@rit.edu
+            </a>
+          </p>
+        </address>
+      </div>
+
+      <nav aria-label="Footer">
+        <h2 class="mb-4 text-xs font-medium tracking-[1px] text-neutral-300 uppercase">Explore</h2>
+        <ul class="space-y-1 text-sm">
+          {links.map((l) => (
+            <li>
+              <a href={l.href} class={linkClass}>
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <nav aria-label="RIT policies">
+        <h2 class="mb-4 text-xs font-medium tracking-[1px] text-neutral-300 uppercase">RIT</h2>
+        <ul class="space-y-1 text-sm">
+          {RIT_LEGAL_LINKS.map((l) => (
+            <li>
+              <a href={l.href} class={linkClass}>
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+
+    <p class="mt-12 border-t border-neutral-700 pt-6 text-xs text-neutral-300">
+      Copyright &copy; Rochester Institute of Technology. All Rights Reserved.
+    </p>
+  </div>
+</footer>

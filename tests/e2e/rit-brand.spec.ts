@@ -84,9 +84,23 @@ test.describe("site search", () => {
     await expect(page).toHaveURL(/\/ldqis\/people\/leon-reznik\/?$/);
   });
 
-  test("Ctrl+K opens it", async ({ page }) => {
+  // The modifier the page itself picks: Cmd on macOS, Ctrl elsewhere.
+  const MOD = process.platform === "darwin" ? "Meta" : "Control";
+  test("the platform shortcut opens it from the page, not from inside a text field", async ({
+    page,
+  }) => {
     await page.goto("");
-    await page.keyboard.press("Control+k");
+    await page.evaluate(() => {
+      const input = document.createElement("input");
+      input.id = "scratch";
+      input.setAttribute("aria-label", "scratch");
+      document.querySelector("main")!.append(input);
+    });
+    await page.locator("#scratch").focus();
+    await page.keyboard.press(`${MOD}+k`);
+    await expect(dialogOf(page)).toBeHidden();
+    await page.locator("#scratch").blur();
+    await page.keyboard.press(`${MOD}+k`);
     await expect(dialogOf(page)).toBeVisible();
     await expect(dialogOf(page).locator("input").first()).toBeFocused();
   });
@@ -107,11 +121,25 @@ test.describe("site search", () => {
     await page.goto("");
     const trigger = page.getByRole("button", { name: "Search" });
     await trigger.click();
-    await expect(page.getByRole("status")).toHaveText(/unavailable/);
+    await expect(page.locator("#search-status")).toHaveText(/unavailable/);
     await expect(trigger).toBeVisible();
     await page.unroute("**/pagefind/pagefind-component-ui.js");
     await trigger.click();
     await expect(dialogOf(page)).toBeVisible();
+    await expect(page.locator("#search-status")).toHaveText("");
+  });
+
+  test("a slow bundle shows progress and still opens on one click", async ({ page }) => {
+    test.setTimeout(60_000);
+    await page.route("**/pagefind/pagefind-component-ui.js", async (r) => {
+      await new Promise((done) => setTimeout(done, 9000));
+      await r.continue();
+    });
+    await page.goto("");
+    await page.getByRole("button", { name: "Search" }).click();
+    await expect(page.locator("#search-status")).toHaveText("Loading search…");
+    await expect(dialogOf(page)).toBeVisible({ timeout: 20_000 });
+    await expect(page.locator("#search-status")).toHaveText("");
   });
 
   test("results are titled by page and homepage listings do not match", async ({ page }) => {

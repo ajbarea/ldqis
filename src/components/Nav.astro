@@ -135,7 +135,7 @@ const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
   <p
     id="search-status"
     role="status"
-    class="absolute top-full right-6 mt-2 rounded-md border border-line bg-bg-elev px-3 py-2 text-xs text-text empty:hidden"
+    class="absolute top-full right-6 mt-2 rounded-md border border-line bg-bg-elev px-3 py-2 text-xs text-text empty:sr-only"
   ></p>
 
   <div id="mobile-menu" class="hidden border-t border-line md:hidden">
@@ -191,25 +191,21 @@ const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
   );
   searchBtn.setAttribute("aria-keyshortcuts", mac ? "Meta+K" : "Control+K");
 
-  const asset = (el: HTMLScriptElement | HTMLLinkElement, url: string) =>
+  const asset = (el: HTMLScriptElement | HTMLLinkElement) =>
     new Promise<void>((resolve, reject) => {
       el.onload = () => resolve();
       el.onerror = () => {
         el.remove();
-        reject(new Error(`${url} unavailable`));
+        reject(new Error("search bundle unavailable"));
       };
       document.head.append(el);
     });
-  const withTimeout = <T,>(p: Promise<T>, ms: number) =>
-    Promise.race([
-      p,
-      new Promise<never>((_, reject) => setTimeout(() => reject(new Error("timed out")), ms)),
-    ]);
 
-  // A failed module fetch is cached per URL for the page, so a retry needs a fresh URL.
-  let attempts = 0;
+  // A failed module fetch stays cached for the page, so each retry uses a fresh URL.
+  let failures = 0;
   let loaded: Promise<void> | undefined;
   const load = () => {
+    if (modal?.dialogEl) return Promise.resolve();
     if (loaded) return loaded;
     const css = Object.assign(document.createElement("link"), {
       rel: "stylesheet",
@@ -217,32 +213,37 @@ const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
     });
     const js = Object.assign(document.createElement("script"), {
       type: "module",
-      src: attempts++ ? `${jsSrc}?retry=${attempts}` : jsSrc,
+      src: failures ? `${jsSrc}?retry=${failures}` : jsSrc,
     });
-    loaded = withTimeout(
-      Promise.all([asset(css, css.href), asset(js, jsSrc)]).then(async () => {
-        await customElements.whenDefined("pagefind-modal");
-        while (!modal?.dialogEl) await new Promise((r) => requestAnimationFrame(r));
-      }),
-      8000,
-    ).catch((err) => {
-      css.remove();
-      js.remove();
-      loaded = undefined;
-      throw err;
-    });
+    // Defining the element upgrades <pagefind-modal> in place and builds its dialog.
+    loaded = Promise.all([asset(css), asset(js)])
+      .then(() => customElements.whenDefined("pagefind-modal"))
+      .then(() => undefined)
+      .catch((err) => {
+        failures++;
+        loaded = undefined;
+        css.remove();
+        throw err;
+      });
     return loaded;
   };
+
   let statusTimer: number | undefined;
+  const say = (text: string, clearAfter = 0) => {
+    clearTimeout(statusTimer);
+    status.textContent = text;
+    if (clearAfter) statusTimer = window.setTimeout(() => (status.textContent = ""), clearAfter);
+  };
   const openSearch = async () => {
+    const pending = load();
+    if (!modal?.dialogEl) say("Loading search…");
     try {
-      await load();
+      await pending;
     } catch {
-      status.textContent = "Search is unavailable. Try again.";
-      clearTimeout(statusTimer);
-      statusTimer = window.setTimeout(() => (status.textContent = ""), 5000);
+      say("Search is unavailable. Try again.", 5000);
       return;
     }
+    say("");
     modal?.open();
     searchBtn.setAttribute("aria-expanded", "true");
   };

@@ -64,7 +64,7 @@ test.describe("focus not obscured", () => {
 });
 
 test.describe("admin", () => {
-  test("keeps pinch zoom and 16px textboxes", async ({ page }) => {
+  test("keeps pinch zoom", async ({ page }) => {
     await page.goto("admin/");
     await expect(page.getByText("Powered by")).toBeVisible();
     const metas = await page.evaluate(() =>
@@ -72,9 +72,29 @@ test.describe("admin", () => {
     );
     expect(metas.length).toBeGreaterThan(0);
     for (const c of metas) expect(c).not.toMatch(/maximum-scale|user-scalable/);
-    const size = await page.evaluate(() =>
-      getComputedStyle(document.documentElement).getPropertyValue("--sui-textbox-font-size"),
-    );
-    expect(size.trim()).toBe("16px");
+  });
+
+  // The signed-out screen has no textboxes, so the elements below stand in for the
+  // ones Sveltia renders once signed in, including its asset text-edit textarea.
+  test.describe("touch textboxes", () => {
+    test.use({ hasTouch: true, isMobile: true });
+
+    test("are at least 16px so iOS does not zoom on focus", async ({ page }) => {
+      await page.goto("admin/");
+      await expect(page.getByText("Powered by")).toBeVisible();
+      const sizes = await page.evaluate(() => {
+        document.body.insertAdjacentHTML(
+          "beforeend",
+          `<div class="wrapper svelte-1olui47"><textarea></textarea></div>
+           <input type="text" /><textarea></textarea><select></select>
+           <div contenteditable="true"></div>`,
+        );
+        return [...document.querySelectorAll("input, textarea, select, [contenteditable]")].map(
+          (el) => parseFloat(getComputedStyle(el).fontSize),
+        );
+      });
+      expect(sizes.length).toBe(5);
+      for (const size of sizes) expect(size).toBeGreaterThanOrEqual(16);
+    });
   });
 });

@@ -2,7 +2,8 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import { cpSync, rmSync } from "node:fs";
+import { cpSync, existsSync, readFileSync } from "node:fs";
+import { extname, join, resolve, sep } from "node:path";
 import { URL, fileURLToPath } from "node:url";
 
 // research(2026-05): Tailwind 4 ships as a Vite plugin (`@tailwindcss/vite`).
@@ -33,20 +34,46 @@ import { URL, fileURLToPath } from "node:url";
 // hardcoded links in README.md, src/content/news/2026-05-welcome.md, and
 // scripts/check-readme-claims.mjs; (3) add the new domain to the
 // sveltia-cms-auth Worker's ALLOWED_DOMAINS.
-// Serve the CMS from this origin: Sveltia loads its chunks relative to its own
-// script, so a same-origin copy needs no third-party host for them. The copy
-// lands in public/admin/cms/ (gitignored) on every dev start and build.
-const sveltiaCms = () => ({
-  name: "sveltia-cms",
-  hooks: {
-    "astro:config:setup": () => {
-      const src = fileURLToPath(new URL("./node_modules/@sveltia/cms/dist", import.meta.url));
-      const dest = fileURLToPath(new URL("./public/admin/cms", import.meta.url));
-      rmSync(dest, { recursive: true, force: true });
-      cpSync(src, dest, { recursive: true, filter: (f) => !/\.(map|mjs)$/.test(f) });
+// research(2026-10): Sveltia is self-hosted from the `@sveltia/cms` npm package
+// rather than unpkg. Its entry script resolves its chunks relative to its own URL
+// (`document.currentScript`), so a same-origin copy loads them locally. The copy
+// goes into the build output (`astro:build:done`) and is served from node_modules
+// in dev (`astro:server:setup`), so nothing is written into public/.
+const CMS_DIST = fileURLToPath(new URL("./node_modules/@sveltia/cms/dist", import.meta.url));
+const CMS_SKIP = /\.(map|mjs)$/;
+/** @type {Record<string, string>} */
+const CMS_TYPES = { ".js": "text/javascript; charset=utf-8" };
+
+/** @type {() => import("astro").AstroIntegration} */
+const sveltiaCms = () => {
+  let base = "/";
+  return {
+    name: "sveltia-cms",
+    hooks: {
+      "astro:config:setup": ({ config }) => {
+        base = config.base.endsWith("/") ? config.base : `${config.base}/`;
+      },
+      "astro:server:setup": ({ server }) => {
+        // Vite may already have stripped the base from req.url.
+        const prefix = "/admin/cms/";
+        server.middlewares.use((req, res, next) => {
+          const path = (req.url ?? "").split("?")[0].replace(base.slice(0, -1) + prefix, prefix);
+          if (!path.startsWith(prefix) || CMS_SKIP.test(path)) return next();
+          const file = resolve(CMS_DIST, decodeURIComponent(path.slice(prefix.length)));
+          if (!file.startsWith(CMS_DIST + sep) || !existsSync(file)) return next();
+          res.setHeader("Content-Type", CMS_TYPES[extname(file)] ?? "application/octet-stream");
+          res.end(readFileSync(file));
+        });
+      },
+      "astro:build:done": ({ dir }) => {
+        cpSync(CMS_DIST, join(fileURLToPath(dir), "admin", "cms"), {
+          recursive: true,
+          filter: (f) => !CMS_SKIP.test(f),
+        });
+      },
     },
-  },
-});
+  };
+};
 
 const isCustomDomain = process.env.CUSTOM_DOMAIN === "true";
 

@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import template from "../../admin/config.template.yml?raw";
+import pkg from "../../../package.json";
 
 // research(2026-05): Sveltia builds every "View on Live Site" link as
 // `new URL(site_url).origin + '/' + preview_path` (sveltia-cms config/index.js
@@ -26,9 +27,10 @@ export const GET: APIRoute = ({ site }) => {
 
   const config = template
     .replaceAll("__SITE_URL__", siteURL)
-    .replaceAll("__BASE_PREFIX__", basePrefix);
+    .replaceAll("__BASE_PREFIX__", basePrefix)
+    .replaceAll("__CMS_VERSION__", pkg.dependencies["@sveltia/cms"]);
 
-  if (config.includes("__SITE_URL__") || config.includes("__BASE_PREFIX__")) {
+  if (/__(SITE_URL|BASE_PREFIX|CMS_VERSION)__/.test(config)) {
     throw new Error("admin/config.yml: unsubstituted template placeholder");
   }
 

@@ -83,12 +83,17 @@ first. The DNS steps need whoever holds the GoDaddy login.
 ## Updating the CMS bundle
 
 `@sveltia/cms` is an exact-pinned npm dependency, so Dependabot bumps it like any other
-package. `astro.config.mjs` copies its `dist/` into `public/admin/cms/` (gitignored) on every
-dev start and build, and `/admin` loads it from the same origin, chunks included. After a bump,
+package. `astro.config.mjs` copies its `dist/` into `dist/admin/cms/` after each build and serves it
+from `node_modules` in dev, and `/admin` loads it from the same origin, chunks included. The
+schema URL in the served `config.yml` takes its version from `package.json`. After a bump,
 open `/admin/` and check the sign-in screen renders and the viewport meta has no
 `maximum-scale`: `public/admin/index.html` rewrites the tag the bundle injects so pinch zoom
 stays on, and sets 16px textboxes so iOS does not zoom on focus.
 
-Some optional features still fetch from `unpkg.com` when used, with no integrity check:
-code-block highlighting in the rich-text editor (shiki), the map field (leaflet), and HEIC or
-PDF previews (`@discourse/heic`, `pdfjs-dist`). The site config has no map field.
+`/admin` still makes these third-party requests, with no integrity checks:
+
+- On every load: `unpkg.com` (a version check and the CMS `package.json`), the GitHub status
+  API, and two jsDelivr fonts (Source Sans 3 and Material Symbols).
+- On demand: code-block highlighting in the rich-text editor (shiki), the map field (leaflet),
+  and HEIC or PDF previews (`@discourse/heic`, `pdfjs-dist`) from `unpkg.com`. The site config
+  has no map field.

@@ -1,6 +1,5 @@
 # build output
 dist/
-public/admin/cms/
 .astro/
 
 # dependencies

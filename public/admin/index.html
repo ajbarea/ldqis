@@ -6,9 +6,17 @@
     <meta name="robots" content="noindex" />
     <title>LDQIS · Content editor</title>
     <style>
-      /* 16px textboxes keep iOS Safari from zooming on focus now that pinch zoom is on. */
+      /* iOS Safari zooms on focus below 16px; touch devices only, so desktop keeps the CMS sizing. */
       html:root {
         --sui-textbox-font-size: 16px;
+      }
+      @media (hover: none) and (pointer: coarse) {
+        input,
+        textarea,
+        select,
+        [contenteditable="true"] {
+          font-size: 16px !important;
+        }
       }
     </style>
     <script>

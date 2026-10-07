@@ -14,7 +14,6 @@ export default defineConfig([
   {
     ignores: [
       "dist/",
-      "public/admin/cms/",
       ".astro/",
       "node_modules/",
       "coverage/",

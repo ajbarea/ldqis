@@ -4,19 +4,25 @@ import { join, relative } from "node:path";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const DIST = join(ROOT, "dist");
+const INDEX = join(DIST, "index.html");
 
-// The newest mtime under a directory.
-function newest(dir: string): number {
-  return readdirSync(dir).reduce((m, f) => {
-    const p = join(dir, f);
-    return Math.max(m, statSync(p).isDirectory() ? newest(p) : statSync(p).mtimeMs);
-  }, 0);
+// The newest mtime under a path; skips public/admin/cms, which older previews rewrote.
+function newest(path: string): number {
+  if (!existsSync(path)) return 0;
+  if (!statSync(path).isDirectory()) return statSync(path).mtimeMs;
+  return readdirSync(path).reduce((m, f) => Math.max(m, newest(join(path, f))), 0);
 }
 
-if (!existsSync(DIST))
+if (!existsSync(INDEX))
   throw new Error("dist/ is missing: run `npm run build` before the e2e tests");
-if (newest(join(ROOT, "src")) > statSync(join(DIST, "index.html")).mtimeMs)
-  throw new Error("dist/ is older than src/: run `npm run build` so every route is covered");
+const builtAt = statSync(INDEX).mtimeMs;
+const stale = ["src", "public", "scripts", "astro.config.mjs", "package.json"].filter(
+  (p) => newest(join(ROOT, p)) > builtAt,
+);
+if (stale.length)
+  throw new Error(
+    `dist/ is older than ${stale.join(", ")}: run \`npm run build\` so every route is covered`,
+  );
 
 // Every built page, as a path relative to baseURL, /admin included.
 function walk(dir: string): string[] {

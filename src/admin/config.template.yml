@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.230.0/schema/sveltia-cms.json
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@__CMS_VERSION__/schema/sveltia-cms.json
 #
 # Sveltia CMS — a browser editor for the existing content collections. It lists
 # every person / project / publication / news post and opens each one in a

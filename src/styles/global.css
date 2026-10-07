@@ -1,3 +1,7 @@
+/* research(2026-10): Fontsource packages self-host the fonts from npm, so no visitor IP
+   reaches Google; its CSS carries `unicode-range`, so only the subsets a page needs load.
+   Static weight files keep the exact weights the Google link served (Fontsource suggests
+   the variable package first; swap to it to cut the file count). */
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";

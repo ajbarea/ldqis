@@ -157,7 +157,10 @@ body::before {
   }
 }
 
-/* Pagefind component UI follows the site tokens, so both themes (and contrast) track them. */
+/* Every Pagefind colour token, mapped to the site tokens so both themes (and contrast) follow
+   them. Scoped html:root so these win over Pagefind's own :root and [data-pf-theme] rules
+   whatever the stylesheet order. --pf-mark is the excerpt match's text colour (its
+   background is transparent), so it must be opaque and AA. */
 html:root {
   --pf-background: var(--color-bg);
   --pf-text: var(--color-text);
@@ -167,6 +170,27 @@ html:root {
   --pf-border-focus: var(--color-rit-orange-text);
   --pf-outline-focus: var(--color-rit-orange-text);
   --pf-hover: var(--color-bg-soft);
-  --pf-mark: color-mix(in oklab, var(--color-rit-orange) 28%, transparent);
+  --pf-skeleton: var(--color-bg-soft);
+  --pf-skeleton-shine: var(--color-bg-elev);
+  --pf-mark: var(--color-rit-orange-text);
+  --pf-scroll-shadow: color-mix(in oklab, var(--color-text) 10%, transparent);
+  --pf-shadow-sm: 0 2px 8px rgb(0 0 0 / 0.06);
+  --pf-shadow-md: 0 4px 12px rgb(0 0 0 / 0.1);
+  --pf-shadow-lg: 0 16px 48px rgb(0 0 0 / 0.2);
+  --pf-modal-backdrop: rgb(0 0 0 / 0.5);
+  --pf-error-bg: #fef2f2;
+  --pf-error-border: #fecaca;
+  --pf-error-text: #b91c1c;
+  --pf-error-text-secondary: #991b1b;
   --pf-font: var(--font-sans);
+}
+html[data-theme="dark"] {
+  --pf-shadow-sm: 0 2px 8px rgb(0 0 0 / 0.3);
+  --pf-shadow-md: 0 4px 12px rgb(0 0 0 / 0.4);
+  --pf-shadow-lg: 0 16px 48px rgb(0 0 0 / 0.5);
+  --pf-modal-backdrop: rgb(0 0 0 / 0.7);
+  --pf-error-bg: #2a1a1a;
+  --pf-error-border: #5c2828;
+  --pf-error-text: #f87171;
+  --pf-error-text-secondary: #fca5a5;
 }

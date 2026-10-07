@@ -103,7 +103,7 @@ Highlights below; full history in git.
   primary links, and RIT's land acknowledgment, disclaimer, copyright, privacy,
   nondiscrimination, emergency and accessibility pages); the lab's own footer stays above it
   on the homepage. A header search button opens Pagefind's modal over an index built from each
-  page's `<main>`. research(2026-10): Pagefind 1.5 component UI (`pagefind-modal`) uses a
+  page's `<body>`, with nav and footer left out by Pagefind's defaults and the 404 page and `/admin` excluded. research(2026-10): Pagefind 1.5 component UI (`pagefind-modal`) uses a
   native `<dialog>` for focus trapping, Escape, a labelled input and result announcements,
   and `pagefind --site dist` runs after `astro build`, so CI and deploy produce the index;
   it resolves its bundle and result URLs from where it is served, so the `/ldqis/` base and

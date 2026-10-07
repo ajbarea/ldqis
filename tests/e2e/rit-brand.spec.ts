@@ -102,14 +102,26 @@ test.describe("site search", () => {
     expect(bundle.some((u) => u.endsWith("pagefind-component-ui.js"))).toBe(true);
   });
 
+  test("a failed bundle load says so and the next try retries", async ({ page }) => {
+    await page.route("**/pagefind/pagefind-component-ui.js", (r) => r.abort());
+    await page.goto("");
+    const trigger = page.getByRole("button", { name: "Search" });
+    await trigger.click();
+    await expect(page.getByRole("status")).toHaveText(/unavailable/);
+    await expect(trigger).toBeVisible();
+    await page.unroute("**/pagefind/pagefind-component-ui.js");
+    await trigger.click();
+    await expect(dialogOf(page)).toBeVisible();
+  });
+
   test("results are titled by page and homepage listings do not match", async ({ page }) => {
     await page.goto("");
     await page.getByRole("button", { name: "Search" }).click();
     // This title is listed on the homepage and has its own page.
     const dialog = await search(page, "Optimizing Federated Learning with Metacognition");
-    await expect(dialog.locator('a[href*="publications/intefl-mis-2026"]').first()).toContainText(
-      /InteFL/,
-    );
+    const hit = dialog.locator('a[href*="publications/intefl-mis-2026"]').first();
+    await expect(hit).toContainText(/InteFL/);
+    await expect(dialog.getByText("· LDQIS")).toHaveCount(0);
     await expect(dialog.locator('a[href$="/ldqis/"]')).toHaveCount(0);
   });
 
@@ -170,6 +182,74 @@ test.describe("site search", () => {
       expect(search).toMatchObject({ w: "36px", h: "36px", bg: "rgba(0, 0, 0, 0)" });
     }
   });
+
+  // WCAG 1.4.3 on what Pagefind paints: the match highlight in excerpts and the title of the
+  // keyboard-selected card, each against its real (composited) background.
+  for (const theme of ["light", "dark"] as const) {
+    test(`excerpt marks and the selected result are AA (${theme})`, async ({ page }) => {
+      await page.addInitScript((t) => localStorage.setItem("ldqis-theme", t), theme);
+      await page.goto("");
+      await page.getByRole("button", { name: "Search" }).click();
+      const dialog = await search(page, "Reznik");
+      await expect(dialog.locator("a.pf-result-link").first()).toBeVisible();
+      await page.keyboard.press("ArrowDown");
+      const selected = dialog.locator("[data-pf-selected]");
+      await expect(selected).toHaveCount(1);
+      const ratios = await page.evaluate(() => {
+        const rgba = (css: string) => {
+          const c = document
+            .createElement("canvas")
+            .getContext("2d", { willReadFrequently: true })!;
+          c.clearRect(0, 0, 1, 1);
+          c.fillStyle = css;
+          c.fillRect(0, 0, 1, 1);
+          const [r, g, b, a] = c.getImageData(0, 0, 1, 1).data;
+          return { r, g, b, a: a / 255 };
+        };
+        const over = (top: ReturnType<typeof rgba>, bottom: ReturnType<typeof rgba>) => ({
+          r: top.r * top.a + bottom.r * (1 - top.a),
+          g: top.g * top.a + bottom.g * (1 - top.a),
+          b: top.b * top.a + bottom.b * (1 - top.a),
+          a: 1,
+        });
+        const background = (el: Element) => {
+          const layers: ReturnType<typeof rgba>[] = [];
+          for (let n: Element | null = el; n; n = n.parentElement)
+            layers.push(rgba(getComputedStyle(n).backgroundColor));
+          return layers.reduceRight((acc, l) => over(l, acc), { r: 255, g: 255, b: 255, a: 1 });
+        };
+        const lum = ({ r, g, b }: { r: number; g: number; b: number }) => {
+          const f = (v: number) => {
+            const x = v / 255;
+            return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4;
+          };
+          return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+        };
+        const ratio = (el: Element) => {
+          const bg = background(el);
+          const fg = over(rgba(getComputedStyle(el).color), bg);
+          const [hi, lo] = [lum(fg), lum(bg)].sort((a, b) => b - a);
+          return (hi + 0.05) / (lo + 0.05);
+        };
+        const marks = [...document.querySelectorAll("dialog mark")];
+        const card = document
+          .querySelector("dialog [data-pf-selected]")!
+          .closest(".pf-result-card")!;
+        const title = card.querySelector("a.pf-result-link")!;
+        const excerpt = card.querySelector(".pf-result-excerpt")!;
+        return {
+          marks: marks.map(ratio),
+          title: ratio(title),
+          excerpt: ratio(excerpt),
+          count: marks.length,
+        };
+      });
+      expect(ratios.count).toBeGreaterThan(0);
+      for (const r of ratios.marks) expect(r).toBeGreaterThanOrEqual(4.5);
+      expect(ratios.title).toBeGreaterThanOrEqual(4.5);
+      expect(ratios.excerpt).toBeGreaterThanOrEqual(4.5);
+    });
+  }
 
   test("the modal follows the site theme", async ({ page }) => {
     for (const theme of ["light", "dark"] as const) {

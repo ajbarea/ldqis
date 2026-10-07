@@ -52,6 +52,10 @@ for (const theme of THEMES) {
         const dialog = page.getByRole("dialog");
         await dialog.locator("input").first().fill("Reznik");
         await expect(dialog.locator('a[href*="people/leon-reznik"]').first()).toBeVisible();
+        // Select a result with the keyboard, so the selected-card colours are scanned too.
+        await expect(dialog.locator("a.pf-result-link").first()).toBeVisible();
+        await page.keyboard.press("ArrowDown");
+        await expect(dialog.locator("[data-pf-selected]")).toHaveCount(1);
         const results = await new AxeBuilder({ page })
           .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
           .analyze();

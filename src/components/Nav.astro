@@ -57,7 +57,6 @@ const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
         aria-label="Search"
         aria-haspopup="dialog"
         aria-expanded="false"
-        aria-keyshortcuts="Control+K Meta+K"
         data-src={`${pagefind}/pagefind-component-ui.js`}
         class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-transparent text-text-dim hover:border-rit-orange hover:text-rit-orange-text"
       >
@@ -133,6 +132,12 @@ const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
     </div>
   </div>
 
+  <p
+    id="search-status"
+    role="status"
+    class="absolute top-full right-6 mt-2 rounded-md border border-line bg-bg-elev px-3 py-2 text-xs text-text empty:hidden"
+  ></p>
+
   <div id="mobile-menu" class="hidden border-t border-line md:hidden">
     <div class="mx-auto flex max-w-[1200px] flex-col px-6 py-2 text-sm text-text-dim">
       {links.map((l) => (
@@ -172,48 +177,93 @@ const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
     menuBtn.setAttribute("aria-expanded", String(open));
   });
 
-  // research(2026-10): the 175 KB Pagefind UI loads on first use (click, hover, focus, or
-  // Ctrl/Cmd+K), not on every page view.
-  const searchBtn = document.getElementById("search-btn");
+  // research(2026-10): the Pagefind UI (175 KB JS, 41 KB CSS) loads on first use (click,
+  // hover, focus, or the shortcut), not on every page view.
+  const searchBtn = document.getElementById("search-btn")!;
+  const status = document.getElementById("search-status")!;
   const modal = document.querySelector<
     HTMLElement & { open(): void; dialogEl?: HTMLDialogElement }
   >("pagefind-modal");
-  let loaded: Promise<void> | undefined;
-  const load = () =>
-    (loaded ??= new Promise<void>((resolve, reject) => {
-      const el = document.createElement("script");
-      el.type = "module";
-      el.src = searchBtn!.dataset.src!;
+  const jsSrc = searchBtn.dataset.src!;
+  const mac = /Mac|iPhone|iPad/.test(
+    (navigator as Navigator & { userAgentData?: { platform: string } }).userAgentData?.platform ??
+      navigator.platform,
+  );
+  searchBtn.setAttribute("aria-keyshortcuts", mac ? "Meta+K" : "Control+K");
+
+  const asset = (el: HTMLScriptElement | HTMLLinkElement, url: string) =>
+    new Promise<void>((resolve, reject) => {
       el.onload = () => resolve();
-      el.onerror = () => reject(new Error("search bundle unavailable"));
+      el.onerror = () => {
+        el.remove();
+        reject(new Error(`${url} unavailable`));
+      };
       document.head.append(el);
-    }).then(async () => {
-      await customElements.whenDefined("pagefind-modal");
-      while (!modal?.dialogEl) await new Promise((r) => requestAnimationFrame(r));
-    }));
+    });
+  const withTimeout = <T,>(p: Promise<T>, ms: number) =>
+    Promise.race([
+      p,
+      new Promise<never>((_, reject) => setTimeout(() => reject(new Error("timed out")), ms)),
+    ]);
+
+  // A failed module fetch is cached per URL for the page, so a retry needs a fresh URL.
+  let attempts = 0;
+  let loaded: Promise<void> | undefined;
+  const load = () => {
+    if (loaded) return loaded;
+    const css = Object.assign(document.createElement("link"), {
+      rel: "stylesheet",
+      href: jsSrc.replace(/\.js$/, ".css"),
+    });
+    const js = Object.assign(document.createElement("script"), {
+      type: "module",
+      src: attempts++ ? `${jsSrc}?retry=${attempts}` : jsSrc,
+    });
+    loaded = withTimeout(
+      Promise.all([asset(css, css.href), asset(js, jsSrc)]).then(async () => {
+        await customElements.whenDefined("pagefind-modal");
+        while (!modal?.dialogEl) await new Promise((r) => requestAnimationFrame(r));
+      }),
+      8000,
+    ).catch((err) => {
+      css.remove();
+      js.remove();
+      loaded = undefined;
+      throw err;
+    });
+    return loaded;
+  };
+  let statusTimer: number | undefined;
   const openSearch = async () => {
     try {
       await load();
     } catch {
-      // Bundle absent (astro dev before a build): no search to offer.
-      searchBtn?.setAttribute("hidden", "");
+      status.textContent = "Search is unavailable. Try again.";
+      clearTimeout(statusTimer);
+      statusTimer = window.setTimeout(() => (status.textContent = ""), 5000);
       return;
     }
     modal?.open();
-    searchBtn?.setAttribute("aria-expanded", "true");
+    searchBtn.setAttribute("aria-expanded", "true");
   };
-  modal?.addEventListener("close", () => searchBtn?.setAttribute("aria-expanded", "false"), true);
+  modal?.addEventListener("close", () => searchBtn.setAttribute("aria-expanded", "false"), true);
   for (const ev of ["pointerenter", "focus"] as const)
-    searchBtn?.addEventListener(ev, () => void load().catch(() => {}), { once: true });
-  searchBtn?.addEventListener("click", () => void openSearch());
+    searchBtn.addEventListener(ev, () => void load().catch(() => {}), { once: true });
+  searchBtn.addEventListener("click", () => void openSearch());
   document.addEventListener("keydown", (e) => {
-    if (e.key.toLowerCase() !== "k" || !(e.ctrlKey || e.metaKey) || e.altKey || e.shiftKey) return;
+    if (typeof e.key !== "string" || e.key.toLowerCase() !== "k") return;
+    // macOS: Cmd+K only, so Ctrl+K (kill-line) still works in text fields.
+    if (mac ? !e.metaKey || e.ctrlKey : !e.ctrlKey || e.metaKey) return;
+    if (e.altKey || e.shiftKey) return;
+    const t = e.target as HTMLElement | null;
+    if (t?.closest("input, textarea, select, [contenteditable]")) return;
     e.preventDefault();
     void openSearch();
   });
+  // Dev has no index until a build: hide the button rather than offer a dead control.
   if (import.meta.env.DEV)
-    fetch(searchBtn!.dataset.src!, { method: "HEAD" }).then(
-      (r) => r.ok || searchBtn?.setAttribute("hidden", ""),
-      () => searchBtn?.setAttribute("hidden", ""),
+    fetch(jsSrc, { method: "HEAD" }).then(
+      (r) => r.ok || searchBtn.setAttribute("hidden", ""),
+      () => searchBtn.setAttribute("hidden", ""),
     );
 </script>

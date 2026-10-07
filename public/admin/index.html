@@ -8,10 +8,13 @@
     <style>
       /* iOS Safari zooms on focus below 16px. Touch devices only, so desktop keeps the CMS
          sizing. Sveltia's textboxes read the first variable; the asset text-edit textarea
-         reads the second. html:root outranks the bundle's :root defaults. */
+         reads the second, set on the textarea only so code and pre elsewhere keep scaling.
+         html:root outranks the bundle's :root defaults. */
       @media (hover: none) and (pointer: coarse) {
         html:root {
           --sui-textbox-font-size: 16px;
+        }
+        html:root textarea {
           --sui-font-size-monospace: 16px;
         }
       }

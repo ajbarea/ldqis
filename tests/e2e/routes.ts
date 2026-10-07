@@ -1,9 +1,10 @@
-import { existsSync, readdirSync, statSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join, relative } from "node:path";
 
-const ROOT = fileURLToPath(new URL("../../", import.meta.url));
-const DIST = join(ROOT, "dist");
+export const ROOT = fileURLToPath(new URL("../../", import.meta.url));
+export const DIST = join(ROOT, "dist");
 const INDEX = join(DIST, "index.html");
 
 // The newest mtime under a path.
@@ -16,11 +17,18 @@ function newest(path: string): number {
 if (!existsSync(INDEX))
   throw new Error("dist/ is missing: run `npm run build` before the e2e tests");
 const builtAt = statSync(INDEX).mtimeMs;
-// Inputs `astro build` reads. package-lock.json is left out: a no-op `npm install` bumps its
-// mtime, and a real dependency change shows up in package.json or needs a rebuild anyway.
+// Inputs `astro build` reads. The lockfile is compared by content (the hash the build
+// recorded), since a no-op `npm install` bumps its mtime.
 const stale = ["src", "public", "astro.config.mjs", "package.json"].filter(
   (p) => newest(join(ROOT, p)) > builtAt,
 );
+const lockHash = createHash("sha256")
+  .update(readFileSync(join(ROOT, "package-lock.json")))
+  .digest("hex");
+const builtHash = existsSync(join(DIST, ".lock-hash"))
+  ? readFileSync(join(DIST, ".lock-hash"), "utf8")
+  : "";
+if (lockHash !== builtHash) stale.push("package-lock.json");
 if (stale.length)
   throw new Error(
     `dist/ is older than ${stale.join(", ")}: run \`npm run build\` so every route is covered`,

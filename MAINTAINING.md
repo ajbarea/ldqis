@@ -90,8 +90,8 @@ included. The schema URL in the served `config.yml` takes its version from `pack
 After a bump, open `/admin/` on a build and preview, and check the sign-in screen renders and
 the viewport meta has no `maximum-scale`. `public/admin/index.html` rewrites the tag the bundle
 injects so pinch zoom stays on, and sets 16px textboxes on touch devices so iOS does not zoom
-on focus. For a quick check, `astro dev` serves the page at `/ldqis/admin/index.html` (its
-directory index, `/ldqis/admin/`, 404s there).
+on focus. For a quick check, `astro dev` serves the page at `<base>admin/index.html` (`/ldqis/`
+now, `/` after the custom domain); its directory index, `<base>admin/`, 404s there.
 
 `/admin` still makes these third-party requests, with no integrity checks:
 

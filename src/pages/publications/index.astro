@@ -1,14 +1,14 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
+import { SCHOLAR_URL as scholarUrl, basePath } from "../../lib/site-links";
 import allPubs from "../../data/publications-all.json";
 
 // The lab's full publication record, built from Dr. Reznik's CV (the authoritative
 // list of which papers are his) with clean fields from OpenAlex/Crossref; the
 // oldest pre-DOI work that no index carries keeps his exact CV citation. See
 // scripts/build-publications.mjs.
-const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
-const scholarUrl = "https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en";
+const baseUrl = basePath(import.meta.env.BASE_URL);
 const linkStyle =
   "color: var(--color-rit-orange-text); border-color: color-mix(in oklab, var(--color-rit-orange) 8%, transparent);";
 

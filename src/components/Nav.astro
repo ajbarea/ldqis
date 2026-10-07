@@ -3,7 +3,7 @@
 // optional contextual back-link. Below the md breakpoint the section links
 // collapse into a hamburger dropdown so mobile keeps full navigation (the
 // theme-toggle script lived only in index.astro before this component).
-import { primaryLinks } from "../lib/site-links";
+import { basePath, primaryLinks } from "../lib/site-links";
 
 interface Props {
   back?: { href: string; label: string };
@@ -11,7 +11,7 @@ interface Props {
 const { back } = Astro.props;
 const links = primaryLinks(import.meta.env.BASE_URL);
 // Pagefind writes its bundle to dist/pagefind/ at build time (`npm run build`).
-const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
+const pagefind = `${basePath(import.meta.env.BASE_URL)}/pagefind`;
 ---
 
 <nav

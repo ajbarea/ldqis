@@ -54,15 +54,13 @@ const sveltiaCms = () => {
         base = config.base.endsWith("/") ? config.base : `${config.base}/`;
       },
       "astro:server:setup": ({ server }) => {
-        // Vite strips the base from req.url, so match on the original URL: only base +
-        // admin/cms/ is served, as in production.
-        const prefix = "/admin/cms/";
+        // Match the original URL, so only base + admin/cms/ is served, as in production.
+        const prefix = `${base}admin/cms/`;
         server.middlewares.use((req, res, next) => {
-          if (!(req.originalUrl ?? "").startsWith(`${base}admin/cms/`)) return next();
-          const stripped = (req.url ?? "").split("?")[0];
-          if (!stripped.startsWith(prefix)) return next();
+          const url = (req.originalUrl ?? req.url ?? "").split("?")[0];
+          if (!url.startsWith(prefix)) return next();
           try {
-            const rel = decodeURIComponent(stripped.slice(prefix.length));
+            const rel = decodeURIComponent(url.slice(prefix.length));
             const file = resolve(CMS_DIST, rel);
             if (CMS_SKIP.test(rel) || !file.startsWith(CMS_DIST + sep)) return next();
             if (!statSync(file).isFile()) return next();

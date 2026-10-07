@@ -16,8 +16,9 @@ function newest(path: string): number {
 if (!existsSync(INDEX))
   throw new Error("dist/ is missing: run `npm run build` before the e2e tests");
 const builtAt = statSync(INDEX).mtimeMs;
-// Inputs `astro build` reads.
-const stale = ["src", "public", "astro.config.mjs", "package.json", "package-lock.json"].filter(
+// Inputs `astro build` reads. package-lock.json is left out: a no-op `npm install` bumps its
+// mtime, and a real dependency change shows up in package.json or needs a rebuild anyway.
+const stale = ["src", "public", "astro.config.mjs", "package.json"].filter(
   (p) => newest(join(ROOT, p)) > builtAt,
 );
 if (stale.length)

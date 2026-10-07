@@ -7,10 +7,12 @@
     <title>LDQIS · Content editor</title>
     <style>
       /* iOS Safari zooms on focus below 16px. Touch devices only, so desktop keeps the CMS
-         sizing; the stacked :root raises specificity over Sveltia's scoped rules. */
+         sizing. Sveltia's textboxes read the first variable; the asset text-edit textarea
+         reads the second. html:root outranks the bundle's :root defaults. */
       @media (hover: none) and (pointer: coarse) {
-        :root:root:root body :is(input, textarea, select, [contenteditable="true"]) {
-          font-size: 16px !important;
+        html:root {
+          --sui-textbox-font-size: 16px;
+          --sui-font-size-monospace: 16px;
         }
       }
     </style>

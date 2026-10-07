@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>LDQIS · Content editor</title>
+    <style>
+      /* 16px textboxes keep iOS Safari from zooming on focus now that pinch zoom is on. */
+      html:root {
+        --sui-textbox-font-size: 16px;
+      }
+    </style>
     <script>
       // Sveltia injects a viewport meta with maximum-scale=1; keep pinch zoom (WCAG 1.4.4).
       (function () {
@@ -25,10 +31,6 @@
     </script>
   </head>
   <body>
-    <script
-      src="https://unpkg.com/@sveltia/cms@0.230.0/dist/sveltia-cms.js"
-      integrity="sha384-AzagiFkRmjAMDuffoNGXass0+WVk9WahF+XJyeht4DDPxO1MHHYDp84YqPoN+XFv"
-      crossorigin="anonymous"
-    ></script>
+    <script src="cms/sveltia-cms.js"></script>
   </body>
 </html>

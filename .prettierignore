@@ -1,4 +1,5 @@
 dist/
+public/admin/cms/
 .astro/
 node_modules/
 # Per-session git worktrees live here. They hold a second copy of the whole

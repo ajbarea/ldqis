@@ -1,4 +1,3 @@
-@import "@fontsource/inter/300.css";
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
@@ -27,14 +26,11 @@
      axe-core — just under WCAG 2.2 AA's 4.5:1 floor for normal text.
      Darkened to #b04b00 (≈5.4:1) so the brand-tinted text variant clears
      AA without sacrificing the visual orange identity. The pure brand
-     orange #f76902 stays available via --color-rit-orange for backgrounds,
-     dark-mode emphasis, and non-text affordances (lines, marks, large
-     display headings ≥18pt where the 3:1 floor applies). */
+     orange #f76902 stays available via --color-rit-orange for backgrounds
+     and non-text affordances (lines, marks). It is 2.98:1 on the light bg,
+     so no text uses it; all orange text uses this token. */
   --color-rit-orange-text: #b04b00;
   --color-rit-yellow: #f6be00; /* secondary, for gradients */
-  /* Large display text on light: RIT's accessible orange #c75300 (4.46:1 on bg);
-     brand #f76902 is 2.98:1 and fails even the 3:1 large-text floor. */
-  --color-rit-orange-display: #c75300;
 
   /* warm editorial light palette */
   --color-bg: #fefefd;
@@ -65,7 +61,6 @@
   --color-text-dim: #93a0ad;
   --color-text-faint: #7f8c99;
   --color-rit-orange-text: #f76902; /* full orange ok on dark */
-  --color-rit-orange-display: #f76902;
 }
 
 /* keep focused elements clear of the sticky nav */

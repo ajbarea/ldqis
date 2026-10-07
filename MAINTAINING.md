@@ -82,13 +82,13 @@ first. The DNS steps need whoever holds the GoDaddy login.
 
 ## Updating the CMS bundle
 
-`public/admin/index.html` pins `@sveltia/cms` to an exact version with a Subresource Integrity
-hash. To update, change the version in that file and in the `$schema` line of
-`src/admin/config.template.yml`, then regenerate the hash:
+`@sveltia/cms` is an exact-pinned npm dependency, so Dependabot bumps it like any other
+package. `astro.config.mjs` copies its `dist/` into `public/admin/cms/` (gitignored) on every
+dev start and build, and `/admin` loads it from the same origin, chunks included. After a bump,
+open `/admin/` and check the sign-in screen renders and the viewport meta has no
+`maximum-scale`: `public/admin/index.html` rewrites the tag the bundle injects so pinch zoom
+stays on, and sets 16px textboxes so iOS does not zoom on focus.
 
-```sh
-curl -sL https://unpkg.com/@sveltia/cms@<version>/dist/sveltia-cms.js | openssl dgst -sha384 -binary | openssl base64 -A
-```
-
-Prefix the output with `sha384-`. The page also rewrites the viewport meta the bundle injects
-so pinch zoom stays on; confirm that still holds after an update.
+Some optional features still fetch from `unpkg.com` when used, with no integrity check:
+code-block highlighting in the rich-text editor (shiki), the map field (leaflet), and HEIC or
+PDF previews (`@discourse/heic`, `pdfjs-dist`). The site config has no map field.

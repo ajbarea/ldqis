@@ -62,3 +62,19 @@ test.describe("focus not obscured", () => {
     }
   }
 });
+
+test.describe("admin", () => {
+  test("keeps pinch zoom and 16px textboxes", async ({ page }) => {
+    await page.goto("admin/");
+    await expect(page.getByText("Powered by")).toBeVisible();
+    const metas = await page.evaluate(() =>
+      [...document.querySelectorAll('meta[name="viewport"]')].map((m) => m.getAttribute("content")),
+    );
+    expect(metas.length).toBeGreaterThan(0);
+    for (const c of metas) expect(c).not.toMatch(/maximum-scale|user-scalable/);
+    const size = await page.evaluate(() =>
+      getComputedStyle(document.documentElement).getPropertyValue("--sui-textbox-font-size"),
+    );
+    expect(size.trim()).toBe("16px");
+  });
+});

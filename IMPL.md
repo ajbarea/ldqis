@@ -13,10 +13,13 @@ Steps: [MAINTAINING.md](./MAINTAINING.md).
 
 ## Known issues
 
-- `npm audit --omit=dev` is clean. The remaining findings are all in the dev-only `@lhci/cli`
-  chain (0.15.1 is its latest release and no longer updated); `npm audit fix --force` would
-  downgrade `@lhci/cli` and `@tailwindcss/typography`, so leave them. Its transitive dependencies `@puppeteer/browsers`, `tmp`, and
-  `uuid` are pinned forward in `package.json` `overrides`.
+- `npm audit --omit=dev` reports `http-cache-semantics` (4.3.0) and `source-map-js` (1.2.2);
+  both fixes were published under 7 days ago, so Dependabot's cooldown holds them. The
+  dev-only findings are the `@lhci/cli` chain (0.15.1 is its latest release and no longer
+  updated) and `@tailwindcss/typography` through `postcss-selector-parser`;
+  `npm audit fix --force` would downgrade `@lhci/cli` and `@tailwindcss/typography`, so leave
+  them. `@puppeteer/browsers`, `tmp`, and `uuid` are pinned forward in `package.json`
+  `overrides`.
 - `ldqis-cms-auth` has no Dependabot and pins an old wrangler; its `pnpm audit` findings are
   all in build and lint tooling, not the deployed Worker.
 

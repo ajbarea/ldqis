@@ -2,6 +2,8 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
+import { cpSync, rmSync } from "node:fs";
+import { URL, fileURLToPath } from "node:url";
 
 // research(2026-05): Tailwind 4 ships as a Vite plugin (`@tailwindcss/vite`).
 // The older `@astrojs/tailwind` integration is deprecated for Tailwind 4 per
@@ -31,6 +33,21 @@ import tailwindcss from "@tailwindcss/vite";
 // hardcoded links in README.md, src/content/news/2026-05-welcome.md, and
 // scripts/check-readme-claims.mjs; (3) add the new domain to the
 // sveltia-cms-auth Worker's ALLOWED_DOMAINS.
+// Serve the CMS from this origin: Sveltia loads its chunks relative to its own
+// script, so a same-origin copy needs no third-party host for them. The copy
+// lands in public/admin/cms/ (gitignored) on every dev start and build.
+const sveltiaCms = () => ({
+  name: "sveltia-cms",
+  hooks: {
+    "astro:config:setup": () => {
+      const src = fileURLToPath(new URL("./node_modules/@sveltia/cms/dist", import.meta.url));
+      const dest = fileURLToPath(new URL("./public/admin/cms", import.meta.url));
+      rmSync(dest, { recursive: true, force: true });
+      cpSync(src, dest, { recursive: true, filter: (f) => !/\.(map|mjs)$/.test(f) });
+    },
+  },
+});
+
 const isCustomDomain = process.env.CUSTOM_DOMAIN === "true";
 
 export default defineConfig({
@@ -41,7 +58,7 @@ export default defineConfig({
   // people / project detail pages to crawlers (incl. Google Scholar). The
   // build-time robots.txt endpoint (src/pages/robots.txt.ts) points at it.
   // Source: https://docs.astro.build/en/guides/integrations-guide/sitemap/
-  integrations: [sitemap()],
+  integrations: [sitemap(), sveltiaCms()],
   vite: {
     plugins: [tailwindcss()],
   },

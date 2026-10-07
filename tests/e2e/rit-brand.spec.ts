@@ -14,16 +14,12 @@ const REQUIRED = {
 };
 // The lab's own links, absolute under the base so they work from every page.
 const LAB = {
-  Areas: /\/ldqis\/#research$/,
-  "Recent publications": /\/ldqis\/#publications$/,
-  "Open-source": /\/ldqis\/#projects$/,
   "Funded by": /\/ldqis\/#funding$/,
-  "Current team": /\/ldqis\/#people$/,
-  Alumni: /\/ldqis\/#people$/,
+  Alumni: /\/ldqis\/#alumni$/,
   Teaching: /\/ldqis\/#teaching$/,
   "Join us": /^mailto:lrvcs@rit\.edu/,
   "Get in touch": /^mailto:lrvcs@rit\.edu$/,
-  "Google Scholar": /scholar\.google\.com/,
+  "Dr. Reznik on Google Scholar": /scholar\.google\.com/,
 };
 const NAV = ["Research", "Projects", "Publications", "People", "News"];
 
@@ -45,7 +41,9 @@ test.describe("RIT footer", () => {
           await expect(
             footer.getByRole("img", { name: "Rochester Institute of Technology" }),
           ).toBeVisible();
-          await expect(footer.getByRole("link", { name: "cs-dql@rit.edu" })).toBeVisible();
+          await expect(
+            footer.getByRole("link", { name: "lrvcs@rit.edu", exact: true }),
+          ).toBeVisible();
           await expect(footer.getByText("1 Lomb Memorial Drive")).toBeVisible();
           for (const [name, href] of Object.entries(REQUIRED))
             await expect(footer.getByRole("link", { name, exact: true })).toHaveAttribute(
@@ -59,10 +57,35 @@ test.describe("RIT footer", () => {
               "href",
               href,
             );
+          await expect(page.getByRole("navigation", { name: "Footer" })).toHaveCount(1);
           await expect(page.getByRole("contentinfo")).toHaveCount(1);
           await expect(page.getByRole("region", { name: "Lab" })).toHaveCount(0);
         });
       }
+    });
+  }
+});
+
+// One name, one destination: links that read the same must go to the same place.
+test.describe("link names", () => {
+  for (const path of PAGES) {
+    test(`${path || "home"}: no two links share a name but not a target`, async ({ page }) => {
+      await page.goto(path);
+      const clash = await page.evaluate(() => {
+        const seen = new Map<string, Set<string>>();
+        for (const a of document.querySelectorAll<HTMLAnchorElement>("a[href]")) {
+          const name = (
+            a.getAttribute("aria-label") ??
+            (a.textContent || a.querySelector("img")?.alt || "")
+          )
+            .replace(/\s+/g, " ")
+            .trim();
+          if (!name) continue;
+          seen.set(name, (seen.get(name) ?? new Set()).add(a.href));
+        }
+        return [...seen].filter(([, h]) => h.size > 1).map(([n, h]) => [n, [...h]]);
+      });
+      expect(clash).toEqual([]);
     });
   }
 });

@@ -5,6 +5,7 @@ import ContactLinks from "../components/ContactLinks.astro";
 import Avatar from "../components/Avatar.astro";
 import Nav from "../components/Nav.astro";
 import { byRecency } from "../lib/publications";
+import { SCHOLAR_URL } from "../lib/site-links";
 import allPubs from "../data/publications-all.json";
 
 // research(2026-05): projects / publications / people live in Astro content
@@ -154,7 +155,7 @@ const pastCohort = peopleEntries
   {/* NAV */}
   <Nav />
 
-  <main id="main" class="relative z-[1]">
+  <main id="main" class="relative z-[1] mb-20">
     {/* HERO */}
     <header class="relative pt-[120px] pb-[100px]">
       <div class="mx-auto max-w-[1200px] px-6">
@@ -344,7 +345,7 @@ const pastCohort = peopleEntries
           A handful of highlights from the lab's work. See the full publication record below, or Dr.
           Reznik's
           <a
-            href="https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en"
+            href={SCHOLAR_URL}
             target="_blank"
             rel="noopener"
             class="border-b"
@@ -495,6 +496,7 @@ const pastCohort = peopleEntries
             Then
           </span>
           <h3
+            id="alumni"
             class="font-normal"
             style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px;"
           >

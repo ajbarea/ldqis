@@ -35,10 +35,6 @@ export function footerGroups(baseUrl: string) {
           href: "https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en",
           label: "Google Scholar",
         },
-        {
-          href: "https://www.rit.edu/computing/",
-          label: "Golisano College of Computing and Information Sciences",
-        },
       ],
     },
   ];

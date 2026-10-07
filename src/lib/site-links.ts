@@ -10,6 +10,40 @@ export function primaryLinks(baseUrl: string) {
   ];
 }
 
+/** The lab's own footer links, shared across pages; anchors are absolute so they work off the homepage. */
+export function footerGroups(baseUrl: string) {
+  const base = baseUrl.replace(/\/$/, "");
+  return [
+    {
+      heading: "Research",
+      links: [
+        { href: `${base}/#research`, label: "Areas" },
+        { href: `${base}/#publications`, label: "Recent publications" },
+        { href: `${base}/#projects`, label: "Open-source" },
+        { href: `${base}/#funding`, label: "Funded by" },
+      ],
+    },
+    {
+      heading: "Lab",
+      links: [
+        { href: `${base}/#people`, label: "Current team" },
+        { href: `${base}/#people`, label: "Alumni" },
+        { href: `${base}/#teaching`, label: "Teaching" },
+        { href: "mailto:lrvcs@rit.edu?subject=Joining%20LDQIS", label: "Join us" },
+        { href: "mailto:lrvcs@rit.edu", label: "Get in touch" },
+        {
+          href: "https://scholar.google.com/citations?user=cKqeJEgAAAAJ&hl=en",
+          label: "Google Scholar",
+        },
+        {
+          href: "https://www.rit.edu/computing/",
+          label: "Golisano College of Computing and Information Sciences",
+        },
+      ],
+    },
+  ];
+}
+
 /** RIT-required footer pages, at their final URLs. */
 export const RIT_LEGAL_LINKS = [
   { href: "https://www.rit.edu/land-acknowledgment", label: "Land Acknowledgment" },

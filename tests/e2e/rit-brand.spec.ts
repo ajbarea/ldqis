@@ -12,6 +12,19 @@ const REQUIRED = {
   "Emergency Information": "https://www.rit.edu/emergency-information",
   Accessibility: "https://www.rit.edu/accessibility",
 };
+// The lab's own links, absolute under the base so they work from every page.
+const LAB = {
+  Areas: /\/ldqis\/#research$/,
+  "Recent publications": /\/ldqis\/#publications$/,
+  "Open-source": /\/ldqis\/#projects$/,
+  "Funded by": /\/ldqis\/#funding$/,
+  "Current team": /\/ldqis\/#people$/,
+  Alumni: /\/ldqis\/#people$/,
+  Teaching: /\/ldqis\/#teaching$/,
+  "Join us": /^mailto:lrvcs@rit\.edu/,
+  "Get in touch": /^mailto:lrvcs@rit\.edu$/,
+  "Google Scholar": /scholar\.google\.com/,
+};
 const NAV = ["Research", "Projects", "Publications", "People", "News"];
 
 // /admin is the CMS app, not a site page.
@@ -41,6 +54,13 @@ test.describe("RIT footer", () => {
             );
           for (const name of NAV)
             await expect(footer.getByRole("link", { name, exact: true })).toBeVisible();
+          for (const [name, href] of Object.entries(LAB))
+            await expect(footer.getByRole("link", { name, exact: true })).toHaveAttribute(
+              "href",
+              href,
+            );
+          await expect(page.getByRole("contentinfo")).toHaveCount(1);
+          await expect(page.getByRole("region", { name: "Lab" })).toHaveCount(0);
         });
       }
     });

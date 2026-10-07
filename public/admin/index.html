@@ -5,8 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>LDQIS · Content editor</title>
+    <style>
+      /* iOS Safari zooms on focus below 16px. Touch devices only, so desktop keeps the CMS
+         sizing; the stacked :root raises specificity over Sveltia's scoped rules. */
+      @media (hover: none) and (pointer: coarse) {
+        :root:root:root body :is(input, textarea, select, [contenteditable="true"]) {
+          font-size: 16px !important;
+        }
+      }
+    </style>
+    <script>
+      // Sveltia injects a viewport meta with maximum-scale=1; keep pinch zoom (WCAG 1.4.4).
+      (function () {
+        var content = "width=device-width, initial-scale=1, interactive-widget=resizes-content";
+        function fix() {
+          document.querySelectorAll('meta[name="viewport"]').forEach(function (m) {
+            if (m.content !== content) m.content = content;
+          });
+        }
+        new MutationObserver(fix).observe(document.head, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ["content"],
+        });
+        fix();
+      })();
+    </script>
   </head>
   <body>
-    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+    <script src="cms/sveltia-cms.js"></script>
   </body>
 </html>

@@ -74,14 +74,14 @@ const typeLabel: Record<string, string> = {
                 </span>
                 <div class="min-w-0">
                   {p.citation ? (
-                    <p class="text-[15px] leading-[1.45] text-text-dim">
+                    <p class="text-[15px] leading-[1.45] [overflow-wrap:anywhere] text-text-dim">
                       {p.citation}
                       {p.link && (
                         <a
                           href={p.link}
                           target="_blank"
                           rel="noopener"
-                          class="ml-1 whitespace-nowrap hover:underline"
+                          class="ml-1 whitespace-nowrap underline"
                           style="color: var(--color-rit-orange-text);"
                           aria-label="DOI"
                         >

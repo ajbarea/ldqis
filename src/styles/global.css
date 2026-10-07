@@ -1,3 +1,13 @@
+/* research(2026-10): Fontsource packages self-host the fonts from npm, so no visitor IP
+   reaches Google; its CSS carries `unicode-range`, so only the subsets a page needs load.
+   Static weight files keep the exact weights the Google link served (Fontsource suggests
+   the variable package first; swap to it to cut the file count). */
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
@@ -20,9 +30,9 @@
      axe-core — just under WCAG 2.2 AA's 4.5:1 floor for normal text.
      Darkened to #b04b00 (≈5.4:1) so the brand-tinted text variant clears
      AA without sacrificing the visual orange identity. The pure brand
-     orange #f76902 stays available via --color-rit-orange for backgrounds,
-     dark-mode emphasis, and non-text affordances (lines, marks, large
-     display headings ≥18pt where the 3:1 floor applies). */
+     orange #f76902 stays available via --color-rit-orange for backgrounds
+     and non-text affordances (lines, marks). It is 2.98:1 on the light bg,
+     so no text uses it; all orange text uses this token. */
   --color-rit-orange-text: #b04b00;
   --color-rit-yellow: #f6be00; /* secondary, for gradients */
 
@@ -53,8 +63,13 @@
   --color-line: #1f2630;
   --color-text: #e7ecef;
   --color-text-dim: #93a0ad;
-  --color-text-faint: #5b6773;
+  --color-text-faint: #7f8c99;
   --color-rit-orange-text: #f76902; /* full orange ok on dark */
+}
+
+/* keep focused elements clear of the sticky nav */
+html {
+  scroll-padding-top: 6rem;
 }
 
 /* Map the typography plugin's prose colors to the site's theme tokens so

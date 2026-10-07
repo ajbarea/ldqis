@@ -171,7 +171,7 @@ const pastCohort = peopleEntries
         >
           Trustworthy data.
           <br />
-          <em class="italic" style="color: var(--color-rit-orange);">
+          <em class="italic" style="color: var(--color-rit-orange-text);">
             Intelligent
           </em>{" "}
           security.
@@ -218,7 +218,7 @@ const pastCohort = peopleEntries
             { num: "20+", label: "Years of research" },
           ].map(({ num, label }) => (
             <div class="bg-bg px-6 py-7">
-              <div style="font-family: var(--font-display); font-size: 44px; line-height: 1; color: var(--color-rit-orange);">
+              <div style="font-family: var(--font-display); font-size: 44px; line-height: 1; color: var(--color-rit-orange-text);">
                 {num}
               </div>
               <div class="mt-[6px] text-[13px] tracking-[0.5px] text-text-dim uppercase">
@@ -313,6 +313,7 @@ const pastCohort = peopleEntries
                     style="color: var(--color-rit-orange-text);"
                   >
                     {l.label}
+                    <span class="sr-only"> ({p.name})</span>
                   </a>
                 ))}
                 <a
@@ -642,7 +643,7 @@ const pastCohort = peopleEntries
                     rel="noopener"
                     class="ml-auto inline-flex items-center gap-1 hover:text-rit-orange-text"
                     style="color: var(--color-rit-orange-text);"
-                    aria-label={`NSF award ${f.award} on nsf.gov`}
+                    aria-label={`View award ${f.award} on nsf.gov`}
                   >
                     View award →
                   </a>
@@ -744,7 +745,7 @@ const pastCohort = peopleEntries
             </li>
             <li>
               <a href="#publications" class="hover:text-rit-orange-text">
-                Publications
+                Recent publications
               </a>
             </li>
             <li>
@@ -801,7 +802,7 @@ const pastCohort = peopleEntries
                 rel="noopener"
                 class="hover:text-rit-orange-text"
               >
-                RIT GCCIS
+                Golisano College of Computing and Information Sciences
               </a>
             </li>
             <li>

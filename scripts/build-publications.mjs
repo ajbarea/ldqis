@@ -274,6 +274,14 @@ deduped.sort(
   (a, b) =>
     (b.year || 0) - (a.year || 0) || (a.title || a.citation).localeCompare(b.title || b.citation),
 );
+// The original .pdf URL now serves the conference home page; link the archived paper.
+const LINK_FIXES = new Map([
+  [
+    "http://hpc-ua.org/hpc-ua-12/files/proceedings/7.pdf",
+    "https://web.archive.org/web/20170401171753/http://hpc-ua.org/hpc-ua-12/files/proceedings/7.pdf",
+  ],
+]);
+for (const r of deduped) if (LINK_FIXES.has(r.link)) r.link = LINK_FIXES.get(r.link);
 writeFileSync(
   join(__dir, "..", "src", "data", "publications-all.json"),
   JSON.stringify(deduped, null, 2) + "\n",

@@ -24,6 +24,9 @@ These hold across redesigns; changing any is a deliberate decision, not drift.
   pull request by Playwright and axe-core. No manual-only a11y claims.
 - **Stable identity.** The LDQIS name and RIT branding (PMS 1505c orange, F6BE00 yellow,
   Instrument Serif + Inter type) stay constant across redesigns.
+  Light-theme text never uses `#f76902` (2.98:1 fails AA, even at large sizes); it uses the
+  accessible orange token. The dark theme uses `#f76902` as text because it passes there.
+  Elsewhere brand orange stays for non-text accents.
 - **Research before architecture.** Framework, library, and pattern choices are checked
   against current best practice and recorded in a `research(YYYY-MM):` note in the code —
   the same provenance habit as the lab's published work.

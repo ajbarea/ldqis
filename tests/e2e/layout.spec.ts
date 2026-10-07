@@ -74,8 +74,9 @@ test.describe("admin", () => {
     for (const c of metas) expect(c).not.toMatch(/maximum-scale|user-scalable/);
   });
 
-  // The signed-out screen has no textboxes, so the elements below stand in for the
-  // ones Sveltia renders once signed in, including its asset text-edit textarea.
+  // The signed-out screen has no textboxes, and Sveltia's scoped rules only exist once its
+  // editor mounts. These stand-ins check our override against a competing scoped
+  // `!important` rule, not the real elements.
   test.describe("touch textboxes", () => {
     test.use({ hasTouch: true, isMobile: true });
 
@@ -85,7 +86,8 @@ test.describe("admin", () => {
       const sizes = await page.evaluate(() => {
         document.body.insertAdjacentHTML(
           "beforeend",
-          `<div class="wrapper svelte-1olui47"><textarea></textarea></div>
+          `<style>.scoped.s-x textarea { font-size: 14px !important; }</style>
+           <div class="scoped s-x"><textarea></textarea></div>
            <input type="text" /><textarea></textarea><select></select>
            <div contenteditable="true"></div>`,
         );

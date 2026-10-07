@@ -2,7 +2,7 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import { cpSync, existsSync, readFileSync } from "node:fs";
+import { cpSync, readFileSync, statSync } from "node:fs";
 import { extname, join, resolve, sep } from "node:path";
 import { URL, fileURLToPath } from "node:url";
 
@@ -54,15 +54,23 @@ const sveltiaCms = () => {
         base = config.base.endsWith("/") ? config.base : `${config.base}/`;
       },
       "astro:server:setup": ({ server }) => {
-        // Vite may already have stripped the base from req.url.
+        // Vite strips the base from req.url, so match on the original URL: only base +
+        // admin/cms/ is served, as in production.
         const prefix = "/admin/cms/";
         server.middlewares.use((req, res, next) => {
-          const path = (req.url ?? "").split("?")[0].replace(base.slice(0, -1) + prefix, prefix);
-          if (!path.startsWith(prefix) || CMS_SKIP.test(path)) return next();
-          const file = resolve(CMS_DIST, decodeURIComponent(path.slice(prefix.length)));
-          if (!file.startsWith(CMS_DIST + sep) || !existsSync(file)) return next();
-          res.setHeader("Content-Type", CMS_TYPES[extname(file)] ?? "application/octet-stream");
-          res.end(readFileSync(file));
+          if (!(req.originalUrl ?? "").startsWith(`${base}admin/cms/`)) return next();
+          const stripped = (req.url ?? "").split("?")[0];
+          if (!stripped.startsWith(prefix)) return next();
+          try {
+            const rel = decodeURIComponent(stripped.slice(prefix.length));
+            const file = resolve(CMS_DIST, rel);
+            if (CMS_SKIP.test(rel) || !file.startsWith(CMS_DIST + sep)) return next();
+            if (!statSync(file).isFile()) return next();
+            res.setHeader("Content-Type", CMS_TYPES[extname(file)] ?? "application/octet-stream");
+            res.end(readFileSync(file));
+          } catch {
+            next();
+          }
         });
       },
       "astro:build:done": ({ dir }) => {

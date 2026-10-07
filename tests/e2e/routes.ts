@@ -6,7 +6,7 @@ const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const DIST = join(ROOT, "dist");
 const INDEX = join(DIST, "index.html");
 
-// The newest mtime under a path; skips public/admin/cms, which older previews rewrote.
+// The newest mtime under a path.
 function newest(path: string): number {
   if (!existsSync(path)) return 0;
   if (!statSync(path).isDirectory()) return statSync(path).mtimeMs;
@@ -16,7 +16,8 @@ function newest(path: string): number {
 if (!existsSync(INDEX))
   throw new Error("dist/ is missing: run `npm run build` before the e2e tests");
 const builtAt = statSync(INDEX).mtimeMs;
-const stale = ["src", "public", "scripts", "astro.config.mjs", "package.json"].filter(
+// Inputs `astro build` reads.
+const stale = ["src", "public", "astro.config.mjs", "package.json", "package-lock.json"].filter(
   (p) => newest(join(ROOT, p)) > builtAt,
 );
 if (stale.length)

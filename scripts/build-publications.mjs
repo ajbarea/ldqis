@@ -274,6 +274,11 @@ deduped.sort(
   (a, b) =>
     (b.year || 0) - (a.year || 0) || (a.title || a.citation).localeCompare(b.title || b.citation),
 );
+// Dead .pdf URLs that now serve the conference home page; link the site instead.
+const LINK_FIXES = new Map([
+  ["http://hpc-ua.org/hpc-ua-12/files/proceedings/7.pdf", "https://hpc-ua.org/"],
+]);
+for (const r of deduped) if (LINK_FIXES.has(r.link)) r.link = LINK_FIXES.get(r.link);
 writeFileSync(
   join(__dir, "..", "src", "data", "publications-all.json"),
   JSON.stringify(deduped, null, 2) + "\n",

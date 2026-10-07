@@ -79,3 +79,16 @@ first. The DNS steps need whoever holds the GoDaddy login.
 - **Share the Cloudflare account.** Cloudflare → Manage Account → Members → invite the
   successor as Super Administrator; the CMS sign-in runs there.
 - **Watch the renewal.** `dataqualitylabs.com` expires each February 12 unless renewed.
+
+## Updating the CMS bundle
+
+`public/admin/index.html` pins `@sveltia/cms` to an exact version with a Subresource Integrity
+hash. To update, change the version in that file and in the `$schema` line of
+`src/admin/config.template.yml`, then regenerate the hash:
+
+```sh
+curl -sL https://unpkg.com/@sveltia/cms@<version>/dist/sveltia-cms.js | openssl dgst -sha384 -binary | openssl base64 -A
+```
+
+Prefix the output with `sha384-`. The page also rewrites the viewport meta the bundle injects
+so pinch zoom stays on; confirm that still holds after an update.

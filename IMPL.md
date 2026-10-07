@@ -13,9 +13,10 @@ Steps: [MAINTAINING.md](./MAINTAINING.md).
 
 ## Known issues
 
-- `npm audit` is clean. `@lhci/cli` 0.15.1 is its latest release and no longer updated, so
-  its vulnerable transitive dependencies are pinned forward in `package.json` `overrides`
-  (`@puppeteer/browsers`, `tmp`, `uuid`). Re-check them when Lighthouse CI changes.
+- `npm audit --omit=dev` is clean. The remaining findings are all in the dev-only `@lhci/cli`
+  chain (0.15.1 is its latest release and no longer updated); `npm audit fix --force` would
+  downgrade `@lhci/cli` and `@tailwindcss/typography`, so leave them. Its transitive dependencies `@puppeteer/browsers`, `tmp`, and
+  `uuid` are pinned forward in `package.json` `overrides`.
 - `ldqis-cms-auth` has no Dependabot and pins an old wrangler; its `pnpm audit` findings are
   all in build and lint tooling, not the deployed Worker.
 

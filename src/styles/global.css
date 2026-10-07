@@ -1,3 +1,10 @@
+@import "@fontsource/inter/300.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
@@ -25,6 +32,9 @@
      display headings ≥18pt where the 3:1 floor applies). */
   --color-rit-orange-text: #b04b00;
   --color-rit-yellow: #f6be00; /* secondary, for gradients */
+  /* Large display text on light: RIT's accessible orange #c75300 (4.46:1 on bg);
+     brand #f76902 is 2.98:1 and fails even the 3:1 large-text floor. */
+  --color-rit-orange-display: #c75300;
 
   /* warm editorial light palette */
   --color-bg: #fefefd;
@@ -53,8 +63,14 @@
   --color-line: #1f2630;
   --color-text: #e7ecef;
   --color-text-dim: #93a0ad;
-  --color-text-faint: #5b6773;
+  --color-text-faint: #7f8c99;
   --color-rit-orange-text: #f76902; /* full orange ok on dark */
+  --color-rit-orange-display: #f76902;
+}
+
+/* keep focused elements clear of the sticky nav */
+html {
+  scroll-padding-top: 6rem;
 }
 
 /* Map the typography plugin's prose colors to the site's theme tokens so

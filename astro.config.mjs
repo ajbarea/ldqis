@@ -2,7 +2,8 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import { cpSync, readFileSync, statSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { cpSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { extname, join, resolve, sep } from "node:path";
 import { URL, fileURLToPath } from "node:url";
 
@@ -54,15 +55,13 @@ const sveltiaCms = () => {
         base = config.base.endsWith("/") ? config.base : `${config.base}/`;
       },
       "astro:server:setup": ({ server }) => {
-        // Vite strips the base from req.url, so match on the original URL: only base +
-        // admin/cms/ is served, as in production.
-        const prefix = "/admin/cms/";
+        // Match the original URL, so only base + admin/cms/ is served, as in production.
+        const prefix = `${base}admin/cms/`;
         server.middlewares.use((req, res, next) => {
-          if (!(req.originalUrl ?? "").startsWith(`${base}admin/cms/`)) return next();
-          const stripped = (req.url ?? "").split("?")[0];
-          if (!stripped.startsWith(prefix)) return next();
+          const url = (req.originalUrl ?? req.url ?? "").split("?")[0];
+          if (!url.startsWith(prefix)) return next();
           try {
-            const rel = decodeURIComponent(stripped.slice(prefix.length));
+            const rel = decodeURIComponent(url.slice(prefix.length));
             const file = resolve(CMS_DIST, rel);
             if (CMS_SKIP.test(rel) || !file.startsWith(CMS_DIST + sep)) return next();
             if (!statSync(file).isFile()) return next();
@@ -74,6 +73,12 @@ const sveltiaCms = () => {
         });
       },
       "astro:build:done": ({ dir }) => {
+        // Lets the e2e staleness check compare the lockfile by content, not mtime.
+        const lock = readFileSync(new URL("./package-lock.json", import.meta.url));
+        writeFileSync(
+          join(fileURLToPath(dir), ".lock-hash"),
+          createHash("sha256").update(lock).digest("hex"),
+        );
         cpSync(CMS_DIST, join(fileURLToPath(dir), "admin", "cms"), {
           recursive: true,
           filter: (f) => !CMS_SKIP.test(f),

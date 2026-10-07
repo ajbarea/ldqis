@@ -61,7 +61,7 @@ const iconClass = isPill ? "h-4 w-4 shrink-0" : "h-5 w-5 shrink-0";
 ---
 
 {links.length > 0 && (
-  <div class={wrapClass}>
+  <div class={wrapClass} data-pagefind-ignore>
     {links.map((link) =>
       link.kind === "email" && isPill ? (
         <div

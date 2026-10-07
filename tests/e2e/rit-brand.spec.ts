@@ -1,6 +1,6 @@
 // RIT brand requirements: the black footer with its required links on every page, and
 // site search in the header.
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { ROUTES } from "./routes";
 
 const REQUIRED = {
@@ -27,11 +27,12 @@ test.describe("RIT footer", () => {
           await page.goto(path);
           const footer = page.locator("footer#rit-footer");
           await expect(footer).toHaveCount(1);
+          await footer.scrollIntoViewIfNeeded();
           await expect(footer).toHaveCSS("background-color", "rgb(0, 0, 0)");
           await expect(
             footer.getByRole("img", { name: "Rochester Institute of Technology" }),
           ).toBeVisible();
-          await expect(footer.getByRole("link", { name: "lrvcs@rit.edu" })).toBeVisible();
+          await expect(footer.getByRole("link", { name: "cs-dql@rit.edu" })).toBeVisible();
           await expect(footer.getByText("1 Lomb Memorial Drive")).toBeVisible();
           for (const [name, href] of Object.entries(REQUIRED))
             await expect(footer.getByRole("link", { name, exact: true })).toHaveAttribute(
@@ -46,6 +47,15 @@ test.describe("RIT footer", () => {
   }
 });
 
+const dialogOf = (page: Page) => page.getByRole("dialog");
+// The results summary reads "N results for ..." or "No results for ...".
+async function search(page: Page, query: string) {
+  const dialog = dialogOf(page);
+  await dialog.locator("input").first().fill(query);
+  await expect(dialog.getByText(/\bresults? for\b/i).first()).toBeVisible();
+  return dialog;
+}
+
 test.describe("site search", () => {
   test("the header button opens a labelled dialog, finds a page, and returns focus on Escape", async ({
     page,
@@ -54,41 +64,130 @@ test.describe("site search", () => {
     const trigger = page.getByRole("button", { name: "Search" });
     await expect(trigger).toHaveAttribute("aria-haspopup", "dialog");
     await trigger.click();
-    const dialog = page.getByRole("dialog");
-    await expect(dialog).toBeVisible();
-    const input = dialog
-      .getByRole("searchbox")
-      .or(dialog.getByRole("combobox"))
-      .or(dialog.locator("input"));
-    await expect(input.first()).toBeFocused();
-    await input.first().fill("Reznik");
+    await expect(dialogOf(page)).toBeVisible();
+    await expect(dialogOf(page).locator("input").first()).toBeFocused();
+    const dialog = await search(page, "Reznik");
     const hit = dialog.locator('a[href*="people/leon-reznik"]').first();
-    await expect(hit).toBeVisible();
     await expect(hit).toHaveAttribute("href", /\/ldqis\/people\/leon-reznik\/?/);
+    await expect(hit).toContainText("Reznik");
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
     await expect(trigger).toBeFocused();
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
   });
 
   test("a result opens its page under the base path", async ({ page }) => {
     await page.goto("");
     await page.getByRole("button", { name: "Search" }).click();
-    await page.getByRole("dialog").locator("input").first().fill("Reznik");
-    await page.getByRole("dialog").locator('a[href*="people/leon-reznik"]').first().click();
+    const dialog = await search(page, "Reznik");
+    await dialog.locator('a[href*="people/leon-reznik"]').first().click();
     await expect(page).toHaveURL(/\/ldqis\/people\/leon-reznik\/?$/);
   });
 
-  test("the keyboard shortcut opens it", async ({ page }) => {
+  test("Ctrl+K opens it", async ({ page }) => {
     await page.goto("");
-    await page.getByRole("button", { name: "Search" }).waitFor();
     await page.keyboard.press("Control+k");
-    await expect(page.getByRole("dialog")).toBeVisible();
+    await expect(dialogOf(page)).toBeVisible();
+    await expect(dialogOf(page).locator("input").first()).toBeFocused();
   });
 
-  test("admin and 404 are not indexed", async ({ page }) => {
+  test("the Pagefind bundle loads on first use, not on page load", async ({ page }) => {
+    const bundle: string[] = [];
+    page.on("request", (r) => r.url().includes("/pagefind/") && bundle.push(r.url()));
+    await page.goto("");
+    await page.waitForLoadState("networkidle");
+    expect(bundle.filter((u) => u.endsWith(".js"))).toEqual([]);
+    await page.getByRole("button", { name: "Search" }).click();
+    await expect(dialogOf(page)).toBeVisible();
+    expect(bundle.some((u) => u.endsWith("pagefind-component-ui.js"))).toBe(true);
+  });
+
+  test("results are titled by page and homepage listings do not match", async ({ page }) => {
     await page.goto("");
     await page.getByRole("button", { name: "Search" }).click();
-    await page.getByRole("dialog").locator("input").first().fill("Powered by");
-    await expect(page.getByRole("dialog").locator('a[href*="admin"]')).toHaveCount(0);
+    // This title is listed on the homepage and has its own page.
+    const dialog = await search(page, "Optimizing Federated Learning with Metacognition");
+    await expect(dialog.locator('a[href*="publications/intefl-mis-2026"]').first()).toContainText(
+      /InteFL/,
+    );
+    await expect(dialog.locator('a[href$="/ldqis/"]')).toHaveCount(0);
+  });
+
+  // 404 and /admin must stay out of the index; the queries are text only they contain.
+  for (const [name, query, pattern] of [
+    ["404", "may have moved", /404/],
+    ["admin", "Content editor", /admin/],
+  ] as const) {
+    test(`${name} is not indexed`, async ({ page }) => {
+      await page.goto("");
+      await page.getByRole("button", { name: "Search" }).click();
+      const dialog = await search(page, query);
+      const hrefs = await dialog
+        .locator("a")
+        .evaluateAll((a) => a.map((x) => x.getAttribute("href")));
+      expect(hrefs.filter((h) => pattern.test(h ?? ""))).toEqual([]);
+    });
+  }
+
+  test("every built route except 404 and admin is in the index", async ({ page }) => {
+    await page.goto("");
+    const urls = await page.evaluate(async () => {
+      const pf = await import(`${document.baseURI}pagefind/pagefind.js`);
+      const all = await pf.search(null);
+      const data = await Promise.all(
+        all.results.map((r: { data(): Promise<{ url: string }> }) => r.data()),
+      );
+      return data.map((d: { url: string }) => d.url);
+    });
+    const indexed = urls
+      .map((u: string) => u.replace(/^\/ldqis\//, "").replace(/^\//, ""))
+      .map((u: string) => u.replace(/\.html$/, ""))
+      .sort();
+    const expected = ROUTES.filter((p) => p !== "404.html" && !p.startsWith("admin/")).map((p) =>
+      p.replace(/\.html$/, ""),
+    );
+    expect(indexed).toEqual([...expected].sort());
+  });
+
+  test("the header button matches the round transparent theme toggle", async ({ page }) => {
+    for (const theme of ["light", "dark"] as const) {
+      await page.addInitScript((t) => localStorage.setItem("ldqis-theme", t), theme);
+      await page.goto("");
+      const style = (id: string) =>
+        page.locator(id).evaluate((el) => {
+          const c = getComputedStyle(el);
+          return {
+            w: c.width,
+            h: c.height,
+            radius: c.borderRadius,
+            bg: c.backgroundColor,
+            border: c.borderTopWidth,
+            color: c.color,
+          };
+        });
+      const search = await style("#search-btn");
+      expect(search).toEqual(await style("#theme-toggle"));
+      expect(search).toMatchObject({ w: "36px", h: "36px", bg: "rgba(0, 0, 0, 0)" });
+    }
+  });
+
+  test("the modal follows the site theme", async ({ page }) => {
+    for (const theme of ["light", "dark"] as const) {
+      await page.addInitScript((t) => localStorage.setItem("ldqis-theme", t), theme);
+      await page.goto("");
+      await page.getByRole("button", { name: "Search" }).click();
+      await expect(dialogOf(page)).toBeVisible();
+      const [pf, site] = await page.evaluate(() => {
+        const dialog = document.querySelector("dialog")!;
+        const pf = getComputedStyle(dialog).backgroundColor;
+        const probe = document.createElement("i");
+        probe.style.backgroundColor = "var(--color-bg)";
+        document.body.append(probe);
+        const site = getComputedStyle(probe).backgroundColor;
+        probe.remove();
+        return [pf, site];
+      });
+      expect(pf).toBe(site);
+    }
   });
 });

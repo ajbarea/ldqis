@@ -88,6 +88,47 @@ const sveltiaCms = () => {
   };
 };
 
+// research(2026-10): Pagefind indexes built HTML, so `astro dev` has no index of its own.
+// This serves the one from the last `npm run build` (dist/pagefind) at <base>/pagefind/,
+// so search works in dev against that snapshot; without a build the header button hides.
+const PAGEFIND_DIST = fileURLToPath(new URL("./dist/pagefind", import.meta.url));
+/** @type {Record<string, string>} */
+const PAGEFIND_TYPES = {
+  ".js": "text/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+};
+
+/** @type {() => import("astro").AstroIntegration} */
+const pagefindDev = () => {
+  let base = "/";
+  return {
+    name: "pagefind-dev",
+    hooks: {
+      "astro:config:setup": ({ config }) => {
+        base = config.base.endsWith("/") ? config.base : `${config.base}/`;
+      },
+      "astro:server:setup": ({ server }) => {
+        const prefix = `${base}pagefind/`;
+        server.middlewares.use((req, res, next) => {
+          const url = (req.originalUrl ?? req.url ?? "").split("?")[0];
+          if (!url.startsWith(prefix)) return next();
+          try {
+            const file = resolve(PAGEFIND_DIST, decodeURIComponent(url.slice(prefix.length)));
+            if (!file.startsWith(PAGEFIND_DIST + sep) || !statSync(file).isFile()) return next();
+            res.setHeader(
+              "Content-Type",
+              PAGEFIND_TYPES[extname(file)] ?? "application/octet-stream",
+            );
+            res.end(readFileSync(file));
+          } catch {
+            next();
+          }
+        });
+      },
+    },
+  };
+};
+
 const isCustomDomain = process.env.CUSTOM_DOMAIN === "true";
 
 export default defineConfig({
@@ -98,7 +139,7 @@ export default defineConfig({
   // people / project detail pages to crawlers (incl. Google Scholar). The
   // build-time robots.txt endpoint (src/pages/robots.txt.ts) points at it.
   // Source: https://docs.astro.build/en/guides/integrations-guide/sitemap/
-  integrations: [sitemap(), sveltiaCms()],
+  integrations: [sitemap(), sveltiaCms(), pagefindDev()],
   vite: {
     plugins: [tailwindcss()],
   },

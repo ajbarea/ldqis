@@ -15,10 +15,12 @@ const linkClass = "inline-block py-1 text-white underline-offset-4 hover:underli
           class="inline-block p-3 -m-3"
         >
           <img
-            src="https://www.rit.edu/brandportal/sites/rit.edu.brandportal/files/2020-04/RIT_RGB_hor_full_w.png"
+            src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/rit-logo-white.png`}
             alt="Rochester Institute of Technology"
-            class="h-10 w-auto"
-            height="40"
+            width="500"
+            height="34"
+            loading="lazy"
+            class="h-auto w-full max-w-[420px]"
           />
         </a>
         <address class="mt-6 text-sm leading-relaxed text-neutral-300 not-italic">
@@ -35,8 +37,8 @@ const linkClass = "inline-block py-1 text-white underline-offset-4 hover:underli
             <a href="tel:+15854752411" class={linkClass}>
               585-475-2411
             </a>
-            <a href="mailto:lrvcs@rit.edu" class={linkClass}>
-              lrvcs@rit.edu
+            <a href="mailto:cs-dql@rit.edu" class={linkClass}>
+              cs-dql@rit.edu
             </a>
           </p>
         </address>

@@ -51,7 +51,30 @@ const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
         )}
       </div>
 
-      <pagefind-modal-trigger compact hide-shortcut placeholder="Search"></pagefind-modal-trigger>
+      <button
+        type="button"
+        id="search-btn"
+        aria-label="Search"
+        aria-haspopup="dialog"
+        aria-expanded="false"
+        aria-keyshortcuts="Control+K Meta+K"
+        data-src={`${pagefind}/pagefind-component-ui.js`}
+        class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-transparent text-text-dim hover:border-rit-orange hover:text-rit-orange-text"
+      >
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+      </button>
 
       <button
         type="button"
@@ -126,10 +149,8 @@ const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
   </div>
 </nav>
 
-<link rel="stylesheet" href={`${pagefind}/pagefind-component-ui.css`} />
 <pagefind-config bundle-path={`${pagefind}/`} base-url={import.meta.env.BASE_URL}></pagefind-config>
-<pagefind-modal reset-on-close></pagefind-modal>
-<script is:inline type="module" src={`${pagefind}/pagefind-component-ui.js`}></script>
+<pagefind-modal reset-on-close data-pagefind-ignore></pagefind-modal>
 
 <script>
   const root = document.documentElement;
@@ -150,4 +171,49 @@ const pagefind = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind`;
     const open = menu?.classList.toggle("hidden") === false;
     menuBtn.setAttribute("aria-expanded", String(open));
   });
+
+  // research(2026-10): the 175 KB Pagefind UI loads on first use (click, hover, focus, or
+  // Ctrl/Cmd+K), not on every page view.
+  const searchBtn = document.getElementById("search-btn");
+  const modal = document.querySelector<
+    HTMLElement & { open(): void; dialogEl?: HTMLDialogElement }
+  >("pagefind-modal");
+  let loaded: Promise<void> | undefined;
+  const load = () =>
+    (loaded ??= new Promise<void>((resolve, reject) => {
+      const el = document.createElement("script");
+      el.type = "module";
+      el.src = searchBtn!.dataset.src!;
+      el.onload = () => resolve();
+      el.onerror = () => reject(new Error("search bundle unavailable"));
+      document.head.append(el);
+    }).then(async () => {
+      await customElements.whenDefined("pagefind-modal");
+      while (!modal?.dialogEl) await new Promise((r) => requestAnimationFrame(r));
+    }));
+  const openSearch = async () => {
+    try {
+      await load();
+    } catch {
+      // Bundle absent (astro dev before a build): no search to offer.
+      searchBtn?.setAttribute("hidden", "");
+      return;
+    }
+    modal?.open();
+    searchBtn?.setAttribute("aria-expanded", "true");
+  };
+  modal?.addEventListener("close", () => searchBtn?.setAttribute("aria-expanded", "false"), true);
+  for (const ev of ["pointerenter", "focus"] as const)
+    searchBtn?.addEventListener(ev, () => void load().catch(() => {}), { once: true });
+  searchBtn?.addEventListener("click", () => void openSearch());
+  document.addEventListener("keydown", (e) => {
+    if (e.key.toLowerCase() !== "k" || !(e.ctrlKey || e.metaKey) || e.altKey || e.shiftKey) return;
+    e.preventDefault();
+    void openSearch();
+  });
+  if (import.meta.env.DEV)
+    fetch(searchBtn!.dataset.src!, { method: "HEAD" }).then(
+      (r) => r.ok || searchBtn?.setAttribute("hidden", ""),
+      () => searchBtn?.setAttribute("hidden", ""),
+    );
 </script>

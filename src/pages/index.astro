@@ -154,7 +154,7 @@ const pastCohort = peopleEntries
   {/* NAV */}
   <Nav />
 
-  <main id="main" data-pagefind-body class="relative z-[1]">
+  <main id="main" class="relative z-[1]">
     {/* HERO */}
     <header class="relative pt-[120px] pb-[100px]">
       <div class="mx-auto max-w-[1200px] px-6">
@@ -264,7 +264,7 @@ const pastCohort = peopleEntries
     </section>
 
     {/* PROJECTS */}
-    <section id="projects" class="relative py-[100px]">
+    <section id="projects" data-pagefind-ignore class="relative py-[100px]">
       <div class="mx-auto max-w-[1200px] px-6">
         <div class="mb-4 text-xs tracking-[1.5px] text-rit-orange-text uppercase">
           Active Projects
@@ -331,7 +331,7 @@ const pastCohort = peopleEntries
     </section>
 
     {/* PUBLICATIONS */}
-    <section id="publications" class="relative py-[100px]">
+    <section id="publications" data-pagefind-ignore class="relative py-[100px]">
       <div class="mx-auto max-w-[1200px] px-6">
         <div class="mb-4 text-xs tracking-[1.5px] text-rit-orange-text uppercase">Publications</div>
         <h2
@@ -410,6 +410,7 @@ const pastCohort = peopleEntries
     {/* PEOPLE */}
     <section
       id="people"
+      data-pagefind-ignore
       class="relative py-[100px]"
       style="background: var(--color-bg-elev); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line);"
     >
@@ -713,7 +714,11 @@ const pastCohort = peopleEntries
   </main>
 
   {/* FOOTER */}
-  <footer class="relative z-[1] mt-20 border-t border-line pt-12 pb-8">
+  <section
+    aria-label="Lab"
+    data-pagefind-ignore
+    class="relative z-[1] mt-20 border-t border-line pt-12 pb-8"
+  >
     <div class="mx-auto max-w-[1200px] px-6">
       <div class="flex flex-wrap items-start justify-between gap-8">
         <div>
@@ -830,5 +835,5 @@ const pastCohort = peopleEntries
         </div>
       </div>
     </div>
-  </footer>
+  </section>
 </BaseLayout>

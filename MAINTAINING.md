@@ -80,6 +80,16 @@ first. The DNS steps need whoever holds the GoDaddy login.
   successor as Super Administrator; the CMS sign-in runs there.
 - **Watch the renewal.** `dataqualitylabs.com` expires each February 12 unless renewed.
 
+## Search
+
+Pagefind indexes the built HTML: `npm run build` runs `pagefind --site dist` after
+`astro build`, writing the index to `dist/pagefind/`. `astro dev` serves that folder, so run
+`npm run build` once and `npm run dev` shows search over that snapshot (it goes stale as pages
+change; rebuild to refresh). With no build, the header search button hides itself.
+Pages are indexed through `data-pagefind-body` on `<body>` in `BaseLayout`; pass
+`indexed={false}` to keep a page out, and put `data-pagefind-ignore` on listings or controls
+that shouldn't match queries. Result titles come from each page's `og:title`.
+
 ## Updating the CMS bundle
 
 `@sveltia/cms` is an exact-pinned npm dependency, so Dependabot bumps it like any other

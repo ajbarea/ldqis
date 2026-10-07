@@ -63,3 +63,21 @@ for (const theme of THEMES) {
     }
   });
 }
+
+// axe's full ruleset (best-practice rules such as landmark uniqueness), once per route.
+test.describe("axe, all rules", () => {
+  for (const path of ROUTES) {
+    test(`${path || "home"}`, async ({ page }) => {
+      await page.goto(path);
+      if (path.startsWith("admin/")) await expect(page.getByText("Powered by")).toBeVisible();
+      // Sveltia renders /admin outside any landmark; every other rule still applies there.
+      const axe = new AxeBuilder({ page });
+      if (path.startsWith("admin/")) axe.disableRules(["region", "landmark-one-main"]);
+      const results = await axe.analyze();
+      expect(
+        results.violations,
+        `axe-core found violations on ${path}:\n${JSON.stringify(results.violations, null, 2)}`,
+      ).toEqual([]);
+    });
+  }
+});

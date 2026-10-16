@@ -6,13 +6,13 @@ maintainer.
 
 ## What the site depends on
 
-| Piece                           | Where it lives                                                                                    | Who can change it               |
-| ------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------- |
-| Source, CI, GitHub Pages        | `ajbarea/ldqis` (moving to `ldqis/ldqis`)                                                         | Repo admins                     |
-| CMS sign-in (Cloudflare Worker) | `ldqis-cms-auth`, source in `ajbarea/ldqis-cms-auth`; Cloudflare deploys every push to its `main` | Cloudflare account members      |
-| GitHub OAuth App                | Client ID in the Worker's `wrangler.toml`; client secret stored as a Worker secret                | The app's owner                 |
-| CMS publisher GitHub App        | Repo variable `CMS_APP_ID`, repo secret `CMS_APP_PRIVATE_KEY`                                     | The app's owner                 |
-| `dataqualitylabs.com`           | GoDaddy (registration and DNS); renews every February 12                                          | Whoever holds the GoDaddy login |
+| Piece                           | Where it lives                                                                                    | Who can change it            |
+| ------------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------- |
+| Source, CI, GitHub Pages        | `ajbarea/ldqis` (moving to `ldqis/ldqis`)                                                         | Repo admins                  |
+| CMS sign-in (Cloudflare Worker) | `ldqis-cms-auth`, source in `ajbarea/ldqis-cms-auth`; Cloudflare deploys every push to its `main` | Cloudflare account members   |
+| GitHub OAuth App                | Client ID in the Worker's `wrangler.toml`; client secret stored as a Worker secret                | The app's owner              |
+| CMS publisher GitHub App        | Repo variable `CMS_APP_ID`, repo secret `CMS_APP_PRIVATE_KEY`                                     | The app's owner              |
+| `dataqualitylabs.com`           | GoDaddy (registration and DNS); renews every February 12                                          | Dr. Reznik (GoDaddy account) |
 
 ## Moving into the `ldqis` organization
 
@@ -44,9 +44,7 @@ and GitHub does not redirect Pages sites after a transfer.
 
 ## Moving to `dataqualitylabs.com`
 
-RIT's [Web Standards](https://www.rit.edu/brandportal/web-standards) cover lab websites and
-ask sites hosted outside RIT's servers for an exception through web@rit.edu; settle that
-first. The DNS steps need whoever holds the GoDaddy login.
+The DNS steps need Dr. Reznik's GoDaddy login.
 
 1. **Verify the domain for the org.** Org Settings → Pages → Add a domain →
    `dataqualitylabs.com`. At GoDaddy, add the TXT record GitHub shows
@@ -69,7 +67,7 @@ first. The DNS steps need whoever holds the GoDaddy login.
 6. **Check.** <https://dataqualitylabs.com> loads, `www` redirects to it, and `/admin` sign-in
    works (the Worker already allows both hostnames).
 7. **Tidy up.** Update the links in `README.md` and the welcome news post, and turn on
-   auto-renew for the domain under an RIT-owned account.
+   auto-renew for the domain in Dr. Reznik's GoDaddy account.
 
 ## Handing the site to the next maintainer
 

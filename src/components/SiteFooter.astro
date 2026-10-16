@@ -1,31 +1,19 @@
 ---
-import { CONTACT_EMAIL, RIT_LEGAL_LINKS, basePath, footerGroups } from "../lib/site-links";
+import { CONTACT_EMAIL, footerGroups } from "../lib/site-links";
 
 const groups = footerGroups(import.meta.env.BASE_URL);
 const linkClass = "inline-block py-1 text-white underline-offset-4 hover:underline";
 ---
 
-<footer id="rit-footer" class="relative z-[1] bg-black text-white" aria-label="RIT">
+<footer id="site-footer" class="relative z-[1] bg-black text-white">
   <div class="mx-auto max-w-[1200px] px-6 py-14">
     <div class="grid gap-10 lg:grid-cols-[1.5fr_2fr]">
       <div>
-        <a
-          href="https://www.rit.edu"
-          aria-label="Rochester Institute of Technology"
-          class="inline-block p-3 -m-3"
-        >
-          <img
-            src={`${basePath(import.meta.env.BASE_URL)}/rit-logo-orange-white.svg`}
-            alt="Rochester Institute of Technology"
-            width="510"
-            height="49"
-            loading="lazy"
-            class="h-auto w-full max-w-[420px]"
-          />
-        </a>
-        <address class="mt-6 text-sm leading-relaxed text-neutral-300 not-italic">
+        <address class="text-sm leading-relaxed text-neutral-300 not-italic">
           <p>
-            Laboratory of Data Quality and Intelligent Security
+            <span class="text-base font-medium text-white">
+              Laboratory of Data Quality and Intelligent Security
+            </span>
             <br />
             <a href="https://www.rit.edu/computing/" class={linkClass}>
               Golisano College of Computing and Information Sciences
@@ -38,9 +26,6 @@ const linkClass = "inline-block py-1 text-white underline-offset-4 hover:underli
             Rochester, NY 14623
           </p>
           <p class="mt-2 flex flex-col items-start">
-            <a href="tel:+15854752411" class={linkClass}>
-              585-475-2411
-            </a>
             <a href={`mailto:${CONTACT_EMAIL}`} class={linkClass}>
               {CONTACT_EMAIL}
             </a>
@@ -68,21 +53,8 @@ const linkClass = "inline-block py-1 text-white underline-offset-4 hover:underli
       </nav>
     </div>
 
-    <nav aria-label="RIT policies" class="mt-10 border-t border-neutral-700 pt-6">
-      <h2 class="sr-only">RIT policies</h2>
-      <ul class="flex flex-wrap gap-x-6 gap-y-1 text-sm">
-        {RIT_LEGAL_LINKS.map((l) => (
-          <li>
-            <a href={l.href} class={linkClass}>
-              {l.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-
-    <p class="mt-6 text-xs text-neutral-300">
-      Copyright &copy; Rochester Institute of Technology. All Rights Reserved.
+    <p class="mt-10 border-t border-neutral-700 pt-6 text-xs text-neutral-300">
+      &copy; {new Date().getFullYear()} Laboratory of Data Quality and Intelligent Security
     </p>
   </div>
 </footer>

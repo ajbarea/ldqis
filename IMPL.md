@@ -24,7 +24,7 @@ Steps: [MAINTAINING.md](./MAINTAINING.md).
 ## Next up
 
 1. **Finish the organization move** (transfer, apps, Cloudflare reconnect; MAINTAINING.md).
-2. **Custom domain,** once the GoDaddy login and RIT's web@rit.edu exception are settled.
+2. **Custom domain,** with Dr. Reznik at GoDaddy for the DNS records.
 3. **Backfill team cross-links.** Projects and publications link to their lab-member
    authors and contributors through the `people` collection; add the remaining lists as
    authorship is confirmed.

@@ -40,5 +40,8 @@ export default defineConfig({
     url: `http://localhost:${PREVIEW_PORT}${BASE_PATH}`,
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
+    // Astro 7 backgrounds `astro preview` under an AI agent, so the command exits and
+    // Playwright reports "exited early"; keep it in the foreground.
+    env: { ASTRO_PREVIEW_BACKGROUND: "0" },
   },
 });

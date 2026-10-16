@@ -22,7 +22,7 @@ These hold across redesigns; changing any is a deliberate decision, not drift.
   four categories.
 - **Accessibility is a check, not a vibe.** WCAG 2.2 AA on every page, enforced on every
   pull request by Playwright and axe-core. No manual-only a11y claims.
-- **Stable identity.** The LDQIS name and RIT branding (PMS 1505c orange, F6BE00 yellow,
+- **Stable identity.** The LDQIS name and palette (PMS 1505c orange, F6BE00 yellow,
   Instrument Serif + Inter type) stay constant across redesigns.
   Light-theme text never uses `#f76902` (2.98:1 fails AA, even at large sizes); it uses the
   accessible orange token. The dark theme uses `#f76902` as text because it passes there.
@@ -43,11 +43,6 @@ so it outlives any one maintainer. Step-by-step for both, plus the handoff check
 [MAINTAINING.md](./MAINTAINING.md). A build flag (`CUSTOM_DOMAIN`) already switches between
 the GitHub Pages path and the apex domain. After the cutover, confirm the old site is fully
 offline (old URLs return 404, not stale data).
-
-### Follow-ups
-
-- The M&C-issued lab lockup replaces the lab mark in the header once RIT Marketing &
-  Communications issues it (request: rit.edu/brandportal/request-lockup).
 
 ### Backlog (unprioritized)
 
@@ -99,9 +94,9 @@ ideas. These were weighed and declined, recorded so they aren't re-proposed:
 
 Highlights below; full history in git.
 
-- **RIT footer and site search.** Every page ends in the black RIT footer (RIT logo, contact,
-  primary links, and RIT's land acknowledgment, disclaimer, copyright, privacy,
-  nondiscrimination, emergency and accessibility pages) and the lab's own links; it is the only footer. A header search button opens Pagefind's modal over an index built from each
+- **Footer and site search.** Every page ends in one black footer: the lab's address and
+  contact, primary links, and the lab's own links. The site is the lab's own, so it carries
+  no RIT logo or RIT policy links. A header search button opens Pagefind's modal over an index built from each
   page's `<body>`, with nav and footer left out by Pagefind's defaults and the 404 page and `/admin` excluded. research(2026-10): Pagefind 1.5 component UI (`pagefind-modal`) uses a
   native `<dialog>` for focus trapping, Escape, a labelled input and result announcements,
   and `pagefind --site dist` runs after `astro build`, so CI and deploy produce the index;

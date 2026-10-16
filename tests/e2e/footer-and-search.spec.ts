@@ -1,17 +1,7 @@
-// RIT brand requirements: the black footer with its required links on every page, and
-// site search in the header.
+// The site footer on every page, and site search in the header.
 import { expect, test, type Page } from "@playwright/test";
 import { ROUTES } from "./routes";
 
-const REQUIRED = {
-  "Land Acknowledgment": "https://www.rit.edu/land-acknowledgment",
-  Disclaimer: "https://www.rit.edu/disclaimer",
-  "Copyright Infringement": "https://www.rit.edu/copyright-infringement",
-  "Privacy Statement": "https://www.rit.edu/legalcomplianceaudit/privacy-rit",
-  Nondiscrimination: "https://www.rit.edu/nondiscrimination",
-  "Emergency Information": "https://www.rit.edu/emergency-information",
-  Accessibility: "https://www.rit.edu/accessibility",
-};
 // The lab's own links, absolute under the base so they work from every page.
 const LAB = {
   "Funded by": /\/ldqis\/#funding$/,
@@ -26,7 +16,7 @@ const NAV = ["Research", "Projects", "Publications", "People", "News"];
 // /admin is the CMS app, not a site page.
 const PAGES = ROUTES.filter((p) => !p.startsWith("admin/"));
 
-test.describe("RIT footer", () => {
+test.describe("footer", () => {
   for (const theme of ["light", "dark"] as const) {
     test.describe(theme, () => {
       test.use({ colorScheme: theme });
@@ -34,22 +24,17 @@ test.describe("RIT footer", () => {
         test(`${path || "home"}`, async ({ page }) => {
           await page.addInitScript((t) => localStorage.setItem("ldqis-theme", t), theme);
           await page.goto(path);
-          const footer = page.locator("footer#rit-footer");
+          const footer = page.locator("footer#site-footer");
           await expect(footer).toHaveCount(1);
           await footer.scrollIntoViewIfNeeded();
           await expect(footer).toHaveCSS("background-color", "rgb(0, 0, 0)");
-          await expect(
-            footer.getByRole("img", { name: "Rochester Institute of Technology" }),
-          ).toBeVisible();
+          await expect(footer.getByRole("img")).toHaveCount(0);
           await expect(
             footer.getByRole("link", { name: "lrvcs@rit.edu", exact: true }),
           ).toBeVisible();
           await expect(footer.getByText("1 Lomb Memorial Drive")).toBeVisible();
-          for (const [name, href] of Object.entries(REQUIRED))
-            await expect(footer.getByRole("link", { name, exact: true })).toHaveAttribute(
-              "href",
-              href,
-            );
+          await expect(footer.getByText("Rochester Institute of Technology")).toBeVisible();
+          await expect(footer.locator('a[href^="https://www.rit.edu/"]')).toHaveCount(1);
           for (const name of NAV)
             await expect(footer.getByRole("link", { name, exact: true })).toBeVisible();
           for (const [name, href] of Object.entries(LAB))

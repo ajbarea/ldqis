@@ -105,10 +105,10 @@ Any quantitative claim not traceable to one of those is slop.
 
 Marketing claims in `README.md` most likely to drift. The CI gate at `scripts/check-readme-claims.mjs` is wired into both `make lint` and the `lint` job in `.github/workflows/ci.yml`; extend the script (a new `// ─── …` block) and add a row here whenever a new fragile claim lands.
 
-| README claim                                                  | Ground truth                              | Verified by                                                                                                              |
-| ------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Quick-start `make <target>` invocations                       | `Makefile` recipe headers                 | `check-readme-claims.mjs` asserts every `make <target>` in the quick-start bash block + inline mentions resolves         |
-| GitHub Pages preview URL (`https://ajbarea.github.io/ldqis/`) | `astro.config.mjs` `site` + `base` values | `check-readme-claims.mjs` asserts both the host and base-path string literals appear in the config (handles the ternary) |
+| README claim                                                | Ground truth                              | Verified by                                                                                                              |
+| ----------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Quick-start `make <target>` invocations                     | `Makefile` recipe headers                 | `check-readme-claims.mjs` asserts every `make <target>` in the quick-start bash block + inline mentions resolves         |
+| GitHub Pages preview URL (`https://ldqis.github.io/ldqis/`) | `astro.config.mjs` `site` + `base` values | `check-readme-claims.mjs` asserts both the host and base-path string literals appear in the config (handles the ternary) |
 
 The script does **not** gate the Project structure code block or the Sister ecosystem list:
 
@@ -142,13 +142,13 @@ The site **is** itself a documentation site — Astro renders to `dist/` and shi
 - ci_workflow: `.github/workflows/ci.yml` (per-PR lint / type / unit / e2e / lighthouse)
 - build_command: `make build` / `npm run build` / `astro build`
 - output_dir: `dist/`
-- preview_url: `https://ajbarea.github.io/ldqis/` (current; subject to base path = `/ldqis`)
+- preview_url: `https://ldqis.github.io/ldqis/` (current; subject to base path = `/ldqis`)
 - production_url: `https://dataqualitylabs.com` (planned; gates on M5 DNS handoff, then `astro.config.mjs` `CUSTOM_DOMAIN=true` env flip)
 - action_pins (expected current, 2026-05): `actions/checkout@v6.0.2`, `actions/setup-node@v6.4.0`, `actions/upload-pages-artifact@v5.0.0`, `actions/deploy-pages@v5.0.0`, `actions/upload-artifact@v7.0.1`
 
 ## sister_graduation
 
-Promoted to a sister 2026-05-21 ahead of original M6 schedule (AJ requested visibility). M6 DoD complete 2026-05-22 via [#5](https://github.com/ajbarea/ldqis/pull/5):
+Promoted to a sister 2026-05-21 ahead of original M6 schedule (AJ requested visibility). M6 DoD complete 2026-05-22 via [#5](https://github.com/ldqis/ldqis/pull/5):
 
 - [x] Entry added to `~/.claude/techne.toml`
 - [x] `Makefile` exists with sister-shape targets (full Phase 1-5 audit grid landed with M4)

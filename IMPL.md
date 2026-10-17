@@ -20,9 +20,8 @@ only for the custom domain at the root. Setup reference: [MAINTAINING.md](./MAIN
 
 ## Next up
 
-1. **Reconnect Cloudflare Workers Builds** to `ldqis/ldqis-cms-auth`.
-2. **Codecov for the org,** then update the README badge token.
-3. **Install GitGuardian on the org.**
-4. **Backfill team cross-links.** Projects and publications link to their lab-member
+1. **Codecov for the org,** then update the README badge token.
+2. **Install GitGuardian on the org.**
+3. **Backfill team cross-links.** Projects and publications link to their lab-member
    authors and contributors through the `people` collection; add the remaining lists as
    authorship is confirmed.

@@ -31,8 +31,6 @@ The site is served at <https://dataqualitylabs.com/>.
 
 ### Still to do
 
-- [ ] Reconnect Cloudflare Workers Builds to `ldqis/ldqis-cms-auth` (Workers & Pages >
-      `ldqis-cms-auth` > Settings > Builds > Git Repository > Manage).
 - [ ] Turn on Codecov for the org and update the badge token in `README.md`.
 - [ ] Install GitGuardian on the org.
 

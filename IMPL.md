@@ -5,8 +5,8 @@ longer-term plan lives in [ROADMAP.md](./ROADMAP.md); git history has the full r
 
 ## In progress
 
-The org move and the `dataqualitylabs.com` cutover are done (2026-10-16). The site builds
-only for the custom domain at the root. Setup reference: [MAINTAINING.md](./MAINTAINING.md).
+Nothing in flight. The site moved to the `ldqis` org and to `dataqualitylabs.com` on
+2026-10-16; setup reference in [MAINTAINING.md](./MAINTAINING.md).
 
 ## Known issues
 
@@ -22,6 +22,8 @@ only for the custom domain at the root. Setup reference: [MAINTAINING.md](./MAIN
 
 1. **Codecov for the org,** then update the README badge token.
 2. **Install GitGuardian on the org.**
-3. **Backfill team cross-links.** Projects and publications link to their lab-member
+3. **Retire the old server.** The previous site still answers at `129.21.34.220`
+   (`vhost11.cs.rit.edu`); RIT CS IT has to take it down.
+4. **Backfill team cross-links.** Projects and publications link to their lab-member
    authors and contributors through the `people` collection; add the remaining lists as
    authorship is confirmed.

@@ -33,6 +33,8 @@ The site is served at <https://dataqualitylabs.com/>.
 
 - [ ] Turn on Codecov for the org and update the badge token in `README.md`.
 - [ ] Install GitGuardian on the org.
+- [ ] Ask RIT CS IT to retire the old site on `vhost11.cs.rit.edu` (`129.21.34.220`), which
+      still answers by IP.
 
 ## Handing the site to the next maintainer
 

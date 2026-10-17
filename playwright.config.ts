@@ -2,18 +2,14 @@
 // production build (`npm run preview` after `npm run build`). Spawning the
 // preview server inside the config keeps CI hermetic — no separate `start`
 // step in the workflow YAML. The `webServer.url` matches Astro's default
-// preview port (4321) with the `/ldqis` base path that astro.config.mjs
-// applies on the GitHub-Pages deploy.
+// preview port (4321); the site is served at the root.
 import { defineConfig, devices } from "@playwright/test";
 
 const PREVIEW_PORT = 4321;
 
-// `astro preview` honors the `base: "/ldqis"` set in astro.config.mjs and
-// serves the homepage at `/ldqis/`. Playwright's `page.goto("/")` resolves
-// against the URL origin, not the baseURL path — so the baseURL needs the
-// trailing-slash form and tests use relative paths (`""` for the homepage,
-// `"projects/"` later) to compose cleanly with the base prefix.
-const BASE_PATH = "/ldqis/";
+// Tests use relative paths (`""` for the homepage, `"projects/"` later) so they
+// compose with the baseURL; a leading `/` would resolve against the origin.
+const BASE_PATH = "/";
 
 export default defineConfig({
   testDir: "./tests/e2e",

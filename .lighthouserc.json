@@ -1,7 +1,7 @@
 {
   "ci": {
     "collect": {
-      "url": ["http://localhost:4321/ldqis/"],
+      "url": ["http://localhost:4321/"],
       "numberOfRuns": 3,
       "startServerCommand": "npm run preview -- --host --port 4321",
       "startServerReadyPattern": "Local",

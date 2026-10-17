@@ -49,31 +49,17 @@ if (!quickStartBlock) {
   }
 }
 
-// ─── GitHub Pages preview URL claim ────────────────────────────────────────
-// Status section claims `https://ldqis.github.io/ldqis/`. The site URL
-// is composed from astro.config's `site` + `base`; until the custom-domain
-// cutover lands the apex domain, the preview path must remain in sync.
-const claimedPreviewUrl = readme.match(/https:\/\/([\w.-]+)\.github\.io\/([\w-]+)\//);
-if (!claimedPreviewUrl) {
-  failures.push(
-    "README status: GitHub Pages preview URL not found (expected `https://<owner>.github.io/<repo>/`)",
-  );
+// ─── Live site URL claim ───────────────────────────────────────────────────
+// Status section claims `https://dataqualitylabs.com/`. The site URL is
+// astro.config's `site`, so the README origin must appear there as a literal.
+const claimedSiteUrl = readme.match(/https:\/\/dataqualitylabs\.com\//);
+if (!claimedSiteUrl) {
+  failures.push("README status: live site URL not found (expected `https://dataqualitylabs.com/`)");
 } else {
-  const [, owner, repo] = claimedPreviewUrl;
-  const expectedSite = `https://${owner}.github.io`;
-  const expectedBase = `/${repo}`;
-  // `site:` and `base:` may be ternaries (e.g. `isCustomDomain ? "/" : "/ldqis"`),
-  // so verify the expected string literal appears somewhere in the config
-  // rather than parsing the assignment value. The CUSTOM_DOMAIN branch keeps
-  // the other (apex-domain) literals; both must stay present until the custom domain ships.
+  const expectedSite = claimedSiteUrl[0].replace(/\/$/, "");
   if (!astroConfig.includes(`"${expectedSite}"`)) {
     failures.push(
-      `README preview URL: claims \`${expectedSite}\` but astro.config.mjs has no matching site literal`,
-    );
-  }
-  if (!astroConfig.includes(`"${expectedBase}"`)) {
-    failures.push(
-      `README preview URL: claims base \`${expectedBase}\` but astro.config.mjs has no matching base literal`,
+      `README site URL: claims \`${expectedSite}\` but astro.config.mjs has no matching site literal`,
     );
   }
 }

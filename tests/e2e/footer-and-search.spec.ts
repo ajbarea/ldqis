@@ -4,9 +4,9 @@ import { ROUTES } from "./routes";
 
 // The lab's own links, absolute under the base so they work from every page.
 const LAB = {
-  "Funded by": /\/ldqis\/#funding$/,
-  Alumni: /\/ldqis\/#alumni$/,
-  Teaching: /\/ldqis\/#teaching$/,
+  "Funded by": /\/#funding$/,
+  Alumni: /\/#alumni$/,
+  Teaching: /\/#teaching$/,
   "Join us": /^mailto:lrvcs@rit\.edu/,
   "Get in touch": /^mailto:lrvcs@rit\.edu$/,
   "Dr. Reznik on Google Scholar": /scholar\.google\.com/,
@@ -96,7 +96,7 @@ test.describe("site search", () => {
     await expect(dialogOf(page).locator("input").first()).toBeFocused();
     const dialog = await search(page, "Reznik");
     const hit = dialog.locator('a[href*="people/leon-reznik"]').first();
-    await expect(hit).toHaveAttribute("href", /\/ldqis\/people\/leon-reznik\/?/);
+    await expect(hit).toHaveAttribute("href", /\/people\/leon-reznik\/?/);
     await expect(hit).toContainText("Reznik");
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
@@ -109,7 +109,7 @@ test.describe("site search", () => {
     await page.getByRole("button", { name: "Search" }).click();
     const dialog = await search(page, "Reznik");
     await dialog.locator('a[href*="people/leon-reznik"]').first().click();
-    await expect(page).toHaveURL(/\/ldqis\/people\/leon-reznik\/?$/);
+    await expect(page).toHaveURL(/\/people\/leon-reznik\/?$/);
   });
 
   // The modifier is what the page advertises and binds: Cmd on macOS, Ctrl elsewhere.
@@ -260,7 +260,7 @@ test.describe("site search", () => {
     const hit = dialog.locator('a[href*="publications/intefl-mis-2026"]').first();
     await expect(hit).toContainText(/InteFL/);
     await expect(dialog.getByText("· LDQIS")).toHaveCount(0);
-    await expect(dialog.locator('a[href$="/ldqis/"]')).toHaveCount(0);
+    await expect(dialog.locator('a[href="/"]')).toHaveCount(0);
   });
 
   // 404 and /admin must stay out of the index; the queries are text only they contain.
@@ -290,7 +290,7 @@ test.describe("site search", () => {
       return data.map((d: { url: string }) => d.url);
     });
     const indexed = urls
-      .map((u: string) => u.replace(/^\/ldqis\//, "").replace(/^\//, ""))
+      .map((u: string) => u.replace(/^\//, ""))
       .map((u: string) => u.replace(/\.html$/, ""))
       .sort();
     const expected = ROUTES.filter((p) => p !== "404.html" && !p.startsWith("admin/")).map((p) =>

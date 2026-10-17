@@ -5,11 +5,8 @@ longer-term plan lives in [ROADMAP.md](./ROADMAP.md); git history has the full r
 
 ## In progress
 
-**Moving into the `ldqis` organization.** The org exists, with Dr. Reznik (`leonr07`) invited
-as an owner and a `lab-members` team. The CMS Worker already allows `ldqis.github.io` and
-`dataqualitylabs.com`, and Dependabot auto-merge no longer depends on the repo's owner. The
-draft PR that points the site and CMS at `ldqis/ldqis` merges right after the repo transfer.
-Steps: [MAINTAINING.md](./MAINTAINING.md).
+The org move and the `dataqualitylabs.com` cutover are done (2026-10-16). The site builds
+only for the custom domain at the root. Setup reference: [MAINTAINING.md](./MAINTAINING.md).
 
 ## Known issues
 
@@ -23,8 +20,9 @@ Steps: [MAINTAINING.md](./MAINTAINING.md).
 
 ## Next up
 
-1. **Finish the organization move** (transfer, apps, Cloudflare reconnect; MAINTAINING.md).
-2. **Custom domain,** with Dr. Reznik at GoDaddy for the DNS records.
-3. **Backfill team cross-links.** Projects and publications link to their lab-member
+1. **Reconnect Cloudflare Workers Builds** to `ldqis/ldqis-cms-auth`.
+2. **Codecov for the org,** then update the README badge token.
+3. **Install GitGuardian on the org.**
+4. **Backfill team cross-links.** Projects and publications link to their lab-member
    authors and contributors through the `people` collection; add the remaining lists as
    authorship is confirmed.

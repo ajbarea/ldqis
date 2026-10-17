@@ -20,8 +20,7 @@ const {
 } = Astro.props;
 // Result title: the page name without the site suffix.
 const pageTitle = title.replace(/\s+[·—]\s+LDQIS\b.*$/, "") || title;
-// Default the share image to /og-image.png at the current origin — works on the
-// GitHub Pages base path now and on the apex domain after the DNS flip.
+// Default the share image to /og-image.png under the site's base path.
 const ogImageUrl =
   ogImage ??
   new URL(`${import.meta.env.BASE_URL.replace(/\/$/, "")}/og-image.png`, Astro.site).href;

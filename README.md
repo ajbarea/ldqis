@@ -5,7 +5,7 @@ Source for the website of RIT's **Laboratory of Data Quality and Intelligent Sec
 [![Astro](https://img.shields.io/badge/Astro-6-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind](https://img.shields.io/badge/Tailwind-4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?style=flat-square&logo=github)](https://ldqis.github.io/ldqis/)
+[![Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-222?style=flat-square&logo=github)](https://dataqualitylabs.com/)
 [![codecov](https://codecov.io/github/ajbarea/ldqis/graph/badge.svg?token=odipJPLUQV)](https://codecov.io/github/ajbarea/ldqis)
 
 This is the lab's website: our people, research, projects, publications, and news. It is content as code: every project, publication, profile, and news post is a Markdown file in git. Add or edit yours through the browser editor at `/admin`, an issue form, or a pull request. No database to maintain.
@@ -54,7 +54,7 @@ The site targets WCAG 2.2 AA, enforced on every PR by axe-core + Playwright, wit
 
 If you're in the lab, there are two no-code ways onto the site, plus git if you prefer.
 
-**Edit anything (the CMS).** Ask a maintainer for write access to this repo, then sign in at [`/admin`](https://ldqis.github.io/ldqis/admin/) with GitHub. You get a form editor for every person, project, publication, and news post: add, change, reorder, or delete. It commits and redeploys for you. Best for updating or fixing something that's already on the site.
+**Edit anything (the CMS).** Ask a maintainer for write access to this repo, then sign in at [`/admin`](https://dataqualitylabs.com/admin/) with GitHub. You get a form editor for every person, project, publication, and news post: add, change, reorder, or delete. It commits and redeploys for you. Best for updating or fixing something that's already on the site.
 
 **No account needed (issue forms).** Fill one in and a maintainer gets a pull request to review, no files to touch.
 
@@ -68,4 +68,4 @@ Looking after the site itself (hosting, the domain, handing it to the next maint
 
 ## Status
 
-Live at <https://ldqis.github.io/ldqis/>; a move to `dataqualitylabs.com` is planned. MIT licensed.
+Live at <https://dataqualitylabs.com/>. MIT licensed.

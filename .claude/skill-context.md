@@ -35,7 +35,7 @@ Audit drives the wrapper `make` targets, in dependency order:
 ### Phase 4 — Granular test
 
 5. `make test-unit` — Vitest. Astro `getViteConfig()` seeds Vitest with the project's Vite resolution; happy-dom is the test environment.
-6. `make test-e2e` — Playwright + @axe-core/playwright. Spawns `astro preview` via `playwright.config.ts`'s `webServer` block; serves the `dist/` build under the `/ldqis/` base path. **Requires `make build` first** (or any state that produced a valid `dist/`).
+6. `make test-e2e` — Playwright + @axe-core/playwright. Spawns `astro preview` via `playwright.config.ts`'s `webServer` block; serves the `dist/` build at the root path. **Requires `make build` first** (or any state that produced a valid `dist/`).
 7. `make test` — combined unit + e2e.
 
 ### Phase 5 — End-to-end gates
@@ -69,7 +69,7 @@ Referenced configs a CI failure can trace to:
 - `eslint.config.js` (ESLint 10 flat config; uses `eslint-plugin-astro` + `typescript-eslint`)
 - `.prettierrc.json` (Prettier + `prettier-plugin-astro` + `prettier-plugin-tailwindcss`)
 - `vitest.config.ts` (uses Astro's `getViteConfig()` so test resolution matches the build)
-- `playwright.config.ts` (chromium project + `webServer` block; `baseURL` ends in `/ldqis/`)
+- `playwright.config.ts` (chromium project + `webServer` block; `baseURL` is `/`)
 - `.lighthouserc.json` (URL list + per-category score assertions + chrome flags)
 - `.github/workflows/ci.yml` (lint / type / unit / e2e / lighthouse jobs)
 - `.github/workflows/deploy.yml` (Pages deploy on push to main)
@@ -105,10 +105,10 @@ Any quantitative claim not traceable to one of those is slop.
 
 Marketing claims in `README.md` most likely to drift. The CI gate at `scripts/check-readme-claims.mjs` is wired into both `make lint` and the `lint` job in `.github/workflows/ci.yml`; extend the script (a new `// ─── …` block) and add a row here whenever a new fragile claim lands.
 
-| README claim                                                | Ground truth                              | Verified by                                                                                                              |
-| ----------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Quick-start `make <target>` invocations                     | `Makefile` recipe headers                 | `check-readme-claims.mjs` asserts every `make <target>` in the quick-start bash block + inline mentions resolves         |
-| GitHub Pages preview URL (`https://ldqis.github.io/ldqis/`) | `astro.config.mjs` `site` + `base` values | `check-readme-claims.mjs` asserts both the host and base-path string literals appear in the config (handles the ternary) |
+| README claim                                   | Ground truth                    | Verified by                                                                                                      |
+| ---------------------------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Quick-start `make <target>` invocations        | `Makefile` recipe headers       | `check-readme-claims.mjs` asserts every `make <target>` in the quick-start bash block + inline mentions resolves |
+| Live site URL (`https://dataqualitylabs.com/`) | `astro.config.mjs` `site` value | `check-readme-claims.mjs` asserts the README origin appears as a string literal in the config                    |
 
 The script does **not** gate the Project structure code block or the Sister ecosystem list:
 
@@ -142,8 +142,8 @@ The site **is** itself a documentation site — Astro renders to `dist/` and shi
 - ci_workflow: `.github/workflows/ci.yml` (per-PR lint / type / unit / e2e / lighthouse)
 - build_command: `make build` / `npm run build` / `astro build`
 - output_dir: `dist/`
-- preview_url: `https://ldqis.github.io/ldqis/` (current; subject to base path = `/ldqis`)
-- production_url: `https://dataqualitylabs.com` (planned; gates on M5 DNS handoff, then `astro.config.mjs` `CUSTOM_DOMAIN=true` env flip)
+- preview_url: `https://dataqualitylabs.com/` (base `/`)
+- production_url: `https://dataqualitylabs.com`
 - action_pins (expected current, 2026-05): `actions/checkout@v6.0.2`, `actions/setup-node@v6.4.0`, `actions/upload-pages-artifact@v5.0.0`, `actions/deploy-pages@v5.0.0`, `actions/upload-artifact@v7.0.1`
 
 ## sister_graduation

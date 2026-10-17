@@ -19,22 +19,6 @@ import { URL, fileURLToPath } from "node:url";
 // without re-testing the build. (withastro/astro#16542; Astro 6 uses
 // vite 7 + Rollup, not rolldown.)
 
-// Until the DNS handoff lands `dataqualitylabs.com` on GitHub Pages,
-// the site is deployed as a project page at `ldqis.github.io/ldqis/`.
-// Astro generates asset URLs against `site + base`, so without `base`
-// set, the CSS link in the rendered HTML resolves to `/_astro/...`
-// (which 404s under the project subpath). Flip `CUSTOM_DOMAIN=true` in
-// the deploy workflow once DNS resolves to make this drop the `/ldqis`
-// prefix and target the apex domain.
-//
-// Domain-migration checklist (the app pages AND the CMS config need NO changes:
-// pages resolve URLs via import.meta.env.BASE_URL, and src/pages/admin/
-// config.yml.ts derives the CMS site_url + preview_path prefixes from `site` +
-// base — all flip with the two settings below). Beyond setting CUSTOM_DOMAIN=true:
-// (1) update the apex literal below if it isn't dataqualitylabs.com; (2) the
-// hardcoded links in README.md, src/content/news/2026-05-welcome.md, and
-// scripts/check-readme-claims.mjs; (3) add the new domain to the
-// sveltia-cms-auth Worker's ALLOWED_DOMAINS.
 // research(2026-10): Sveltia is self-hosted from the `@sveltia/cms` npm package
 // rather than unpkg. Its entry script resolves its chunks relative to its own URL
 // (`document.currentScript`), so a same-origin copy loads them locally. The copy
@@ -129,11 +113,8 @@ const pagefindDev = () => {
   };
 };
 
-const isCustomDomain = process.env.CUSTOM_DOMAIN === "true";
-
 export default defineConfig({
-  site: isCustomDomain ? "https://dataqualitylabs.com" : "https://ldqis.github.io",
-  base: isCustomDomain ? "/" : "/ldqis",
+  site: "https://dataqualitylabs.com",
   // research(2026-05): @astrojs/sitemap auto-generates
   // sitemap-index.xml from `site` + `base`, surfacing the publication /
   // people / project detail pages to crawlers (incl. Google Scholar). The

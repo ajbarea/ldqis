@@ -7,8 +7,7 @@
 #
 # NOT the served file. This is a template rendered by src/pages/admin/config.yml.ts,
 # which substitutes __SITE_URL__ and __BASE_PREFIX__ from astro's `site` + base so
-# the live config tracks the CUSTOM_DOMAIN switch (project page /ldqis/ → apex /)
-# with no manual edit. See that endpoint for the why.
+# the live config tracks the site's origin and base with no manual edit. See that endpoint for the why.
 #
 # Try it locally (Chrome/Edge): `npm run dev`, open the /admin/ page, choose
 # "Work with Local Repository". For the live site, sign in with GitHub
@@ -33,8 +32,7 @@ local_backend: true
 # Branding — match the LDQIS site instead of Sveltia's defaults. app_title
 # replaces the "Sveltia CMS" tab/login title; logo.src sets BOTH the entrance
 # logo and the browser-tab favicon (sveltia-cms branding.js). A base64 data URI
-# keeps the mark self-contained and base-path-independent (no /ldqis vs apex
-# concern). Same orange rounded-square "L" as src/layouts/BaseLayout.astro.
+# keeps the mark self-contained and base-path-independent. Same orange rounded-square "L" as src/layouts/BaseLayout.astro.
 app_title: "LDQIS — RIT"
 logo:
   src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiNGNzY5MDIiLz48cGF0aCBkPSJNMjIgMTh2MjhoMjIiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+PC9zdmc+"

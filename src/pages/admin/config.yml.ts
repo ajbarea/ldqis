@@ -5,11 +5,10 @@ import pkg from "../../../package.json";
 // research(2026-05): Sveltia builds every "View on Live Site" link as
 // `new URL(site_url).origin + '/' + preview_path` (sveltia-cms config/index.js
 // `_baseURL = new URL(siteURL).origin`, entry/index.js joins it) — it discards
-// site_url's PATH, so on the `/ldqis/` project page the base was dropped and
-// links 404'd to the apex. No site_url value can fix that; the base has to live
-// in each preview_path. Serving config.yml from an endpoint lets both site_url
-// and that prefix derive from astro's `site` + base, so the CUSTOM_DOMAIN switch
-// (project page /ldqis/ → apex /) needs no manual CMS edit — same pattern as
+// site_url's PATH, so under any non-root base the base would be dropped and
+// links would 404. No site_url value can fix that; the base has to live in each
+// preview_path. Serving config.yml from an endpoint lets both site_url and that
+// prefix derive from astro's `site` + base — same pattern as
 // src/pages/robots.txt.ts. The .yml.ts → /admin/config.yml mapping mirrors
 // robots.txt.ts and news/rss.xml.js.
 
@@ -18,11 +17,11 @@ export const GET: APIRoute = ({ site }) => {
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
   // `site` is always set in astro.config.mjs; guard keeps the types honest.
-  const origin = site ?? new URL("https://ldqis.github.io");
+  const origin = site ?? new URL("https://dataqualitylabs.com");
   // Full site root → "open production site" link (Sveltia keeps this path).
   const siteURL = new URL(base, origin).href;
   // Base path Sveltia drops from site_url, re-attached to each preview_path.
-  // "/ldqis/" → "ldqis/"; apex "/" → "" (no prefix).
+  // Base "/" → "" (no prefix); a sub-path base "/x/" → "x/".
   const basePrefix = base.replace(/^\//, "");
 
   const config = template

@@ -5,11 +5,8 @@ longer-term plan lives in [ROADMAP.md](./ROADMAP.md); git history has the full r
 
 ## In progress
 
-**Moving into the `ldqis` organization.** The org exists, with Dr. Reznik (`leonr07`) invited
-as an owner and a `lab-members` team. The CMS Worker already allows `ldqis.github.io` and
-`dataqualitylabs.com`, and Dependabot auto-merge no longer depends on the repo's owner. The
-draft PR that points the site and CMS at `ldqis/ldqis` merges right after the repo transfer.
-Steps: [MAINTAINING.md](./MAINTAINING.md).
+Nothing in flight. The site moved to the `ldqis` org and to `dataqualitylabs.com` on
+2026-10-16; setup reference in [MAINTAINING.md](./MAINTAINING.md).
 
 ## Known issues
 
@@ -23,8 +20,10 @@ Steps: [MAINTAINING.md](./MAINTAINING.md).
 
 ## Next up
 
-1. **Finish the organization move** (transfer, apps, Cloudflare reconnect; MAINTAINING.md).
-2. **Custom domain,** with Dr. Reznik at GoDaddy for the DNS records.
-3. **Backfill team cross-links.** Projects and publications link to their lab-member
+1. **Codecov for the org,** then update the README badge token.
+2. **Install GitGuardian on the org.**
+3. **Retire the old server.** The previous site still answers at `129.21.34.220`
+   (`vhost11.cs.rit.edu`); RIT CS IT has to take it down.
+4. **Backfill team cross-links.** Projects and publications link to their lab-member
    authors and contributors through the `people` collection; add the remaining lists as
    authorship is confirmed.

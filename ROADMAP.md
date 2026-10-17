@@ -36,14 +36,6 @@ These hold across redesigns; changing any is a deliberate decision, not drift.
 
 ## Planned
 
-### Lab organization, then `dataqualitylabs.com`
-
-The site moves into the lab-owned `ldqis` GitHub organization, then onto the lab's domain,
-so it outlives any one maintainer. Step-by-step for both, plus the handoff checklist, is in
-[MAINTAINING.md](./MAINTAINING.md). A build flag (`CUSTOM_DOMAIN`) already switches between
-the GitHub Pages path and the apex domain. After the cutover, confirm the old site is fully
-offline (old URLs return 404, not stale data).
-
 ### Backlog (unprioritized)
 
 - **Research areas / themes** — group the lab's work by problem area (data quality,
@@ -94,14 +86,17 @@ ideas. These were weighed and declined, recorded so they aren't re-proposed:
 
 Highlights below; full history in git.
 
+- **2026-10-16: Moved to the ldqis org and dataqualitylabs.com.** The repo lives in the lab-owned
+  `ldqis` organization and the site builds only for <https://dataqualitylabs.com/>. DNS and the
+  domain are described in [MAINTAINING.md](./MAINTAINING.md).
+
 - **Footer and site search.** Every page ends in one black footer: the lab's address and
   contact, primary links, and the lab's own links. The site is the lab's own, so it carries
   no RIT logo or RIT policy links. A header search button opens Pagefind's modal over an index built from each
   page's `<body>`, with nav and footer left out by Pagefind's defaults and the 404 page and `/admin` excluded. research(2026-10): Pagefind 1.5 component UI (`pagefind-modal`) uses a
   native `<dialog>` for focus trapping, Escape, a labelled input and result announcements,
   and `pagefind --site dist` runs after `astro build`, so CI and deploy produce the index;
-  it resolves its bundle and result URLs from where it is served, so the `/ldqis/` base and
-  the custom domain both work. Source: pagefind.app/docs/components/modal.
+  it resolves its bundle and result URLs from where it is served, so it works under any base. Source: pagefind.app/docs/components/modal.
 
 - **Publication code links.** A publication can reference the lab project that implements it
   (a `project` field); the paper then surfaces a "Code" cross-link to that project on its

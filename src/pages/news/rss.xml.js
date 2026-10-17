@@ -1,7 +1,6 @@
 // @ts-check
 // research(2026-05): @astrojs/rss writes a valid RSS 2.0 feed from a
-// content-collection iterable. `site` must be set in astro.config (it is —
-// per-env via CUSTOM_DOMAIN). Atom namespace + atom:link self-reference
+// content-collection iterable. `site` must be set in astro.config (it is). Atom namespace + atom:link self-reference
 // added per W3C feed-validation spec so the feed clears strict validators.
 // Source: https://docs.astro.build/en/recipes/rss/
 import rss from "@astrojs/rss";
